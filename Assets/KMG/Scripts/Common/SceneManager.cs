@@ -1,5 +1,6 @@
 using System.Collections;
 using Common.Network;
+using Cysharp.Threading.Tasks;
 using GUI;
 using UnityEngine;
 
@@ -21,11 +22,11 @@ namespace Common
             DontDestroyOnLoad(gameObject);
         }
 
-        public void MoveRoom(string roomName)
+        public IEnumerator MoveRoom(string roomName)
         {
             if (RunnerManager.Instance.isRunnerExist)
-                RunnerManager.Instance.Disconnect();
-            RunnerManager.Instance.Connect(roomName);
+                yield return RunnerManager.Instance.Disconnect();
+            yield return RunnerManager.Instance.Connect(roomName);
             MoveScene("SampleScene");
         }
         

@@ -22,12 +22,12 @@ namespace KMG.Scripts.Dummy
         private void Connect()
         {
             // RunnerManager.Instance.Connect(inputField.text);
-            SceneManager.Instance.MoveRoom(inputField.text);
+            StartCoroutine(SceneManager.Instance.MoveRoom(inputField.text));
         }
 
         private void Disconnect()
         {
-            RunnerManager.Instance.Disconnect();
+            RunnerManager.Instance.Disconnect().Forget();
         }
     }
 }
