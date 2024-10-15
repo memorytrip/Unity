@@ -10,7 +10,7 @@ namespace Common
     {
         public static SceneManager Instance = null;
         public string curScene;
-        public Session session;
+        
         private void Awake()
         {
             if (Instance == null) Instance = this;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Common
+namespace Common.Network
 {
     /**
      * TODO: 세션 생성 (로그인) 및 제거 (로그아웃)
