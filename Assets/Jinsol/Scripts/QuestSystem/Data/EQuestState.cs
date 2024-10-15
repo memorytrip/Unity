@@ -1,11 +1,8 @@
-namespace Jinsol
+public enum EQuestState
 {
-    public enum EQuestState
-    {
-        QuestRequirementsNotMet,
-        CanStartQuest,
-        QuestInProgress,
-        QuestRequirementsCleared,
-        QuestCompleted,
-    }
+    QuestRequirementsNotMet,
+    CanStartQuest,
+    QuestInProgress,
+    QuestRequirementsCleared,
+    QuestCompleted,
 }

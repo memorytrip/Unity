@@ -1,26 +1,23 @@
-namespace Jinsol
+using UnityEngine;
+using UnityEngine.Events;
+
+public class GameEventListener : MonoBehaviour
 {
-    using UnityEngine;
-    using UnityEngine.Events;
+    [SerializeField] private GameEvent gameEvent;
+    [SerializeField] private UnityEvent response;
 
-    public class GameEventListener : MonoBehaviour
+    private void OnEnable()
     {
-        [SerializeField] private GameEvent gameEvent;
-        [SerializeField] private UnityEvent response;
+        gameEvent.RegisterListener(this);
+    }
 
-        private void OnEnable()
-        {
-            gameEvent.RegisterListener(this);
-        }
-
-        private void OnDisable()
-        {
-            gameEvent.UnregisterListener(this);
-        }
+    private void OnDisable()
+    {
+        gameEvent.UnregisterListener(this);
+    }
         
-        public void OnEventRaised()
-        {
-            response.Invoke();
-        }
+    public void OnEventRaised()
+    {
+        response.Invoke();
     }
 }

@@ -1,22 +1,19 @@
-namespace Jinsol
+using UnityEngine;
+
+public class QuestStep : MonoBehaviour
 {
-    using UnityEngine;
+    private bool _completed = false;
+    private string _questId;
 
-    public class QuestStep : MonoBehaviour
+    public void InitializeQuestStep(string questId)
     {
-        private bool _completed = false;
-        private string _questId;
+        _questId = questId;
+    }
 
-        public void InitializeQuestStep(string questId)
-        {
-            _questId = questId;
-        }
-
-        protected void CompleteQuestStep()
-        {
-            if (_completed) return;
-            _completed = true;
-            //QuestEvents.OnQuestContinued(_questId);
-        }
+    protected void CompleteQuestStep()
+    {
+        if (_completed) return;
+        _completed = true;
+        //QuestEvents.OnQuestContinued(_questId);
     }
 }

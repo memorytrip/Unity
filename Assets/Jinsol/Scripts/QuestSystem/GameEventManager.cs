@@ -1,32 +1,28 @@
+using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Jinsol
+public class GameEventManager : MonoBehaviour
 {
-    using UnityEngine;
+    public static GameEventManager Instance { get; private set; }
 
-    public class GameEventManager : MonoBehaviour
+    [FormerlySerializedAs("PlayerEvents")] public PlayerEvent playerEvent;
+    [FormerlySerializedAs("QuestEvents")] public QuestEvent questEvent;
+    [FormerlySerializedAs("TokenEvents")] public TokenEvent tokenEvent;
+    //public MiscEvents MiscEvents;
+
+    private void Awake()
     {
-        public static GameEventManager Instance { get; private set; }
-
-        [FormerlySerializedAs("PlayerEvents")] public PlayerEvent playerEvent;
-        [FormerlySerializedAs("QuestEvents")] public QuestEvent questEvent;
-        [FormerlySerializedAs("TokenEvents")] public TokenEvent tokenEvent;
-        //public MiscEvents MiscEvents;
-
-        private void Awake()
+        if (Instance != null)
         {
-            if (Instance != null)
-            {
-                Debug.LogError("More than one instance of GameEventManager!");
-            }
-
-            Instance = this;
-            DontDestroyOnLoad(this);
-
-            playerEvent = new();
-            questEvent = new();
-            tokenEvent = new();
-            //MiscEvents = new();
+            Debug.LogError("More than one instance of GameEventManager!");
         }
+
+        Instance = this;
+        DontDestroyOnLoad(this);
+
+        playerEvent = new();
+        questEvent = new();
+        tokenEvent = new();
+        //MiscEvents = new();
     }
 }

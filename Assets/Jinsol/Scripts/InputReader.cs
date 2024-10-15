@@ -1,5 +1,3 @@
-namespace Jinsol
-{
     using System;
     using System.Collections;
     using Unity.Cinemachine;
@@ -424,4 +422,3 @@ namespace Jinsol
             followTransform.transform.localEulerAngles = new Vector3(angles.x, 0, 0);*/
         }
     }
-}

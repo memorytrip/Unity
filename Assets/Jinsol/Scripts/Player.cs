@@ -1,26 +1,31 @@
-using UnityEngine;
-
-public class Player : MonoBehaviour
+namespace Jinsol
 {
-    private Rigidbody _rigidbody;
-    
-    private void Awake()
+    using UnityEngine;
+
+    // TODO: 개인적 테스트용 클래스. 프로젝트에서 사용 안함
+    public class Player : MonoBehaviour
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        private Rigidbody _rigidbody;
+
+        private void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody>();
+        }
+
+        private void Start()
+        {
+            _rigidbody.WakeUp();
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            Debug.Log($"Collision!!!! {other.gameObject}");
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log($"Trigger!!!! {other.gameObject}");
+        }
     }
 
-    private void Start()
-    {
-        _rigidbody.WakeUp();
-    }
-    
-    private void OnCollisionEnter(Collision other)
-    {
-        Debug.Log($"Collision!!!! {other.gameObject}");
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log($"Trigger!!!! {other.gameObject}");
-    }
 }

@@ -1,8 +1,5 @@
-namespace Jinsol
-{
-    using UnityEngine;
+using UnityEngine;
 
-    public class PlayerEvent : MonoBehaviour
-    {
-    }
+public class PlayerEvent : MonoBehaviour
+{
 }
