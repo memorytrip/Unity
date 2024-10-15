@@ -22,6 +22,11 @@ namespace Common
             StartCoroutine(MoveSceneProcess(sceneName));
         }
 
+        public void MoveRoom(string roomName)
+        {
+            
+        }
+
         public IEnumerator MoveSceneProcess(string sceneName)
         {
             yield break;
