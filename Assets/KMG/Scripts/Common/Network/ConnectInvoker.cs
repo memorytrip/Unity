@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Common.Network
 {
     /**
-     * 아바타 생성, NetworkObject 소유권 이전 등을 담당
+     * Fusion 방 접속/해제시에 일어나야 할 일들 관리 (NetworkObject 소유권 이전 등)
      */
-    public class NetworkObjectManager: SimulationBehaviour, IPlayerJoined, IPlayerLeft
+    public class ConnectInvoker: SimulationBehaviour, IPlayerJoined, IPlayerLeft
     {
         
         
@@ -49,5 +49,7 @@ namespace Common.Network
                 }
             }
         }
+        
+        // public void SpawnAvatar
     }
 }
