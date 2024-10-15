@@ -1,45 +1,70 @@
 using System.Collections;
+using Common.Network;
+using GUI;
 using UnityEngine;
 
 namespace Common
 {
     /**
-     * TODO: FadeIn이랑 FadeOut 구현하기
+     * TODO: MoveRoom 구현하기
      */
     public class SceneManager: MonoBehaviour
     {
         public static SceneManager Instance = null;
         public string curScene;
+        [SerializeField] private FadeController fader;
         
         private void Awake()
         {
             if (Instance == null) Instance = this;
             else Destroy(this);
+            DontDestroyOnLoad(gameObject);
         }
 
+        public void MoveRoom(string roomName)
+        {
+            if (RunnerManager.Instance.isRunnerExist)
+                RunnerManager.Instance.Disconnect();
+            RunnerManager.Instance.Connect(roomName);
+            MoveScene("SampleScene");
+        }
+        
         public void MoveScene(string sceneName)
         {
             StartCoroutine(MoveSceneProcess(sceneName));
         }
 
-        public void MoveRoom(string roomName)
+        private IEnumerator MoveSceneProcess(string sceneName)
         {
-            
+            yield return FadeOut();
+            yield return ChangeSceneWithCheckNetworkRunner(sceneName);
+            yield return FadeIn();
         }
 
-        public IEnumerator MoveSceneProcess(string sceneName)
+        private IEnumerator ChangeSceneWithCheckNetworkRunner(string sceneName)
         {
-            yield break;
+            if (RunnerManager.Instance.isRunnerExist)
+            {
+                var Runner = RunnerManager.Instance.Runner;
+                if (Runner.IsSceneAuthority)
+                {
+                    yield return Runner.LoadScene(sceneName);
+                }
+            }
+            else
+            {
+                yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
+            }
         }
 
         private IEnumerator FadeIn()
         {
-            yield break;   
+            yield return fader.FadeOut(1f);
         }
         
         private IEnumerator FadeOut()
         {
-            yield break;   
+            yield return fader.FadeIn(1f);
         }
     }
 }

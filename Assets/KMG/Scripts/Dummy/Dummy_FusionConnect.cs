@@ -1,3 +1,4 @@
+using Common;
 using Common.Network;
 using TMPro;
 using UnityEngine;
@@ -20,7 +21,8 @@ namespace KMG.Scripts.Dummy
 
         private void Connect()
         {
-            RunnerManager.Instance.Connect(inputField.text);
+            // RunnerManager.Instance.Connect(inputField.text);
+            SceneManager.Instance.MoveRoom(inputField.text);
         }
 
         private void Disconnect()
