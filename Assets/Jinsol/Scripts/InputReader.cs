@@ -29,10 +29,7 @@
         private Vector3 _movementCenter;
         private bool _isDirty;
         private Transform _camera;
-        [SerializeField] private CinemachineCamera characterCamera;
         
-        [SerializeField] private GameObject footstep;
-
         private Animator _animator;
         private static readonly int SayHi = Animator.StringToHash("SayHi");
         private static readonly int IsSprinting = Animator.StringToHash("IsSprinting");
@@ -42,10 +39,16 @@
         [field: SerializeField] private float camMoveSpeed;
         [field: SerializeField] private float camSpeed = 1f;
 
-        private CinemachineBrain _brain; // 1인칭 전환을 위한 시네머신 브레인 참조
+        [Header("파일 구조를 바꾸거나 하면 재연결 필요")]
+        [SerializeField] private CinemachineCamera characterCamera;
+        [SerializeField] private GameObject footstep;
+        
         public CinemachineCamera mainCam; // 현재 주도권을 가진 카메라
         public CinemachineCamera defaultCam; // 원래카메라
         public CinemachineCamera firstPersonCam; // 플레이어 시점 카메라
+        
+        private CinemachineBrain _brain; // 1인칭 전환을 위한 시네머신 브레인 참조
+        [Header("---------------------------------")]
         public bool toggleCam = false; // 껐다켰다 스위치
         private bool _togglePov = false; // 1인칭 시점 스위치
         private const float DefaultBlendTime = 0f; // 1인칭 전환 속도 (기본값)

@@ -183,9 +183,6 @@ PrefabInstance:
       addedObject: {fileID: 8153732027407074692}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 994705132da3b0b468550067109848ee, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3448334179856495753}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 994705132da3b0b468550067109848ee, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5517177221856356844}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 994705132da3b0b468550067109848ee, type: 3}
       insertIndex: -1
@@ -211,7 +208,7 @@ Animator:
   m_GameObject: {fileID: 4433440297633385545}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 43648f2de14743440a60dc3c2786625d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 15ed85aeb30f97f4dbb0728d7caae6f9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -387,32 +384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911b923b47878654a8d064736105b3f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3448334179856495753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4433440297633385545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0a3b3c5a3bd8ac46ae811b1b90c62c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotationSpeed: 5
-  setSprintMultiplier: 3
-  jumpPower: 10
-  characterCamera: {fileID: 0}
-  footstep: {fileID: 0}
-  delta: {x: 0, y: 0}
-  camMoveSpeed: 0
-  camSpeed: 1
-  mainCam: {fileID: 0}
-  defaultCam: {fileID: 0}
-  firstPersonCam: {fileID: 0}
-  toggleCam: 0
-  director: {fileID: 0}
 --- !u!114 &5517177221856356844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,11 +400,11 @@ MonoBehaviour:
   rotationSpeed: 5
   setSprintMultiplier: 3
   jumpPower: 10
-  characterCamera: {fileID: 0}
-  footstep: {fileID: 7523392560483085937}
   delta: {x: 0, y: 0}
   camMoveSpeed: 0
   camSpeed: 1
+  characterCamera: {fileID: 0}
+  footstep: {fileID: 7523392560483085937}
   mainCam: {fileID: 0}
   defaultCam: {fileID: 0}
   firstPersonCam: {fileID: 0}
