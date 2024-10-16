@@ -10,20 +10,28 @@ namespace Map
      */
     public class MapObject : MonoBehaviour
     {
-        public uint modelId;
-        public uint objectId;
-        private Mesh mesh;
-        private Material material;
+        public string id
+        {
+            get { return _id; }
+        }
+        private string _id;
+        private MapObjectModel model;
 
         private void Start()
         {
-            GetComponent<MeshFilter>().mesh = mesh;
-            GetComponent<MeshRenderer>().material = material;
+            _id = System.Guid.NewGuid().ToString();
         }
-        
-        private void SetModel(uint modelId)
+
+        public void SetModel(MapObjectModel model)
         {
-            throw new NotImplementedException();
+            this.model = model;
+            GetComponent<MeshFilter>().mesh = model.mesh;
+            GetComponent<MeshRenderer>().material = model.material;
+        }
+
+        public MapObjectModel GetModel()
+        {
+            return model;
         }
     }
 

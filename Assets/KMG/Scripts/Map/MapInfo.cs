@@ -5,7 +5,7 @@ namespace Map
 {
     public class MapInfo
     {
-        public uint id;
+        public string id;
         public Texture2D thumbnail;
         public string data;
 
