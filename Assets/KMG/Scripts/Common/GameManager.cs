@@ -14,13 +14,14 @@ namespace Common
             Myroom,
         }
 
-        public State state;
+        [HideInInspector] public State state;
         public PersistenceData data;
         
         private void Awake()
         {
             if (Instance == null) Instance = this;
             else Destroy(this);
+            DontDestroyOnLoad(gameObject);
         }
     }
 }

@@ -57,14 +57,14 @@ namespace Common.Network
             };
 
             StartGameResult result = await Runner.StartGame(args);
-
+            
             if (result.Ok)
             {
                 
             }
             else
             {
-                
+                throw new Exception(result.ErrorMessage);
             }
         }
 

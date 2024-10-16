@@ -25,7 +25,7 @@ namespace Common
         }
 
 #region MoveRoom
-        public async UniTaskVoid MoveRoom(string roomName)
+        public async UniTask MoveRoom(string roomName)
         {
             await UniTask.WhenAll(FadeOut().ToUniTask(), MoveRoomProcess("SampleScene"));
             await ChangeSceneWithCheckNetworkRunner("SampleScene").ToUniTask();
@@ -42,6 +42,7 @@ namespace Common
             }
             catch (Exception e)
             {
+                Debug.LogException(e);
                 // TODO: 예외처리
             }
         }
@@ -78,6 +79,7 @@ namespace Common
             {
                 yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
             }
+            curScene = sceneName;
         }
 
         private IEnumerator FadeIn()

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Common
@@ -16,7 +17,7 @@ namespace Common
         public event EventHandler<PinchEventArgs> OnPinch;
         public event EventHandler<PanningEventArgs> OnPanning;
 
-        public int touchCount = 0;
+        [HideInInspector] public int touchCount = 0;
 
         private float prevPinchMagnitude = -1;
         private Vector2 prevPanningCenter = Vector2.zero;
@@ -62,6 +63,7 @@ namespace Common
             touch1Action.performed += _ =>
             {
                 if (touchCount != 2) return;
+                if (EventSystem.current.IsPointerOverGameObject(0)) return;
                 var magnitude = (touch0Action.ReadValue<Vector2>() - touch1Action.ReadValue<Vector2>()).magnitude;
                 if (prevPinchMagnitude < 0f)
                     prevPinchMagnitude = magnitude;
@@ -76,6 +78,7 @@ namespace Common
             touch1Action.performed += _ =>
             {
                 if (touchCount != 2) return;
+                if (EventSystem.current.IsPointerOverGameObject(0)) return;
                 var center = (touch0Action.ReadValue<Vector2>() + touch1Action.ReadValue<Vector2>()) / 2;
                 if (prevPanningCenter == Vector2.zero)
                     prevPanningCenter = center;

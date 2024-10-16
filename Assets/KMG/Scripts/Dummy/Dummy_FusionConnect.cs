@@ -1,3 +1,4 @@
+using System;
 using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
@@ -15,14 +16,27 @@ namespace KMG.Scripts.Dummy
 
         private void Awake()
         {
-            connectButton.onClick.AddListener(Connect);
+            connectButton.onClick.AddListener(()=>Connect().Forget());
             disconnectButton.onClick.AddListener(Disconnect);
         }
 
-        private void Connect()
+        private async UniTaskVoid Connect()
         {
             // RunnerManager.Instance.Connect(inputField.text);
-            SceneManager.Instance.MoveRoom(inputField.text).Forget();
+            try
+            {
+                connectButton.interactable = false;    
+                await SceneManager.Instance.MoveRoom(inputField.text);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
+            finally
+            {
+                if (connectButton != null)
+                    connectButton.interactable = true;    
+            }
         }
 
         private void Disconnect()
