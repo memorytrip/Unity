@@ -11,18 +11,13 @@ namespace Map
         public GameObject rootObject;
         private List<MapObject> mapObjects;
         private GameObject mapObjectPrefab;
-        
-        private void Awake()
-        {
-            mapObjects = new List<MapObject>();
-            mapObjectPrefab = Resources.Load<GameObject>(mapObjectPrefabPath);
-        }
 
-        private void Init(MapInfo info)
+        public MapConcrete(MapInfo info)
         {
             this.info = info;
-            
-
+            rootObject = new GameObject("MapConcrete");
+            mapObjects = new List<MapObject>();
+            mapObjectPrefab = Resources.Load<GameObject>(mapObjectPrefabPath);
         }
 
         public void AddMapObject(Vector3 position, Quaternion rotation, MapObjectModel model)
