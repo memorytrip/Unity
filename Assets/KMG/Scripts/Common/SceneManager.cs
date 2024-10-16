@@ -14,7 +14,7 @@ namespace Common
     public class SceneManager: MonoBehaviour
     {
         public static SceneManager Instance = null;
-        public string curScene;
+        [HideInInspector] public string curScene;
         [SerializeField] private FadeController fader;
         
         private void Awake()
