@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Common.Network;
 using Cysharp.Threading.Tasks;
@@ -7,7 +8,8 @@ using UnityEngine;
 namespace Common
 {
     /**
-     * TODO: MoveRoom 구현하기
+     * 씬 / Fusion 방 이동을 구현하는 클래스
+     * DontDestroyOnLoad
      */
     public class SceneManager: MonoBehaviour
     {
@@ -22,14 +24,30 @@ namespace Common
             DontDestroyOnLoad(gameObject);
         }
 
-        public IEnumerator MoveRoom(string roomName)
+#region MoveRoom
+        public async UniTaskVoid MoveRoom(string roomName)
         {
-            if (RunnerManager.Instance.isRunnerExist)
-                yield return RunnerManager.Instance.Disconnect();
-            yield return RunnerManager.Instance.Connect(roomName);
-            MoveScene("SampleScene");
+            await UniTask.WhenAll(FadeOut().ToUniTask(), MoveRoomProcess("SampleScene"));
+            await ChangeSceneWithCheckNetworkRunner("SampleScene").ToUniTask();
+            await FadeIn().ToUniTask();
         }
-        
+
+        private async UniTask MoveRoomProcess(string roomName)
+        {
+            try
+            {
+                if (RunnerManager.Instance.isRunnerExist)
+                    await RunnerManager.Instance.Disconnect();
+                await RunnerManager.Instance.Connect(roomName);
+            }
+            catch (Exception e)
+            {
+                // TODO: 예외처리
+            }
+        }
+#endregion
+
+#region MoveScene
         public void MoveScene(string sceneName)
         {
             StartCoroutine(MoveSceneProcess(sceneName));
@@ -41,7 +59,11 @@ namespace Common
             yield return ChangeSceneWithCheckNetworkRunner(sceneName);
             yield return FadeIn();
         }
-
+#endregion
+        
+        /**
+         * Runner가 있으면 Runner.LoadScene을 아니면 UnityEngine의 LoadScene을 실행
+         */
         private IEnumerator ChangeSceneWithCheckNetworkRunner(string sceneName)
         {
             if (RunnerManager.Instance.isRunnerExist)
@@ -60,12 +82,12 @@ namespace Common
 
         private IEnumerator FadeIn()
         {
-            yield return fader.FadeOut(1f);
+            yield return fader.FadeOut(0.5f);
         }
         
         private IEnumerator FadeOut()
         {
-            yield return fader.FadeIn(1f);
+            yield return fader.FadeIn(0.5f);
         }
     }
 }

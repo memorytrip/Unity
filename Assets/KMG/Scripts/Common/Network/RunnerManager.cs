@@ -38,7 +38,7 @@ namespace Common.Network
         /**
          * TODO: 방 접속 후 실행할 머시깽이 넣기
          */
-        public async UniTaskVoid Connect(string roomName)
+        public async UniTask Connect(string roomName)
         {
             if (RunnerObject != null)
                 throw new Exception("Try fusion Connect while Runner is already exist");
@@ -68,7 +68,7 @@ namespace Common.Network
             }
         }
 
-        public async UniTaskVoid Disconnect()
+        public async UniTask Disconnect()
         {
             if (RunnerObject == null)
                 throw new Exception("Trying fusion disconnect while Runner is not exist");

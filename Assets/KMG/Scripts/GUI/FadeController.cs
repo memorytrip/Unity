@@ -19,14 +19,14 @@ namespace GUI
         {
             if (isActive) yield break;
             isActive = true;
-            yield return canvasGroup.DOFade(1f, seconds);
+            yield return canvasGroup.DOFade(1f, seconds).WaitForCompletion();
         }
 
         public IEnumerator FadeOut(float seconds)
         {
             if (!isActive) yield break;
             isActive = false;
-            yield return canvasGroup.DOFade(0f, seconds);
+            yield return canvasGroup.DOFade(0f, seconds).WaitForCompletion();
         }
     }
 }

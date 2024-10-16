@@ -1,8 +1,8 @@
 using Common;
 using Common.Network;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace KMG.Scripts.Dummy
@@ -22,7 +22,7 @@ namespace KMG.Scripts.Dummy
         private void Connect()
         {
             // RunnerManager.Instance.Connect(inputField.text);
-            StartCoroutine(SceneManager.Instance.MoveRoom(inputField.text));
+            SceneManager.Instance.MoveRoom(inputField.text).Forget();
         }
 
         private void Disconnect()
