@@ -51,7 +51,6 @@ namespace Map
 
             Model[] assets = await UniTask.WhenAll(tasks);
             downloadList.AddRange(assets);
-            downloadList.ForEach((e)=>Debug.Log(e));
             
             // load downloaded assets
             // ...
@@ -87,6 +86,7 @@ namespace Map
 
         /**
          * Find 중 모델이 로컬에 없으면 다운로드하기
+         * 에셋 참고: https://assetstore.unity.com/packages/tools/modeling/trilib-2-model-loading-package-157548
          */
         private async UniTask<Model> Download(string modelId)
         {
@@ -97,6 +97,7 @@ namespace Map
         #region import
         /**
          * 로컬에서 모델 새로 찾아 로드하기
+         * 에셋 참고: https://assetstore.unity.com/packages/tools/modeling/trilib-2-model-loading-package-157548
          */
         public Model Import()
         {
