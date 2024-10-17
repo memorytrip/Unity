@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using Common;
+using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -10,7 +13,7 @@ namespace Map
      */
     public class MapConverter
     {
-        public static MapConcrete ConvertMapInfoToMapConcrete(MapInfo info)
+        public static async UniTask<MapConcrete> ConvertMapInfoToMapConcrete(MapInfo info)
         {
             MapData mapData = ConvertJsonToMapData(info.data);
             
@@ -20,8 +23,8 @@ namespace Map
             // MapConcrete에 MapObject 추가
             foreach (var mapObjectData in mapData.mapObjectList)
             {
-                Model model = ModelManager.Instance.Find(mapObjectData);
-                mapConcrete.AddMapObject(mapObjectData.position, mapObjectData.rotation, model);
+                Model model = await ModelManager.Instance.Find(mapObjectData);
+                mapConcrete.AddMapObject(mapObjectData.position.ToVector3(), mapObjectData.rotation.ToQuaternion(), model);
             }
             
             return mapConcrete;
@@ -36,12 +39,13 @@ namespace Map
         {
             MapData mapData = new MapData();
             mapData.themeId = mapConcrete.themeId;
+            mapData.mapObjectList = new List<MapData.MapObjectData>(mapConcrete.mapObjects.Count);
             foreach (var mapObject in mapConcrete.mapObjects)
             {
                 MapData.MapObjectData objData = new MapData.MapObjectData();
                 objData.modelId = mapObject.GetModel().id;
-                objData.position = mapObject.transform.position;
-                objData.rotation = mapObject.transform.rotation;
+                objData.position = new SerializedVector3(mapObject.transform.position);
+                objData.rotation = new SerializedQuaternion(mapObject.transform.rotation); 
                 mapData.mapObjectList.Add(objData);
             }
 

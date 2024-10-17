@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Map
@@ -8,7 +9,7 @@ namespace Map
      */
     public class MapConcrete
     {
-        private const string mapObjectPrefabPath = "KMG/Prefabs/MapObject.prefab";
+        private const string mapObjectPrefabPath = "Prefabs/MapObject";
         
         public MapInfo info;
         public GameObject rootObject;

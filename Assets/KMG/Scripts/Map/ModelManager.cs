@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Map
@@ -20,6 +21,7 @@ namespace Map
             }
         }
         private List<Model> downloadList;
+        private bool isLoaded;
 
         private ModelManager()
         {
@@ -31,36 +33,56 @@ namespace Map
         public void Init()
         {
             downloadList = new List<Model>();
-            LoadDownloadList();
+            LoadDownloadList().Forget();
         }
         
-        private void LoadDownloadList()
+        private async UniTaskVoid LoadDownloadList()
         {
             // load default assets
-            downloadList.AddRange(Resources.FindObjectsOfTypeAll<Model>());
+            string[] assetNames = new[] { "Cube", "Sphere" };
+            List<UniTask<Model>> tasks = new List<UniTask<Model>>();
+            foreach (var assetName in assetNames)
+            {
+                tasks.Add(LoadModel(assetName));
+            }
+
+            Model[] assets = await UniTask.WhenAll(tasks);
+            downloadList.AddRange(assets);
+            downloadList.ForEach((e)=>Debug.Log(e));
             
             // load downloaded assets
             // throw new NotImplementedException();
+
+            isLoaded = true;
+        }
+
+        private async UniTask<Model> LoadModel(string assetName)
+        {
+            // reference : https://discussions.unity.com/t/unitask-asyncload-list-of-resources/895491
+            var model = await Resources.LoadAsync<Model>("Models/" + assetName);
+            return model as Model;
         }
         #endregion
         
+        
         #region find
-        public Model Find(MapData.MapObjectData mapObjectData)
+        public async UniTask<Model> Find(MapData.MapObjectData mapObjectData)
         {
-            return Find(mapObjectData.modelId);
+            return await Find(mapObjectData.modelId);
         }
 
-        public Model Find(string modelId)
+        public async UniTask<Model> Find(string modelId)
         {
+            await UniTask.WaitUntil(() => isLoaded == true);
             Model model = downloadList.Find((e) => e.id == modelId);
-            if (model == null) model = Download(model.id);
+            if (model == null) model = await Download(modelId);
             return model;
         }
 
         /**
          * Find 중 모델이 로컬에 없으면 다운로드하기
          */
-        private Model Download(string modelId)
+        private async UniTask<Model> Download(string modelId)
         {
             throw new NotImplementedException();
         }
