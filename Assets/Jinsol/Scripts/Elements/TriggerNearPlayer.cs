@@ -5,10 +5,11 @@ public class TriggerNearPlayer : MonoBehaviour
 {
     public enum TriggerType
     {
+        Yggdrasil,
         Sound,
         Video,
+        Quest,
         Npc,
-        Event,
     }
         
     [SerializeField] private TriggerType triggerType;
