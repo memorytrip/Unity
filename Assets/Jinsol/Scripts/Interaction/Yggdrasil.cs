@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 // 광장 중앙 나무의 생태(?) 관할 클래스
@@ -8,12 +7,13 @@ using UnityEngine;
 // 2. 
 public class Yggdrasil : MonoBehaviour
 {
+    private MemoryGem[] _memoryGems = new MemoryGem[10];
     private MemoryGemInfoSO[] _gemInfoArray; // TODO: 이게 맞냐
     private const int MaxGemDisplayCount = 10; // TODO: 해보고 값 조정 필요
     
     private void Awake()
     {
-        
+        //_memoryGems = FindObjectsByType<MemoryGem>();
     }
 
     private void Start()
