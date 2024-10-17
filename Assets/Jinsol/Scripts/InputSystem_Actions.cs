@@ -110,6 +110,24 @@ namespace Jinsol
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Touch0"",
+                    ""type"": ""Value"",
+                    ""id"": ""b4ec838c-bff2-4448-b902-8f2e60f16ee4"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Touch1"",
+                    ""type"": ""Value"",
+                    ""id"": ""1545e7f7-ab2d-4a2e-a6fb-90167975d07f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -484,6 +502,28 @@ namespace Jinsol
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37d2b1d9-c487-47fc-8a7d-5f59c67dde01"",
+                    ""path"": ""<Touchscreen>/touch0/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""Touch0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87541d59-8275-43bf-a8b1-6583f533fb32"",
+                    ""path"": ""<Touchscreen>/touch1/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""Touch1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1080,6 +1120,8 @@ namespace Jinsol
             m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
             m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
             m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+            m_Player_Touch0 = m_Player.FindAction("Touch0", throwIfNotFound: true);
+            m_Player_Touch1 = m_Player.FindAction("Touch1", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1168,6 +1210,8 @@ namespace Jinsol
         private readonly InputAction m_Player_Next;
         private readonly InputAction m_Player_Sprint;
         private readonly InputAction m_Player_Zoom;
+        private readonly InputAction m_Player_Touch0;
+        private readonly InputAction m_Player_Touch1;
         public struct PlayerActions
         {
             private @InputSystem_Actions m_Wrapper;
@@ -1181,6 +1225,8 @@ namespace Jinsol
             public InputAction @Next => m_Wrapper.m_Player_Next;
             public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
             public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
+            public InputAction @Touch0 => m_Wrapper.m_Player_Touch0;
+            public InputAction @Touch1 => m_Wrapper.m_Player_Touch1;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1217,6 +1263,12 @@ namespace Jinsol
                 @Zoom.started += instance.OnZoom;
                 @Zoom.performed += instance.OnZoom;
                 @Zoom.canceled += instance.OnZoom;
+                @Touch0.started += instance.OnTouch0;
+                @Touch0.performed += instance.OnTouch0;
+                @Touch0.canceled += instance.OnTouch0;
+                @Touch1.started += instance.OnTouch1;
+                @Touch1.performed += instance.OnTouch1;
+                @Touch1.canceled += instance.OnTouch1;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1248,6 +1300,12 @@ namespace Jinsol
                 @Zoom.started -= instance.OnZoom;
                 @Zoom.performed -= instance.OnZoom;
                 @Zoom.canceled -= instance.OnZoom;
+                @Touch0.started -= instance.OnTouch0;
+                @Touch0.performed -= instance.OnTouch0;
+                @Touch0.canceled -= instance.OnTouch0;
+                @Touch1.started -= instance.OnTouch1;
+                @Touch1.performed -= instance.OnTouch1;
+                @Touch1.canceled -= instance.OnTouch1;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1439,6 +1497,8 @@ namespace Jinsol
             void OnNext(InputAction.CallbackContext context);
             void OnSprint(InputAction.CallbackContext context);
             void OnZoom(InputAction.CallbackContext context);
+            void OnTouch0(InputAction.CallbackContext context);
+            void OnTouch1(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {
