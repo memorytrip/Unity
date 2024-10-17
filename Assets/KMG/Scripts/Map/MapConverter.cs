@@ -9,7 +9,6 @@ namespace Map
 {
     /**
      * MapInfo <-> MapConcrete 변환
-     * TODO: convert과정 구현하기
      */
     public class MapConverter
     {
@@ -18,12 +17,13 @@ namespace Map
             MapData mapData = ConvertJsonToMapData(info.data);
             
             // MapConcrete 초기화
-            MapConcrete mapConcrete = new MapConcrete(info);
+            MapConcrete mapConcrete = new MapConcrete();
+            mapConcrete.info = info;
             
             // MapConcrete에 MapObject 추가
             foreach (var mapObjectData in mapData.mapObjectList)
             {
-                Model model = await ModelManager.Instance.Find(mapObjectData);
+                Model model = await ModelManager.Instance.Get(mapObjectData);
                 mapConcrete.AddMapObject(mapObjectData.position.ToVector3(), mapObjectData.rotation.ToQuaternion(), model);
             }
             

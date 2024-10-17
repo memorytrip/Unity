@@ -17,9 +17,8 @@ namespace Map
         public List<MapObject> mapObjects;
         private GameObject mapObjectPrefab;
 
-        public MapConcrete(MapInfo info)
+        public MapConcrete()
         {
-            this.info = info;
             rootObject = new GameObject("MapConcrete");
             mapObjects = new List<MapObject>();
             mapObjectPrefab = Resources.Load<GameObject>(mapObjectPrefabPath);

@@ -11,6 +11,7 @@ namespace Common
         public float y;
         public float z;
 
+        public SerializedVector3() {}
         public SerializedVector3(float x, float y, float z)
         {
             this.x = x;
@@ -39,6 +40,7 @@ namespace Common
         public float y;
         public float z;
 
+        public SerializedQuaternion() {}
         public SerializedQuaternion(Quaternion quaternion)
         {
             w = quaternion.w;

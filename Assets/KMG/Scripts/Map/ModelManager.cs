@@ -7,7 +7,7 @@ namespace Map
 {
     /**
      * 모델 에셋 저장 및 다운로드 관리
-     * TODO: Find, LoadDownloadList 구현
+     * TODO: Find, Download, Import, Upload 구현
      */
     public class ModelManager
     {
@@ -36,6 +36,9 @@ namespace Map
             LoadDownloadList().Forget();
         }
         
+        /**
+         * TODO: downloaded assets 로드 구현하기
+         */
         private async UniTaskVoid LoadDownloadList()
         {
             // load default assets
@@ -43,7 +46,7 @@ namespace Map
             List<UniTask<Model>> tasks = new List<UniTask<Model>>();
             foreach (var assetName in assetNames)
             {
-                tasks.Add(LoadModel(assetName));
+                tasks.Add(LoadModelFromResources(assetName));
             }
 
             Model[] assets = await UniTask.WhenAll(tasks);
@@ -51,12 +54,12 @@ namespace Map
             downloadList.ForEach((e)=>Debug.Log(e));
             
             // load downloaded assets
-            // throw new NotImplementedException();
+            // ...
 
             isLoaded = true;
         }
 
-        private async UniTask<Model> LoadModel(string assetName)
+        private async UniTask<Model> LoadModelFromResources(string assetName)
         {
             // reference : https://discussions.unity.com/t/unitask-asyncload-list-of-resources/895491
             var model = await Resources.LoadAsync<Model>("Models/" + assetName);
@@ -65,13 +68,16 @@ namespace Map
         #endregion
         
         
-        #region find
-        public async UniTask<Model> Find(MapData.MapObjectData mapObjectData)
+        #region get
+        /**
+         * Model 데이터를 반환
+         */
+        public async UniTask<Model> Get(MapData.MapObjectData mapObjectData)
         {
-            return await Find(mapObjectData.modelId);
+            return await Get(mapObjectData.modelId);
         }
 
-        public async UniTask<Model> Find(string modelId)
+        public async UniTask<Model> Get(string modelId)
         {
             await UniTask.WaitUntil(() => isLoaded == true);
             Model model = downloadList.Find((e) => e.id == modelId);
