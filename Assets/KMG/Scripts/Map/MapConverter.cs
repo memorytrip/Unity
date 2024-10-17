@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Map
 {
@@ -19,21 +20,40 @@ namespace Map
             // MapConcrete에 MapObject 추가
             foreach (var mapObjectData in mapData.mapObjectList)
             {
-                MapObjectModel model = ModelManager.Find(mapObjectData);
+                Model model = ModelManager.Instance.Find(mapObjectData);
                 mapConcrete.AddMapObject(mapObjectData.position, mapObjectData.rotation, model);
             }
             
-            throw new NotImplementedException();
+            return mapConcrete;
+        }
+        
+        private static MapData ConvertJsonToMapData(string data)
+        {
+            return JsonConvert.DeserializeObject<MapData>(data);
         }
 
         public static MapInfo ConvertMapConcreteToMapInfo(MapConcrete mapConcrete)
         {
-            throw new NotImplementedException();
+            MapData mapData = new MapData();
+            mapData.themeId = mapConcrete.themeId;
+            foreach (var mapObject in mapConcrete.mapObjects)
+            {
+                MapData.MapObjectData objData = new MapData.MapObjectData();
+                objData.modelId = mapObject.GetModel().id;
+                objData.position = mapObject.transform.position;
+                objData.rotation = mapObject.transform.rotation;
+                mapData.mapObjectList.Add(objData);
+            }
+
+            //TODO: mapInfo.id, mapInfo.thmbnail 채우기
+            MapInfo mapInfo = new MapInfo();
+            mapInfo.data = ConvertMapDataToJson(mapData);
+            return mapInfo;
         }
 
-        private static MapData ConvertJsonToMapData(string data)
+        private static string ConvertMapDataToJson(MapData mapData)
         {
-            return JsonConvert.DeserializeObject<MapData>(data);
+            return JsonConvert.SerializeObject(mapData);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Map
 {
     public class MapData
     {
-        public string mapThemeId;
+        public string themeId;
         public class MapObjectData
         {
             public string modelId;
