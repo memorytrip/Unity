@@ -26,9 +26,10 @@ namespace Common
             sfxPlayers = new List<AudioSource>(baseSfxPlayersCount);
             for (int i = 0; i < baseSfxPlayersCount; i++)
             {
-                sfxPlayers[i] = gameObject.AddComponent<AudioSource>();
+                sfxPlayers.Add(gameObject.AddComponent<AudioSource>());
             }
             bgmPlayer = gameObject.AddComponent<AudioSource>();
+            bgmPlayer.loop = true;
         }
 
         public void PlayBGM(AudioClip audioClip)

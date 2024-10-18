@@ -1,28 +1,35 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Map
 {
+    /**
+     * MapInfo가 게임오브젝트로 구체화된 것
+     */
     public class MapConcrete
     {
-        private const string mapObjectPrefabPath = "KMG/Prefabs/MapObject.prefab";
+        private const string mapObjectPrefabPath = "Prefabs/MapObject";
         
         public MapInfo info;
         public GameObject rootObject;
-        private List<MapObject> mapObjects;
+        public string themeId;
+        public List<MapObject> mapObjects;
         private GameObject mapObjectPrefab;
 
-        public MapConcrete(MapInfo info)
+        public MapConcrete()
         {
-            this.info = info;
             rootObject = new GameObject("MapConcrete");
             mapObjects = new List<MapObject>();
             mapObjectPrefab = Resources.Load<GameObject>(mapObjectPrefabPath);
         }
 
-        public void AddMapObject(Vector3 position, Quaternion rotation, MapObjectModel model)
+        /**
+         * 지정된 transform에 model을 Instantiate
+         */
+        public void AddMapObject(Vector3 position, Quaternion rotation, Model model)
         {
-            GameObject gameObject = MonoBehaviour.Instantiate(mapObjectPrefab);
+            GameObject gameObject = MonoBehaviour.Instantiate(mapObjectPrefab, rootObject.transform);
             gameObject.transform.position = position;
             gameObject.transform.rotation = rotation;
             
@@ -40,7 +47,7 @@ namespace Map
 
         public void RefreshInfo()
         {
-            
+            info = MapConverter.ConvertMapConcreteToMapInfo(this);
         }
     }
 }
