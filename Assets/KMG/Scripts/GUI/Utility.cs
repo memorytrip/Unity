@@ -6,10 +6,16 @@ namespace GUI
 {
     public static class Utility 
     {
+        
         public static bool IsPointOverGUI()
         {
+            return IsPointOverGUI(Input.mousePosition);
+        }
+        
+        public static bool IsPointOverGUI(Vector2 point)
+        {
             PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-            pointerEventData.position = Input.mousePosition;
+            pointerEventData.position = point;
 
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(pointerEventData, results);
