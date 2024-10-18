@@ -1,24 +1,62 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PhotoHide : MonoBehaviour
+public class PhotoHide : MonoBehaviour, IListener
 {
-    private Vector2 randomPosition;
-    private Vector2[] photoPosition;//사진이랑 위치를 dictionary로 만들까?
-    
-    private Vector2 GetRandomPosition()
+    private float yValue = 1f;
+    private Dictionary<string, Vector3> photoPositions;
+    public GameObject photoPrefab;
+    private GameObject hitObject;
+
+    void Start()
     {
-        return randomPosition = new Vector2(Random.Range(-10, 11), Random.Range(-10, 11));
+        EventManager.Instance.AddListener(EventType.eRaycasting, this);
+        photoPositions = new Dictionary<string, Vector3>();
+        HidePhoto(photoPositions, 8); 
+    }
+    
+    private Vector3 GetRandomPosition()
+    {
+        return new Vector3(Random.Range(-10, 11), yValue, Random.Range(-10, 11));
     }
 
-    public void HidePhoto(string[] photoArray)
+    public void HidePhoto(Dictionary<string, Vector3> photoDict, int numberOfPhotos)
     {
-        for (int i = 0; i < photoArray.Length; i++)
+        for (int i = 1; i <= numberOfPhotos; i++)
         {
-            photoPosition[i] = GetRandomPosition();
+            string photoName = "Photo" + i;
+            photoDict[photoName] = GetRandomPosition(); 
+            Instantiate(photoPrefab, photoDict[photoName], Quaternion.identity);
         }
     }
 
-    public void FindPhoto()
+
+    public void OnEvent(EventType eventType, Component sender, object param = null)
     {
+        switch (eventType)
+        {
+            case EventType.eRaycasting:
+                if (param is PlayerInteraction.RaycastInfo raycastInfo)
+                {
+                    if (raycastInfo.isHit)
+                    {
+                        hitObject = raycastInfo.hitInfo.collider.gameObject;
+                        Debug.Log("됐네?");
+                    }
+                }
+                else
+                {
+                    Debug.Log("왜 안돼");
+                }
+
+                break;
+                
+        }
+        
+    }
+
+    public void DestroyPhoto()
+    {
+        Destroy(hitObject);
     }
 }

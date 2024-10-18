@@ -7,21 +7,17 @@ public class InteractButton : MonoBehaviour, IListener
 {
     private void Start()
     {
-        EventManager.Instance.AddListener(Event_Type.eRaycasting, this);
+        EventManager.Instance.AddListener(EventType.eRaycasting, this);
     }
 
-    public void OnEvent(Event_Type eventType, Component sender, object param = null)
+    public void OnEvent(EventType eventType, Component sender, object param = null)
     {
         switch (eventType)
         {
-            case Event_Type.eRaycasting:
-                if (param == null)
+            case EventType.eRaycasting:
+                if (param is PlayerInteraction.RaycastInfo raycastInfo)
                 {
-                    Debug.Log("없는데요?");
-                }
-                else
-                {
-                    gameObject.SetActive((bool)param);
+                    gameObject.SetActive(raycastInfo.isHit);
                 }
                 break;
         }
