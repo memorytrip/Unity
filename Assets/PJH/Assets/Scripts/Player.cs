@@ -38,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         //networkanim = GetComponentInChildren<NetworkMecanimAnimator>();
-        Debug.Log(joystick.inputDirection);
         camera = Camera.main;
         groundLayer = LayerMask.GetMask("map");
         boxSize = new Vector3(1f, 1f, 1f);
@@ -82,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
     public void PlayerRotation()
     {
         playerDir = Quaternion.Euler(0.0f, camera.transform.eulerAngles.y, 0.0f) * new Vector3(joystick.inputDirection.x, 0.0f, joystick.inputDirection.y);
-        var targetRotation = Quaternion.LookRotation(playerDir, Vector3.up);
+        Quaternion targetRotation = Quaternion.LookRotation(playerDir, Vector3.up);
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
     }

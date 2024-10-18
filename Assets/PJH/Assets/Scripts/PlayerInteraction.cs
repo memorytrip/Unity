@@ -3,53 +3,35 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public float interactionRange = 2.0f; // 상호작용 가능한 범위
-    public LayerMask interactionLayer; // interaction 레이어 설정
-    public KeyCode interactKey = KeyCode.E; // 상호작용 키 (E)
-    private IInteractable currentInteractable;
+    public float interactionRange = 2.0f;
+    public float interactionRadius = 0.5f;
+    private RaycastHit hits;
+    public LayerMask interactionLayer; 
 
     private void Awake()
     {
-        interactionLayer = LayerMask.NameToLayer("Interactable");
-        
+        interactionLayer = LayerMask.GetMask("Interactable");
     }
-    
 
     void Update()
     {
         CheckForInteractable();
-        
-        if (currentInteractable != null && Input.GetKeyDown(interactKey))
-        {
-            currentInteractable.Interact();
-        }
     }
 
-    void CheckForInteractable()
+    public void CheckForInteractable()
     {
-        // 플레이어 앞에 구체 모양의 Raycast를 쏨
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position + transform.forward, interactionRange, interactionLayer);
-
-        if (hitColliders.Length > 0)
+        // Physics.SphereCast는 bool 값을 반환하므로, hit에 bool이 들어가는 문제를 수정.
+        bool isHit = Physics.SphereCast(transform.position, interactionRadius, transform.forward, out hits, interactionRange, interactionLayer);
+        
+        if (isHit)
         {
-            currentInteractable = hitColliders[0].GetComponent<IInteractable>();
-            if (currentInteractable != null)
-            {
-                // E 버튼 활성화 로직을 여기서 처리
-                Debug.Log("상호작용 가능한 물체 발견! E 버튼을 누르세요.");
-            }
+            // 오브젝트가 감지된 경우 이벤트를 통해 감지 사실을 알림.
+            EventManager.Instance.PostNotification(Event_Type.eRaycasting, this, true);
         }
         else
         {
-            currentInteractable = null;
-            // E 버튼 비활성화 로직
+            // 감지된 오브젝트가 없을 때 이벤트로 알림.
+            EventManager.Instance.PostNotification(Event_Type.eRaycasting, this, false);
         }
-    }
-
-    void OnDrawGizmos()
-    {
-        // 디버깅을 위해 Sphere의 범위를 표시
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position + transform.forward, interactionRange);
     }
 }
