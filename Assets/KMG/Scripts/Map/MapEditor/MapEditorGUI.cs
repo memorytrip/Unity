@@ -28,6 +28,8 @@ namespace Map.Editor
             {
                 cinemachineController.enabled = true;
             }
+            
+            
         }
 
         void OnTouchPerform(Finger finger)

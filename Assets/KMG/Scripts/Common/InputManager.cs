@@ -21,9 +21,6 @@ namespace Common
         public event Action<Finger> OnFingerUp;
         public event Action<Finger> OnFingerDown;
         public event Action<Finger> OnFingerMove;
-        
-
-        [HideInInspector] public int touchCount = 0;
 
         private float prevPinchMagnitude = -1;
         private Vector2 prevPanningCenter = Vector2.zero;
@@ -39,7 +36,6 @@ namespace Common
             InitPinch();
             InitPanning();
             
-            
         }
 
         private void InitAction()
@@ -50,40 +46,37 @@ namespace Common
             Touch.onFingerUp += finger => OnFingerUp?.Invoke(finger);
             Touch.onFingerMove += finger => OnFingerMove?.Invoke(finger);
             Touch.onFingerDown += finger => OnFingerDown?.Invoke(finger);
-
-
-            OnFingerDown += _ => touchCount++;
-            OnFingerUp += _ => touchCount--;
         }
 
         private void InitPinch()
         {
-            // touch1Action.performed += _ =>
-            // {
-            //     if (touchCount != 2) return;
-            //     if (EventSystem.current.IsPointerOverGameObject(0)) return;
-            //     var magnitude = (touch0Action.ReadValue<Vector2>() - touch1Action.ReadValue<Vector2>()).magnitude;
-            //     if (prevPinchMagnitude < 0f)
-            //         prevPinchMagnitude = magnitude;
-            //     var difference = magnitude - prevPinchMagnitude;
-            //     prevPinchMagnitude = magnitude;
-            //     OnPinch?.Invoke(this, new PinchEventArgs(difference));
-            // };
+            OnFingerMove += _ =>
+            {
+                var fingers = Touch.activeFingers;
+                if (fingers.Count != 2) return;
+                var magnitude = (fingers[0].screenPosition - fingers[1].screenPosition).magnitude;
+                if (prevPinchMagnitude < 0f)
+                    prevPinchMagnitude = magnitude;
+                var difference = magnitude - prevPinchMagnitude;
+                prevPinchMagnitude = magnitude;
+                OnPinch?.Invoke(this, new PinchEventArgs(difference));
+            };
         }
 
         private void InitPanning()
         {
-            // touch1Action.performed += _ =>
-            // {
-            //     if (touchCount != 2) return;
-            //     if (EventSystem.current.IsPointerOverGameObject(0)) return;
-            //     var center = (touch0Action.ReadValue<Vector2>() + touch1Action.ReadValue<Vector2>()) / 2;
-            //     if (prevPanningCenter == Vector2.zero)
-            //         prevPanningCenter = center;
-            //     var difference = center - prevPanningCenter;
-            //     prevPanningCenter = center;
-            //     OnPanning?.Invoke(this, new PanningEventArgs(difference));
-            // };
+            OnFingerMove += _ =>
+            {
+                var fingers = Touch.activeFingers;
+                if (fingers.Count != 2) return;
+                if (EventSystem.current.IsPointerOverGameObject(0)) return;
+                var center = (fingers[0].screenPosition + fingers[1].screenPosition) / 2;
+                if (prevPanningCenter == Vector2.zero)
+                    prevPanningCenter = center;
+                var difference = center - prevPanningCenter;
+                prevPanningCenter = center;
+                OnPanning?.Invoke(this, new PanningEventArgs(difference));
+            };
         }
     }
     
