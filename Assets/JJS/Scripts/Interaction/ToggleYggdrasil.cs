@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.EventSystems;
+using Unity.Cinemachine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 // 서버 연결까지 생각하면 복잡할 것 같아서 일단은 연출이라도 제대로 하기
 
@@ -13,23 +15,46 @@ using UnityEngine.UI;
 // 영상일 경우 영상 전용 UI
 public class ToggleYggdrasil : MonoBehaviour
 {
+    private static readonly int Exit = Animator.StringToHash("Exit");
     private Yggdrasil _yggdrasil;
     
     // 불러올 열매들을 저장하는 배열
     private MemoryGem[] _memoryGemSet;
+    [FormerlySerializedAs("backgroundMemoryGemSet")] [SerializeField] private VideoPlayer[] backgroundMemoryGemSetVideo = new VideoPlayer [10]; // 이거는 그냥 서버에서 이미지나 비디오만 가져올 것
+    [SerializeField] private RawImage[] backgroundMemoryGemSetImage;
     private const int MaxGems = 7; // TODO: 변동 가능. 일단은 길이를 7로 잡기
     [SerializeField] private GameObject content;
+    private Animator _contentUiAnimator;
+    private readonly WaitForSeconds _exitClipLength = new(1.5f);
+    [SerializeField] private CinemachineCamera yggdrasilCamera;
+    [SerializeField] private CinemachineCamera defaultCamera;
 
     private void Awake()
     {
         _yggdrasil = GetComponent<Yggdrasil>();
         _memoryGemSet = new MemoryGem[MaxGems];
+        _memoryGemSet = FindObjectsByType<MemoryGem>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        ActivateButtons(_memoryGemSet);
+        _contentUiAnimator = content.GetComponentInChildren<Animator>(includeInactive:true);
+        if (_contentUiAnimator == null)
+        {
+            Debug.LogWarning("Animator is not initialized!");
+        }
+        
+        defaultCamera.Prioritize();
+        //yggdrasilCamera.SetActive(false);
         content.SetActive(false);
     }
     
     private void Start()
     {
         StartCoroutine(LoadGems());
+    }
+
+    private IEnumerator LoadGems()
+    {
+        // TODO: 서버로부터 불러오는 로직
+        yield return null;
     }
     
     private void OnTriggerEnter(Collider other)
@@ -39,13 +64,20 @@ public class ToggleYggdrasil : MonoBehaviour
             return;
         }
         
-        StartCoroutine(LoadGems());
+        StartCoroutine(ViewGems());
         Debug.Log($"Player entered {gameObject}");
     }
 
-    private IEnumerator LoadGems()
+    private IEnumerator ViewGems()
     {
+        Camera.main.cullingMask |= 1 << LayerMask.NameToLayer("Player");
+        foreach (var gem in backgroundMemoryGemSetVideo)
+        {
+            gem.Stop();
+        }
         content.SetActive(true);
+        yggdrasilCamera.Prioritize();
+        //yggdrasilCamera.SetActive(true);
         DeactivateBackgroundGems();
         // 열람 가능한 열매가 화면 상단에서 중앙으로 슬라이드
         // 이 열매는 항상 개수가 고정되어 있다
@@ -62,44 +94,55 @@ public class ToggleYggdrasil : MonoBehaviour
     {
         foreach (var memoryGem in memoryGemSet)
         {
-            memoryGem.GetComponent<Button>().onClick.AddListener(DisplayContentUi);
+            //memoryGem.GetComponent<Button>().onClick.AddListener(DisplayContentUi);
         }
     }
 
-    private void DisplayContentUi()
+    public void DisplayContentUi()
     {
-        MemoryGem selectedMemoryGem = EventSystem.current.currentSelectedGameObject.GetComponent<MemoryGem>();
-        ToggleRevealContent(selectedMemoryGem);
+        Debug.Log("Tap!");
+        //MemoryGem selectedMemoryGem = EventSystem.current.currentSelectedGameObject.GetComponent<MemoryGem>();
+        //ToggleRevealContent(selectedMemoryGem);
     }
 
     private void ToggleRevealContent(MemoryGem memoryGem)
     {
     }
 
-    private void OnTriggerExit(Collider other)
+    private IEnumerator OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player"))
         {
-            return;
+            yield break;
         }
 
+        _contentUiAnimator.SetTrigger(Exit);
+        yield return _exitClipLength;
         HideContentUi();
+        foreach (var gem in backgroundMemoryGemSetVideo)
+        {
+            gem.Play();
+        }
+        Camera.main.cullingMask = -1; 
         Debug.Log($"Player exited {gameObject}");
     }
 
     private void HideContentUi()
     {
-        // TODO: 재생중이던 비디오를 여기서 수동으로 멈춰줘야할 필요가 있을까?
-        MemoryGem[] memoryGems = FindObjectsByType<MemoryGem>(FindObjectsSortMode.None);
-        DeactivateButtons(memoryGems);
         content.SetActive(false);
+        defaultCamera.Prioritize();
     }
 
-    private void DeactivateButtons(MemoryGem[] memoryGemSet)
+    /*private void DeactivateButtons(MemoryGem[] memoryGemSet)
     {
         foreach (var memoryGem in memoryGemSet)
         {
             memoryGem.GetComponent<Button>().onClick.RemoveAllListeners();
         }
-    }
+    }*/
+
+    /*private void OnDisable()
+    {
+        DeactivateButtons(_memoryGemSet);
+    }*/
 }
