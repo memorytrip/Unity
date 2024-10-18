@@ -8,38 +8,37 @@ namespace Map.Editor
 {
     public class MapEditorGUI : MonoBehaviour
     {
-        [SerializeField] private CinemachineInputAxisController cinemachineController;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        [SerializeField] public CinemachineInputAxisController cinemachineController;
+        [HideInInspector] public MapObject focusObject;
+        private MapEditorGUIState state;
+        
         void Start()
         {
             InputManager.Instance.OnFingerDown += OnTouchStart;
             InputManager.Instance.OnFingerMove += OnTouchPerform;
             InputManager.Instance.OnFingerUp += OnTouchCanceled;
             cinemachineController.enabled = false;
+            state = new MapEditorGUIIdle(this);
         }
 
         void OnTouchStart(Finger finger)
         {
-            if (GUI.Utility.IsPointOverGUI(finger.screenPosition))
-            {
-                cinemachineController.enabled = false;
-            }
-            else
-            {
-                cinemachineController.enabled = true;
-            }
-            
-            
+            state.OnTouchStart(finger);
         }
 
         void OnTouchPerform(Finger finger)
         {
-
+            state.OnTouchPerform(finger);
         }
 
         void OnTouchCanceled(Finger finger)
         {
-            cinemachineController.enabled = false;
+            state.OnTouchCanceled(finger);
+        }
+
+        public void SwitchState(MapEditorGUIState state)
+        {
+            this.state = state;
         }
     }
 }
