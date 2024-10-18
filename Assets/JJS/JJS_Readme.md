@@ -1,6 +1,7 @@
-﻿# Jinsol 폴더 내부사항 기록(메모)
+﻿# JJS 폴더 내부사항 기록(메모)
 ## 2024-10-18
 * Jinsol_Readme.md 생성
+* JJS_Readme.md로 이름 변경
 ---
 * ### Scenes
 #### 현재 사용하지 않는 씬
