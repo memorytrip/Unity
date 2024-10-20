@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
 
 namespace Map.Editor
@@ -9,11 +11,23 @@ namespace Map.Editor
         
         public override void OnTouchStart(Finger finger)
         {
-            if (GUI.Utility.IsPointOverGUI(finger.screenPosition))
-            {
+            if (GUI.Utility.IsPointOverGUI(finger.screenPosition)) {
+                List<RaycastResult> results = GUI.Utility.RaycastWithPoint(finger.screenPosition);
+                MapEditorItem item;
+                foreach (var result in results) {
+                    if (result.gameObject.TryGetComponent<MapEditorItem>(out item)) {
+                        MapObject mapObject = context.mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, item.model);
+                        context.focusObject = mapObject;
+						mapObject.GetComponent<Collider>().enabled = false;
+                        context.focusObject.gameObject.SetActive(false);
+						context.SwitchState(new MapEditorGUIDrag(context));
+                        break;
+                    }
+                }
                 return;
             }
-            
+
+            // 배치된 오브젝트 선택
             Ray mouseRay = Camera.main.ScreenPointToRay(finger.screenPosition);
             RaycastHit hit;
             if (Physics.Raycast(mouseRay, out hit))
@@ -22,7 +36,6 @@ namespace Map.Editor
                 MapObject mapObject;
                 if (hit.transform.TryGetComponent(out mapObject))
                 {
-                    
                     context.focusObject = mapObject;
                     mapObject.GetComponent<Collider>().enabled = false;
                     context.SwitchState(new MapEditorGUIDrag(context));
@@ -30,6 +43,7 @@ namespace Map.Editor
                 }
             }
             
+            // 카메라 이동
             context.cinemachineController.enabled = true;
             context.SwitchState(new MapEditorGUIMove(context));
                 

@@ -9,6 +9,7 @@ namespace Map.Editor
     public class MapEditorGUI : MonoBehaviour
     {
         [SerializeField] public CinemachineInputAxisController cinemachineController;
+        public MapConcrete mapConcrete;
         [HideInInspector] public MapObject focusObject;
         private MapEditorGUIState state;
         

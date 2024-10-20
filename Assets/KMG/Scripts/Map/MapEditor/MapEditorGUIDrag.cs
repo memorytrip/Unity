@@ -12,18 +12,25 @@ namespace Map.Editor
 
         public override void OnTouchPerform(Finger finger)
         {
-            Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray mouseRay = Camera.main.ScreenPointToRay(finger.screenPosition);
             RaycastHit hitdata;
             if (Physics.Raycast(mouseRay, out hitdata))
             {
+                context.focusObject.gameObject.SetActive(true);
                 context.focusObject.transform.position = hitdata.point;
+            } else {
+                context.focusObject.gameObject.SetActive(false);
             }
         }
 
         public override void OnTouchCanceled(Finger finger)
         {
+            if (context.focusObject.gameObject.activeSelf) {
+				context.focusObject.GetComponent<Collider>().enabled = true;
+            } else {
+                MonoBehaviour.Destroy(context.focusObject.gameObject);
+            }
             context.SwitchState(new MapEditorGUIIdle(context));
-            context.focusObject.GetComponent<Collider>().enabled = true;
         }
     }
 }

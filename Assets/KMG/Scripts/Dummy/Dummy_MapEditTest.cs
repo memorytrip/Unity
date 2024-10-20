@@ -5,9 +5,10 @@ using Map;
 
 namespace KMG.Scripts.Dummy
 {
-    public class Dummy_MapConvertTest: MonoBehaviour
+    public class Dummy_MapEditTest: MonoBehaviour
     {
         [SerializeField] private GameObject mapConcreteRoot;
+        [SerializeField] private Map.Editor.MapEditorGUI mapEditorGUI;
         private MapConcrete mapConcrete;
         private async UniTaskVoid Start()
         {
@@ -21,6 +22,7 @@ namespace KMG.Scripts.Dummy
             // mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, await ModelManager.Instance.Find("0"));
             // mapConcrete.AddMapObject(Vector3.left, Quaternion.identity, await ModelManager.Instance.Find("1"));
             mapConcrete = await MapConverter.ConvertMapInfoToMapConcrete(mapInfo);
+            mapEditorGUI.mapConcrete = mapConcrete;
 
             MapInfo mapInfo2 = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
             Debug.Log(mapInfo2.data);
