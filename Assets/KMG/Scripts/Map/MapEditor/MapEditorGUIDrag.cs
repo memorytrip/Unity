@@ -28,7 +28,7 @@ namespace Map.Editor
             if (context.focusObject.gameObject.activeSelf) {
 				context.focusObject.GetComponent<Collider>().enabled = true;
             } else {
-                MonoBehaviour.Destroy(context.focusObject.gameObject);
+                context.mapConcrete.DeleteMapObject(context.focusObject);
             }
             context.SwitchState(new MapEditorGUIIdle(context));
         }
