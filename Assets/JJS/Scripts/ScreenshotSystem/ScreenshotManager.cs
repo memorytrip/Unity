@@ -3,12 +3,11 @@ using UnityEngine.UI;
 using Unity.Cinemachine;
 using System;
 using System.IO;
-using UnityEngine.Serialization;
 
 // ScreenshotWorldCanvas의 Canvas > Event Camera: 메인카메라로 지정 필요
 public class ScreenshotManager : MonoBehaviour
 {
-    // TODO: 스크린샷 기능은 UI에 버튼 형태로 존재할 예정
+    // 스크린샷 기능은 UI에 버튼 형태로 존재할 예정
     // 이지만 몇 가지 제한 사항이 있음
     // 1. 모두가 동시에 관람하는/전환하는 이벤트 발생 시에는 스크린샷 모드가 강제로 해제
     // 2. 세션(방에서 하는 모든 활동 - 영상을 관람하고 각자 저장하는 과정)이 끝난 후 30분간은 자유롭게 맵을 돌아다니면서 촬영 가능
@@ -39,6 +38,8 @@ public class ScreenshotManager : MonoBehaviour
         
     [Header("스크린샷 기능")]
     [SerializeField] private CinemachineCamera[] screenshotCameras = new CinemachineCamera [2];
+
+    [SerializeField] private Camera[] screenshotCamerasCamComponent = new Camera[2];
     private GameObject _screenshotUi;
     [SerializeField] private RawImage cameraPreviewRawImage;
     [SerializeField] private Button flipButton;
@@ -51,7 +52,18 @@ public class ScreenshotManager : MonoBehaviour
     private ECameraMode _cameraMode;
     private EScreenshotCameraType _screenshotCameraType;
     private bool _isScreenshotModeEnabled;
+    
+    private Slider _slider;
+    [SerializeField] private float zoomRate;
+    private const float MinFieldOfView = 5f;
+    private const float MaxFieldOfView = 90f;
+    
+    private float DefaultFOV()
+    {
+        return screenshotCameras[(int)EScreenshotCameraType.Selfie].IsLive ? 24f : 40f;
+    }
 
+    // 미션용 세팅: 특명! 오브젝트의 사진을 찍어라!
     private int _layerAsLayerMask;
     private float _maxDistance;
     private float _speed;
@@ -59,7 +71,7 @@ public class ScreenshotManager : MonoBehaviour
     private Collider _hitBoxCollider;
     private RaycastHit _hit;
     
-    #region Save
+    #region Save System
 
     private const string SubDirectory = "/Screenshots/";
     private const string FileType = ".png";
@@ -70,11 +82,16 @@ public class ScreenshotManager : MonoBehaviour
     {
         InitializeDirectory();
         
+        // 오브젝트 특정을 위한 부분 초기화
         _layerAsLayerMask = (1 << LayerMask.NameToLayer("Quest"));
         _maxDistance = 300f;
         _speed = 20f;
         _hitBoxCollider = GetComponent<Collider>();
 
+        _slider = GetComponentInChildren<Slider>();
+        _slider.minValue = MinFieldOfView;
+        _slider.maxValue = MaxFieldOfView;
+        
         var canvas = GetComponentInChildren<Canvas>();
         _screenshotUi = canvas.gameObject;
         if (canvas.worldCamera == null)
@@ -93,19 +110,28 @@ public class ScreenshotManager : MonoBehaviour
         toggleScreenshotModeButton.onClick.AddListener(ToggleScreenshotMode);
         flipButton.onClick.AddListener(FlipCamera);
         snapshotButton.onClick.AddListener(CaptureScreenshot);
-            
+        
+        _slider.onValueChanged.AddListener(ControlCameraZoom);
+        
         _screenshotUi.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
     {
-        if (_isScreenshotModeEnabled)
+        DetectQuestObject();
+    }
+
+    private void DetectQuestObject()
+    {
+        if (!_isScreenshotModeEnabled)
         {
-            _hitDetected = Physics.BoxCast(_hitBoxCollider.bounds.center, transform.localScale * 0.5f, transform.forward, out _hit, transform.rotation, _maxDistance, _layerAsLayerMask);
-            if (_hitDetected)
-            {
-                Debug.Log("Hit Detected");
-            }
+            return;
+        }
+        
+        _hitDetected = Physics.BoxCast(_hitBoxCollider.bounds.center, transform.localScale * 0.5f, transform.forward, out _hit, transform.rotation, _maxDistance, _layerAsLayerMask);
+        if (_hitDetected)
+        {
+            Debug.Log("Hit Detected");
         }
     }
     
@@ -163,6 +189,8 @@ public class ScreenshotManager : MonoBehaviour
 
     private void ToggleScreenshotUI()
     {
+        ResetCameraZoom();
+
         switch (_cameraMode)
         {
             case ECameraMode.Screenshot:
@@ -198,7 +226,32 @@ public class ScreenshotManager : MonoBehaviour
                 screenshotCameras[(int)EScreenshotCameraType.Selfie].gameObject.SetActive(false);
                 break;
         }
+
+        ResetCameraZoom();
         Debug.Log("Flip Camera!");
+    }
+
+    private void ControlCameraZoom(float value)
+    {
+        if (!_isScreenshotModeEnabled)
+        {
+            return;
+        }
+        
+        foreach (var screenshotCamera in screenshotCamerasCamComponent)
+        {
+            screenshotCamera.fieldOfView = _slider.value;
+        }
+    }
+
+    private void ResetCameraZoom()
+    {
+        foreach (var screenshotCamera in screenshotCamerasCamComponent)
+        {
+            screenshotCamera.fieldOfView = DefaultFOV();
+            _slider.value = DefaultFOV();
+            Debug.Log($"Field of View reset to {DefaultFOV()}");
+        }
     }
 
     private void InitializeDirectory()
