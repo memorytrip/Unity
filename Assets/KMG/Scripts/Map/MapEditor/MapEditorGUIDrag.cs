@@ -17,7 +17,7 @@ namespace Map.Editor
             if (Physics.Raycast(mouseRay, out hitdata))
             {
                 context.focusObject.gameObject.SetActive(true);
-                context.focusObject.transform.position = hitdata.point;
+                context.focusObject.transform.position = QuantizatePosition(hitdata.point);
             } else {
                 context.focusObject.gameObject.SetActive(false);
             }
@@ -31,6 +31,14 @@ namespace Map.Editor
                 MonoBehaviour.Destroy(context.focusObject.gameObject);
             }
             context.SwitchState(new MapEditorGUIIdle(context));
+        }
+
+        private Vector3 QuantizatePosition(Vector3 pos)
+        {
+            pos.x = Mathf.Round(pos.x);
+            pos.y = Mathf.Round(pos.y);
+            pos.z = Mathf.Round(pos.z);
+            return pos;
         }
     }
 }

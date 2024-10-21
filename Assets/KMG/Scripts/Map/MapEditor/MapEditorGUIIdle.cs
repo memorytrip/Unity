@@ -27,7 +27,7 @@ namespace Map.Editor
                 return;
             }
 
-            // ¹èÄ¡µÈ ¿ÀºêÁ§Æ® ¼±ÅÃ
+            // ë°°ì¹˜ëœ ì˜¤ë¸Œì íŠ¸ ì„ íƒ
             Ray mouseRay = Camera.main.ScreenPointToRay(finger.screenPosition);
             RaycastHit hit;
             if (Physics.Raycast(mouseRay, out hit))
@@ -43,7 +43,7 @@ namespace Map.Editor
                 }
             }
             
-            // Ä«¸Ş¶ó ÀÌµ¿
+            // ì¹´ë©”ë¼ ì´ë™
             context.cinemachineController.enabled = true;
             context.SwitchState(new MapEditorGUIMove(context));
                 

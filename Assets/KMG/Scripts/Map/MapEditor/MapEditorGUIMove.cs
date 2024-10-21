@@ -3,7 +3,7 @@ using UnityEngine.InputSystem.EnhancedTouch;
 namespace Map.Editor
 {
     /**
-     * Ä«¸Ş¶ó ¿òÁ÷ÀÌ´Â »óÅÂ
+     * ì¹´ë©”ë¼ ì›€ì§ì´ëŠ” ìƒíƒœ
      */
     public class MapEditorGUIMove: MapEditorGUIState
     {

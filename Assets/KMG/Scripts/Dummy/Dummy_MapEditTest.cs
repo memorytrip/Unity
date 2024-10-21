@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Map;
+using UnityEngine.UI;
 
 namespace KMG.Scripts.Dummy
 {
@@ -9,6 +10,7 @@ namespace KMG.Scripts.Dummy
     {
         [SerializeField] private GameObject mapConcreteRoot;
         [SerializeField] private Map.Editor.MapEditorGUI mapEditorGUI;
+        [SerializeField] private Button mapConvertButton;
         private MapConcrete mapConcrete;
         private async UniTaskVoid Start()
         {
@@ -26,6 +28,14 @@ namespace KMG.Scripts.Dummy
 
             MapInfo mapInfo2 = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
             Debug.Log(mapInfo2.data);
+
+            mapConvertButton.onClick.AddListener(ConvertMap);
+        }
+
+        private void ConvertMap()
+        {
+            MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
+            Debug.Log(mapInfo.data);
         }
     }
 }
