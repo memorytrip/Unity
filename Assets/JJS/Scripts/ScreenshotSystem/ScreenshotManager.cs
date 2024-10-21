@@ -264,19 +264,11 @@ public class ScreenshotManager : MonoBehaviour
     
     private void CaptureScreenshot()
     {
-        if (_hitDetected)
-        {
-            Debug.Log("Hit Detected");
-        }
-        
-        Debug.Log($"{_layerAsLayerMask}");
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 20000f, _layerAsLayerMask))
         {
+            YamiQuestManager.Instance.ProceedQuest();
+            hitInfo.collider.gameObject.layer = LayerMask.NameToLayer("Default");
             Debug.Log($"Found it! {_layerAsLayerMask}, {hitInfo.colliderInstanceID}");
-        }
-        else
-        {
-            Debug.Log($"?, {hitInfo.collider}, {hitInfo.colliderInstanceID}");
         }
         
         var now = DateTime.Now;
