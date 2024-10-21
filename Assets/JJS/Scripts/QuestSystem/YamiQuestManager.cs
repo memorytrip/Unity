@@ -14,6 +14,9 @@ public class YamiQuestManager : MonoBehaviour
     public int CurrentQuestIndex { get; private set; }
     private const int RequiredQuestNumber = 7;
 
+    [SerializeField] private GameObject questPopup;
+    [SerializeField] private GameObject allClearPopup;
+    
     private bool AllQuestsCleared()
     {
         if (CurrentQuestIndex == RequiredQuestNumber)
@@ -41,10 +44,12 @@ public class YamiQuestManager : MonoBehaviour
     {
         if (AllQuestsCleared())
         {
+            allClearPopup.SetActive(true);
             Debug.Log("All Quests Cleared!");
         }
         else
         {
+            questPopup.SetActive(true);
             Debug.Log("One Quest Completed");
         }
     }

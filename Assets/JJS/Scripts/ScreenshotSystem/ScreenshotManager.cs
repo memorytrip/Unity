@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using Unity.Cinemachine;
 using System;
 using System.IO;
+using UnityEngine.Serialization;
 
 // ScreenshotWorldCanvas의 Canvas > Event Camera: 메인카메라로 지정 필요
 public class ScreenshotManager : MonoBehaviour
@@ -57,6 +58,11 @@ public class ScreenshotManager : MonoBehaviour
     [SerializeField] private float zoomRate;
     private const float MinFieldOfView = 5f;
     private const float MaxFieldOfView = 90f;
+
+    
+    // Quest
+    private Vector3 _rayDirection;
+    [SerializeField] private GameObject questAlert;
     
     private float DefaultFOV()
     {
@@ -118,9 +124,24 @@ public class ScreenshotManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        SwitchRayDirection();
         DetectQuestObject();
     }
 
+    private void SwitchRayDirection()
+    {
+        switch (_screenshotCameraType)
+        {
+            case EScreenshotCameraType.Selfie:
+                _rayDirection = -transform.forward;
+                break;
+            case EScreenshotCameraType.Default:
+            default:
+                _rayDirection = transform.forward;
+                break;
+        }
+    }
+    
     private void DetectQuestObject()
     {
         if (!_isScreenshotModeEnabled)
@@ -128,11 +149,8 @@ public class ScreenshotManager : MonoBehaviour
             return;
         }
         
-        _hitDetected = Physics.BoxCast(_hitBoxCollider.bounds.center, transform.localScale * 0.5f, transform.forward, out _hit, transform.rotation, _maxDistance, _layerAsLayerMask);
-        if (_hitDetected)
-        {
-            Debug.Log("Hit Detected");
-        }
+        _hitDetected = Physics.BoxCast(_hitBoxCollider.bounds.center, transform.localScale * 0.5f, _rayDirection, out _hit, transform.rotation, _maxDistance, _layerAsLayerMask);
+        questAlert.SetActive(_hitDetected);
     }
     
     private void OnDrawGizmos()
@@ -264,7 +282,8 @@ public class ScreenshotManager : MonoBehaviour
     
     private void CaptureScreenshot()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 20000f, _layerAsLayerMask))
+        //SwitchRayDirection();
+        if (Physics.Raycast(transform.position, _rayDirection, out RaycastHit hitInfo, 20000f, _layerAsLayerMask))
         {
             YamiQuestManager.Instance.ProceedQuest();
             hitInfo.collider.gameObject.layer = LayerMask.NameToLayer("Default");
