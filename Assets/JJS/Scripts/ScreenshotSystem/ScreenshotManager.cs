@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using Unity.Cinemachine;
 using System;
 using System.IO;
+using UnityEngine.Serialization;
 
 // ScreenshotWorldCanvas의 Canvas > Event Camera: 메인카메라로 지정 필요
 public class ScreenshotManager : MonoBehaviour
@@ -51,6 +52,13 @@ public class ScreenshotManager : MonoBehaviour
     private EScreenshotCameraType _screenshotCameraType;
     private bool _isScreenshotModeEnabled;
 
+    private int _layerAsLayerMask;
+    private float _maxDistance;
+    private float _speed;
+    private bool _hitDetected;
+    private Collider _hitBoxCollider;
+    private RaycastHit _hit;
+    
     #region Save
 
     private const string SubDirectory = "/Screenshots/";
@@ -61,6 +69,11 @@ public class ScreenshotManager : MonoBehaviour
     private void Awake()
     {
         InitializeDirectory();
+        
+        _layerAsLayerMask = (1 << LayerMask.NameToLayer("Quest"));
+        _maxDistance = 300f;
+        _speed = 20f;
+        _hitBoxCollider = GetComponent<Collider>();
 
         var canvas = GetComponentInChildren<Canvas>();
         _screenshotUi = canvas.gameObject;
@@ -84,6 +97,40 @@ public class ScreenshotManager : MonoBehaviour
         _screenshotUi.gameObject.SetActive(false);
     }
 
+    private void FixedUpdate()
+    {
+        if (_isScreenshotModeEnabled)
+        {
+            _hitDetected = Physics.BoxCast(_hitBoxCollider.bounds.center, transform.localScale * 0.5f, transform.forward, out _hit, transform.rotation, _maxDistance, _layerAsLayerMask);
+            if (_hitDetected)
+            {
+                Debug.Log("Hit Detected");
+            }
+        }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        //Check if there has been a hit yet
+        if (_hitDetected)
+        {
+            //Draw a Ray forward from GameObject toward the hit
+            Gizmos.DrawRay(transform.position, transform.forward * _hit.distance);
+            //Draw a cube that extends to where the hit exists
+            Gizmos.DrawWireCube(transform.position + transform.forward * _hit.distance, transform.localScale);
+        }
+        //If there hasn't been a hit yet, draw the ray at the maximum distance
+        else
+        {
+            //Draw a Ray forward from GameObject toward the maximum distance
+            Gizmos.DrawRay(transform.position, transform.forward * _maxDistance);
+            //Draw a cube at the maximum distance
+            Gizmos.DrawWireCube(transform.position + transform.forward * _maxDistance, transform.localScale);
+        }
+    }
+
     private void ToggleScreenshotMode()
     {
         _cameraMode = _cameraMode switch
@@ -102,10 +149,12 @@ public class ScreenshotManager : MonoBehaviour
         {
             case ECameraMode.Screenshot:
                 screenshotCameras[(int)_screenshotCameraType].gameObject.SetActive(true);
+                _isScreenshotModeEnabled = true;
                 break;
             case ECameraMode.Default:
             default:
                 screenshotCameras[(int)_screenshotCameraType].gameObject.SetActive(false);
+                _isScreenshotModeEnabled = false;
                 break;
         }
 
@@ -159,10 +208,24 @@ public class ScreenshotManager : MonoBehaviour
             Directory.CreateDirectory(Application.persistentDataPath + SubDirectory);
         }
     }
-        
-    // TODO: 라이팅 완전 어두움... 화면 상 보이는 그대로를 캡처하고 싶은데!?!?!?!?ㅠㅠㅠㅠㅠ
+    
     private void CaptureScreenshot()
     {
+        if (_hitDetected)
+        {
+            Debug.Log("Hit Detected");
+        }
+        
+        Debug.Log($"{_layerAsLayerMask}");
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 20000f, _layerAsLayerMask))
+        {
+            Debug.Log($"Found it! {_layerAsLayerMask}, {hitInfo.colliderInstanceID}");
+        }
+        else
+        {
+            Debug.Log($"?, {hitInfo.collider}, {hitInfo.colliderInstanceID}");
+        }
+        
         var now = DateTime.Now;
         var formattedDate = now.ToString("yyyyMMdd_HHmmssfff");
             
