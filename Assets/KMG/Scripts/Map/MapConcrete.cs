@@ -27,7 +27,7 @@ namespace Map
         /**
          * 지정된 transform에 model을 Instantiate
          */
-        public void AddMapObject(Vector3 position, Quaternion rotation, Model model)
+        public MapObject AddMapObject(Vector3 position, Quaternion rotation, Model model)
         {
             GameObject gameObject = MonoBehaviour.Instantiate(mapObjectPrefab, rootObject.transform);
             gameObject.transform.position = position;
@@ -37,6 +37,7 @@ namespace Map
             mapObject.SetModel(model);
             
             mapObjects.Add(mapObject);
+            return mapObject;
         }
 
         public void DeleteMapObject(MapObject mapObject)

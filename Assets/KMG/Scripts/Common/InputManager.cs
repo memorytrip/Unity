@@ -1,7 +1,10 @@
 using System;
+using UnityEditor.DeviceSimulation;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace Common
 {
@@ -11,13 +14,13 @@ namespace Common
         
         [HideInInspector] public InputAction moveAction;
         [HideInInspector] public InputAction lookAction;
-        [HideInInspector] public InputAction touch0Action;
-        [HideInInspector] public InputAction touch1Action;
+        [HideInInspector] public InputAction jumpAction;
     
         public event EventHandler<PinchEventArgs> OnPinch;
         public event EventHandler<PanningEventArgs> OnPanning;
-
-        [HideInInspector] public int touchCount = 0;
+        public event Action<Finger> OnFingerUp;
+        public event Action<Finger> OnFingerDown;
+        public event Action<Finger> OnFingerMove;
 
         private float prevPinchMagnitude = -1;
         private Vector2 prevPanningCenter = Vector2.zero;
@@ -26,45 +29,32 @@ namespace Common
         {
             if (Instance == null) Instance = this;
             else Destroy(this);
-        }
-        
-        private void Start()
-        {
+            
+            EnhancedTouchSupport.Enable();
+            
             InitAction();
             InitPinch();
             InitPanning();
+            
         }
 
         private void InitAction()
         {
             moveAction = InputSystem.actions.FindAction("Move");
             lookAction = InputSystem.actions.FindAction("Look");
-            touch0Action = InputSystem.actions.FindAction("Touch0");
-            touch1Action = InputSystem.actions.FindAction("Touch1");
-
-            touch0Action.started += _ => touchCount++;
-            touch1Action.started += _ => touchCount++;
-            touch0Action.canceled += _ =>
-            {
-                touchCount--;
-                prevPinchMagnitude = -1;
-                prevPanningCenter = Vector2.zero;
-            };
-            touch1Action.canceled += _ =>
-            {
-                touchCount--;
-                prevPinchMagnitude = -1;
-                prevPanningCenter = Vector2.zero;
-            };
+            jumpAction = InputSystem.actions.FindAction("Jump");
+            Touch.onFingerUp += finger => OnFingerUp?.Invoke(finger);
+            Touch.onFingerMove += finger => OnFingerMove?.Invoke(finger);
+            Touch.onFingerDown += finger => OnFingerDown?.Invoke(finger);
         }
 
         private void InitPinch()
         {
-            touch1Action.performed += _ =>
+            OnFingerMove += _ =>
             {
-                if (touchCount != 2) return;
-                if (EventSystem.current.IsPointerOverGameObject(0)) return;
-                var magnitude = (touch0Action.ReadValue<Vector2>() - touch1Action.ReadValue<Vector2>()).magnitude;
+                var fingers = Touch.activeFingers;
+                if (fingers.Count != 2) return;
+                var magnitude = (fingers[0].screenPosition - fingers[1].screenPosition).magnitude;
                 if (prevPinchMagnitude < 0f)
                     prevPinchMagnitude = magnitude;
                 var difference = magnitude - prevPinchMagnitude;
@@ -75,11 +65,12 @@ namespace Common
 
         private void InitPanning()
         {
-            touch1Action.performed += _ =>
+            OnFingerMove += _ =>
             {
-                if (touchCount != 2) return;
+                var fingers = Touch.activeFingers;
+                if (fingers.Count != 2) return;
                 if (EventSystem.current.IsPointerOverGameObject(0)) return;
-                var center = (touch0Action.ReadValue<Vector2>() + touch1Action.ReadValue<Vector2>()) / 2;
+                var center = (fingers[0].screenPosition + fingers[1].screenPosition) / 2;
                 if (prevPanningCenter == Vector2.zero)
                     prevPanningCenter = center;
                 var difference = center - prevPanningCenter;

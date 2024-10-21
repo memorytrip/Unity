@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using Fusion;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Common.Network
@@ -8,11 +10,17 @@ namespace Common.Network
      */
     public class ConnectInvoker: SimulationBehaviour, IPlayerJoined, IPlayerLeft
     {
-        
-        
         public void PlayerJoined(PlayerRef player)
         {
-            
+            if (player == Runner.LocalPlayer)
+            {
+                SpawnConnectionProcess().Forget();
+            }
+        }
+
+        private async UniTaskVoid SpawnConnectionProcess() {
+            GameObject connectionPrefab = await Resources.LoadAsync<GameObject>("Prefabs/Connection") as GameObject;
+            await Runner.SpawnAsync(connectionPrefab);
         }
 
         public void PlayerLeft(PlayerRef player)
