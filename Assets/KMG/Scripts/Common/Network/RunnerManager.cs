@@ -72,7 +72,7 @@ namespace Common.Network
         {
             if (RunnerObject == null)
                 throw new Exception("Trying fusion disconnect while Runner is not exist");
-
+            connectInvoker.ReleaseAuth(Runner.LocalPlayer);
             await Runner.Shutdown();
             Destroy(RunnerObject);
             Runner = null;
