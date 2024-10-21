@@ -9,7 +9,7 @@ public class EventManager : MonoBehaviour
     }
     
     private static EventManager instance = null;
-    private Dictionary<Event_Type, List<IListener>> Listeners = new Dictionary<Event_Type, List<IListener>>();
+    private Dictionary<EventType, List<IListener>> Listeners = new();
 
     void Awake()
     {
@@ -23,11 +23,9 @@ public class EventManager : MonoBehaviour
         DestroyImmediate(gameObject);
     }
 
-    public void AddListener(Event_Type eventType, IListener listener)
+    public void AddListener(EventType eventType, IListener listener)
     {
-        List<IListener> ListenList = null;
-
-        if (Listeners.TryGetValue(eventType, out ListenList))
+        if (Listeners.TryGetValue(eventType, out var ListenList))
         {
             ListenList.Add(listener);
             return;
@@ -38,11 +36,9 @@ public class EventManager : MonoBehaviour
         Listeners.Add(eventType, ListenList);
     }
 
-    public void PostNotification(Event_Type eventType, Component sender, object param = null)
+    public void PostNotification(EventType eventType, Component sender, object param = null)
     {
-        List<IListener> ListenList = null;
-
-        if (!Listeners.TryGetValue(eventType, out ListenList))
+        if (!Listeners.TryGetValue(eventType, out var ListenList))
         {
             return;
         }
@@ -53,13 +49,13 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void RemoveEvent(Event_Type eventType) => Listeners.Remove(eventType);
+    public void RemoveEvent(EventType eventType) => Listeners.Remove(eventType);
 
     public void RemoveRedundancies()
     {
-        Dictionary<Event_Type, List<IListener>> newListeners = new Dictionary<Event_Type, List<IListener>>();
+        Dictionary<EventType, List<IListener>> newListeners = new Dictionary<EventType, List<IListener>>();
 
-        foreach (KeyValuePair<Event_Type, List<IListener>> Item in Listeners)
+        foreach (KeyValuePair<EventType, List<IListener>> Item in Listeners)
         {
             for (int i = Item.Value.Count - 1; i >= 0; i--)
             {

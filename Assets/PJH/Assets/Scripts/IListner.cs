@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public enum Event_Type
+public enum EventType
 {
     eRaycasting,
     eUI,
 }
 public interface IListener
 {
-    void OnEvent(Event_Type eventType, Component sender, object param = null);
+    void OnEvent(EventType eventType, Component sender, object param = null);
 }
