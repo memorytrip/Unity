@@ -16,16 +16,5 @@ namespace Jinsol
         {
             _rigidbody.WakeUp();
         }
-
-        private void OnCollisionEnter(Collision other)
-        {
-            Debug.Log($"Collision!!!! {other.gameObject}");
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log($"Trigger!!!! {other.gameObject}");
-        }
     }
-
 }
