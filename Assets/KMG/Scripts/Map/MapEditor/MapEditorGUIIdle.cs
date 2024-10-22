@@ -16,10 +16,10 @@ namespace Map.Editor
                 MapEditorItem item;
                 foreach (var result in results) {
                     if (result.gameObject.TryGetComponent<MapEditorItem>(out item)) {
-                        MapObject mapObject = context.mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, item.model);
-                        context.focusObject = mapObject;
+                        MapObject mapObject = context.target.mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, item.model);
+                        context.target.focusObject = mapObject;
 						mapObject.GetComponent<Collider>().enabled = false;
-                        context.focusObject.gameObject.SetActive(false);
+                        context.target.focusObject.gameObject.SetActive(false);
 						context.SwitchState(new MapEditorGUIDrag(context));
                         break;
                     }
@@ -36,7 +36,7 @@ namespace Map.Editor
                 MapObject mapObject;
                 if (hit.transform.TryGetComponent(out mapObject))
                 {
-                    context.focusObject = mapObject;
+                    context.target.focusObject = mapObject;
                     mapObject.GetComponent<Collider>().enabled = false;
                     context.SwitchState(new MapEditorGUIDrag(context));
                     return;

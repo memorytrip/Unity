@@ -1,9 +1,14 @@
 using System;
+using System.Resources;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Map;
+using Map.MapEditor;
 using Newtonsoft.Json;
 using UnityEngine.UI;
+using UnityEngine.Windows;
+using System.IO;
+using File = System.IO.File;
 
 namespace KMG.Scripts.Dummy
 {
@@ -14,6 +19,7 @@ namespace KMG.Scripts.Dummy
         [SerializeField] private GameObject mapConcreteRoot;
         [SerializeField] private Map.Editor.MapEditorGUI mapEditorGUI;
         [SerializeField] private Button mapConvertButton;
+        [SerializeField] private ThumbnailCapture capturer;
         private MapConcrete mapConcrete;
         private async UniTaskVoid Start()
         {
@@ -24,18 +30,23 @@ namespace KMG.Scripts.Dummy
             // mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, await ModelManager.Instance.Get("2"));
             // mapConcrete.AddMapObject(Vector3.left, Quaternion.identity, await ModelManager.Instance.Find("1"));
             mapConcrete = await MapConverter.ConvertMapInfoToMapConcrete(mapInfo);
-            mapEditorGUI.mapConcrete = mapConcrete;
+            mapEditorGUI.target.mapConcrete = mapConcrete;  
 
             MapInfo mapInfo2 = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
             Debug.Log(mapInfo2.data);
 
-            mapConvertButton.onClick.AddListener(ConvertMap);
+            mapConvertButton.onClick.AddListener(()=>ConvertMap().Forget());
         }
 
-        private void ConvertMap()
+        private async UniTaskVoid ConvertMap()
         {
             MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
-            Debug.Log(JsonConvert.SerializeObject(mapInfo));
+            mapInfo.thumbnail = await capturer.CaptureToBase64();
+            
+            string path = Application.persistentDataPath + "/";
+            string filename = "asdf.json";
+            Debug.Log(path + filename);
+            await File.WriteAllTextAsync(path + filename, JsonConvert.SerializeObject(mapInfo));
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Map
     {
         public string formatVersion = "0.0.1";
         public string id;
-        public Texture2D thumbnail;
+        public string thumbnail;
         public string data;
     }
 }

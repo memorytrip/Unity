@@ -9,12 +9,12 @@ namespace Map.Editor
     public class MapEditorGUI : MonoBehaviour
     {
         [SerializeField] public CinemachineInputAxisController cinemachineController;
-        public MapConcrete mapConcrete;
-        [HideInInspector] public MapObject focusObject;
+        public MapEditor target;
         private MapEditorGUIState state;
         
         void Start()
         {
+            target = new MapEditor();
             InputManager.Instance.OnFingerDown += OnTouchStart;
             InputManager.Instance.OnFingerMove += OnTouchPerform;
             InputManager.Instance.OnFingerUp += OnTouchCanceled;

@@ -6,30 +6,32 @@ using UnityEngine;
 
 namespace Map
 {
-    public class MapManager: MonoBehaviour
+    public class MapManager
     {
-        public static MapManager Instance;
-        private void Awake()
+        private static MapManager _instance;
+        public static MapManager Instance
         {
-            if (Instance == null) Instance = this;
-            else Destroy(this);
-            DontDestroyOnLoad(gameObject);
+            get
+            {
+                if (_instance == null) _instance = new MapManager();
+                return _instance;
+            }
+        }
+        private MapManager()
+        {
+            if (_instance != null) return;
         }
 
         public async UniTask<List<MapInfo>> LoadMapList(User user)
         {
             return await LoadDefaultsMapList();
         }
-
-        public async UniTask<MapConcrete> LoadMap(MapInfo mapInfo)
-        {
-            return await MapConverter.ConvertMapInfoToMapConcrete(mapInfo);
-        }
-
+        
         private async UniTask<List<MapInfo>> LoadDefaultsMapList()
         {
             List<MapInfo> mapInfos = new List<MapInfo>(4);
-            mapInfos.Add(JsonConvert.DeserializeObject<MapInfo>(await LoadMapFileFromResources("DummyMap1")));
+            mapInfos.Add(JsonConvert.DeserializeObject<MapInfo>(await LoadMapFileFromResources("DummyMap01")));
+            mapInfos.Add(JsonConvert.DeserializeObject<MapInfo>(await LoadMapFileFromResources("DummyMap02")));
 
             return mapInfos;
         }
@@ -38,6 +40,11 @@ namespace Map
         {
             TextAsset textAsset = await Resources.LoadAsync<TextAsset>("Maps/" + mapName) as TextAsset;
             return textAsset.text;
+        }
+        
+        public async UniTask<MapConcrete> LoadMap(MapInfo mapInfo)
+        {
+            return await MapConverter.ConvertMapInfoToMapConcrete(mapInfo);
         }
     }
 }
