@@ -16,7 +16,8 @@ namespace Common.Network
 
         public override void Spawned()
         {
-            if (!HasStateAuthority) return;
+            if (!HasStateAuthority) 
+                return;
             StateAuthInstance = this;
             DontDestroyOnLoad(gameObject);
         }

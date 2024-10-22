@@ -2,26 +2,26 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Map;
+using Newtonsoft.Json;
 using UnityEngine.UI;
 
 namespace KMG.Scripts.Dummy
 {
     public class Dummy_MapEditTest: MonoBehaviour
     {
+        private const string defaultMapInfo =
+            "{\"formatVersion\":\"0.0.1\",\"id\":null,\"thumbnail\":null,\"data\":\"{\\\"themeId\\\":\\\"0\\\",\\\"mapObjectList\\\":[]}\"}";
         [SerializeField] private GameObject mapConcreteRoot;
         [SerializeField] private Map.Editor.MapEditorGUI mapEditorGUI;
         [SerializeField] private Button mapConvertButton;
         private MapConcrete mapConcrete;
         private async UniTaskVoid Start()
         {
-            MapInfo mapInfo = new MapInfo();
-            mapInfo.id = "0";
-            mapInfo.thumbnail = null;
-            mapInfo.data = "{\"themeId\":null,\"mapObjectList\":[{\"modelId\":\"0\",\"position\":{\"x\":0.0,\"y\":0.0,\"z\":0.0},\"rotation\":{\"w\":1.0,\"x\":0.0,\"y\":0.0,\"z\":0.0}},{\"modelId\":\"1\",\"position\":{\"x\":-1.0,\"y\":0.0,\"z\":0.0},\"rotation\":{\"w\":1.0,\"x\":0.0,\"y\":0.0,\"z\":0.0}}]}";
+            MapInfo mapInfo = JsonConvert.DeserializeObject<MapInfo>(defaultMapInfo);
             
-            // mapConcrete = new MapConcrete(mapInfo);
+            // mapConcrete = new MapConcrete();
             // mapConcrete.rootObject = mapConcreteRoot;
-            // mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, await ModelManager.Instance.Find("0"));
+            // mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, await ModelManager.Instance.Get("2"));
             // mapConcrete.AddMapObject(Vector3.left, Quaternion.identity, await ModelManager.Instance.Find("1"));
             mapConcrete = await MapConverter.ConvertMapInfoToMapConcrete(mapInfo);
             mapEditorGUI.mapConcrete = mapConcrete;
@@ -35,7 +35,7 @@ namespace KMG.Scripts.Dummy
         private void ConvertMap()
         {
             MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
-            Debug.Log(mapInfo.data);
+            Debug.Log(JsonConvert.SerializeObject(mapInfo));
         }
     }
 }

@@ -6,7 +6,6 @@ namespace Map
 {
     public class MapData
     {
-        public string formatVersion = "0.0.1";
         public string themeId;
         public class MapObjectData
         {

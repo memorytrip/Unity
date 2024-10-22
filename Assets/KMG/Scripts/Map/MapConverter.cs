@@ -17,6 +17,7 @@ namespace Map
             // MapConcrete 초기화
             MapConcrete mapConcrete = new MapConcrete();
             mapConcrete.info = info;
+            mapConcrete.SetTheme(mapData.themeId).Forget();
             
             // MapConcrete에 MapObject 추가
             foreach (var mapObjectData in mapData.mapObjectList)
