@@ -64,6 +64,7 @@ public class ScreenshotManager : MonoBehaviour
     [SerializeField] private GameObject questAlert;
     
     // QR
+    private int _qrLayerMask;
     [SerializeField] private CanvasGroup jumpToInternetPopup;
     [SerializeField] private Button jumpToInternetButton;
     private string _savedURL;
@@ -94,6 +95,7 @@ public class ScreenshotManager : MonoBehaviour
         
         // 오브젝트 특정을 위한 부분 초기화
         _layerAsLayerMask = 1 << LayerMask.NameToLayer("Quest");
+        _qrLayerMask = 1 << LayerMask.NameToLayer("QR");
         _maxDistance = 300f;
         _speed = 20f;
         _hitBoxCollider = GetComponent<Collider>();
@@ -287,10 +289,6 @@ public class ScreenshotManager : MonoBehaviour
     
     private void CaptureScreenshot()
     {
-        
-        var now = DateTime.Now;
-        var formattedDate = now.ToString("yyyyMMdd_HHmmssfff");
-            
         // Assign the RenderTexture temporarily to the active RenderTexture
         RenderTexture currentRT = RenderTexture.active;
         RenderTexture.active = screenshotRenderTexture;
@@ -299,26 +297,36 @@ public class ScreenshotManager : MonoBehaviour
         Texture2D screenshot = new Texture2D(screenshotRenderTexture.width, screenshotRenderTexture.height, TextureFormat.RGB24, false);
         screenshot.ReadPixels(new Rect(0, 0, screenshotRenderTexture.width, screenshotRenderTexture.height), 0, 0);
         screenshot.Apply();
-
+        
         if (Physics.Raycast(transform.position, _rayDirection, out RaycastHit hitInfo, 20000f, _layerAsLayerMask))
         {
             YamiQuestManager.Instance.ProceedQuest();
-            hitInfo.collider.gameObject.layer = LayerMask.NameToLayer("Default");
-            Debug.Log($"Found it! {_layerAsLayerMask}, {hitInfo.colliderInstanceID}");
+            NullifyQuest(hitInfo);
         }
 
+        if (Physics.Raycast(transform.position, _rayDirection, out hitInfo, 20000f, _qrLayerMask))
+        {
+            DecodeQRCode(screenshot);
+        }
+        
+        SaveScreenshot(screenshot);
+        
+        // Clean up
+        RenderTexture.active = currentRT;
+        Destroy(screenshot);
+    }
+
+    private void SaveScreenshot(Texture2D screenshot)
+    {
         // Save the screenshot as a PNG file
+        var now = DateTime.Now;
+        var formattedDate = now.ToString("yyyyMMdd_HHmmssfff");
+            
         byte[] bytes = screenshot.EncodeToPNG();
         string path = Path.Combine(Application.persistentDataPath + SubDirectory + formattedDate + FileType);
         File.WriteAllBytes(path, bytes);
 
         Debug.Log($"Screenshot saved to {path}");
-        
-        DecodeQRCode(screenshot);
-        
-        // Clean up
-        RenderTexture.active = currentRT;
-        Destroy(screenshot);
     }
 
     private void DecodeQRCode(Texture2D screenshot)
@@ -338,5 +346,11 @@ public class ScreenshotManager : MonoBehaviour
     private void JumpToURL()
     {
         Application.OpenURL(_savedURL);
+        jumpToInternetPopup.alpha = 0f;
+    }
+
+    private void NullifyQuest(RaycastHit hitInfo)
+    {
+        hitInfo.collider.gameObject.layer = LayerMask.NameToLayer("Default");
     }
 }
