@@ -1,7 +1,6 @@
 using UnityEngine;
 using GUI;
 using Unity.Cinemachine;
-using UnityEditor.IMGUI.Controls;
 
 public class CinemachineInput : MonoBehaviour
 {

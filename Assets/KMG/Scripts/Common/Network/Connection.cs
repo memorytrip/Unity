@@ -1,5 +1,6 @@
 using Fusion;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 namespace Common.Network
 {
@@ -20,6 +21,24 @@ namespace Common.Network
                 return;
             StateAuthInstance = this;
             DontDestroyOnLoad(gameObject);
+            
+            SpawnAvatar().Forget();
+        }
+
+        private async UniTaskVoid SpawnAvatar()
+        {
+            switch (SceneManager.Instance.curScene)
+            {
+                case "MultiPlayTest":
+                    currenctCharacter = await SpawnProcess("Player");
+                    break;
+            }
+        }
+        
+        
+        public async UniTask<NetworkObject> SpawnProcess(string prefabName) {
+            GameObject connectionPrefab = await Resources.LoadAsync<GameObject>("Prefabs/" + prefabName) as GameObject;
+            return await Runner.SpawnAsync(connectionPrefab);
         }
     }
 }

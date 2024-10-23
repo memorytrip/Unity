@@ -15,6 +15,16 @@ namespace GUI
             canvasGroup.alpha = 0f;
         }
 
+        public void StartFadeIn(float seconds)
+        {
+            StartCoroutine(FadeIn(seconds));
+        }
+
+        public void StartFadeOut(float seconds)
+        {
+            StartCoroutine(FadeOut(seconds));
+        }
+
         public IEnumerator FadeIn(float seconds)
         {
             if (isActive) yield break;

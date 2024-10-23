@@ -35,7 +35,7 @@ public class Dummy_RESTTest : MonoBehaviour
         string jsonData = JsonConvert.SerializeObject(testData);
 
         // 요청 생성
-        UnityWebRequest request = new UnityWebRequest("http://125.132.216.190:12222/api/ai/analyze", "POST");
+        UnityWebRequest request = new UnityWebRequest("http://125.132.216.190:17778/api/ai/analyze", "POST");
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
         request.timeout = 60;
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);

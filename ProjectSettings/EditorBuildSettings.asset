@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/KMG/Scene/PhotonTest.unity
+    guid: 24d283bfbd5b7b746bf128a880eee30e
+  - enabled: 1
+    path: Assets/KMG/Scene/MultiPlayTest.unity
+    guid: 38339fc4892bea649aa5f21532e9840b
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:

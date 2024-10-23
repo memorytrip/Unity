@@ -15,7 +15,9 @@ namespace Common
     {
         public static SceneManager Instance = null;
         [HideInInspector] public string curScene;
+        [HideInInspector] public event Action OnLoadScene;
         [SerializeField] private FadeController fader;
+        
         
         private void Awake()
         {
@@ -27,8 +29,8 @@ namespace Common
 #region MoveRoom
         public async UniTask MoveRoom(string roomName)
         {
-            await UniTask.WhenAll(FadeOut().ToUniTask(), MoveRoomProcess("SampleScene"));
-            await ChangeSceneWithCheckNetworkRunner("SampleScene").ToUniTask();
+            await UniTask.WhenAll(FadeOut().ToUniTask(), MoveRoomProcess("MultiPlayTest"));
+            await ChangeSceneWithCheckNetworkRunner("MultiPlayTest").ToUniTask();
             await FadeIn().ToUniTask();
         }
 
@@ -45,6 +47,14 @@ namespace Common
                 Debug.LogException(e);
                 // TODO: 예외처리
             }
+        }
+
+        private string RoutingScene(string roomName)
+        {
+            if (roomName == "0") return "Lobby";
+            if (roomName.Length == 4) return "Play";
+            if (roomName.Contains("player_")) return "MyRoom";
+            throw new ArgumentException("try to connect invalid room name");
         }
 #endregion
 
@@ -80,6 +90,7 @@ namespace Common
                 yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
             }
             curScene = sceneName;
+            OnLoadScene?.Invoke();
         }
 
         private IEnumerator FadeIn()
