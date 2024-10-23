@@ -3,11 +3,12 @@ using UnityEngine.UI;
 using Unity.Cinemachine;
 using System;
 using System.IO;
+using ZXing;
 
 // ScreenshotWorldCanvas의 Canvas > Event Camera: 메인카메라로 지정 필요
 public class ScreenshotManager : MonoBehaviour
 {
-    // TODO: 스크린샷 기능은 UI에 버튼 형태로 존재할 예정
+    // 스크린샷 기능은 UI에 버튼 형태로 존재할 예정
     // 이지만 몇 가지 제한 사항이 있음
     // 1. 모두가 동시에 관람하는/전환하는 이벤트 발생 시에는 스크린샷 모드가 강제로 해제
     // 2. 세션(방에서 하는 모든 활동 - 영상을 관람하고 각자 저장하는 과정)이 끝난 후 30분간은 자유롭게 맵을 돌아다니면서 촬영 가능
@@ -38,6 +39,8 @@ public class ScreenshotManager : MonoBehaviour
         
     [Header("스크린샷 기능")]
     [SerializeField] private CinemachineCamera[] screenshotCameras = new CinemachineCamera [2];
+
+    [SerializeField] private Camera[] screenshotCamerasCamComponent = new Camera[2];
     private GameObject _screenshotUi;
     [SerializeField] private RawImage cameraPreviewRawImage;
     [SerializeField] private Button flipButton;
@@ -50,8 +53,36 @@ public class ScreenshotManager : MonoBehaviour
     private ECameraMode _cameraMode;
     private EScreenshotCameraType _screenshotCameraType;
     private bool _isScreenshotModeEnabled;
+    
+    private Slider _slider;
+    [SerializeField] private float zoomRate;
+    private const float MinFieldOfView = 5f;
+    private const float MaxFieldOfView = 90f;
 
-    #region Save
+    // Quest
+    private Vector3 _rayDirection;
+    [SerializeField] private GameObject questAlert;
+    
+    // QR
+    private int _qrLayerMask;
+    [SerializeField] private CanvasGroup jumpToInternetPopup;
+    [SerializeField] private Button jumpToInternetButton;
+    private string _savedURL;
+    
+    private float DefaultFOV()
+    {
+        return screenshotCameras[(int)EScreenshotCameraType.Selfie].IsLive ? 24f : 36f;
+    }
+
+    // 미션용 세팅: 특명! 오브젝트의 사진을 찍어라!
+    private int _layerAsLayerMask;
+    private float _maxDistance;
+    private float _speed;
+    private bool _hitDetected;
+    private Collider _hitBoxCollider;
+    private RaycastHit _hit;
+    
+    #region Save System
 
     private const string SubDirectory = "/Screenshots/";
     private const string FileType = ".png";
@@ -61,7 +92,18 @@ public class ScreenshotManager : MonoBehaviour
     private void Awake()
     {
         InitializeDirectory();
+        
+        // 오브젝트 특정을 위한 부분 초기화
+        _layerAsLayerMask = 1 << LayerMask.NameToLayer("Quest");
+        _qrLayerMask = 1 << LayerMask.NameToLayer("QR");
+        _maxDistance = 300f;
+        _speed = 20f;
+        _hitBoxCollider = GetComponent<Collider>();
 
+        _slider = GetComponentInChildren<Slider>();
+        _slider.minValue = MinFieldOfView;
+        _slider.maxValue = MaxFieldOfView;
+        
         var canvas = GetComponentInChildren<Canvas>();
         _screenshotUi = canvas.gameObject;
         if (canvas.worldCamera == null)
@@ -80,8 +122,64 @@ public class ScreenshotManager : MonoBehaviour
         toggleScreenshotModeButton.onClick.AddListener(ToggleScreenshotMode);
         flipButton.onClick.AddListener(FlipCamera);
         snapshotButton.onClick.AddListener(CaptureScreenshot);
-            
+        jumpToInternetButton.onClick.AddListener(JumpToURL);
+        
+        _slider.onValueChanged.AddListener(ControlCameraZoom);
+        
         _screenshotUi.gameObject.SetActive(false);
+    }
+
+    private void FixedUpdate()
+    {
+        SwitchRayDirection();
+        DetectQuestObject();
+    }
+
+    private void SwitchRayDirection()
+    {
+        switch (_screenshotCameraType)
+        {
+            case EScreenshotCameraType.Selfie:
+                _rayDirection = -transform.forward;
+                break;
+            case EScreenshotCameraType.Default:
+            default:
+                _rayDirection = transform.forward;
+                break;
+        }
+    }
+    
+    private void DetectQuestObject()
+    {
+        if (!_isScreenshotModeEnabled)
+        {
+            return;
+        }
+        
+        _hitDetected = Physics.BoxCast(_hitBoxCollider.bounds.center, transform.localScale * 0.5f, _rayDirection, out _hit, transform.rotation, _maxDistance, _layerAsLayerMask);
+        questAlert.SetActive(_hitDetected);
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        //Check if there has been a hit yet
+        if (_hitDetected)
+        {
+            //Draw a Ray forward from GameObject toward the hit
+            Gizmos.DrawRay(transform.position, transform.forward * _hit.distance);
+            //Draw a cube that extends to where the hit exists
+            Gizmos.DrawWireCube(transform.position + transform.forward * _hit.distance, transform.localScale);
+        }
+        //If there hasn't been a hit yet, draw the ray at the maximum distance
+        else
+        {
+            //Draw a Ray forward from GameObject toward the maximum distance
+            Gizmos.DrawRay(transform.position, transform.forward * _maxDistance);
+            //Draw a cube at the maximum distance
+            Gizmos.DrawWireCube(transform.position + transform.forward * _maxDistance, transform.localScale);
+        }
     }
 
     private void ToggleScreenshotMode()
@@ -102,10 +200,12 @@ public class ScreenshotManager : MonoBehaviour
         {
             case ECameraMode.Screenshot:
                 screenshotCameras[(int)_screenshotCameraType].gameObject.SetActive(true);
+                _isScreenshotModeEnabled = true;
                 break;
             case ECameraMode.Default:
             default:
                 screenshotCameras[(int)_screenshotCameraType].gameObject.SetActive(false);
+                _isScreenshotModeEnabled = false;
                 break;
         }
 
@@ -114,6 +214,8 @@ public class ScreenshotManager : MonoBehaviour
 
     private void ToggleScreenshotUI()
     {
+        ResetCameraZoom();
+
         switch (_cameraMode)
         {
             case ECameraMode.Screenshot:
@@ -149,7 +251,32 @@ public class ScreenshotManager : MonoBehaviour
                 screenshotCameras[(int)EScreenshotCameraType.Selfie].gameObject.SetActive(false);
                 break;
         }
+
+        ResetCameraZoom();
         Debug.Log("Flip Camera!");
+    }
+
+    private void ControlCameraZoom(float value)
+    {
+        if (!_isScreenshotModeEnabled)
+        {
+            return;
+        }
+        
+        foreach (var screenshotCamera in screenshotCamerasCamComponent)
+        {
+            screenshotCamera.fieldOfView = _slider.value;
+        }
+    }
+
+    private void ResetCameraZoom()
+    {
+        foreach (var screenshotCamera in screenshotCamerasCamComponent)
+        {
+            screenshotCamera.fieldOfView = DefaultFOV();
+            _slider.value = DefaultFOV();
+            Debug.Log($"Field of View reset to {DefaultFOV()}");
+        }
     }
 
     private void InitializeDirectory()
@@ -159,13 +286,9 @@ public class ScreenshotManager : MonoBehaviour
             Directory.CreateDirectory(Application.persistentDataPath + SubDirectory);
         }
     }
-        
-    // TODO: 라이팅 완전 어두움... 화면 상 보이는 그대로를 캡처하고 싶은데!?!?!?!?ㅠㅠㅠㅠㅠ
+    
     private void CaptureScreenshot()
     {
-        var now = DateTime.Now;
-        var formattedDate = now.ToString("yyyyMMdd_HHmmssfff");
-            
         // Assign the RenderTexture temporarily to the active RenderTexture
         RenderTexture currentRT = RenderTexture.active;
         RenderTexture.active = screenshotRenderTexture;
@@ -174,16 +297,60 @@ public class ScreenshotManager : MonoBehaviour
         Texture2D screenshot = new Texture2D(screenshotRenderTexture.width, screenshotRenderTexture.height, TextureFormat.RGB24, false);
         screenshot.ReadPixels(new Rect(0, 0, screenshotRenderTexture.width, screenshotRenderTexture.height), 0, 0);
         screenshot.Apply();
+        
+        if (Physics.Raycast(transform.position, _rayDirection, out RaycastHit hitInfo, 20000f, _layerAsLayerMask))
+        {
+            YamiQuestManager.Instance.ProceedQuest();
+            NullifyQuest(hitInfo);
+        }
 
+        if (Physics.Raycast(transform.position, _rayDirection, out hitInfo, 20000f, _qrLayerMask))
+        {
+            DecodeQRCode(screenshot);
+        }
+        
+        SaveScreenshot(screenshot);
+        
+        // Clean up
+        RenderTexture.active = currentRT;
+        Destroy(screenshot);
+    }
+
+    private void SaveScreenshot(Texture2D screenshot)
+    {
         // Save the screenshot as a PNG file
+        var now = DateTime.Now;
+        var formattedDate = now.ToString("yyyyMMdd_HHmmssfff");
+            
         byte[] bytes = screenshot.EncodeToPNG();
         string path = Path.Combine(Application.persistentDataPath + SubDirectory + formattedDate + FileType);
         File.WriteAllBytes(path, bytes);
 
         Debug.Log($"Screenshot saved to {path}");
+    }
 
-        // Clean up
-        RenderTexture.active = currentRT;
-        Destroy(screenshot);
+    private void DecodeQRCode(Texture2D screenshot)
+    {
+        var barcodeReader = new BarcodeReader();
+        Result result = barcodeReader.Decode(screenshot.GetPixels32(), screenshot.width, screenshot.height);
+        if (result == null)
+        {
+            return;
+        }
+        
+        Debug.Log($"QR code found!: BarcodeFormat({result.BarcodeFormat}), ResultText({result.Text})");
+        _savedURL = result.Text;
+        jumpToInternetPopup.alpha = 1f;
+    }
+
+    private void JumpToURL()
+    {
+        Application.OpenURL(_savedURL);
+        jumpToInternetPopup.alpha = 0f;
+    }
+
+    private void NullifyQuest(RaycastHit hitInfo)
+    {
+        hitInfo.collider.gameObject.layer = LayerMask.NameToLayer("Default");
     }
 }
