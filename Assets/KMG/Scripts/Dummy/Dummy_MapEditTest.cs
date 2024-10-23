@@ -1,41 +1,52 @@
 using System;
+using System.Resources;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Map;
+using Map.MapEditor;
+using Newtonsoft.Json;
 using UnityEngine.UI;
+using UnityEngine.Windows;
+using System.IO;
+using File = System.IO.File;
 
 namespace KMG.Scripts.Dummy
 {
     public class Dummy_MapEditTest: MonoBehaviour
     {
+        private const string defaultMapInfo =
+            "{\"formatVersion\":\"0.0.1\",\"id\":null,\"thumbnail\":null,\"data\":\"{\\\"themeId\\\":\\\"0\\\",\\\"mapObjectList\\\":[]}\"}";
         [SerializeField] private GameObject mapConcreteRoot;
         [SerializeField] private Map.Editor.MapEditorGUI mapEditorGUI;
         [SerializeField] private Button mapConvertButton;
+        [SerializeField] private ThumbnailCapture capturer;
         private MapConcrete mapConcrete;
         private async UniTaskVoid Start()
         {
-            MapInfo mapInfo = new MapInfo();
-            mapInfo.id = "0";
-            mapInfo.thumbnail = null;
-            mapInfo.data = "{\"themeId\":null,\"mapObjectList\":[{\"modelId\":\"0\",\"position\":{\"x\":0.0,\"y\":0.0,\"z\":0.0},\"rotation\":{\"w\":1.0,\"x\":0.0,\"y\":0.0,\"z\":0.0}},{\"modelId\":\"1\",\"position\":{\"x\":-1.0,\"y\":0.0,\"z\":0.0},\"rotation\":{\"w\":1.0,\"x\":0.0,\"y\":0.0,\"z\":0.0}}]}";
+            MapInfo mapInfo = JsonConvert.DeserializeObject<MapInfo>(defaultMapInfo);
             
-            // mapConcrete = new MapConcrete(mapInfo);
+            // mapConcrete = new MapConcrete();
             // mapConcrete.rootObject = mapConcreteRoot;
-            // mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, await ModelManager.Instance.Find("0"));
+            // mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, await ModelManager.Instance.Get("2"));
             // mapConcrete.AddMapObject(Vector3.left, Quaternion.identity, await ModelManager.Instance.Find("1"));
             mapConcrete = await MapConverter.ConvertMapInfoToMapConcrete(mapInfo);
-            mapEditorGUI.mapConcrete = mapConcrete;
+            mapEditorGUI.target.mapConcrete = mapConcrete;  
 
             MapInfo mapInfo2 = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
             Debug.Log(mapInfo2.data);
 
-            mapConvertButton.onClick.AddListener(ConvertMap);
+            mapConvertButton.onClick.AddListener(()=>ConvertMap().Forget());
         }
 
-        private void ConvertMap()
+        private async UniTaskVoid ConvertMap()
         {
             MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
-            Debug.Log(mapInfo.data);
+            mapInfo.thumbnail = await capturer.CaptureToBase64();
+            
+            string path = Application.persistentDataPath + "/";
+            string filename = "asdf.json";
+            Debug.Log(path + filename);
+            await File.WriteAllTextAsync(path + filename, JsonConvert.SerializeObject(mapInfo));
         }
     }
 }

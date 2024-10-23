@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.DeviceSimulation;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -69,7 +68,6 @@ namespace Common
             {
                 var fingers = Touch.activeFingers;
                 if (fingers.Count != 2) return;
-                if (EventSystem.current.IsPointerOverGameObject(0)) return;
                 var center = (fingers[0].screenPosition + fingers[1].screenPosition) / 2;
                 if (prevPanningCenter == Vector2.zero)
                     prevPanningCenter = center;

@@ -1,12 +1,13 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Map.Editor
 {
-    public class MapEditor: MonoBehaviour
+    public class MapEditor
     {
         public MapConcrete mapConcrete;
-        [HideInInspector] public MapObject focusObject;
+        public MapObject focusObject;
         
         private List<Operations.IMapEditOperation> operationQueue;
 
@@ -18,6 +19,16 @@ namespace Map.Editor
         public void DeleteObj(MapObject mapObject)
         {
             mapConcrete.DeleteMapObject(mapObject);
+        }
+
+        public void Execute(Operations.Create oper)
+        {
+            throw new NotImplementedException();
+        }
+        
+        public void Execute(Operations.Delete oper)
+        {
+            throw new NotImplementedException();
         }
     }
 }

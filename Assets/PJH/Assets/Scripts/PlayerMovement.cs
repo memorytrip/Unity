@@ -1,5 +1,8 @@
 using System;
 using System.Collections;
+using Common;
+using Common.Network;
+using Fusion;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     private CharacterController cc;
     //private NetworkMecanimAnimator networkanim;
-    public VirtualJoystick joystick;
 
     [Header("PlayerMove")] 
     public float playerMoveSpeed;
@@ -34,6 +36,9 @@ public class PlayerMovement : MonoBehaviour
     private LayerMask groundLayer;
     public float maxDistance = 1f;
 
+
+    private NetworkObject networkObject;
+
     private void Awake()
     {
         cc = GetComponent<CharacterController>();
@@ -41,10 +46,23 @@ public class PlayerMovement : MonoBehaviour
         camera = Camera.main;
         groundLayer = LayerMask.GetMask("map");
         boxSize = new Vector3(1f, 1f, 1f);
+        networkObject = GetComponent<NetworkObject>();
+        
+        SettingCamera();
+    }
+
+    private void SettingCamera()
+    {
+        if (!networkObject.HasStateAuthority)
+            return;
+        GameManager.Instance.cinemachineCamera.Target.TrackingTarget = transform;
+        Debug.Log("asdf");
     }
 
     public void FixedUpdate()
     {
+        if (!networkObject.HasStateAuthority)
+            return;
         PlayerMove();
         PlayerRotation();
         ApplyGravity();
@@ -53,7 +71,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyMovement()
     {
-        if (joystick.isInput)
+        // if (joystick.isInput)
+        if (InputManager.Instance.moveAction.ReadValue<Vector2>().magnitude > 0f)
         {
             playerMoveSpeed = 5f;
         }
@@ -66,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
     
     private void ApplyGravity()
     {
-        if (IsGrounded() && velocity < 0.0f)
+        if (cc.isGrounded && velocity < 0.0f)
         {
             velocity = -3.0f;
         }
@@ -80,15 +99,18 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerRotation()
     {
-        playerDir = Quaternion.Euler(0.0f, camera.transform.eulerAngles.y, 0.0f) * new Vector3(joystick.inputDirection.x, 0.0f, joystick.inputDirection.y);
+        if (!InputManager.Instance.moveAction.inProgress)
+            return;
+        playerDir = Quaternion.Euler(0.0f, camera.transform.eulerAngles.y, 0.0f) * playerDir; //new Vector3(joystick.inputDirection.x, 0.0f, joystick.inputDirection.y);
         Quaternion targetRotation = Quaternion.LookRotation(playerDir, Vector3.up);
-
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
     }
     
     public void PlayerMove()
     { 
-        playerDir = new Vector3(joystick.inputDirection.x, 0f, joystick.inputDirection.y);
+        // playerDir = new Vector3(joystick.inputDirection.x, 0f, joystick.inputDirection.y);
+        Vector2 inputVector = InputManager.Instance.moveAction.ReadValue<Vector2>();
+        playerDir = new Vector3(inputVector.x, 0f, inputVector.y);
         playerDir.Normalize();
     }
 

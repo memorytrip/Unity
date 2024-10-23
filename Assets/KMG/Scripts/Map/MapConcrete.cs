@@ -17,9 +17,16 @@ namespace Map
         public List<MapObject> mapObjects;
         private GameObject mapObjectPrefab;
 
+        private MeshFilter rootMeshFilter;
+        private MeshRenderer rootMeshRenderer;
+        private MeshCollider rootMeshCollider;
+
         public MapConcrete()
         {
             rootObject = new GameObject("MapConcrete");
+            rootMeshFilter = rootObject.AddComponent<MeshFilter>();
+            rootMeshRenderer = rootObject.AddComponent<MeshRenderer>();
+            rootMeshCollider = rootObject.AddComponent<MeshCollider>();
             mapObjects = new List<MapObject>();
             mapObjectPrefab = Resources.Load<GameObject>(mapObjectPrefabPath);
         }
@@ -43,7 +50,16 @@ namespace Map
         public void DeleteMapObject(MapObject mapObject)
         {
             mapObjects.Remove(mapObject);
-            MonoBehaviour.Destroy(mapObject);
+            MonoBehaviour.Destroy(mapObject.gameObject);
+        }
+
+        public async UniTaskVoid SetTheme(string themeId)
+        {
+            Theme theme = await ModelManager.Instance.GetTheme(themeId);
+            this.themeId = themeId;
+            rootMeshFilter.mesh = theme.mesh;
+            rootMeshRenderer.material = theme.material;
+            rootMeshCollider.sharedMesh = theme.mesh;
         }
 
         public void RefreshInfo()

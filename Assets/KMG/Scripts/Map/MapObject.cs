@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Map
@@ -9,6 +10,25 @@ namespace Map
     public class MapObject : MonoBehaviour
     {
         private Model model;
+        
+        /**
+         * TODO: 맵에디팅에 사용할 Id 부여하기
+         */
+        private string _id;
+        public string id
+        {
+            get { return _id; }
+            set {
+                if (_id == null)
+                {
+                    _id = value;
+                }
+                else
+                {
+                    throw new Exception("Try to set id of MapObject which already is set");
+                }
+            }
+        }
         
         /** 
          * 생성과 함꼐 실행
