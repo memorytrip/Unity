@@ -1,28 +1,36 @@
-using System;
-using UnityEngine;
+using UnityEngine.Serialization;
 
-[Serializable]
-[CreateAssetMenu(fileName = "QuestInfo", menuName = "ScriptableObjects/QuestInfo")]
-public class QuestInfoSO : ScriptableObject
+namespace Draft
 {
-    [field: SerializeField] public string questId { get; private set; }
-        
-    [Header("퀘스트 제목")]
-    [SerializeField] private string questName;
-    [Header("달성 단계")]
-    public GameObject[] questStepPrefabs; // TODO: 이게 최선이냐
-    [Header("퀘스트 발생 조건")]
-    [SerializeField] private int playerLevelRequired; // TODO: 플레이어 레벨 시스템이 있다면
-    [SerializeField] private QuestInfoSO[] prerequisiteQuests;
+    using System;
+    using UnityEngine;
 
-    [Header("보상")] // TODO: 있다면 - 수집한 사진의 매수라고 봐도 무난할 듯
-    [SerializeField] private int receivedTokens;
-
-    private void OnValidate()
+    [Serializable]
+    // TODO: 확정되면 적당하게 수정하기
+    [CreateAssetMenu(fileName = "QuestInfoSO", menuName = "QuestSystem/QuestInfoSO")]
+    public class QuestInfoSO : ScriptableObject
     {
+        public string QuestId { get; private set; }
+        
+        [Header("퀘스트 제목")]
+        [Tooltip("예시: ????")] // TODO: 적당한 예시는 나중에 알아보도록 하자
+        public string questName;
+
+        [Header("퀘스트 달성 조건")] public QuestInfoSO[] prerequisiteQuestInfo;
+        [Header("보상 연결")] public RewardSO reward;
+        [Space(10f)]
+        [Header("퀘스트 내용 - 내부 식별용")]
+        [TextArea(10, 15)] public string questDescription;
+
+        [Header("퀘스트 달성 여부")] public bool questClear;
+        
+        // TODO: 이거 왜 있는지 잊어버렸다
+        private void OnValidate()
+        {
 #if UNITY_EDITOR
-        questId = name;
-        UnityEditor.EditorUtility.SetDirty(this);
+            QuestId = name;
+            UnityEditor.EditorUtility.SetDirty(this);
 #endif
+        }
     }
 }
