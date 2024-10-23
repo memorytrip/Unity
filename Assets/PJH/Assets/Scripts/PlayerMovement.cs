@@ -97,9 +97,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerRotation()
     {
+        if (!InputManager.Instance.moveAction.inProgress)
+            return;
         playerDir = Quaternion.Euler(0.0f, camera.transform.eulerAngles.y, 0.0f) * playerDir; //new Vector3(joystick.inputDirection.x, 0.0f, joystick.inputDirection.y);
         Quaternion targetRotation = Quaternion.LookRotation(playerDir, Vector3.up);
-
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
     }
     
