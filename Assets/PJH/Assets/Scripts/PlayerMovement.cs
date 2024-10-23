@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     private CharacterController cc;
     //private NetworkMecanimAnimator networkanim;
-    public VirtualJoystick joystick;
 
     [Header("PlayerMove")] 
     public float playerMoveSpeed;
@@ -54,7 +53,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void SettingCamera()
     {
+        if (!networkObject.HasStateAuthority)
+            return;
         GameManager.Instance.cinemachineCamera.Target.TrackingTarget = transform;
+        Debug.Log("asdf");
     }
 
     public void FixedUpdate()

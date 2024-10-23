@@ -1,4 +1,5 @@
 using System;
+using Common.Network;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -33,6 +34,7 @@ namespace Common
 
         private void FindCamera()
         {
+            if (Connection.StateAuthInstance == null) return;
             cinemachineCamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
         }
     }
