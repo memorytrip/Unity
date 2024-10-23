@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace GUI
 {
@@ -9,7 +10,10 @@ namespace GUI
         
         public static bool IsPointOverGUI()
         {
-            return IsPointOverGUI(Input.mousePosition);
+            if (Touch.activeTouches.Count == 0)
+                return false;
+            Vector2 touchPosition = Touch.activeTouches[Touch.activeTouches.Count - 1].screenPosition;
+            return IsPointOverGUI(touchPosition);
         }
         
         public static bool IsPointOverGUI(Vector2 point)
