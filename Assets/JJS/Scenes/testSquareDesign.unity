@@ -14098,6 +14098,7 @@ MonoBehaviour:
   content: {fileID: 301748012}
   yggdrasilCamera: {fileID: 645212169}
   defaultCamera: {fileID: 1541748316}
+  character: {fileID: 0}
 --- !u!114 &1742539290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16414,7 +16415,7 @@ GameObject:
   - component: {fileID: 2050133835}
   - component: {fileID: 2050133834}
   - component: {fileID: 2050133833}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
