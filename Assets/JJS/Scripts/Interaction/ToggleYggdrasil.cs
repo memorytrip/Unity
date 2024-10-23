@@ -5,9 +5,6 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-// 서버 연결까지 생각하면 복잡할 것 같아서 일단은 연출이라도 제대로 하기
-
-// TODO: 나무 연출
 // 플레이어가 접근하면 기존에 나무에 달린 열매들의 비디오/사진이 사라지고 (열매 모델만 남음)
 // 열람 가능한 열매가 화면 상단에서 중앙으로 슬라이드
 // 클릭하면 상세 정보 볼 수 있는 UI 팝업
@@ -29,6 +26,10 @@ public class ToggleYggdrasil : MonoBehaviour
     [SerializeField] private CinemachineCamera yggdrasilCamera;
     [SerializeField] private CinemachineCamera defaultCamera;
 
+    // TODO: 이런 것들은 다른 데로 가야되긴 함
+    [SerializeField] private GameObject character;
+    private SkinnedMeshRenderer[] _characterMeshes;
+    
     private void Awake()
     {
         _yggdrasil = GetComponent<Yggdrasil>();
@@ -40,6 +41,8 @@ public class ToggleYggdrasil : MonoBehaviour
         {
             Debug.LogWarning("Animator is not initialized!");
         }
+
+        _characterMeshes = character.GetComponentsInChildren<SkinnedMeshRenderer>();
         
         defaultCamera.Prioritize();
         //yggdrasilCamera.SetActive(false);
@@ -63,20 +66,20 @@ public class ToggleYggdrasil : MonoBehaviour
         {
             return;
         }
-        
+
+        HideCharacter();
         StartCoroutine(ViewGems());
         Debug.Log($"Player entered {gameObject}");
     }
 
     private IEnumerator ViewGems()
     {
-        Camera.main.cullingMask |= 1 << LayerMask.NameToLayer("Player");
         foreach (var gem in backgroundMemoryGemSetVideo)
         {
             gem.Stop();
         }
         content.SetActive(true);
-        yggdrasilCamera.Prioritize();
+        //yggdrasilCamera.Prioritize();
         Debug.Log($"Yggdrasil camera is now {yggdrasilCamera.gameObject}, Priority: {yggdrasilCamera.Priority}");
         //yggdrasilCamera.SetActive(true);
         DeactivateBackgroundGems();
@@ -119,19 +122,18 @@ public class ToggleYggdrasil : MonoBehaviour
 
         _contentUiAnimator.SetTrigger(Exit);
         yield return _exitClipLength;
-        HideContentUi();
         foreach (var gem in backgroundMemoryGemSetVideo)
         {
             gem.Play();
         }
-        Camera.main.cullingMask = -1; 
-        Debug.Log($"Player exited {gameObject}");
+        HideContentUi();
     }
 
     private void HideContentUi()
     {
         content.SetActive(false);
-        defaultCamera.Prioritize();
+        //defaultCamera.Prioritize();
+        ShowCharacter();
     }
 
     /*private void DeactivateButtons(MemoryGem[] memoryGemSet)
@@ -146,4 +148,20 @@ public class ToggleYggdrasil : MonoBehaviour
     {
         DeactivateButtons(_memoryGemSet);
     }*/
+
+    private void HideCharacter()
+    {
+        foreach (var part in _characterMeshes)
+        {
+            part.enabled = false;
+        }
+    }
+
+    private void ShowCharacter()
+    {
+        foreach (var part in _characterMeshes)
+        {
+            part.enabled = true;
+        }
+    }
 }

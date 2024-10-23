@@ -71,7 +71,7 @@ public class ScreenshotManager : MonoBehaviour
     
     private float DefaultFOV()
     {
-        return screenshotCameras[(int)EScreenshotCameraType.Selfie].IsLive ? 24f : 40f;
+        return screenshotCameras[(int)EScreenshotCameraType.Selfie].IsLive ? 24f : 36f;
     }
 
     // 미션용 세팅: 특명! 오브젝트의 사진을 찍어라!
