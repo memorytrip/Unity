@@ -20,7 +20,7 @@ public class MemoryGemInfoSO : ScriptableObject
         Large = 10,
     }
     
-    public string memoryId; // 고유 ID TODO: 확실하게 랜덤 생성해줘야
+    public string memoryId; // 고유 ID
     public GemType gemType;
     public GemSize gemSize;
     public byte[] photo; // TODO: 이렇게 하는 게 맞나
