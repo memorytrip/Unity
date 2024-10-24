@@ -55,7 +55,7 @@ public class UploadPhoto : MonoBehaviour
 
         img.texture = tex;
         img.SetNativeSize();
-        ImageSizeSetting(img, 495f, 495f);
+        ImageSizeSetting(img, 720f, 480f);
     }
 
     void ImageSizeSetting(RawImage img, float x, float y)

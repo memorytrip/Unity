@@ -16,7 +16,14 @@ public class Testmanager : MonoBehaviour
 
     private IEnumerator PlayerSpawn()
     {
-        var op = RunnerManager.Instance.Runner.SpawnAsync(playerPrefab);
-        yield return new WaitUntil(() => op.Status == NetworkSpawnStatus.Spawned);
+        if (RunnerManager.Instance.Runner != null)
+        {
+            var op = RunnerManager.Instance.Runner.SpawnAsync(playerPrefab);
+            yield return new WaitUntil(() => op.Status == NetworkSpawnStatus.Spawned);
+        }
+        else
+        {
+            Debug.Log("Runner가 없음");
+        }
     }
 }
