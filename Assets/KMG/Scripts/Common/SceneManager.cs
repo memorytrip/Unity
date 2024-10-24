@@ -29,8 +29,8 @@ namespace Common
 #region MoveRoom
         public async UniTask MoveRoom(string roomName)
         {
-            await UniTask.WhenAll(FadeOut().ToUniTask(), MoveRoomProcess("MultiPlayTest"));
-            await ChangeSceneWithCheckNetworkRunner("MultiPlayTest").ToUniTask();
+            await UniTask.WhenAll(FadeOut().ToUniTask(), MoveRoomProcess(roomName));
+            await ChangeSceneWithCheckNetworkRunner(roomName).ToUniTask();
             await FadeIn().ToUniTask();
         }
 
