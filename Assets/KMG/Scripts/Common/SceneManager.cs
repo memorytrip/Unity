@@ -90,7 +90,15 @@ namespace Common
                 yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
             }
             curScene = sceneName;
-            OnLoadScene?.Invoke();
+
+            try
+            {
+                OnLoadScene?.Invoke();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
         }
 
         private IEnumerator FadeIn()

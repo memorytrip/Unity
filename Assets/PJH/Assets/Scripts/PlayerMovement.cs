@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     [Header("References")]
     private CharacterController cc;
@@ -36,9 +36,6 @@ public class PlayerMovement : MonoBehaviour
     private LayerMask groundLayer;
     public float maxDistance = 1f;
 
-
-    private NetworkObject networkObject;
-
     private void Awake()
     {
         cc = GetComponent<CharacterController>();
@@ -46,22 +43,25 @@ public class PlayerMovement : MonoBehaviour
         camera = Camera.main;
         groundLayer = LayerMask.GetMask("map");
         boxSize = new Vector3(1f, 1f, 1f);
-        networkObject = GetComponent<NetworkObject>();
-        
+    }
+
+    public override void Spawned()
+    {
         SettingCamera();
+        InputManager.Instance.jumpAction.started += PlayerJump;
     }
 
     private void SettingCamera()
     {
-        if (!networkObject.HasStateAuthority)
+        if (!HasStateAuthority)
             return;
-        GameManager.Instance.cinemachineCamera.Target.TrackingTarget = transform;
-        Debug.Log("asdf");
+        if (GameManager.Instance.cinemachineCamera != null)
+            GameManager.Instance.cinemachineCamera.Target.TrackingTarget = transform;
     }
 
-    public void FixedUpdate()
+    public override void FixedUpdateNetwork()
     {
-        if (!networkObject.HasStateAuthority)
+        if (!HasStateAuthority)
             return;
         PlayerMove();
         PlayerRotation();
@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         // if (joystick.isInput)
         if (InputManager.Instance.moveAction.ReadValue<Vector2>().magnitude > 0f)
         {
-            playerMoveSpeed = 5f;
+            playerMoveSpeed = 10f;
         }
         else
         {
@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
         playerDir.Normalize();
     }
 
-    public void PlayerJump()
+    public void PlayerJump(InputAction.CallbackContext ctx)
     {
         velocity = jumpForce;
     }

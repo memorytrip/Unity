@@ -34,8 +34,8 @@ namespace Common
 
         private void FindCamera()
         {
-            if (Connection.StateAuthInstance == null) return;
-            cinemachineCamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
+            // if (Connection.StateAuthInstance == null) return;
+            cinemachineCamera = GameObject.Find("CinemachineCamera")?.GetComponent<CinemachineCamera>();
         }
     }
 }
