@@ -14,15 +14,23 @@ namespace Common.Network
 
         [Networked] public NetworkObject currenctCharacter { get; set; }
         [Networked] public string playerName { get; set; }
+        [Networked] public PlayerRef playerRef { get; set; }
+        [Networked] public bool hasSceneAuthority { get; set; }
 
         public override void Spawned()
         {
             if (!HasStateAuthority) 
                 return;
-            StateAuthInstance = this;
+            Init();
             DontDestroyOnLoad(gameObject);
-            
             SpawnAvatar().Forget();
+        }
+
+        private void Init()
+        {
+            StateAuthInstance = this;
+            playerRef = Runner.LocalPlayer;
+            hasSceneAuthority = Runner.IsSceneAuthority;
         }
 
         private async UniTaskVoid SpawnAvatar()

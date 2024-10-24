@@ -31,7 +31,7 @@ namespace Common
         public async UniTask MoveRoom(string roomName)
         {
             await UniTask.WhenAll(FadeOut().ToUniTask(), MoveRoomProcess(roomName));
-            await ChangeSceneWithCheckNetworkRunner("MultiPlayTest").ToUniTask();
+            await ChangeSceneWithCheckNetworkRunner(RoutingScene(roomName)).ToUniTask();
             await FadeIn().ToUniTask();
         }
 
@@ -52,6 +52,7 @@ namespace Common
 
         private string RoutingScene(string roomName)
         {
+            return "MultiPlayTest";
             if (roomName == "0") return "Lobby";
             if (roomName.Length == 4) return "Play";
             if (roomName.Contains("player_")) return "MyRoom";

@@ -1,10 +1,7 @@
-using System;
-using Fusion;
-using NUnit.Framework.Constraints;
-using Unity.VisualScripting;
+using Common.Network;
 using UnityEngine;
 
-public class InteractButton : NetworkBehaviour, IListener
+public class InteractButton : MonoBehaviour, IListener
 {
     private void Start()
     {
@@ -18,6 +15,7 @@ public class InteractButton : NetworkBehaviour, IListener
             case EventType.eRaycasting:
                 if (param is PlayerInteraction.RaycastInfo raycastInfo)
                 {
+                    Debug.Log(Connection.StateAuthInstance.playerRef.PlayerId);
                     gameObject.SetActive(raycastInfo.isHit);
                 }
                 break;
