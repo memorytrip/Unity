@@ -3,6 +3,7 @@ using System.Collections;
 using Common;
 using Common.Network;
 using Fusion;
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -55,8 +56,9 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!HasStateAuthority)
             return;
-        if (GameManager.Instance.cinemachineCamera != null)
-            GameManager.Instance.cinemachineCamera.Target.TrackingTarget = transform;
+        CinemachineCamera cam = GameObject.Find("CinemachineCamera")?.GetComponent<CinemachineCamera>();
+        if (cam != null)
+            cam.Target.TrackingTarget = transform;
     }
 
     public override void FixedUpdateNetwork()
@@ -74,13 +76,13 @@ public class PlayerMovement : NetworkBehaviour
         // if (joystick.isInput)
         if (InputManager.Instance.moveAction.ReadValue<Vector2>().magnitude > 0f)
         {
-            playerMoveSpeed = 10f;
+            playerMoveSpeed = 5f;
         }
         else
         {
             playerMoveSpeed = 0f;
         }
-        cc.Move(new Vector3(playerDir.x * playerMoveSpeed, velocity, playerDir.z * playerMoveSpeed) * Time.deltaTime);
+        cc.Move(new Vector3(playerDir.x * playerMoveSpeed, velocity, playerDir.z * playerMoveSpeed) * Time.fixedDeltaTime);
     }
     
     private void ApplyGravity()
@@ -91,7 +93,7 @@ public class PlayerMovement : NetworkBehaviour
         }
         else
         {
-            velocity += gravity * gravityMultiplier * Time.deltaTime;
+            velocity += gravity * gravityMultiplier * Time.fixedDeltaTime;
         }
 		
         playerDir.y = velocity;
