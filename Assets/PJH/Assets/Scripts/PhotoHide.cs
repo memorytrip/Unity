@@ -1,15 +1,20 @@
 using System.Collections.Generic;
+using Common.Network;
+using Fusion;
 using UnityEngine;
 
-public class PhotoHide : MonoBehaviour, IListener
+public class PhotoHide : NetworkBehaviour, IListener
 {
     private float yValue = 1f;
     private Dictionary<string, Vector3> photoPositions;
     public GameObject photoPrefab;
     private GameObject hitObject;
 
-    void Start()
+    // void Start()
+    public override void Spawned()
     {
+        if (!Runner.IsSceneAuthority)
+            return;
         EventManager.Instance.AddListener(EventType.eRaycasting, this);
         photoPositions = new Dictionary<string, Vector3>();
         HidePhoto(photoPositions, 8); 
@@ -26,7 +31,8 @@ public class PhotoHide : MonoBehaviour, IListener
         {
             string photoName = "Photo" + i;
             photoDict[photoName] = GetRandomPosition(); 
-            Instantiate(photoPrefab, photoDict[photoName], Quaternion.identity);
+            // Instantiate(photoPrefab, photoDict[photoName], Quaternion.identity);
+            Runner.Spawn(photoPrefab, photoDict[photoName]);
         }
     }
 
@@ -41,12 +47,7 @@ public class PhotoHide : MonoBehaviour, IListener
                     if (raycastInfo.isHit)
                     {
                         hitObject = raycastInfo.hitInfo.collider.gameObject;
-                        Debug.Log("됐네?");
                     }
-                }
-                else
-                {
-                    Debug.Log("왜 안돼");
                 }
 
                 break;
