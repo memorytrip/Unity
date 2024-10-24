@@ -197,15 +197,10 @@ public class ScreenshotManager : MonoBehaviour
         switch (CameraMode)
         {
             case ECameraMode.Screenshot:
-                screenshotCameras[(int)_screenshotCameraType].Prioritize();
                 _isScreenshotModeEnabled = true;
                 break;
             case ECameraMode.Default:
-                screenshotCameras[(int)_screenshotCameraType].Prioritize();
                 _isScreenshotModeEnabled = false;
-                break;
-            default:
-                _brain.Prioritize();
                 break;
         }
 
@@ -214,8 +209,8 @@ public class ScreenshotManager : MonoBehaviour
 
     private void ToggleScreenshotUI()
     {
-        ResetCameraZoom();
         ResetCameraMode();
+        ResetCameraZoom();
 
         switch (CameraMode)
         {
@@ -283,6 +278,8 @@ public class ScreenshotManager : MonoBehaviour
     private void ResetCameraMode()
     {
         _screenshotCameraType = EScreenshotCameraType.Default;
+        screenshotCameras[(int)EScreenshotCameraType.Default].gameObject.SetActive(true);
+        screenshotCameras[(int)EScreenshotCameraType.Selfie].gameObject.SetActive(false);
     }
 
     private void InitializeDirectory()
