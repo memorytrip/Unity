@@ -3706,7 +3706,7 @@ Transform:
   m_GameObject: {fileID: 346652803}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.69999504, y: 0, z: 78.40875}
+  m_LocalPosition: {x: -0.69999504, y: 2.8, z: 78.40875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3743,7 +3743,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &369914476
 GameObject:
@@ -5931,7 +5931,7 @@ Transform:
   m_GameObject: {fileID: 570390760}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.679995, y: 3.48, z: 116.02875}
+  m_LocalPosition: {x: -27.679995, y: 2.8, z: 116.02875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5968,7 +5968,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &574164028
 GameObject:
@@ -13708,7 +13708,7 @@ Transform:
   m_GameObject: {fileID: 1140141192}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.200003, y: 0, z: 87.93875}
+  m_LocalPosition: {x: 11.200003, y: 2.8, z: 87.93875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13745,7 +13745,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1172102920
 GameObject:
@@ -17727,7 +17727,7 @@ Transform:
   m_GameObject: {fileID: 1482508847}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.49999428, y: 0, z: 123.03876}
+  m_LocalPosition: {x: -0.49999428, y: 2.8, z: 123.03876}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17764,7 +17764,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1486674621
 GameObject:
@@ -21586,7 +21586,7 @@ Transform:
   m_GameObject: {fileID: 1782157827}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.899996, y: 0, z: 96.738754}
+  m_LocalPosition: {x: -18.899996, y: 2.8, z: 96.738754}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21623,7 +21623,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1792721490
 GameObject:
@@ -23671,7 +23671,7 @@ GameObject:
   - component: {fileID: 2050133835}
   - component: {fileID: 2050133834}
   - component: {fileID: 2050133833}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Quad_Poster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24579,7 +24579,7 @@ Transform:
   m_GameObject: {fileID: 2119332525}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.59999657, y: 0, z: 87.53876}
+  m_LocalPosition: {x: -0.59999657, y: 2.8, z: 87.53876}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24616,7 +24616,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2125513944
 GameObject:
