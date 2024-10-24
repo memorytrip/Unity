@@ -38,15 +38,22 @@ namespace Common.Network
             switch (SceneManager.Instance.curScene)
             {
                 case "MultiPlayTest":
-                    currenctCharacter = await SpawnProcess("Player");
+                case "Square":
+                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 20, 0), Quaternion.identity);
                     break;
             }
         }
         
         
-        public async UniTask<NetworkObject> SpawnProcess(string prefabName) {
+        public async UniTask<NetworkObject> SpawnProcess(string prefabName)
+        {
+            return await SpawnProcess(prefabName, Vector3.zero, Quaternion.identity);
+        }
+        
+        public async UniTask<NetworkObject> SpawnProcess(string prefabName, Vector3 position, Quaternion rotation) 
+        {
             GameObject connectionPrefab = await Resources.LoadAsync<GameObject>("Prefabs/" + prefabName) as GameObject;
-            return await Runner.SpawnAsync(connectionPrefab);
+            return await Runner.SpawnAsync(connectionPrefab, position, rotation);
         }
     }
 }

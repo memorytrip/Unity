@@ -10,14 +10,11 @@ namespace KMG.Scripts.Dummy
 {
     public class Dummy_FusionConnect: MonoBehaviour
     {
-        [SerializeField] private TMP_InputField inputField;
         [SerializeField] private Button connectButton;
-        [SerializeField] private Button disconnectButton;
 
         private void Awake()
         {
             connectButton.onClick.AddListener(()=>Connect().Forget());
-            disconnectButton.onClick.AddListener(Disconnect);
         }
 
         private async UniTaskVoid Connect()
@@ -26,7 +23,7 @@ namespace KMG.Scripts.Dummy
             try
             {
                 connectButton.interactable = false;    
-                await SceneManager.Instance.MoveRoom(inputField.text);
+                await SceneManager.Instance.MoveRoom("0");
             }
             catch (Exception e)
             {
