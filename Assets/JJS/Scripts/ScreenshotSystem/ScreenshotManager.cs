@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using Unity.Cinemachine;
 using System;
 using System.IO;
-using UnityEngine.Serialization;
 using ZXing;
 
 // ScreenshotWorldCanvas의 Canvas > Event Camera: 메인카메라로 지정 필요
@@ -30,6 +29,8 @@ public class ScreenshotManager : MonoBehaviour
         Selfie,
     }
 
+    private CinemachineCamera _brain;
+    
     [Header("메인 UI")] [SerializeField] private Button toggleScreenshotModeButton;
         
     [Header("스크린샷 기능")]
@@ -88,6 +89,7 @@ public class ScreenshotManager : MonoBehaviour
     private void Awake()
     {
         InitializeDirectory();
+        _brain = FindAnyObjectByType<CinemachineBrain>().GetComponent<CinemachineCamera>();
 
         screenshotUi.alpha = 0f;
         
@@ -195,13 +197,15 @@ public class ScreenshotManager : MonoBehaviour
         switch (CameraMode)
         {
             case ECameraMode.Screenshot:
-                screenshotCameras[(int)_screenshotCameraType].gameObject.SetActive(true);
+                screenshotCameras[(int)_screenshotCameraType].Prioritize();
                 _isScreenshotModeEnabled = true;
                 break;
             case ECameraMode.Default:
-            default:
-                screenshotCameras[(int)_screenshotCameraType].gameObject.SetActive(false);
+                screenshotCameras[(int)_screenshotCameraType].Prioritize();
                 _isScreenshotModeEnabled = false;
+                break;
+            default:
+                _brain.Prioritize();
                 break;
         }
 
