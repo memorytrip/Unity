@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 5200066991887265945}
   - component: {fileID: 7746818860066421470}
   - component: {fileID: 8067508609732034889}
-  - component: {fileID: 8889479036677935023}
+  - component: {fileID: 3735187516853750063}
+  - component: {fileID: 915548430270039918}
+  - component: {fileID: -979823712083294569}
   m_Layer: 7
   m_Name: Photo
   m_TagString: Untagged
@@ -109,7 +111,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8889479036677935023
+--- !u!114 &3735187516853750063
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,7 +120,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 2010717050185545089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92cd68d85473dcd4b9289747bfd440f2, type: 3}
+  m_Script: {fileID: 11500000, guid: cd05a9d13354ce94fa0f03cc7c4c4f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photoName: 
+--- !u!114 &915548430270039918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010717050185545089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 999558733
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: -979823712083294569}
+--- !u!114 &-979823712083294569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010717050185545089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0

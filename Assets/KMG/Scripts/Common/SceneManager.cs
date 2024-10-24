@@ -4,6 +4,7 @@ using Common.Network;
 using Cysharp.Threading.Tasks;
 using GUI;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Common
 {
@@ -30,7 +31,7 @@ namespace Common
         public async UniTask MoveRoom(string roomName)
         {
             await UniTask.WhenAll(FadeOut().ToUniTask(), MoveRoomProcess(roomName));
-            await ChangeSceneWithCheckNetworkRunner(roomName).ToUniTask();
+            await ChangeSceneWithCheckNetworkRunner("MultiPlayTest").ToUniTask();
             await FadeIn().ToUniTask();
         }
 

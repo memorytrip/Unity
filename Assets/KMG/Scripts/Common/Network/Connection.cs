@@ -12,8 +12,8 @@ namespace Common.Network
     {
         public static Connection StateAuthInstance;
 
-        public NetworkObject currenctCharacter;
-        public string playerName;
+        [Networked] public NetworkObject currenctCharacter { get; set; }
+        [Networked] public string playerName { get; set; }
 
         public override void Spawned()
         {

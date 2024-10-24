@@ -1,9 +1,10 @@
 using System;
+using Fusion;
 using NUnit.Framework.Constraints;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class InteractButton : MonoBehaviour, IListener
+public class InteractButton : NetworkBehaviour, IListener
 {
     private void Start()
     {
