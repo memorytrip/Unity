@@ -31,7 +31,7 @@ namespace Common
         public async UniTask MoveRoom(string roomName)
         {
             await UniTask.WhenAll(FadeOut().ToUniTask(), MoveRoomProcess(roomName));
-            await ChangeSceneWithCheckNetworkRunner(roomName).ToUniTask();
+            await ChangeSceneWithCheckNetworkRunner(RoutingScene(roomName)).ToUniTask();
             await FadeIn().ToUniTask();
         }
 

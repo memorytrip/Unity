@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Common;
 using Common.Network;
+using Cysharp.Threading.Tasks;
 using Fusion;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
@@ -39,6 +40,7 @@ public class PlayerMovement : NetworkBehaviour
     private void Awake()
     {
         cc = GetComponent<CharacterController>();
+        cc.enabled = false;
         //networkanim = GetComponentInChildren<NetworkMecanimAnimator>();
         camera = Camera.main;
         boxSize = new Vector3(1f, 1f, 1f);
@@ -46,8 +48,10 @@ public class PlayerMovement : NetworkBehaviour
 
     public override void Spawned()
     {
+        cc.enabled = true;
         SettingCamera();
         InputManager.Instance.jumpAction.started += PlayerJump;
+        
     }
 
     private void SettingCamera()
@@ -116,7 +120,7 @@ public class PlayerMovement : NetworkBehaviour
 
     public void PlayerJump(InputAction.CallbackContext ctx)
     {
-        velocity = jumpForce;
+        // if (cc.isGrounded)
+            velocity = jumpForce;
     }
-    
 }

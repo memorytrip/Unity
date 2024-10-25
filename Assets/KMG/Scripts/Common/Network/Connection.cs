@@ -16,7 +16,6 @@ namespace Common.Network
         [Networked] public string playerName { get; set; }
         [Networked] public PlayerRef playerRef { get; set; }
         [Networked] public bool hasSceneAuthority { get; set; }
-
         public override void Spawned()
         {
             if (!HasStateAuthority) 
@@ -39,7 +38,7 @@ namespace Common.Network
             {
                 case "MultiPlayTest":
                 case "Square":
-                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 20, 0), Quaternion.identity);
+                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 10, 0), Quaternion.identity);
                     break;
             }
         }
