@@ -12,12 +12,10 @@ namespace KMG.Scripts.Dummy
     {
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private Button connectButton;
-        [SerializeField] private Button disconnectButton;
-        
+
         private void Awake()
         {
             connectButton.onClick.AddListener(()=>Connect().Forget());
-            disconnectButton.onClick.AddListener(Disconnect);
         }
 
         private async UniTaskVoid Connect()

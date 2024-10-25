@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using Unity.Cinemachine;
 using System;
 using System.IO;
+using UnityEngine.Serialization;
 using ZXing;
 
 // ScreenshotWorldCanvas의 Canvas > Event Camera: 메인카메라로 지정 필요
@@ -16,12 +17,6 @@ public class ScreenshotManager : MonoBehaviour
     // 3-1. 스크린샷 기능을 활성화 후 카메라 시점(ECameraMode)을 변경할 수 없음
     // 3-2. 스크린샷 기능 활성화 후 포즈를 바꾸거나 맵을 이동할 수 없음
     // 3-3. 단, 스크린샷 이전에 취한 포즈는 그대로 반영된다 (모션을 취하고 적절한 타이밍에 스크린샷 기능을 활성화 하면 좀 더 재밌는 사진을 촬용할 수 있음)
-        
-    public enum ECameraMode
-    {
-        Default,
-        Screenshot,
-    }
         
     public enum ECameraState
     {
@@ -41,16 +36,17 @@ public class ScreenshotManager : MonoBehaviour
     [SerializeField] private CinemachineCamera[] screenshotCameras = new CinemachineCamera [2];
 
     [SerializeField] private Camera[] screenshotCamerasCamComponent = new Camera[2];
-    private GameObject _screenshotUi;
+    [SerializeField] private CanvasGroup screenshotUi;
     [SerializeField] private RawImage cameraPreviewRawImage;
     [SerializeField] private Button flipButton;
     [SerializeField] private Button snapshotButton;
-        
+    [SerializeField] private Button exitButton;    
+    
     [Header("파일 구조 바뀌면 재연결 필요")]
     [Tooltip(@"Jinsol\Textures\ScreenshotRenderTexture.renderTexture")]
     [SerializeField] private RenderTexture screenshotRenderTexture;
 
-    private ECameraMode _cameraMode;
+    public static ECameraMode CameraMode { get; private set; }
     private EScreenshotCameraType _screenshotCameraType;
     private bool _isScreenshotModeEnabled;
     
@@ -92,6 +88,8 @@ public class ScreenshotManager : MonoBehaviour
     private void Awake()
     {
         InitializeDirectory();
+
+        screenshotUi.alpha = 0f;
         
         // 오브젝트 특정을 위한 부분 초기화
         _layerAsLayerMask = 1 << LayerMask.NameToLayer("Quest");
@@ -105,13 +103,12 @@ public class ScreenshotManager : MonoBehaviour
         _slider.maxValue = MaxFieldOfView;
         
         var canvas = GetComponentInChildren<Canvas>();
-        _screenshotUi = canvas.gameObject;
         if (canvas.worldCamera == null)
         {
             Debug.LogWarning("ScreenshotWorldCanvas -> Canvas -> Event Camera is null: use scene's main camera");
         }
             
-        _cameraMode = ECameraMode.Default;
+        CameraMode = ECameraMode.Default;
         _screenshotCameraType = EScreenshotCameraType.Default;
 
         foreach (var screenshotCamera in screenshotCameras)
@@ -123,10 +120,9 @@ public class ScreenshotManager : MonoBehaviour
         flipButton.onClick.AddListener(FlipCamera);
         snapshotButton.onClick.AddListener(CaptureScreenshot);
         jumpToInternetButton.onClick.AddListener(JumpToURL);
+        exitButton.onClick.AddListener(ToggleScreenshotMode);
         
         _slider.onValueChanged.AddListener(ControlCameraZoom);
-        
-        _screenshotUi.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -184,11 +180,11 @@ public class ScreenshotManager : MonoBehaviour
 
     private void ToggleScreenshotMode()
     {
-        _cameraMode = _cameraMode switch
+        CameraMode = CameraMode switch
         {
             ECameraMode.Default => ECameraMode.Screenshot,
             ECameraMode.Screenshot => ECameraMode.Default,
-            _ => _cameraMode
+            _ => CameraMode
         };
 
         ToggleCamera();
@@ -196,7 +192,7 @@ public class ScreenshotManager : MonoBehaviour
 
     private void ToggleCamera()
     {
-        switch (_cameraMode)
+        switch (CameraMode)
         {
             case ECameraMode.Screenshot:
                 screenshotCameras[(int)_screenshotCameraType].gameObject.SetActive(true);
@@ -215,16 +211,17 @@ public class ScreenshotManager : MonoBehaviour
     private void ToggleScreenshotUI()
     {
         ResetCameraZoom();
+        ResetCameraMode();
 
-        switch (_cameraMode)
+        switch (CameraMode)
         {
             case ECameraMode.Screenshot:
-                _screenshotUi.SetActive(true);
+                screenshotUi.alpha = 1f;
                 Debug.Log("Screenshot UI Active");
                 break;
             case ECameraMode.Default:
             default:
-                _screenshotUi.SetActive(false);
+                screenshotUi.alpha = 0f;
                 Debug.Log("Screenshot UI Inactive");
                 break;
         }
@@ -277,6 +274,11 @@ public class ScreenshotManager : MonoBehaviour
             _slider.value = DefaultFOV();
             Debug.Log($"Field of View reset to {DefaultFOV()}");
         }
+    }
+
+    private void ResetCameraMode()
+    {
+        _screenshotCameraType = EScreenshotCameraType.Default;
     }
 
     private void InitializeDirectory()

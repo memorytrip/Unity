@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - HiddenItem
   layers:
   - Default
   - TransparentFX
@@ -14,10 +15,7 @@ TagManager:
   - Quest
   - Interactable
   - QR
-  - 
-  - 
-  - 
-  - 
+  - Ground
   - 
   - 
   - 

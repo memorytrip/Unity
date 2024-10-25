@@ -34,7 +34,6 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("GroundCheck")] 
     public Vector3 boxSize;
-    private LayerMask groundLayer;
     public float maxDistance = 1f;
 
     private void Awake()
@@ -42,7 +41,6 @@ public class PlayerMovement : NetworkBehaviour
         cc = GetComponent<CharacterController>();
         //networkanim = GetComponentInChildren<NetworkMecanimAnimator>();
         camera = Camera.main;
-        groundLayer = LayerMask.GetMask("map");
         boxSize = new Vector3(1f, 1f, 1f);
     }
 
@@ -119,11 +117,6 @@ public class PlayerMovement : NetworkBehaviour
     public void PlayerJump(InputAction.CallbackContext ctx)
     {
         velocity = jumpForce;
-    }
-
-    private bool IsGrounded()
-    {
-        return Physics.BoxCast(transform.position, boxSize, -transform.up, transform.rotation, maxDistance , groundLayer);
     }
     
 }

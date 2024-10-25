@@ -52,7 +52,8 @@ namespace Common
 
         private string RoutingScene(string roomName)
         {
-            if (roomName == "0") return "Lobby";
+            // return "MultiPlayTest";
+            if (roomName == "0") return "Square";
             if (roomName.Length == 4) return "Play";
             if (roomName.Contains("player_")) return "MyRoom";
             throw new ArgumentException("try to connect invalid room name");
