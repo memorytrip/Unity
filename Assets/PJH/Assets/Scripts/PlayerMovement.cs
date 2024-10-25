@@ -123,7 +123,7 @@ public class PlayerMovement : NetworkBehaviour
         if (cc.isGrounded)
             velocity = jumpForce;
     }
-
+    
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
         InputManager.Instance.jumpAction.started -= PlayerJump;
