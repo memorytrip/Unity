@@ -120,7 +120,7 @@ public class PlayerMovement : NetworkBehaviour
 
     public void PlayerJump(InputAction.CallbackContext ctx)
     {
-        // if (cc.isGrounded)
+        if (cc.isGrounded)
             velocity = jumpForce;
     }
 }
