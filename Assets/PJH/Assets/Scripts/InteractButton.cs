@@ -4,7 +4,7 @@ using NUnit.Framework.Constraints;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class InteractButton : NetworkBehaviour, IListener
+public class InteractButton : MonoBehaviour, IListener
 {
     private void Start()
     {

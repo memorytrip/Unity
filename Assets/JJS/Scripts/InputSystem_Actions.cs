@@ -320,17 +320,6 @@ namespace Jinsol
                 },
                 {
                     ""name"": """",
-                    ""id"": ""610028fc-eff1-4f22-927d-72a3b2f0d10f"",
-                    ""path"": ""<Touchscreen>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Touch"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""cbac6039-9c09-46a1-b5f2-4e5124ccb5ed"",
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",

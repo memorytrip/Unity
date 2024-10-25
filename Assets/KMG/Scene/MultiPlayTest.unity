@@ -583,8 +583,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1562566638}
-        m_TargetAssemblyTypeName: PhotoHide, Assembly-CSharp
-        m_MethodName: DestroyPhoto
+        m_TargetAssemblyTypeName: PhotoManager, Assembly-CSharp
+        m_MethodName: OnDestroyPhoto
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -651,7 +651,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728184153}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
@@ -660,8 +660,7 @@ MonoBehaviour:
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 728184158}
+  NetworkedBehaviours: []
 --- !u!1 &784881559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,7 +1543,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d1b3246600d024e9ed7a7cff6a90fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photoPrefab: {fileID: 2010717050185545089, guid: 1664f3ba699cecd4dade13d10fe4cfac, type: 3}
+  photoPrefab:
+    RawGuidValue: 1664f3ba699cecd4dade13d10fe4cfac
 --- !u!4 &1562566639
 Transform:
   m_ObjectHideFlags: 0

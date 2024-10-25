@@ -1509,7 +1509,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1562566638}
         m_TargetAssemblyTypeName: PhotoHide, Assembly-CSharp
-        m_MethodName: DestroyPhoto
+        m_MethodName: RpcDestroyPhoto
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

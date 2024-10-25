@@ -150,12 +150,12 @@ MonoBehaviour:
     m_ActionName: 'Player/Zoom[/Mouse/scroll/y]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: b4ec838c-bff2-4448-b902-8f2e60f16ee4
-    m_ActionName: 'Player/Touch0[/Device Simulator Touchscreen/touch0/position]'
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 1545e7f7-ab2d-4a2e-a6fb-90167975d07f
     m_ActionName: 'Player/Touch1[/Device Simulator Touchscreen/touch1/position]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c7bbd56f-9705-44a4-b18f-adab3348402c
+    m_ActionName: 'Player/Touch0[/Device Simulator Touchscreen/touch0]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -179,6 +179,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 106936983026804534}
+  - {fileID: 7515603157310727061}
 --- !u!143 &2952914703231179904
 CharacterController:
   m_ObjectHideFlags: 0
