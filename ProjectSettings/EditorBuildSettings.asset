@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Login.unity
     guid: 2f28177dd727d154fad00826d41cd84a
-  - enabled: 0
+  - enabled: 1
     path: Assets/KMG/Scene/MultiPlayTest.unity
     guid: 38339fc4892bea649aa5f21532e9840b
   - enabled: 1
@@ -16,7 +16,7 @@ EditorBuildSettings:
     guid: 07c47557e8d96dd499d7af916d232840
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    guid: 1581c49179ccdac4d9ef8a1516b90ef6
   - enabled: 0
     path: Assets/Scenes/testSquare.unity
     guid: 45ad38d5a2f1d54428cfe14a7248f941

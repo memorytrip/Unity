@@ -990,7 +990,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 1742883052}
   connectButton: {fileID: 1501455572}
-  disconnectButton: {fileID: 1084654467}
 --- !u!114 &1459894688
 MonoBehaviour:
   m_ObjectHideFlags: 0
