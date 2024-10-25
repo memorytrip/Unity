@@ -15,7 +15,6 @@ public class InteractButton : MonoBehaviour, IListener
             case EventType.eRaycasting:
                 if (param is PlayerInteraction.RaycastInfo raycastInfo)
                 {
-                    Debug.Log(Connection.StateAuthInstance.playerRef.PlayerId);
                     gameObject.SetActive(raycastInfo.isHit);
                 }
                 break;

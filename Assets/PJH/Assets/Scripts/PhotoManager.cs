@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Common.Network;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Fusion;
 using TMPro;
@@ -18,7 +19,7 @@ public class PhotoManager : NetworkBehaviour, IListener
     {
         EventManager.Instance.AddListener(EventType.eRaycasting, this);
         photoPositions = new Dictionary<int, Vector3>();
-        StartCoroutine(HidePhoto(photoPositions, 8));
+        HidePhoto(photoPositions, 8).Forget();
     }
     
     private Vector3 GetRandomPosition()
@@ -26,14 +27,14 @@ public class PhotoManager : NetworkBehaviour, IListener
         return new Vector3(Random.Range(-10, 11), yValue, Random.Range(-10, 11));
     }
 
-    public IEnumerator HidePhoto(Dictionary<int, Vector3> photoDict, int numberOfPhotos)
+    public async UniTaskVoid HidePhoto(Dictionary<int, Vector3> photoDict, int numberOfPhotos)
     {
-        for (int i = 1; i <= numberOfPhotos; i++)
+        for (var i = 1; i <= numberOfPhotos; i++)
         {
             int photoName = i;
             photoDict[photoName] = GetRandomPosition(); 
-            yield return RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName], Quaternion.identity);
-            NetworkObject photoObject = RunnerManager.Instance.Runner.Spawn(photoPrefab, photoDict[photoName], Quaternion.identity);
+            var photoObject = await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName], Quaternion.identity);
+            // NetworkObject photoObject = RunnerManager.Instance.Runner.Spawn(photoPrefab, photoDict[photoName], Quaternion.identity);
             PhotoData photodata = photoObject.GetComponent<PhotoData>();
             if (photodata != null)
             {
