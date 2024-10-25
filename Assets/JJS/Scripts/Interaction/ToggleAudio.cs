@@ -36,7 +36,7 @@ public class ToggleAudio : MonoBehaviour
         }
 
         StartAudioPlayback();
-        Debug.Log($"Player entered {gameObject}");
+        Debug.Log($"Player entered {gameObject}: AudioClip {audioClip}");
     }
 
     private void StartAudioPlayback()
