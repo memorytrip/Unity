@@ -22,7 +22,7 @@ public class TriggerNearPlayer : MonoBehaviour
         }
         else
         {
-            Debug.Log($"?????");
+            Debug.Log($"{other.gameObject} is tagged: {other.gameObject.tag} ?????");
         }
     }
 }
