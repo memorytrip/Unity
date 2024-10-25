@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Common.Network;
+using Fusion;
 using Unity.Cinemachine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -62,9 +63,7 @@ public class ToggleYggdrasil : MonoBehaviour
 
     private IEnumerator SettingTargetCharacter()
     {
-        Debug.Log("adsf");
         yield return new WaitUntil(() => Connection.StateAuthInstance?.currenctCharacter != null);
-        Debug.Log("adsf");
         character = Connection.StateAuthInstance.currenctCharacter.gameObject;
         _characterMeshes = character.GetComponentsInChildren<SkinnedMeshRenderer>();
     }
@@ -72,9 +71,9 @@ public class ToggleYggdrasil : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
-        {
             return;
-        }
+        if (!other.GetComponent<NetworkObject>().HasStateAuthority)
+            return;
 
         HideCharacter();
         StartCoroutine(ViewGems());
@@ -125,9 +124,9 @@ public class ToggleYggdrasil : MonoBehaviour
     private IEnumerator OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player"))
-        {
             yield break;
-        }
+        if (!other.GetComponent<NetworkObject>().HasStateAuthority)
+            yield break;
 
         _contentUiAnimator.SetTrigger(Exit);
         yield return _exitClipLength;

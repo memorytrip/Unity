@@ -38,7 +38,7 @@ namespace Common.Network
             {
                 case "MultiPlayTest":
                 case "Square":
-                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 10, 0), Quaternion.identity);
+                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 2, 0), Quaternion.identity);
                     break;
             }
         }
