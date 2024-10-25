@@ -1943,7 +1943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &174708098
 Transform:
   m_ObjectHideFlags: 0
@@ -2016,11 +2016,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Priority:
-    Enabled: 0
-    m_Value: 0
+    Enabled: 1
+    m_Value: -2
   OutputChannel: 1
   StandbyUpdate: 2
-  m_StreamingVersion: 0
+  m_StreamingVersion: 20230301
   m_LegacyPriority: 0
   Target:
     TrackingTarget: {fileID: 0}
@@ -3706,7 +3706,7 @@ Transform:
   m_GameObject: {fileID: 346652803}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.69999504, y: 0, z: 78.40875}
+  m_LocalPosition: {x: -0.69999504, y: 2.8, z: 78.40875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3743,7 +3743,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &369914476
 GameObject:
@@ -5931,7 +5931,7 @@ Transform:
   m_GameObject: {fileID: 570390760}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.679995, y: 3.48, z: 116.02875}
+  m_LocalPosition: {x: -27.679995, y: 2.8, z: 116.02875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5968,7 +5968,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &574164028
 GameObject:
@@ -6940,7 +6940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69be291f6b84044788fcc3a7dc57cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoClip: {fileID: 32900000, guid: 1786a19d257a34c4c996bc242dbac593, type: 3}
+  videoClip: {fileID: 32900000, guid: 9e2c44c4fde9ef24eb0f64636fb7d77f, type: 3}
 --- !u!1 &622551422
 GameObject:
   m_ObjectHideFlags: 0
@@ -13708,7 +13708,7 @@ Transform:
   m_GameObject: {fileID: 1140141192}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.200003, y: 0, z: 87.93875}
+  m_LocalPosition: {x: 11.200003, y: 2.8, z: 87.93875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13745,7 +13745,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1172102920
 GameObject:
@@ -15218,7 +15218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e6789abc6f3c041b15f9e22bb928c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 4e34d3f77c4df6342bdef0df40cb9603, type: 3}
+  audioClip: {fileID: 8300000, guid: 18a76d2d13d08fb48b184606c89cbb56, type: 3}
 --- !u!1 &1251292619
 GameObject:
   m_ObjectHideFlags: 0
@@ -17727,7 +17727,7 @@ Transform:
   m_GameObject: {fileID: 1482508847}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.49999428, y: 0, z: 123.03876}
+  m_LocalPosition: {x: -0.49999428, y: 2.8, z: 123.03876}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17764,7 +17764,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1486674621
 GameObject:
@@ -18335,7 +18335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69be291f6b84044788fcc3a7dc57cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoClip: {fileID: 32900000, guid: 1786a19d257a34c4c996bc242dbac593, type: 3}
+  videoClip: {fileID: 32900000, guid: 2c650bddedd4ef244bad86dd1cc4063f, type: 3}
 --- !u!1 &1529949493
 GameObject:
   m_ObjectHideFlags: 0
@@ -18541,6 +18541,8 @@ GameObject:
   - component: {fileID: 1541748317}
   - component: {fileID: 1541748316}
   - component: {fileID: 1541748315}
+  - component: {fileID: 1541748319}
+  - component: {fileID: 1541748318}
   m_Layer: 0
   m_Name: CharacterCamera
   m_TagString: Untagged
@@ -18625,6 +18627,101 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1541748318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541748314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+--- !u!20 &1541748319
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541748314}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.01
+  far clip plane: 1000
+  field of view: 40
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &1554224138
 GameObject:
   m_ObjectHideFlags: 0
@@ -19139,7 +19236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1625624025
 Transform:
   m_ObjectHideFlags: 0
@@ -19212,11 +19309,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Priority:
-    Enabled: 0
-    m_Value: 0
+    Enabled: 1
+    m_Value: -2
   OutputChannel: 1
   StandbyUpdate: 2
-  m_StreamingVersion: 0
+  m_StreamingVersion: 20230301
   m_LegacyPriority: 0
   Target:
     TrackingTarget: {fileID: 0}
@@ -21586,7 +21683,7 @@ Transform:
   m_GameObject: {fileID: 1782157827}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.899996, y: 0, z: 96.738754}
+  m_LocalPosition: {x: -18.899996, y: 2.8, z: 96.738754}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21623,7 +21720,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1792721490
 GameObject:
@@ -21998,7 +22095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e6789abc6f3c041b15f9e22bb928c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: eef51767bb1f07e43a5f86fa0577e134, type: 3}
+  audioClip: {fileID: 8300000, guid: 11c70397c2cdee74385a9c458373aefe, type: 3}
 --- !u!1 &1804184147
 GameObject:
   m_ObjectHideFlags: 0
@@ -23671,7 +23768,7 @@ GameObject:
   - component: {fileID: 2050133835}
   - component: {fileID: 2050133834}
   - component: {fileID: 2050133833}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Quad_Poster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24579,7 +24676,7 @@ Transform:
   m_GameObject: {fileID: 2119332525}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.59999657, y: 0, z: 87.53876}
+  m_LocalPosition: {x: -0.59999657, y: 2.8, z: 87.53876}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24616,7 +24713,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2125513944
 GameObject:
