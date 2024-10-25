@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Common.Network;
 using Unity.Cinemachine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -41,23 +42,31 @@ public class ToggleYggdrasil : MonoBehaviour
         {
             Debug.LogWarning("Animator is not initialized!");
         }
-
-        _characterMeshes = character.GetComponentsInChildren<SkinnedMeshRenderer>();
         
-        defaultCamera.Prioritize();
-        //yggdrasilCamera.SetActive(false);
         content.SetActive(false);
     }
     
     private void Start()
     {
+        defaultCamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
+        defaultCamera.Prioritize();
         StartCoroutine(LoadGems());
+        StartCoroutine(SettingTargetCharacter());
     }
 
     private IEnumerator LoadGems()
     {
         // TODO: 서버로부터 불러오는 로직
         yield return null;
+    }
+
+    private IEnumerator SettingTargetCharacter()
+    {
+        Debug.Log("adsf");
+        yield return new WaitUntil(() => Connection.StateAuthInstance?.currenctCharacter != null);
+        Debug.Log("adsf");
+        character = Connection.StateAuthInstance.currenctCharacter.gameObject;
+        _characterMeshes = character.GetComponentsInChildren<SkinnedMeshRenderer>();
     }
     
     private void OnTriggerEnter(Collider other)
