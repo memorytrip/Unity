@@ -42,6 +42,7 @@ namespace Common
                 if (RunnerManager.Instance.isRunnerExist)
                     await RunnerManager.Instance.Disconnect();
                 await RunnerManager.Instance.Connect(roomName);
+                Debug.Log($"Move to Room ({roomName})");
             }
             catch (Exception e)
             {
