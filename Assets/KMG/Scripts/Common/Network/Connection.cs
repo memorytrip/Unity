@@ -63,11 +63,12 @@ namespace Common.Network
                 case "MultiPlayTest":
                 case "Square":
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 2, 0), Quaternion.identity);
-                    Debug.Log($"curScene: {SceneManager.Instance.curScene}, spawn Player");
                     break;
                 case "MyRoomTest":
                     currenctCharacter = await SpawnProcess("Player");
-                    Debug.Log($"curScene: {SceneManager.Instance.curScene}, spawn Player");
+                    break;
+                case "PlayReady":
+                    currenctCharacter = await SpawnProcess("PlayReadyState");
                     break;
                 default:
                     break;

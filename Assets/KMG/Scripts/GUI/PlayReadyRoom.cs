@@ -4,6 +4,7 @@ using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
 using Fusion;
+using GUI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -15,7 +16,6 @@ public class PlayReadyRoom : NetworkBehaviour, IPlayerJoined, IPlayerLeft, IStat
     [SerializeField] private Button readyButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private TMP_Text roomNameText;
-
     private int readyCount = 0;
     
     public override void Spawned()
@@ -33,7 +33,6 @@ public class PlayReadyRoom : NetworkBehaviour, IPlayerJoined, IPlayerLeft, IStat
 
     public void PlayerLeft(PlayerRef player)
     {
-        Debug.Log($"Player left: {player.PlayerId}");
         RefreshPlayerList().Forget();
     }
 
@@ -43,7 +42,11 @@ public class PlayReadyRoom : NetworkBehaviour, IPlayerJoined, IPlayerLeft, IStat
         var i = 0;
         foreach (var connection in Connection.list)
         {
-            playerNameTextList[i++].text = $"{(connection.hasSceneAuthority ? "* " : "")}{connection.playerName}";
+            await UniTask.WaitUntil(() => (connection.currenctCharacter != null));
+            string sceneAuthPrefix = (connection.hasSceneAuthority ? "* " : "");
+            string playerName = connection.playerName;
+            string ready = connection.currenctCharacter.GetComponent<PlayReadyState>().ready ? "O" : "X";
+            playerNameTextList[i++].text = $"{sceneAuthPrefix}{playerName} [{ready}]";
         }
 
         for (; i < playerNameTextList.Count; i++)
@@ -54,16 +57,20 @@ public class PlayReadyRoom : NetworkBehaviour, IPlayerJoined, IPlayerLeft, IStat
 
     private void Ready()
     {
-        RpcReady(Connection.StateAuthInstance);
+        foreach (var connection in Connection.list)
+        {
+            connection.currenctCharacter.GetComponent<PlayReadyState>().Ready();
+        }
+        readyCount++;
+        DeactiveByReady();
         RefreshPlayerList().Forget();
     }
 
-    [Rpc(RpcSources.All, RpcTargets.All)]
-    private void RpcReady(Connection connection)
+    private void DeactiveByReady()
     {
-        readyCount++;
+        readyButton.interactable = false;
     }
-
+    
     private void Exit()
     {
         SceneManager.Instance.MoveRoom(SceneManager.SquareScene).Forget();
