@@ -2347,6 +2347,7 @@ MonoBehaviour:
   mapEditorGUI: {fileID: 348634955}
   mapConvertButton: {fileID: 1347894648}
   capturer: {fileID: 2131542325}
+  cam: {fileID: 1662441117}
 --- !u!4 &2131542324
 Transform:
   m_ObjectHideFlags: 0
