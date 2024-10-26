@@ -14,7 +14,7 @@ public class MoveRoomTest : MonoBehaviour
     //[SerializeField] private TMP_InputField inputField;
     [SerializeField] private Button EnterButton;
     //[SerializeField] private UserListControll userList;
-    private string UserListTest = "UserListTest";
+    private string UserListTest = "SelectPhotoScene";
 
     private void Awake()
     {
