@@ -14395,7 +14395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9900e52d6354a0fbfab77a2ce8573b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectCreateOrJoinPanel: {fileID: 98824119}
+  selectCreateOrJoinPanel: {fileID: 2049571791}
   createRoomButton: {fileID: 1611386150}
   inputRoomButton: {fileID: 469993213}
   inputRoomPanel: {fileID: 1850514298}

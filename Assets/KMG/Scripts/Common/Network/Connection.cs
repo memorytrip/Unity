@@ -10,7 +10,7 @@ namespace Common.Network
      * Photon 접속자마다 생성되어 각 접속자 정보, 아바타 관리하는 오브젝트
      * DontDestroyOnLoad
      */
-    public class Connection: NetworkBehaviour
+    public class Connection: NetworkBehaviour, IPlayerLeft
     {
         public static Connection StateAuthInstance;
 
@@ -84,6 +84,11 @@ namespace Common.Network
         {
             GameObject connectionPrefab = await Resources.LoadAsync<GameObject>("Prefabs/" + prefabName) as GameObject;
             return await Runner.SpawnAsync(connectionPrefab, position, rotation);
+        }
+
+        public void PlayerLeft(PlayerRef player)
+        {
+            hasSceneAuthority = Runner.IsSceneAuthority;
         }
     }
 }
