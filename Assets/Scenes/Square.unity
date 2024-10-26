@@ -895,9 +895,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 98824118}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!224 &98824120
 RectTransform:
@@ -8066,9 +8066,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770175069}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &772533608
 GameObject:
@@ -14395,7 +14395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9900e52d6354a0fbfab77a2ce8573b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectCreateOrJoinPanel: {fileID: 98824119}
+  selectCreateOrJoinPanel: {fileID: 2049571791}
   createRoomButton: {fileID: 1611386150}
   inputRoomButton: {fileID: 469993213}
   inputRoomPanel: {fileID: 1850514298}
@@ -19043,7 +19043,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2049571789}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
