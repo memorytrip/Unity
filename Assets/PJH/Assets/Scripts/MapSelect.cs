@@ -17,7 +17,7 @@ public class MapSelectionController : MonoBehaviour
     {
         initialPosition = scrollRect.content.anchoredPosition.x;
         UpdateArrowButtons();
-        scrollRect.content.sizeDelta = new Vector2(800 * totalPages, 700f);
+        //scrollRect.content.sizeDelta = new Vector2(800 * totalPages, 700f);
         leftArrowButton.onClick.AddListener(PreviousPage);
         rightArrowButton.onClick.AddListener(NextPage);
     }
@@ -44,7 +44,7 @@ public class MapSelectionController : MonoBehaviour
 
     private void ScrollToPage(int pageIndex)
     {
-        float targetHorizontalPosition = initialPosition - pageIndex * 800f;
+        float targetHorizontalPosition = initialPosition - pageIndex * 450f;
         Debug.Log(targetHorizontalPosition);
         scrollRect.content.DOAnchorPosX(targetHorizontalPosition, scrollDuration);
         

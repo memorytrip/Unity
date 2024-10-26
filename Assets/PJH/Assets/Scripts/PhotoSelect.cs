@@ -65,9 +65,4 @@ public class CanvasController : NetworkBehaviour
             }
     }
     
-    /*public void RpcAddPhotoToList(int buttonID)
-    {
-        AddPhotoToList(buttonID);
-    }*/
-
 }
