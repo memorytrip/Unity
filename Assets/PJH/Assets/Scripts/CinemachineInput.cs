@@ -81,4 +81,11 @@ public class CinemachineInput : MonoBehaviour
         orbitalFollow.HorizontalAxis.Recentering.Enabled = true;
         orbitalFollow.VerticalAxis.Recentering.Enabled = true;
     }
+
+    private void OnDestroy()
+    {
+        InputManager.Instance.OnFingerDown -= OnTouchStart;
+        InputManager.Instance.OnFingerMove -= OnTouchPerform;
+        InputManager.Instance.OnFingerUp -= OnTouchEnd;
+    }
 }

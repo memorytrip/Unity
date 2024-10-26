@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using Unity.Cinemachine;
 using System;
 using System.IO;
-using UnityEngine.Serialization;
 using ZXing;
 
 // ScreenshotWorldCanvas의 Canvas > Event Camera: 메인카메라로 지정 필요
@@ -17,39 +16,31 @@ public class ScreenshotManager : MonoBehaviour
     // 3-1. 스크린샷 기능을 활성화 후 카메라 시점(ECameraMode)을 변경할 수 없음
     // 3-2. 스크린샷 기능 활성화 후 포즈를 바꾸거나 맵을 이동할 수 없음
     // 3-3. 단, 스크린샷 이전에 취한 포즈는 그대로 반영된다 (모션을 취하고 적절한 타이밍에 스크린샷 기능을 활성화 하면 좀 더 재밌는 사진을 촬용할 수 있음)
-        
+
     public enum ECameraState
     {
         Static,
         Moving,
     }
-    
-    public enum EScreenshotCameraType
-    {
-        Default,
-        Selfie,
-    }
 
     [Header("메인 UI")] [SerializeField] private Button toggleScreenshotModeButton;
-        
-    [Header("스크린샷 기능")]
-    [SerializeField] private CinemachineCamera[] screenshotCameras = new CinemachineCamera [2];
-
-    [SerializeField] private Camera[] screenshotCamerasCamComponent = new Camera[2];
+    
+    private ScreenshotCamera[] _targetCameras = new ScreenshotCamera[2]; 
+    [SerializeField] private CinemachineCamera[] _screenshotCameras = new CinemachineCamera[2];
+    [SerializeField] private Camera[] _screenshotCamerasCamComponent = new Camera[2];
     [SerializeField] private CanvasGroup screenshotUi;
     [SerializeField] private RawImage cameraPreviewRawImage;
     [SerializeField] private Button flipButton;
     [SerializeField] private Button snapshotButton;
-    [SerializeField] private Button exitButton;    
-    
-    [Header("파일 구조 바뀌면 재연결 필요")]
-    [Tooltip(@"Jinsol\Textures\ScreenshotRenderTexture.renderTexture")]
-    [SerializeField] private RenderTexture screenshotRenderTexture;
+    [SerializeField] private Button exitButton;
+
+    [Header("파일 구조 바뀌면 재연결 필요")] [Tooltip(@"Jinsol\Textures\ScreenshotRenderTexture.renderTexture")] [SerializeField]
+    private RenderTexture screenshotRenderTexture;
 
     public static ECameraMode CameraMode { get; private set; }
     private EScreenshotCameraType _screenshotCameraType;
     private bool _isScreenshotModeEnabled;
-    
+
     private Slider _slider;
     [SerializeField] private float zoomRate;
     private const float MinFieldOfView = 5f;
@@ -58,16 +49,16 @@ public class ScreenshotManager : MonoBehaviour
     // Quest
     private Vector3 _rayDirection;
     [SerializeField] private GameObject questAlert;
-    
+
     // QR
     private int _qrLayerMask;
     [SerializeField] private CanvasGroup jumpToInternetPopup;
     [SerializeField] private Button jumpToInternetButton;
     private string _savedURL;
-    
+
     private float DefaultFOV()
     {
-        return screenshotCameras[(int)EScreenshotCameraType.Selfie].IsLive ? 24f : 36f;
+        return _screenshotCameras[(int)EScreenshotCameraType.Selfie].IsLive ? 24f : 36f;
     }
 
     // 미션용 세팅: 특명! 오브젝트의 사진을 찍어라!
@@ -77,7 +68,7 @@ public class ScreenshotManager : MonoBehaviour
     private bool _hitDetected;
     private Collider _hitBoxCollider;
     private RaycastHit _hit;
-    
+
     #region Save System
 
     private const string SubDirectory = "/Screenshots/";
@@ -85,12 +76,18 @@ public class ScreenshotManager : MonoBehaviour
 
     #endregion
 
-    private void Awake()
+    private void Start()
+    {
+        InitializeScreenshotFeature();
+        InitializeCameras();
+    }
+
+    private void InitializeScreenshotFeature()
     {
         InitializeDirectory();
 
         screenshotUi.alpha = 0f;
-        
+
         // 오브젝트 특정을 위한 부분 초기화
         _layerAsLayerMask = 1 << LayerMask.NameToLayer("Quest");
         _qrLayerMask = 1 << LayerMask.NameToLayer("QR");
@@ -101,19 +98,11 @@ public class ScreenshotManager : MonoBehaviour
         _slider = GetComponentInChildren<Slider>();
         _slider.minValue = MinFieldOfView;
         _slider.maxValue = MaxFieldOfView;
-        
+
         var canvas = GetComponentInChildren<Canvas>();
         if (canvas.worldCamera == null)
         {
             Debug.LogWarning("ScreenshotWorldCanvas -> Canvas -> Event Camera is null: use scene's main camera");
-        }
-            
-        CameraMode = ECameraMode.Default;
-        _screenshotCameraType = EScreenshotCameraType.Default;
-
-        foreach (var screenshotCamera in screenshotCameras)
-        {
-            screenshotCamera.gameObject.SetActive(false);
         }
 
         toggleScreenshotModeButton.onClick.AddListener(ToggleScreenshotMode);
@@ -121,8 +110,21 @@ public class ScreenshotManager : MonoBehaviour
         snapshotButton.onClick.AddListener(CaptureScreenshot);
         jumpToInternetButton.onClick.AddListener(JumpToURL);
         exitButton.onClick.AddListener(ToggleScreenshotMode);
-        
+
         _slider.onValueChanged.AddListener(ControlCameraZoom);
+    }
+
+    private void InitializeCameras()
+    {
+        //_targetCameras =
+        
+        CameraMode = ECameraMode.Default;
+        _screenshotCameraType = EScreenshotCameraType.Default;
+
+        foreach (var screenshotCamera in _screenshotCameras)
+        {
+            screenshotCamera.gameObject.SetActive(false);
+        }
     }
 
     private void FixedUpdate()
@@ -144,18 +146,19 @@ public class ScreenshotManager : MonoBehaviour
                 break;
         }
     }
-    
+
     private void DetectQuestObject()
     {
         if (!_isScreenshotModeEnabled)
         {
             return;
         }
-        
-        _hitDetected = Physics.BoxCast(_hitBoxCollider.bounds.center, transform.localScale * 0.5f, _rayDirection, out _hit, transform.rotation, _maxDistance, _layerAsLayerMask);
+
+        _hitDetected = Physics.BoxCast(_hitBoxCollider.bounds.center, transform.localScale * 0.5f, _rayDirection,
+            out _hit, transform.rotation, _maxDistance, _layerAsLayerMask);
         questAlert.SetActive(_hitDetected);
     }
-    
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -195,13 +198,15 @@ public class ScreenshotManager : MonoBehaviour
         switch (CameraMode)
         {
             case ECameraMode.Screenshot:
-                screenshotCameras[(int)_screenshotCameraType].gameObject.SetActive(true);
                 _isScreenshotModeEnabled = true;
                 break;
             case ECameraMode.Default:
-            default:
-                screenshotCameras[(int)_screenshotCameraType].gameObject.SetActive(false);
                 _isScreenshotModeEnabled = false;
+                foreach (var ssCamera in _screenshotCameras)
+                {
+                    ssCamera.gameObject.SetActive(false);
+                    Debug.Log($"SSCamera : {ssCamera.gameObject} set to false? {ssCamera.isActiveAndEnabled}");
+                }
                 break;
         }
 
@@ -210,8 +215,8 @@ public class ScreenshotManager : MonoBehaviour
 
     private void ToggleScreenshotUI()
     {
-        ResetCameraZoom();
         ResetCameraMode();
+        ResetCameraZoom();
 
         switch (CameraMode)
         {
@@ -239,13 +244,13 @@ public class ScreenshotManager : MonoBehaviour
         switch (_screenshotCameraType)
         {
             case EScreenshotCameraType.Selfie:
-                screenshotCameras[(int)EScreenshotCameraType.Default].gameObject.SetActive(false);
-                screenshotCameras[(int)EScreenshotCameraType.Selfie].gameObject.SetActive(true);
+                _screenshotCameras[(int)EScreenshotCameraType.Default].gameObject.SetActive(false);
+                _screenshotCameras[(int)EScreenshotCameraType.Selfie].gameObject.SetActive(true);
                 break;
             case EScreenshotCameraType.Default:
             default:
-                screenshotCameras[(int)EScreenshotCameraType.Default].gameObject.SetActive(true);
-                screenshotCameras[(int)EScreenshotCameraType.Selfie].gameObject.SetActive(false);
+                _screenshotCameras[(int)EScreenshotCameraType.Default].gameObject.SetActive(true);
+                _screenshotCameras[(int)EScreenshotCameraType.Selfie].gameObject.SetActive(false);
                 break;
         }
 
@@ -259,8 +264,8 @@ public class ScreenshotManager : MonoBehaviour
         {
             return;
         }
-        
-        foreach (var screenshotCamera in screenshotCamerasCamComponent)
+
+        foreach (var screenshotCamera in _screenshotCamerasCamComponent)
         {
             screenshotCamera.fieldOfView = _slider.value;
         }
@@ -268,7 +273,7 @@ public class ScreenshotManager : MonoBehaviour
 
     private void ResetCameraZoom()
     {
-        foreach (var screenshotCamera in screenshotCamerasCamComponent)
+        foreach (var screenshotCamera in _screenshotCamerasCamComponent)
         {
             screenshotCamera.fieldOfView = DefaultFOV();
             _slider.value = DefaultFOV();
@@ -278,7 +283,12 @@ public class ScreenshotManager : MonoBehaviour
 
     private void ResetCameraMode()
     {
-        _screenshotCameraType = EScreenshotCameraType.Default;
+        if (_isScreenshotModeEnabled)
+        {
+            _screenshotCameraType = EScreenshotCameraType.Default;
+            _screenshotCameras[(int)EScreenshotCameraType.Default].gameObject.SetActive(true);
+            _screenshotCameras[(int)EScreenshotCameraType.Selfie].gameObject.SetActive(false);
+        }
     }
 
     private void InitializeDirectory()
@@ -288,7 +298,7 @@ public class ScreenshotManager : MonoBehaviour
             Directory.CreateDirectory(Application.persistentDataPath + SubDirectory);
         }
     }
-    
+
     private void CaptureScreenshot()
     {
         // Assign the RenderTexture temporarily to the active RenderTexture
@@ -296,10 +306,11 @@ public class ScreenshotManager : MonoBehaviour
         RenderTexture.active = screenshotRenderTexture;
 
         // Create a new Texture2D with the RenderTexture's dimensions
-        Texture2D screenshot = new Texture2D(screenshotRenderTexture.width, screenshotRenderTexture.height, TextureFormat.RGB24, false);
+        Texture2D screenshot = new Texture2D(screenshotRenderTexture.width, screenshotRenderTexture.height,
+            TextureFormat.RGB24, false);
         screenshot.ReadPixels(new Rect(0, 0, screenshotRenderTexture.width, screenshotRenderTexture.height), 0, 0);
         screenshot.Apply();
-        
+
         if (Physics.Raycast(transform.position, _rayDirection, out RaycastHit hitInfo, 20000f, _layerAsLayerMask))
         {
             YamiQuestManager.Instance.ProceedQuest();
@@ -310,9 +321,9 @@ public class ScreenshotManager : MonoBehaviour
         {
             DecodeQRCode(screenshot);
         }
-        
+
         SaveScreenshot(screenshot);
-        
+
         // Clean up
         RenderTexture.active = currentRT;
         Destroy(screenshot);
@@ -323,7 +334,7 @@ public class ScreenshotManager : MonoBehaviour
         // Save the screenshot as a PNG file
         var now = DateTime.Now;
         var formattedDate = now.ToString("yyyyMMdd_HHmmssfff");
-            
+
         byte[] bytes = screenshot.EncodeToPNG();
         string path = Path.Combine(Application.persistentDataPath + SubDirectory + formattedDate + FileType);
         File.WriteAllBytes(path, bytes);
@@ -339,7 +350,7 @@ public class ScreenshotManager : MonoBehaviour
         {
             return;
         }
-        
+
         Debug.Log($"QR code found!: BarcodeFormat({result.BarcodeFormat}), ResultText({result.Text})");
         _savedURL = result.Text;
         jumpToInternetPopup.alpha = 1f;

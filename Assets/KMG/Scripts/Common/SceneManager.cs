@@ -31,7 +31,7 @@ namespace Common
         public async UniTask MoveRoom(string roomName)
         {
             await UniTask.WhenAll(FadeOut().ToUniTask(), MoveRoomProcess(roomName));
-            await ChangeSceneWithCheckNetworkRunner(roomName).ToUniTask();
+            await ChangeSceneWithCheckNetworkRunner(RoutingScene(roomName)).ToUniTask();
             await FadeIn().ToUniTask();
         }
 
@@ -42,6 +42,7 @@ namespace Common
                 if (RunnerManager.Instance.isRunnerExist)
                     await RunnerManager.Instance.Disconnect();
                 await RunnerManager.Instance.Connect(roomName);
+                Debug.Log($"Move to Room ({roomName})");
             }
             catch (Exception e)
             {
@@ -55,7 +56,7 @@ namespace Common
             // return "MultiPlayTest";
             if (roomName == "0") return "Square";
             if (roomName.Length == 4) return "Play";
-            if (roomName.Contains("player_")) return "MyRoom";
+            if (roomName.Contains("player_")) return "MyRoomTest";
             throw new ArgumentException("try to connect invalid room name");
         }
 #endregion

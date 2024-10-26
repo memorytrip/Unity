@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Fusion;
 using Unity.Cinemachine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -26,10 +27,6 @@ public class ToggleYggdrasil : MonoBehaviour
     [SerializeField] private CinemachineCamera yggdrasilCamera;
     [SerializeField] private CinemachineCamera defaultCamera;
 
-    // TODO: 이런 것들은 다른 데로 가야되긴 함
-    [SerializeField] private GameObject character;
-    private SkinnedMeshRenderer[] _characterMeshes;
-    
     private void Awake()
     {
         _yggdrasil = GetComponent<Yggdrasil>();
@@ -41,16 +38,14 @@ public class ToggleYggdrasil : MonoBehaviour
         {
             Debug.LogWarning("Animator is not initialized!");
         }
-
-        _characterMeshes = character.GetComponentsInChildren<SkinnedMeshRenderer>();
         
-        defaultCamera.Prioritize();
-        //yggdrasilCamera.SetActive(false);
         content.SetActive(false);
     }
     
     private void Start()
     {
+        defaultCamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
+        defaultCamera.Prioritize();
         StartCoroutine(LoadGems());
     }
 
@@ -63,11 +58,10 @@ public class ToggleYggdrasil : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
-        {
             return;
-        }
+        if (!other.GetComponent<NetworkObject>().HasStateAuthority)
+            return;
 
-        HideCharacter();
         StartCoroutine(ViewGems());
         Debug.Log($"Player entered {gameObject}");
     }
@@ -116,9 +110,9 @@ public class ToggleYggdrasil : MonoBehaviour
     private IEnumerator OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player"))
-        {
             yield break;
-        }
+        if (!other.GetComponent<NetworkObject>().HasStateAuthority)
+            yield break;
 
         _contentUiAnimator.SetTrigger(Exit);
         yield return _exitClipLength;
@@ -133,7 +127,6 @@ public class ToggleYggdrasil : MonoBehaviour
     {
         content.SetActive(false);
         //defaultCamera.Prioritize();
-        ShowCharacter();
     }
 
     /*private void DeactivateButtons(MemoryGem[] memoryGemSet)
@@ -148,20 +141,4 @@ public class ToggleYggdrasil : MonoBehaviour
     {
         DeactivateButtons(_memoryGemSet);
     }*/
-
-    private void HideCharacter()
-    {
-        foreach (var part in _characterMeshes)
-        {
-            part.enabled = false;
-        }
-    }
-
-    private void ShowCharacter()
-    {
-        foreach (var part in _characterMeshes)
-        {
-            part.enabled = true;
-        }
-    }
 }

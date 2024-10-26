@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using Common;
 using Common.Network;
+using Cysharp.Threading.Tasks;
 using Fusion;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
+using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 
 public class PlayerMovement : NetworkBehaviour
@@ -39,6 +41,7 @@ public class PlayerMovement : NetworkBehaviour
     private void Awake()
     {
         cc = GetComponent<CharacterController>();
+        cc.enabled = false;
         //networkanim = GetComponentInChildren<NetworkMecanimAnimator>();
         camera = Camera.main;
         boxSize = new Vector3(1f, 1f, 1f);
@@ -46,9 +49,11 @@ public class PlayerMovement : NetworkBehaviour
 
     public override void Spawned()
     {
+        cc.enabled = true;
         SettingCamera();
         InputManager.Instance.jumpAction.started += PlayerJump;
     }
+
 
     private void SettingCamera()
     {
@@ -56,7 +61,30 @@ public class PlayerMovement : NetworkBehaviour
             return;
         CinemachineCamera cam = GameObject.Find("CinemachineCamera")?.GetComponent<CinemachineCamera>();
         if (cam != null)
+        {
             cam.Target.TrackingTarget = transform;
+            var screenshotCam = cam.transform.Find("ScreenshotCamera_Default")?.GetComponent<CinemachineCamera>();
+            if (screenshotCam != null)
+            {
+                screenshotCam.Target.TrackingTarget = transform;
+                Debug.Log($"ScreenshotCam: {screenshotCam} Tracking Target: {screenshotCam.Target.TrackingTarget}");
+            }
+            else
+            {
+                Debug.Log("Screenshot cam is not found");
+            }
+            var screenshotSelfieCam = cam.transform.Find("ScreenshotCamera_Player")?.GetComponent<CinemachineCamera>();
+            if (screenshotSelfieCam != null)
+            {
+                var lookAtTransform = transform.Find("LookAt");
+                screenshotSelfieCam.Target.TrackingTarget = lookAtTransform;
+                Debug.Log($"ScreenshotCam: {screenshotSelfieCam} Tracking Target: {screenshotSelfieCam.Target.TrackingTarget}");
+            }
+            else
+            {
+                Debug.Log("Screenshot selfie cam is not found");
+            }
+        }
     }
 
     public override void FixedUpdateNetwork()
@@ -74,7 +102,7 @@ public class PlayerMovement : NetworkBehaviour
         // if (joystick.isInput)
         if (InputManager.Instance.moveAction.ReadValue<Vector2>().magnitude > 0f)
         {
-            playerMoveSpeed = 5f;
+            playerMoveSpeed = 24f;
         }
         else
         {
@@ -116,7 +144,12 @@ public class PlayerMovement : NetworkBehaviour
 
     public void PlayerJump(InputAction.CallbackContext ctx)
     {
-        velocity = jumpForce;
+        if (cc.isGrounded)
+            velocity = jumpForce;
     }
     
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        InputManager.Instance.jumpAction.started -= PlayerJump;
+    }
 }

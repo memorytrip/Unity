@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using UnityEngine.UI;
 using UnityEngine.Windows;
 using System.IO;
+using Unity.Cinemachine;
 using File = System.IO.File;
 
 namespace KMG.Scripts.Dummy
@@ -20,6 +21,7 @@ namespace KMG.Scripts.Dummy
         [SerializeField] private Map.Editor.MapEditorGUI mapEditorGUI;
         [SerializeField] private Button mapConvertButton;
         [SerializeField] private ThumbnailCapture capturer;
+        [SerializeField] private CinemachineCamera cam;
         private MapConcrete mapConcrete;
         private async UniTaskVoid Start()
         {
@@ -30,7 +32,8 @@ namespace KMG.Scripts.Dummy
             // mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, await ModelManager.Instance.Get("2"));
             // mapConcrete.AddMapObject(Vector3.left, Quaternion.identity, await ModelManager.Instance.Find("1"));
             mapConcrete = await MapConverter.ConvertMapInfoToMapConcrete(mapInfo);
-            mapEditorGUI.target.mapConcrete = mapConcrete;  
+            mapEditorGUI.target.mapConcrete = mapConcrete;
+            cam.Target.TrackingTarget = mapConcrete.rootObject.transform;
 
             MapInfo mapInfo2 = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
             Debug.Log(mapInfo2.data);
@@ -43,9 +46,14 @@ namespace KMG.Scripts.Dummy
             MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
             mapInfo.thumbnail = await capturer.CaptureToBase64();
             
-            string path = Application.persistentDataPath + "/";
+            string path = Application.persistentDataPath + "/Maps/";
             string filename = "asdf.json";
             Debug.Log(path + filename);
+            DirectoryInfo directoryInfo = new DirectoryInfo($"{Application.persistentDataPath}/Maps/");
+            if (!directoryInfo.Exists)
+            {
+                directoryInfo.Create();
+            }
             await File.WriteAllTextAsync(path + filename, JsonConvert.SerializeObject(mapInfo));
         }
     }
