@@ -15,6 +15,8 @@ public class PlayReadyRoom : NetworkBehaviour, IPlayerJoined, IPlayerLeft, IStat
     [SerializeField] private Button readyButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private TMP_Text roomNameText;
+
+    private int readyCount = 0;
     
     public override void Spawned()
     {
@@ -41,7 +43,7 @@ public class PlayReadyRoom : NetworkBehaviour, IPlayerJoined, IPlayerLeft, IStat
         var i = 0;
         foreach (var connection in Connection.list)
         {
-            playerNameTextList[i++].text = $"[{(connection.hasSceneAuthority ? 'O' : 'X')}] {connection.playerName}";
+            playerNameTextList[i++].text = $"{(connection.hasSceneAuthority ? "* " : "")}{connection.playerName}";
         }
 
         for (; i < playerNameTextList.Count; i++)
@@ -59,7 +61,7 @@ public class PlayReadyRoom : NetworkBehaviour, IPlayerJoined, IPlayerLeft, IStat
     [Rpc(RpcSources.All, RpcTargets.All)]
     private void RpcReady(Connection connection)
     {
-        Debug.Log($"{connection.playerName} has ready");
+        readyCount++;
     }
 
     private void Exit()
