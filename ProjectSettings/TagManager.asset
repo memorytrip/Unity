@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HiddenItem
   - FusionConnector
+  - Yggdrasil
   layers:
   - Default
   - TransparentFX
