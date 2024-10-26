@@ -3,11 +3,10 @@ using UnityEngine.UI;
 using Unity.Cinemachine;
 using System;
 using System.IO;
-using Fusion;
 using ZXing;
 
 // ScreenshotWorldCanvas의 Canvas > Event Camera: 메인카메라로 지정 필요
-public class ScreenshotManager : NetworkBehaviour
+public class ScreenshotManager : MonoBehaviour
 {
     // 스크린샷 기능은 UI에 버튼 형태로 존재할 예정
     // 이지만 몇 가지 제한 사항이 있음
@@ -77,7 +76,7 @@ public class ScreenshotManager : NetworkBehaviour
 
     #endregion
 
-    public override void Spawned()
+    private void Start()
     {
         InitializeScreenshotFeature();
         InitializeCameras();
@@ -203,6 +202,11 @@ public class ScreenshotManager : NetworkBehaviour
                 break;
             case ECameraMode.Default:
                 _isScreenshotModeEnabled = false;
+                foreach (var ssCamera in _screenshotCameras)
+                {
+                    ssCamera.gameObject.SetActive(false);
+                    Debug.Log($"SSCamera : {ssCamera.gameObject} set to false? {ssCamera.isActiveAndEnabled}");
+                }
                 break;
         }
 
@@ -279,9 +283,12 @@ public class ScreenshotManager : NetworkBehaviour
 
     private void ResetCameraMode()
     {
-        _screenshotCameraType = EScreenshotCameraType.Default;
-        _screenshotCameras[(int)EScreenshotCameraType.Default].gameObject.SetActive(true);
-        _screenshotCameras[(int)EScreenshotCameraType.Selfie].gameObject.SetActive(false);
+        if (_isScreenshotModeEnabled)
+        {
+            _screenshotCameraType = EScreenshotCameraType.Default;
+            _screenshotCameras[(int)EScreenshotCameraType.Default].gameObject.SetActive(true);
+            _screenshotCameras[(int)EScreenshotCameraType.Selfie].gameObject.SetActive(false);
+        }
     }
 
     private void InitializeDirectory()

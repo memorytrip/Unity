@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using Common.Network;
 using Fusion;
 using Unity.Cinemachine;
 using UnityEngine.Serialization;
@@ -28,10 +27,6 @@ public class ToggleYggdrasil : MonoBehaviour
     [SerializeField] private CinemachineCamera yggdrasilCamera;
     [SerializeField] private CinemachineCamera defaultCamera;
 
-    // TODO: 이런 것들은 다른 데로 가야되긴 함
-    [SerializeField] private GameObject character;
-    private SkinnedMeshRenderer[] _characterMeshes;
-    
     private void Awake()
     {
         _yggdrasil = GetComponent<Yggdrasil>();
@@ -52,20 +47,12 @@ public class ToggleYggdrasil : MonoBehaviour
         defaultCamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
         defaultCamera.Prioritize();
         StartCoroutine(LoadGems());
-        StartCoroutine(SettingTargetCharacter());
     }
 
     private IEnumerator LoadGems()
     {
         // TODO: 서버로부터 불러오는 로직
         yield return null;
-    }
-
-    private IEnumerator SettingTargetCharacter()
-    {
-        yield return new WaitUntil(() => Connection.StateAuthInstance?.currenctCharacter != null);
-        character = Connection.StateAuthInstance.currenctCharacter.gameObject;
-        _characterMeshes = character.GetComponentsInChildren<SkinnedMeshRenderer>();
     }
     
     private void OnTriggerEnter(Collider other)
@@ -75,7 +62,6 @@ public class ToggleYggdrasil : MonoBehaviour
         if (!other.GetComponent<NetworkObject>().HasStateAuthority)
             return;
 
-        HideCharacter();
         StartCoroutine(ViewGems());
         Debug.Log($"Player entered {gameObject}");
     }
@@ -141,7 +127,6 @@ public class ToggleYggdrasil : MonoBehaviour
     {
         content.SetActive(false);
         //defaultCamera.Prioritize();
-        ShowCharacter();
     }
 
     /*private void DeactivateButtons(MemoryGem[] memoryGemSet)
@@ -156,20 +141,4 @@ public class ToggleYggdrasil : MonoBehaviour
     {
         DeactivateButtons(_memoryGemSet);
     }*/
-
-    private void HideCharacter()
-    {
-        foreach (var part in _characterMeshes)
-        {
-            part.enabled = false;
-        }
-    }
-
-    private void ShowCharacter()
-    {
-        foreach (var part in _characterMeshes)
-        {
-            part.enabled = true;
-        }
-    }
 }

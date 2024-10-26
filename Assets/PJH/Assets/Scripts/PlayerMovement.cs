@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
+using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 
 public class PlayerMovement : NetworkBehaviour
@@ -51,8 +52,8 @@ public class PlayerMovement : NetworkBehaviour
         cc.enabled = true;
         SettingCamera();
         InputManager.Instance.jumpAction.started += PlayerJump;
-        
     }
+
 
     private void SettingCamera()
     {
@@ -60,7 +61,30 @@ public class PlayerMovement : NetworkBehaviour
             return;
         CinemachineCamera cam = GameObject.Find("CinemachineCamera")?.GetComponent<CinemachineCamera>();
         if (cam != null)
+        {
             cam.Target.TrackingTarget = transform;
+            var screenshotCam = cam.transform.Find("ScreenshotCamera_Default")?.GetComponent<CinemachineCamera>();
+            if (screenshotCam != null)
+            {
+                screenshotCam.Target.TrackingTarget = transform;
+                Debug.Log($"ScreenshotCam: {screenshotCam} Tracking Target: {screenshotCam.Target.TrackingTarget}");
+            }
+            else
+            {
+                Debug.Log("Screenshot cam is not found");
+            }
+            var screenshotSelfieCam = cam.transform.Find("ScreenshotCamera_Player")?.GetComponent<CinemachineCamera>();
+            if (screenshotSelfieCam != null)
+            {
+                var lookAtTransform = transform.Find("LookAt");
+                screenshotSelfieCam.Target.TrackingTarget = lookAtTransform;
+                Debug.Log($"ScreenshotCam: {screenshotSelfieCam} Tracking Target: {screenshotSelfieCam.Target.TrackingTarget}");
+            }
+            else
+            {
+                Debug.Log("Screenshot selfie cam is not found");
+            }
+        }
     }
 
     public override void FixedUpdateNetwork()
