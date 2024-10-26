@@ -1,28 +1,16 @@
-using System;
 using System.Collections.Generic;
-using Fusion;
 using TMPro;
 using UnityEngine;
 
 public class Nickname : MonoBehaviour
 {
-    public static string Value;
+    public string value;
     public TMP_InputField inputField;
-
-    private void OnEnable()
+    
+    public void SetNickName()
     {
-        inputField.text = Value;
-        inputField.onValueChanged.AddListener(OnChanged);
-    }
-
-    private void OnDisable()
-    {
-        inputField.onValueChanged.RemoveListener(OnChanged);
-    }
-
-    private void OnChanged(string nickname)
-    {
-        Nickname.Value = nickname;
+        value = inputField.text;
+        PlayerPrefs.SetString("NickName", value);
     }
     
 }

@@ -67,6 +67,7 @@ MonoBehaviour:
   Runner: {fileID: 0}
   networkEvents: {fileID: 0}
   connectInvoker: {fileID: 0}
+  nickNameManager: {fileID: 0}
 --- !u!114 &4937572610410619089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +102,7 @@ MonoBehaviour:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 2b4e3ef1-6eae-4d19-a6d5-7816d2a94861
+    m_Id: abd383ea-f759-462f-bad7-db2f538382ff
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []

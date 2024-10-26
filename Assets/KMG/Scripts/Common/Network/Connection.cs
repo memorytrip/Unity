@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
@@ -16,6 +17,9 @@ namespace Common.Network
         [Networked] public string playerName { get; set; }
         [Networked] public PlayerRef playerRef { get; set; }
         [Networked] public bool hasSceneAuthority { get; set; }
+
+        public static List<Connection> list = new ();
+
         public override void Spawned()
         {
             if (!HasStateAuthority) 
@@ -25,8 +29,23 @@ namespace Common.Network
             SpawnAvatar().Forget();
         }
 
+        private void OnEnable()
+        {
+            list.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            list.Remove(this);
+        }
+        
+
         private void Init()
         {
+            ///// BE로 교체 에정
+            playerName =  PlayerPrefs.GetString("NickName", string.Empty);
+            Debug.Log($"Connection Init() PlayerName : {playerName}");
+            
             StateAuthInstance = this;
             playerRef = Runner.LocalPlayer;
             hasSceneAuthority = Runner.IsSceneAuthority;
