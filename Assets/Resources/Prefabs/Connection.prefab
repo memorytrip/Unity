@@ -63,5 +63,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f3c39d9374433e92f68e00badcbbc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currenctCharacter: {fileID: 0}
-  playerName: 
+  _currenctCharacter: {fileID: 0}
+  _playerName: 
+  _hasSceneAuthority: 0

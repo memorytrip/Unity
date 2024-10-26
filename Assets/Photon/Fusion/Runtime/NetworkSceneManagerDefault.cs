@@ -586,7 +586,7 @@ namespace Fusion {
       // register scene objects; this will deactivate GameObjects for clients
       // the additional loadId parameter is passed to ensure each scene load
       // yields unique type ids for scene objects
-      Runner.RegisterSceneObjects(sceneRef, sceneObjects, loadId: sceneParams.LoadId);
+       Runner.RegisterSceneObjects(sceneRef, sceneObjects, loadId: sceneParams.LoadId);
       
       Log.TraceSceneManager(Runner, $"Finished loading & processing {scene.Dump()} for {sceneRef}");
       Runner.InvokeSceneLoadDone(new SceneLoadDoneArgs(sceneRef, sceneObjects, scene, rootObjects));

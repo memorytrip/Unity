@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace Common.Network
      * Photon 접속자마다 생성되어 각 접속자 정보, 아바타 관리하는 오브젝트
      * DontDestroyOnLoad
      */
-    public class Connection: NetworkBehaviour
+    public class Connection : NetworkBehaviour
     {
         public static Connection StateAuthInstance;
 
@@ -16,6 +17,8 @@ namespace Common.Network
         [Networked] public string playerName { get; set; }
         [Networked] public PlayerRef playerRef { get; set; }
         [Networked] public bool hasSceneAuthority { get; set; }
+
+        public static List<Connection> list = new ();
 
         public override void Spawned()
         {
@@ -26,8 +29,23 @@ namespace Common.Network
             SpawnAvatar().Forget();
         }
 
+        private void OnEnable()
+        {
+            list.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            list.Remove(this);
+        }
+        
+
         private void Init()
         {
+            ///// BE로 교체 에정
+            playerName =  PlayerPrefs.GetString("NickName", string.Empty);
+            Debug.Log($"Connection Init() PlayerName : {playerName}");
+            
             StateAuthInstance = this;
             playerRef = Runner.LocalPlayer;
             hasSceneAuthority = Runner.IsSceneAuthority;

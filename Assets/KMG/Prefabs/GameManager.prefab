@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec29529b813c439ea9d77119d8f2a9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cinemachineCamera: {fileID: 0}
   state: 0
 --- !u!114 &7031300577035295829
 MonoBehaviour:
@@ -65,6 +66,7 @@ MonoBehaviour:
   Runner: {fileID: 0}
   networkEvents: {fileID: 0}
   connectInvoker: {fileID: 0}
+  nickNameManager: {fileID: 0}
 --- !u!114 &4937572610410619089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,25 +97,15 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  touch0Action:
+  jumpAction:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: f20cb204-2957-4fbb-b888-e9f600ae16c9
+    m_Id: abd383ea-f759-462f-bad7-db2f538382ff
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  touch1Action:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 55d06f76-2511-4662-91eb-26d0e199f763
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  touchCount: 0
 --- !u!114 &4105582481195439229
 MonoBehaviour:
   m_ObjectHideFlags: 0
