@@ -78,7 +78,7 @@ public class PlayerMovement : NetworkBehaviour
         // if (joystick.isInput)
         if (InputManager.Instance.moveAction.ReadValue<Vector2>().magnitude > 0f)
         {
-            playerMoveSpeed = 5f;
+            playerMoveSpeed = 24f;
         }
         else
         {

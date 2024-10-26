@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0febf2955981294479247c35c52d9881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMoveSpeed: 0
+  playerMoveSpeed: 50
   playerDir: {x: 0, y: 0, z: 0}
   jumpForce: 10
   turnSpeed: 1000
