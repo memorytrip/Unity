@@ -59,6 +59,7 @@ namespace Common
             if (roomName == "0") return "Square";
             if (roomName.Length == 4) return "PlayReady";
             if (roomName.Contains("player_")) return "MyRoomTest";
+            if (roomName == "1") return "MultiPlayTest";
             throw new ArgumentException("try to connect invalid room name");
         }
 #endregion
@@ -69,7 +70,7 @@ namespace Common
             StartCoroutine(MoveSceneProcess(sceneName));
         }
 
-        private IEnumerator MoveSceneProcess(string sceneName)
+        public IEnumerator MoveSceneProcess(string sceneName)
         {
             yield return FadeOut();
             yield return ChangeSceneWithCheckNetworkRunner(sceneName);
