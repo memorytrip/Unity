@@ -14,6 +14,8 @@ namespace Common
      */
     public class SceneManager: MonoBehaviour
     {
+        public static readonly string SquareScene = "0";
+        
         public static SceneManager Instance = null;
         [HideInInspector] public string curScene;
         [HideInInspector] public event Action OnLoadScene;
@@ -55,7 +57,7 @@ namespace Common
         {
             // return "MultiPlayTest";
             if (roomName == "0") return "Square";
-            if (roomName.Length == 4) return "Play";
+            if (roomName.Length == 4) return "PlayReady";
             if (roomName.Contains("player_")) return "MyRoomTest";
             throw new ArgumentException("try to connect invalid room name");
         }
@@ -80,6 +82,7 @@ namespace Common
          */
         private IEnumerator ChangeSceneWithCheckNetworkRunner(string sceneName)
         {
+            curScene = null;
             if (RunnerManager.Instance.isRunnerExist)
             {
                 var Runner = RunnerManager.Instance.Runner;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
@@ -20,11 +21,14 @@ namespace Common.Network
 
         public static List<Connection> list = new ();
 
+        public Action OnAfterSpawned;
+
         public override void Spawned()
         {
             if (!HasStateAuthority) 
                 return;
             Init();
+            OnAfterSpawned?.Invoke();
             DontDestroyOnLoad(gameObject);
             SpawnAvatar().Forget();
         }
@@ -53,14 +57,19 @@ namespace Common.Network
 
         private async UniTaskVoid SpawnAvatar()
         {
+            await UniTask.WaitWhile(() => SceneManager.Instance.curScene == null);
             switch (SceneManager.Instance.curScene)
             {
                 case "MultiPlayTest":
                 case "Square":
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 2, 0), Quaternion.identity);
+                    Debug.Log($"curScene: {SceneManager.Instance.curScene}, spawn Player");
                     break;
                 case "MyRoomTest":
                     currenctCharacter = await SpawnProcess("Player");
+                    Debug.Log($"curScene: {SceneManager.Instance.curScene}, spawn Player");
+                    break;
+                default:
                     break;
             }
         }
