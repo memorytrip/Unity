@@ -18,7 +18,7 @@ namespace Common.Network
         {
             get
             {
-                return Runner != null;
+                return (Runner != null);
             }
         }
 
@@ -40,8 +40,8 @@ namespace Common.Network
          */
         public async UniTask Connect(string roomName)
         {
-            if (RunnerObject != null)
-                throw new Exception("Try fusion Connect while Runner is already exist");
+            if (isRunnerExist)
+                throw new Exception("Trying fusion Connect while Runner is already exist");
             
             RunnerObject = new GameObject("FusionRunner");
             Runner = RunnerObject.AddComponent<NetworkRunner>();
@@ -60,7 +60,6 @@ namespace Common.Network
             
             if (result.Ok)
             {
-                
             }
             else
             {
@@ -70,7 +69,7 @@ namespace Common.Network
 
         public async UniTask Disconnect()
         {
-            if (RunnerObject == null)
+            if (!isRunnerExist)
                 throw new Exception("Trying fusion disconnect while Runner is not exist");
             connectInvoker.ReleaseAuth(Runner.LocalPlayer);
             await UniTask.Delay(500);

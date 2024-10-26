@@ -50,6 +50,19 @@ namespace Common.Network
         {
             foreach (NetworkObject obj in Runner.GetAllNetworkObjects())
             {
+                if (obj.gameObject.CompareTag("Player"))
+                {
+                    Runner.Despawn(obj);
+                    continue;
+                }
+
+                if (obj.gameObject.CompareTag("FusionConnector"))
+                {
+                    Runner.Despawn(obj);
+                    continue;
+                }
+                    
+                
                 if (obj.StateAuthority == playerSelf)
                 {
                     obj.ReleaseStateAuthority();

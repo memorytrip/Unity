@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4105582481195439229}
   - component: {fileID: 20360145353379479}
   - component: {fileID: 5817256964011514131}
+  - component: {fileID: 3489679472794201254}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec29529b813c439ea9d77119d8f2a9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cinemachineCamera: {fileID: 0}
   state: 0
 --- !u!114 &7031300577035295829
 MonoBehaviour:
@@ -95,25 +97,15 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  touch0Action:
+  jumpAction:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: f20cb204-2957-4fbb-b888-e9f600ae16c9
+    m_Id: 2b4e3ef1-6eae-4d19-a6d5-7816d2a94861
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  touch1Action:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 55d06f76-2511-4662-91eb-26d0e199f763
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  touchCount: 0
 --- !u!114 &4105582481195439229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,5 +140,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8b1afeec6204968b844c6917e3652c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3489679472794201254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7555971560589672104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2ce24266583ba4c84bc6de2f874f62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

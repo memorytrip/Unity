@@ -13,6 +13,7 @@ namespace GUI
         private void Awake()
         {
             canvasGroup.alpha = 0f;
+            canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
         }
 
         public void StartFadeIn(float seconds)
@@ -29,6 +30,7 @@ namespace GUI
         {
             if (isActive) yield break;
             isActive = true;
+            canvasGroup.interactable = canvasGroup.blocksRaycasts = true;
             yield return canvasGroup.DOFade(1f, seconds).WaitForCompletion();
         }
 
@@ -36,6 +38,7 @@ namespace GUI
         {
             if (!isActive) yield break;
             isActive = false;
+            canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
             yield return canvasGroup.DOFade(0f, seconds).WaitForCompletion();
         }
     }
