@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,9 +8,17 @@ namespace Common
         public static AudioManager Instance;
 
         private List<AudioSource> sfxPlayers;
-        private AudioSource bgmPlayer;
         private const int baseSfxPlayersCount = 8;
 
+        private BGM bgm;
+        private AudioSource bgmPlayer;
+        
+        [Header("오디오 볼륨")]
+        [Range(0f, 1f)] public float ambienceVolume = 1f;
+        [Range(0f, 1f)] public float bgmVolume = 1f;
+        [Range(0f, 1f)] public float sfxVolume = 1f;
+        [Range(0f, 1f)] public float systemVolume = 1f;
+        
         private void Awake()
         {
             if (Instance == null) Instance = this;
@@ -34,9 +41,7 @@ namespace Common
 
         public void PlayBGM(AudioClip audioClip)
         {
-            if (bgmPlayer.isPlaying) bgmPlayer.Stop();
-            bgmPlayer.clip = audioClip;
-            bgmPlayer.Play();
+            
         }
 
         public void StopBGM()
@@ -54,6 +59,27 @@ namespace Common
             }
             audioSource.clip = audioClip;
             audioSource.Play();
+        }
+
+        public void SetAmbienceVolume(float volume)
+        {
+            ambienceVolume = volume;
+        }
+
+        public void SetBgmVolume(float volume)
+        {
+            bgmVolume = volume;
+            bgm.SetVolume(bgmVolume);
+        }
+
+        public void SetSfxVolume(float volume)
+        {
+            sfxVolume = volume;
+        }
+
+        public void SetSystemVolume(float volume)
+        {
+            systemVolume = volume;
         }
     }
 }

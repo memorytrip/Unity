@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ToggleCanvasGroup : MonoBehaviour, IToggleStateListener
 {
@@ -16,6 +17,9 @@ public class ToggleCanvasGroup : MonoBehaviour, IToggleStateListener
     
     public void Toggle()
     {
-        _canvasGroup.alpha = ScreenshotManager.CameraMode == ECameraMode.Default ? 1f : 0f;
+        if (SceneManager.GetActiveScene().name == "Square")
+        {
+            _canvasGroup.alpha = ScreenshotManager.CameraMode == ECameraMode.Default ? 1f : 0f;
+        }
     }
 }
