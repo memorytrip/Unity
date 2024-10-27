@@ -20,8 +20,14 @@ namespace Common
         [HideInInspector] public string curScene;
         [HideInInspector] public event Action OnLoadScene;
         [SerializeField] private FadeController fader;
-        
-        
+
+        public event Action EndScene;
+
+        public void OnSceneEnded()
+        {
+            EndScene?.Invoke();
+        }
+
         private void Awake()
         {
             if (Instance == null) Instance = this;
@@ -32,6 +38,7 @@ namespace Common
 #region MoveRoom
         public async UniTask MoveRoom(string roomName)
         {
+            OnSceneEnded(); // 이벤트 -> BGM 페이드아웃
             await UniTask.WhenAll(FadeOut().ToUniTask(), MoveRoomProcess(roomName));
             await ChangeSceneWithCheckNetworkRunner(RoutingScene(roomName)).ToUniTask();
             await FadeIn().ToUniTask();

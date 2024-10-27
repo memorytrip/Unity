@@ -9,6 +9,7 @@ public class YamiQuest : MonoBehaviour
             return;
         }
         
+        YamiQuestManager.Instance.ProceedQuest();
         Destroy(gameObject);
     }
 }

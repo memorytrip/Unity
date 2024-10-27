@@ -1,4 +1,5 @@
 using System.Collections;
+using Common;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -20,9 +21,20 @@ public class ToggleVideo : MonoBehaviour
     private void Start()
     {
         InitializeVideoPlayer();
+        _videoPlayer.started += RequestFadeIn;
     }
 
-    private void InitializeVideoPlayer()
+    private void OnDestroy()
+    {
+        _videoPlayer.started -= RequestFadeIn;
+    }
+
+    private void RequestFadeIn(VideoPlayer videoPlayer)
+    {
+        AudioManager.Instance.OnVideoPlayed();
+    }
+
+private void InitializeVideoPlayer()
     {
         _videoPlayer.playOnAwake = false;
         _videoPlayer.isLooping = true;
@@ -55,6 +67,7 @@ public class ToggleVideo : MonoBehaviour
             return;
         }
         
+        AudioManager.Instance.OnVideoStopped();
         StopVideoPlayback();
         Debug.Log($"Player exited {gameObject}");
     }

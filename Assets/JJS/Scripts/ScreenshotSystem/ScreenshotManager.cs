@@ -49,6 +49,7 @@ public class ScreenshotManager : MonoBehaviour
     // Quest
     private Vector3 _rayDirection;
     [SerializeField] private GameObject questAlert;
+    private bool snapshotQuestCleared;
 
     // QR
     private int _qrLayerMask;
@@ -70,6 +71,7 @@ public class ScreenshotManager : MonoBehaviour
 
     private void Start()
     {
+        toggleScreenshotModeButton = FindAnyObjectByType<ScreenshotButton>().GetComponent<Button>();
         InitializeScreenshotFeature();
         InitializeCameras();
     }
@@ -254,7 +256,12 @@ public class ScreenshotManager : MonoBehaviour
 
         if (RaycastShooter.HitDetected)
         {
+            if (snapshotQuestCleared)
+            {
+                return;
+            }
             YamiQuestManager.Instance.ProceedQuest();
+            snapshotQuestCleared = true;
         }
 
         if (RaycastShooter.FoundQRCode)

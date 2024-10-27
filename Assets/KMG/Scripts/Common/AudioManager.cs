@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,26 @@ namespace Common
         [Range(0f, 1f)] public float bgmVolume = 1f;
         [Range(0f, 1f)] public float sfxVolume = 1f;
         [Range(0f, 1f)] public float systemVolume = 1f;
+
+        [Header("로컬로 저장되는 볼륨값")]
+        private float _savedAmbienceVolume = 1f;
+        private float _savedBgmVolume = 1f;
+        private float _savedSfxVolume = 1f;
+        private float _savedSystemVolume = 1f;
+        
+        public event Action PlayVideo;
+
+        public void OnVideoPlayed()
+        {
+            PlayVideo?.Invoke();
+        }
+
+        public event Action StopVideo;
+
+        public void OnVideoStopped()
+        {
+            StopVideo?.Invoke();
+        }
         
         private void Awake()
         {
@@ -69,7 +90,7 @@ namespace Common
         public void SetBgmVolume(float volume)
         {
             bgmVolume = volume;
-            bgm.SetVolume(bgmVolume);
+            bgm.SetVolume(volume);
         }
 
         public void SetSfxVolume(float volume)

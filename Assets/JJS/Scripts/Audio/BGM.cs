@@ -24,7 +24,7 @@ public class BGM : MonoBehaviour
                 PlayBGM(EBgmList.Intro);
                 break;
             case "Square":
-                PlayBGM(EBgmList.Intro);
+                PlayBGM(EBgmList.Lobby);
                 break;
             default:
                 _bgmPlayer.clip = null;
