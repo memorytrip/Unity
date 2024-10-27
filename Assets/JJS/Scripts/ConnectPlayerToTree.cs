@@ -13,7 +13,7 @@ public class ConnectPlayerToTree : NetworkBehaviour
     
     private void ConnectCharacterMeshToTree()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
         {
             _characterMeshes = GetComponentsInChildren<SkinnedMeshRenderer>();
         }
