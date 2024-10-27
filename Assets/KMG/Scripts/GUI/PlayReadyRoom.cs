@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
@@ -10,48 +11,52 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class PlayReadyRoom : NetworkBehaviour, IPlayerJoined, IPlayerLeft, IStateAuthorityChanged
+public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
 {
     [SerializeField] private List<TMP_Text> playerNameTextList;
     [SerializeField] private Button readyButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private TMP_Text roomNameText;
     private int readyCount = 0;
-    
+    private CancellationTokenSource cts;
     public override void Spawned()
     {
-        RefreshPlayerList().Forget();
+        cts = new CancellationTokenSource();
+        RefreshPlayerList(cts.Token).Forget();
         exitButton.onClick.AddListener(Exit);
         readyButton.onClick.AddListener(Ready);
         roomNameText.text = $"Room: {Runner.SessionInfo.Name}";
     }
     
-    public void PlayerJoined(PlayerRef player)
-    {
-        RefreshPlayerList().Forget();
-    }
 
-    public void PlayerLeft(PlayerRef player)
+    private async UniTaskVoid RefreshPlayerList(CancellationToken token)
     {
-        RefreshPlayerList().Forget();
-    }
+        while (true) {
 
-    private async UniTaskVoid RefreshPlayerList()
-    {
-        await UniTask.WaitUntil(() => Connection.list.Count == Runner.ActivePlayers.Count());
-        var i = 0;
-        foreach (var connection in Connection.list)
-        {
-            await UniTask.WaitUntil(() => (connection.currenctCharacter != null));
-            string sceneAuthPrefix = (connection.hasSceneAuthority ? "* " : "");
-            string playerName = connection.playerName;
-            string ready = connection.currenctCharacter.GetComponent<PlayReadyState>().ready ? "O" : "X";
-            playerNameTextList[i++].text = $"{sceneAuthPrefix}{playerName} [{ready}]";
-        }
+            await UniTask.WaitUntil(() => Connection.list.Count == Runner.ActivePlayers.Count());
+            var i = 0;
+            readyCount = 0;
+            foreach (var connection in Connection.list) {
+                await UniTask.WaitUntil(() => (connection.currenctCharacter != null));
+                string sceneAuthPrefix = (connection.hasSceneAuthority ? "* " : "");
+                string playerName = connection.playerName;
+                string ready;
+                if (connection.currenctCharacter.GetComponent<PlayReadyState>().ready) {
+                    ready = "O";
+                    ++readyCount;
+                } else {
+                    ready = "X";
+                }
+                playerNameTextList[i++].text = $"{sceneAuthPrefix}{playerName} [{ready}]";
+            }
 
-        for (; i < playerNameTextList.Count; i++)
-        {
-            playerNameTextList[i].text = "-";
+            for (; i < playerNameTextList.Count; i++) {
+                playerNameTextList[i].text = "-";
+            }
+
+            await UniTask.Delay(500);
+
+            if (token.IsCancellationRequested) break;
         }
     }
 
@@ -62,24 +67,32 @@ public class PlayReadyRoom : NetworkBehaviour, IPlayerJoined, IPlayerLeft, IStat
             connection.currenctCharacter.GetComponent<PlayReadyState>().Ready();
         }
         readyCount++;
+        
         DeactiveByReady();
-        RefreshPlayerList().Forget();
+        if (Runner.IsSceneAuthority && readyCount == Connection.list.Count) {
+            ActiveStart();
+        }
     }
 
     private void DeactiveByReady()
     {
         readyButton.interactable = false;
     }
+
+    private void ActiveStart() {
+        readyButton.interactable = true;
+        readyButton.GetComponentInChildren<TMP_Text>().text = "Start";
+    }
     
     private void Exit()
     {
+        cts.Cancel();
         SceneManager.Instance.MoveRoom(SceneManager.SquareScene).Forget();
     }
 
     public void StateAuthorityChanged()
     {
         Debug.Log($"sachanged");
-        RefreshPlayerList().Forget();
         exitButton.onClick.AddListener(Exit);
         readyButton.onClick.AddListener(Ready);
     }

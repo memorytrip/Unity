@@ -3,21 +3,21 @@ using UnityEngine;
 
 namespace GUI
 {
-    public class PlayReadyState: NetworkBehaviour
+    public class PlayReadyState: NetworkBehaviour 
     {
-        public bool ready = false;
+        [Networked] public bool ready { get; set; }
 
-        
-        public void Ready()
+
+		public void Ready()
         {
             if (HasStateAuthority) 
                 RpcReady();
         }
 
         [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-        public void RpcReady()
+        private void RpcReady()
         {
-            ready = !ready;
+            ready = true;
         }
     }
 }
