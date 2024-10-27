@@ -25,7 +25,7 @@ public class ConnectPlayerToTree : NetworkBehaviour
         {
             return;
         }
-        HideCharacter();
+        //HideCharacter();
     }
 
     private void OnTriggerExit(Collider other)
@@ -34,7 +34,7 @@ public class ConnectPlayerToTree : NetworkBehaviour
         {
             return;
         }
-        ShowCharacter();
+        //ShowCharacter();
     }
 
     private void HideCharacter()
