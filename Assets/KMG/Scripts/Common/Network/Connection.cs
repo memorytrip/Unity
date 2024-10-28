@@ -56,7 +56,7 @@ namespace Common.Network
             await UniTask.WaitUntil(() => SceneManager.Instance.curScene != null);
             switch (SceneManager.Instance.curScene)
             {
-                case "MultiPlayTest":
+                
                 case "Square":
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
                     break;
@@ -65,7 +65,10 @@ namespace Common.Network
                     break;
                 case "PlayReady":
                     currenctCharacter = await SpawnProcess("PlayReadyState");
-                    Debug.Log(currenctCharacter);
+                    SceneManager.Instance.OnLoadScene += () => SpawnAvatar().Forget();
+                    break;
+                case "MultiPlayTest":
+                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 0, 0), Quaternion.identity);
                     break;
                 default:
                     break;
