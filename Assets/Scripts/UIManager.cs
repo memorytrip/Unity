@@ -3,7 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance;
+    private static UIManager _instance;
+
+    public static UIManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindAnyObjectByType<UIManager>();
+            }
+            return _instance;
+        }
+    }
     
     [SerializeField] private CanvasGroup mainMenu;
     [SerializeField] private CanvasGroup sideMenu;
@@ -12,16 +24,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(this);
-        }
-
+        DontDestroyOnLoad(Instance);
         SceneManager.sceneLoaded += ToggleUI;
     }
     
@@ -30,22 +33,38 @@ public class UIManager : MonoBehaviour
         switch (scene.name)
         {
             case "Login":
-                mainMenu.alpha = 1f;
-                Debug.Log($"MainMenu alpha: {mainMenu.alpha}");
-                sideMenu.alpha = 0f;
-                Debug.Log($"SideMenu alpha: {sideMenu.alpha}");
-                chat.alpha = 0f;
-                Debug.Log($"Chat alpha: {chat.alpha}");
-                joystick.alpha = 0f;
-                Debug.Log($"Joystick alpha: {joystick.alpha}");
+                ShowUi(mainMenu);
+                HideUi(sideMenu);
+                HideUi(chat);
+                HideUi(joystick);
                 break;
             default:
-                mainMenu.alpha = 1f;
-                sideMenu.alpha = 1f;
-                chat.alpha = 1f;
-                joystick.alpha = 1f;
+                ShowUi(mainMenu);
+                ShowUi(sideMenu);
+                ShowUi(chat);
+                ShowUi(joystick);
                 break;
         }
+    }
+
+    private void ShowUi(CanvasGroup target)
+    {
+        target.alpha = 1f;
+        Debug.Log($"WHY {target} {target.alpha}");
+        target.interactable = true;
+        target.blocksRaycasts = true;
+    }
+
+    private void HideUi(CanvasGroup target)
+    {
+        target.alpha = 0f;
+        Debug.Log($"Why alpha no change: {target} {target.alpha}");
+        target.interactable = false;
+        target.blocksRaycasts = false;
+    }
+
+    public void SwitchUI()
+    {
     }
 
     private void OnDestroy()
