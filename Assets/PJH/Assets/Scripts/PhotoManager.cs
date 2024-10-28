@@ -34,15 +34,20 @@ public class PhotoManager : NetworkBehaviour, IListener
 
     public async UniTaskVoid HidePhoto(Dictionary<int, Vector3> photoDict, int numberOfPhotos)
     {
-        for (var i = 1; i <= numberOfPhotos; i++)
+        if (HasStateAuthority)
         {
-            int photoName = i;
-            photoDict[photoName] = GetRandomPosition(); 
-            var photoObject = await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName], Quaternion.identity);
-            PhotoData photodata = photoObject.GetComponent<PhotoData>();
-            if (photodata != null)
+            for (var i = 1; i <= numberOfPhotos; i++)
             {
-                photodata.SetPhotoName(photoName);
+                int photoName = i;
+                photoDict[photoName] = GetRandomPosition();
+                var photoObject =
+                    await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName],
+                        Quaternion.identity);
+                PhotoData photodata = photoObject.GetComponent<PhotoData>();
+                if (photodata != null)
+                {
+                    photodata.SetPhotoName(photoName);
+                }
             }
         }
     }

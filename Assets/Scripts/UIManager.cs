@@ -37,6 +37,13 @@ public class UIManager : MonoBehaviour
                 ToggleOff(chat);
                 ToggleOff(joystick);
                 break;
+            case "SelectPhotoScene":
+            case "VideoLoadTest":
+                ToggleOff(mainMenu);
+                ToggleOff(sideMenu);
+                ToggleOff(chat);
+                ToggleOff(joystick);
+                break;
             default:
                 ToggleOn(mainMenu);
                 ToggleOn(sideMenu);
