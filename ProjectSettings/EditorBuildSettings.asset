@@ -41,6 +41,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/PJH/Assets/Scenes/VideoLoadTest.unity
     guid: f1b9c8bf554d1fc43b6f14f5c07ba4dd
+  - enabled: 1
+    path: Assets/Scenes/MapEdit.unity
+    guid: 9097013f791faa44ea840ebd70d1da49
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

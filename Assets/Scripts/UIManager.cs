@@ -3,7 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance;
+    private static UIManager _instance;
+
+    public static UIManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindAnyObjectByType<UIManager>();
+            }
+            return _instance;
+        }
+    }
     
     [SerializeField] private CanvasGroup mainMenu;
     [SerializeField] private CanvasGroup sideMenu;
@@ -12,16 +24,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(this);
-        }
-
+        DontDestroyOnLoad(Instance);
         SceneManager.sceneLoaded += ToggleUI;
     }
     
@@ -32,34 +35,34 @@ public class UIManager : MonoBehaviour
             case "Login":
             case "PlayReady":
             case "MapEdit":
-                ToggleOn(mainMenu);
-                ToggleOff(sideMenu);
-                ToggleOff(chat);
-                ToggleOff(joystick);
+                ShowUI(mainMenu);
+                HideUI(sideMenu);
+                HideUI(chat);
+                HideUI(joystick);
                 break;
             case "SelectPhotoScene":
             case "VideoLoadTest":
-                ToggleOff(mainMenu);
-                ToggleOff(sideMenu);
-                ToggleOff(chat);
-                ToggleOff(joystick);
+                HideUI(mainMenu);
+                HideUI(sideMenu);
+                HideUI(chat);
+                HideUI(joystick);
                 break;
             default:
-                ToggleOn(mainMenu);
-                ToggleOn(sideMenu);
-                ToggleOn(chat);
-                ToggleOn(joystick);
+                ShowUI(mainMenu);
+                ShowUI(sideMenu);
+                ShowUI(chat);
+                ShowUI(joystick);
                 break;
         }
     }
 
-    public static void ToggleOn(CanvasGroup canvasGroup)
+    public static void ShowUI(CanvasGroup canvasGroup)
     {
         canvasGroup.alpha = 1f;
         canvasGroup.interactable = canvasGroup.blocksRaycasts = true;
     }
 
-    public static void ToggleOff(CanvasGroup canvasGroup)
+    public static void HideUI(CanvasGroup canvasGroup)
     {
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
