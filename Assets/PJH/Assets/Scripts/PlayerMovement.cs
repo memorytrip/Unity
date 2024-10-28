@@ -76,8 +76,8 @@ public class PlayerMovement : NetworkBehaviour
             var screenshotSelfieCam = cam.transform.Find("ScreenshotCamera_Player")?.GetComponent<CinemachineCamera>();
             if (screenshotSelfieCam != null)
             {
-                var lookAtTransform = transform.Find("LookAt");
-                screenshotSelfieCam.Target.TrackingTarget = lookAtTransform;
+                var lookAtTransform = transform;
+                screenshotSelfieCam.Target.TrackingTarget = transform;
                 Debug.Log($"ScreenshotCam: {screenshotSelfieCam} Tracking Target: {screenshotSelfieCam.Target.TrackingTarget}");
             }
             else
