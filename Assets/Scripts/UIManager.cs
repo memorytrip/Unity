@@ -31,26 +31,31 @@ public class UIManager : MonoBehaviour
         {
             case "Login":
             case "PlayReady":
-                mainMenu.alpha = 1f;
-                mainMenu.interactable = mainMenu.blocksRaycasts = true;
-                sideMenu.alpha = 0f;
-                sideMenu.interactable = sideMenu.blocksRaycasts = false;
-                chat.alpha = 0f;
-                chat.interactable = chat.blocksRaycasts = false;
-                joystick.alpha = 0f;
-                joystick.interactable = joystick.blocksRaycasts = false;
+            case "MapEdit":
+                ToggleOn(mainMenu);
+                ToggleOff(sideMenu);
+                ToggleOff(chat);
+                ToggleOff(joystick);
                 break;
             default:
-                mainMenu.alpha = 1f;
-                mainMenu.interactable = mainMenu.blocksRaycasts = true;
-                sideMenu.alpha = 1f;
-                sideMenu.interactable = sideMenu.blocksRaycasts = true;
-                chat.alpha = 1f;
-                chat.interactable = chat.blocksRaycasts = true;
-                joystick.alpha = 1f;
-                joystick.interactable = joystick.blocksRaycasts = true;
+                ToggleOn(mainMenu);
+                ToggleOn(sideMenu);
+                ToggleOn(chat);
+                ToggleOn(joystick);
                 break;
         }
+    }
+
+    public static void ToggleOn(CanvasGroup canvasGroup)
+    {
+        canvasGroup.alpha = 1f;
+        canvasGroup.interactable = canvasGroup.blocksRaycasts = true;
+    }
+
+    public static void ToggleOff(CanvasGroup canvasGroup)
+    {
+        canvasGroup.alpha = 0f;
+        canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
     }
 
     private void OnDestroy()

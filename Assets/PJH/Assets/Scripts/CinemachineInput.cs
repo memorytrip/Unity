@@ -40,11 +40,6 @@ public class CinemachineInput : MonoBehaviour
     
     void OnTouchStart(Finger finger)
     {
-        List<RaycastResult> adsf = Utility.RaycastWithPoint(finger.screenPosition);
-        foreach (var res in adsf)
-        {
-            Debug.Log(res.gameObject.name);
-        }
         if (!Utility.IsPointOverGUI(finger.screenPosition))
         {
             lookFingerIndex = finger.index;
