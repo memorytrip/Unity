@@ -1917,7 +1917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photoPrefab:
-    RawGuidValue: 1664f3ba699cecd4dade13d10fe4cfac
+    RawGuidValue: 49057b33ea71fbb4da4e8f02a8db9f28
   findedPhotoCount: {fileID: 772937589}
 --- !u!4 &1562566639
 Transform:

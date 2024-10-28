@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/KMG/Scene/MultiPlayTest.unity
     guid: 38339fc4892bea649aa5f21532e9840b
+  - enabled: 1
+    path: Assets/PJH/Assets/Scenes/SelectPhotoScene.unity
+    guid: 3d6a1523b35497e42a64534c0180471c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
