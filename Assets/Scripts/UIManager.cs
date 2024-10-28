@@ -50,7 +50,6 @@ public class UIManager : MonoBehaviour
     private void ShowUi(CanvasGroup target)
     {
         target.alpha = 1f;
-        Debug.Log($"WHY {target} {target.alpha}");
         target.interactable = true;
         target.blocksRaycasts = true;
     }
@@ -58,7 +57,6 @@ public class UIManager : MonoBehaviour
     private void HideUi(CanvasGroup target)
     {
         target.alpha = 0f;
-        Debug.Log($"Why alpha no change: {target} {target.alpha}");
         target.interactable = false;
         target.blocksRaycasts = false;
     }

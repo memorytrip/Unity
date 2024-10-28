@@ -1,16 +1,8 @@
-using System;
-using System.Collections;
 using Common;
-using Common.Network;
-using Cysharp.Threading.Tasks;
 using Fusion;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.PlayerLoop;
-using SceneManager = UnityEngine.SceneManagement.SceneManager;
-
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -38,20 +30,28 @@ public class PlayerMovement : NetworkBehaviour
     public Vector3 boxSize;
     public float maxDistance = 1f;
 
+    private ChatDisplay _chatDisplay;
+    private PlayerInput _playerInput;
+    
     private void Awake()
     {
+        _playerInput = GetComponent<PlayerInput>();
         cc = GetComponent<CharacterController>();
         cc.enabled = false;
         //networkanim = GetComponentInChildren<NetworkMecanimAnimator>();
         camera = Camera.main;
         boxSize = new Vector3(1f, 1f, 1f);
     }
-
+    
     public override void Spawned()
     {
         cc.enabled = true;
         SettingCamera();
         InputManager.Instance.jumpAction.started += PlayerJump;
+        
+        _chatDisplay = FindAnyObjectByType<ChatDisplay>();
+        _chatDisplay.StartTyping += ToggleMovement;
+        _chatDisplay.StopTyping += ToggleMovement;
     }
 
 
@@ -146,6 +146,21 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (cc.isGrounded)
             velocity = jumpForce;
+    }
+
+    // 텍스트창 입력 시 움직임 금지
+    private void ToggleMovement(bool isTyping)
+    {
+        if (isTyping)
+        {
+            _playerInput.DeactivateInput();
+            Debug.Log("얼음");
+        }
+        else
+        {
+            _playerInput.ActivateInput();
+            Debug.Log($"얼음 -> 땡");
+        }
     }
     
     public override void Despawned(NetworkRunner runner, bool hasState)
