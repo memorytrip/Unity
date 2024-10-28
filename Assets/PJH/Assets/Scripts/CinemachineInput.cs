@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Common;
 using UnityEngine;
 using GUI;
 using Unity.Cinemachine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
@@ -29,7 +31,7 @@ public class CinemachineInput : MonoBehaviour
      * 터치 중에 delta값을 구해 카메라 회전
      * 터치가 끝나면 RetargetProcess 실행
      */
-    private void Start()
+    private void OnEnable()
     {
         InputManager.Instance.OnFingerDown += OnTouchStart;
         InputManager.Instance.OnFingerMove += OnTouchPerform;
@@ -38,6 +40,11 @@ public class CinemachineInput : MonoBehaviour
     
     void OnTouchStart(Finger finger)
     {
+        List<RaycastResult> adsf = Utility.RaycastWithPoint(finger.screenPosition);
+        foreach (var res in adsf)
+        {
+            Debug.Log(res.gameObject.name);
+        }
         if (!Utility.IsPointOverGUI(finger.screenPosition))
         {
             lookFingerIndex = finger.index;
@@ -69,7 +76,7 @@ public class CinemachineInput : MonoBehaviour
             previousScreenPosition = Vector2.zero;
         }
 
-        if (Touch.activeFingers.Count == 1)
+        if (Touch.activeFingers.Count == 1 && gameObject.activeSelf)
         {
             retarget = StartCoroutine(RetargetProcess());
         }
@@ -82,7 +89,7 @@ public class CinemachineInput : MonoBehaviour
         orbitalFollow.VerticalAxis.Recentering.Enabled = true;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         InputManager.Instance.OnFingerDown -= OnTouchStart;
         InputManager.Instance.OnFingerMove -= OnTouchPerform;

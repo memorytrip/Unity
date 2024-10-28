@@ -65,7 +65,7 @@ namespace Common
             // return "MultiPlayTest";
             if (roomName == "0") return "Square";
             if (roomName.Length == 4) return "PlayReady";
-            if (roomName.Contains("player_")) return "MyRoomTest";
+            if (roomName.Contains("player_")) return "MyRoom";
             if (roomName == "1") return "MultiPlayTest";
             throw new ArgumentException("try to connect invalid room name");
         }

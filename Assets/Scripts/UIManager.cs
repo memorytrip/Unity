@@ -32,19 +32,23 @@ public class UIManager : MonoBehaviour
             case "Login":
             case "PlayReady":
                 mainMenu.alpha = 1f;
-                Debug.Log($"MainMenu alpha: {mainMenu.alpha}");
+                mainMenu.interactable = mainMenu.blocksRaycasts = true;
                 sideMenu.alpha = 0f;
-                Debug.Log($"SideMenu alpha: {sideMenu.alpha}");
+                sideMenu.interactable = sideMenu.blocksRaycasts = false;
                 chat.alpha = 0f;
-                Debug.Log($"Chat alpha: {chat.alpha}");
+                chat.interactable = chat.blocksRaycasts = false;
                 joystick.alpha = 0f;
-                Debug.Log($"Joystick alpha: {joystick.alpha}");
+                joystick.interactable = joystick.blocksRaycasts = false;
                 break;
             default:
                 mainMenu.alpha = 1f;
+                mainMenu.interactable = mainMenu.blocksRaycasts = true;
                 sideMenu.alpha = 1f;
+                sideMenu.interactable = sideMenu.blocksRaycasts = true;
                 chat.alpha = 1f;
+                chat.interactable = chat.blocksRaycasts = true;
                 joystick.alpha = 1f;
+                joystick.interactable = joystick.blocksRaycasts = true;
                 break;
         }
     }
