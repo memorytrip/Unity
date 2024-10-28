@@ -1,11 +1,14 @@
+using Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 [RequireComponent(typeof(AudioSource))]
 public class BGM : MonoBehaviour
 {
     [SerializeField] private AudioClip[] bgmList;
     private AudioSource _bgmPlayer;
+    private Scene _loadedScene;
 
     private void Awake()
     {
@@ -14,10 +17,22 @@ public class BGM : MonoBehaviour
         _bgmPlayer.playOnAwake = true;
         SceneManager.sceneLoaded += ChangeBGM;
         SceneManager.sceneUnloaded += StopDuringTransition;
+        _loadedScene = SceneManager.GetActiveScene();
+    }
+
+    private bool IsTransitioning(Scene scene)
+    {
+        if (_loadedScene != scene)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void ChangeBGM(Scene scene, LoadSceneMode mode)
     {
+        _loadedScene = scene;
         switch (scene.name)
         {
             case "Login":
@@ -34,17 +49,14 @@ public class BGM : MonoBehaviour
     
     public void PlayBGM(EBgmList bgmNumber)
     {
-        StopBGM();
         _bgmPlayer.clip = bgmList[(int)bgmNumber];
+        _bgmPlayer.volume = AudioManager.Instance.bgmVolume;
         _bgmPlayer.Play();
     }
 
     public void StopDuringTransition(Scene scene)
     {
-        if (scene.name == "Login" || scene.name == "Square")
-        {
-            StopBGM();
-        }
+        StopBGM();
     }
     
     public void StopBGM()

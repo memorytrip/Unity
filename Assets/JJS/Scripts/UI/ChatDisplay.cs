@@ -61,6 +61,7 @@ public class ChatDisplay : MonoBehaviour
         Debug.Log($"StartChat: {text}");
         isTyping = true;
         OnStartedTyping(isTyping);
+        Debug.Log("얼음땡: 이게 안되냐");
         Debug.Log($"얼음땡 IsTyping: {isTyping}");
     }
 
@@ -72,6 +73,7 @@ public class ChatDisplay : MonoBehaviour
             _inputField.DeactivateInputField(true);
             isTyping = false;
             OnStoppedTyping(isTyping);
+            Debug.Log("얼음땡: 이게 안되냐");
             Debug.Log($"얼음땡 IsTyping: {isTyping}");
         }
     }

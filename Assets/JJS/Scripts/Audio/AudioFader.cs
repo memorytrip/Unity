@@ -32,17 +32,20 @@ public class AudioFader : MonoBehaviour
 
     private void FadeIn()
     {
+        Debug.Log($"FadeIn");
         StartCoroutine(ProcessFade(true, _audioSource, 1f, MinVolume));
     }
 
     private void FadeOut()
     {
+        Debug.Log("FadeOut");
         StartCoroutine(ProcessFade(true, _audioSource, 1f, AudioManager.Instance.bgmVolume));
     }
 
     private void ResumeBGM(Scene scene, LoadSceneMode mode)
     {
         _audioSource.volume = AudioManager.Instance.bgmVolume;
+        FadeOut();
     }
     
     private IEnumerator ProcessFade(bool startNow, AudioSource source, float duration, float targetVolume)
