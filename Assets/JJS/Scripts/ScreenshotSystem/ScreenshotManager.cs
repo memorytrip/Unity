@@ -38,8 +38,8 @@ public class ScreenshotManager : MonoBehaviour
     private RenderTexture screenshotRenderTexture;
 
     public static ECameraMode CameraMode { get; private set; }
-    private EScreenshotCameraType _screenshotCameraType;
-    private bool _isScreenshotModeEnabled;
+    public static EScreenshotCameraType ScreenshotCameraType;
+    public static bool IsScreenshotModeEnabled;
 
     private Slider _slider;
     [SerializeField] private float zoomRate;
@@ -49,6 +49,7 @@ public class ScreenshotManager : MonoBehaviour
     // Quest
     private Vector3 _rayDirection;
     [SerializeField] private GameObject questAlert;
+    private bool snapshotQuestCleared;
 
     // QR
     private int _qrLayerMask;
@@ -61,14 +62,6 @@ public class ScreenshotManager : MonoBehaviour
         return _screenshotCameras[(int)EScreenshotCameraType.Selfie].IsLive ? 24f : 36f;
     }
 
-    // 미션용 세팅: 특명! 오브젝트의 사진을 찍어라!
-    private int _layerAsLayerMask;
-    private float _maxDistance;
-    private float _speed;
-    private bool _hitDetected;
-    private Collider _hitBoxCollider;
-    private RaycastHit _hit;
-
     #region Save System
 
     private const string SubDirectory = "/Screenshots/";
@@ -78,6 +71,7 @@ public class ScreenshotManager : MonoBehaviour
 
     private void Start()
     {
+        toggleScreenshotModeButton = FindAnyObjectByType<ScreenshotButton>().GetComponent<Button>();
         InitializeScreenshotFeature();
         InitializeCameras();
     }
@@ -87,13 +81,6 @@ public class ScreenshotManager : MonoBehaviour
         InitializeDirectory();
 
         screenshotUi.alpha = 0f;
-
-        // 오브젝트 특정을 위한 부분 초기화
-        _layerAsLayerMask = 1 << LayerMask.NameToLayer("Quest");
-        _qrLayerMask = 1 << LayerMask.NameToLayer("QR");
-        _maxDistance = 300f;
-        _speed = 20f;
-        _hitBoxCollider = GetComponent<Collider>();
 
         _slider = GetComponentInChildren<Slider>();
         _slider.minValue = MinFieldOfView;
@@ -119,7 +106,7 @@ public class ScreenshotManager : MonoBehaviour
         //_targetCameras =
         
         CameraMode = ECameraMode.Default;
-        _screenshotCameraType = EScreenshotCameraType.Default;
+        ScreenshotCameraType = EScreenshotCameraType.Default;
 
         foreach (var screenshotCamera in _screenshotCameras)
         {
@@ -129,56 +116,12 @@ public class ScreenshotManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        SwitchRayDirection();
         DetectQuestObject();
-    }
-
-    private void SwitchRayDirection()
-    {
-        switch (_screenshotCameraType)
-        {
-            case EScreenshotCameraType.Selfie:
-                _rayDirection = -transform.forward;
-                break;
-            case EScreenshotCameraType.Default:
-            default:
-                _rayDirection = transform.forward;
-                break;
-        }
     }
 
     private void DetectQuestObject()
     {
-        if (!_isScreenshotModeEnabled)
-        {
-            return;
-        }
-
-        _hitDetected = Physics.BoxCast(_hitBoxCollider.bounds.center, transform.localScale * 0.5f, _rayDirection,
-            out _hit, transform.rotation, _maxDistance, _layerAsLayerMask);
-        questAlert.SetActive(_hitDetected);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-
-        //Check if there has been a hit yet
-        if (_hitDetected)
-        {
-            //Draw a Ray forward from GameObject toward the hit
-            Gizmos.DrawRay(transform.position, transform.forward * _hit.distance);
-            //Draw a cube that extends to where the hit exists
-            Gizmos.DrawWireCube(transform.position + transform.forward * _hit.distance, transform.localScale);
-        }
-        //If there hasn't been a hit yet, draw the ray at the maximum distance
-        else
-        {
-            //Draw a Ray forward from GameObject toward the maximum distance
-            Gizmos.DrawRay(transform.position, transform.forward * _maxDistance);
-            //Draw a cube at the maximum distance
-            Gizmos.DrawWireCube(transform.position + transform.forward * _maxDistance, transform.localScale);
-        }
+        questAlert.SetActive(RaycastShooter.HitDetected);
     }
 
     private void ToggleScreenshotMode()
@@ -198,10 +141,10 @@ public class ScreenshotManager : MonoBehaviour
         switch (CameraMode)
         {
             case ECameraMode.Screenshot:
-                _isScreenshotModeEnabled = true;
+                IsScreenshotModeEnabled = true;
                 break;
             case ECameraMode.Default:
-                _isScreenshotModeEnabled = false;
+                IsScreenshotModeEnabled = false;
                 foreach (var ssCamera in _screenshotCameras)
                 {
                     ssCamera.gameObject.SetActive(false);
@@ -234,14 +177,14 @@ public class ScreenshotManager : MonoBehaviour
 
     private void FlipCamera()
     {
-        _screenshotCameraType = _screenshotCameraType switch
+        ScreenshotCameraType = ScreenshotCameraType switch
         {
             EScreenshotCameraType.Default => EScreenshotCameraType.Selfie,
             EScreenshotCameraType.Selfie => EScreenshotCameraType.Default,
-            _ => _screenshotCameraType
+            _ => ScreenshotCameraType
         };
 
-        switch (_screenshotCameraType)
+        switch (ScreenshotCameraType)
         {
             case EScreenshotCameraType.Selfie:
                 _screenshotCameras[(int)EScreenshotCameraType.Default].gameObject.SetActive(false);
@@ -260,7 +203,7 @@ public class ScreenshotManager : MonoBehaviour
 
     private void ControlCameraZoom(float value)
     {
-        if (!_isScreenshotModeEnabled)
+        if (!IsScreenshotModeEnabled)
         {
             return;
         }
@@ -283,9 +226,9 @@ public class ScreenshotManager : MonoBehaviour
 
     private void ResetCameraMode()
     {
-        if (_isScreenshotModeEnabled)
+        if (IsScreenshotModeEnabled)
         {
-            _screenshotCameraType = EScreenshotCameraType.Default;
+            ScreenshotCameraType = EScreenshotCameraType.Default;
             _screenshotCameras[(int)EScreenshotCameraType.Default].gameObject.SetActive(true);
             _screenshotCameras[(int)EScreenshotCameraType.Selfie].gameObject.SetActive(false);
         }
@@ -311,13 +254,17 @@ public class ScreenshotManager : MonoBehaviour
         screenshot.ReadPixels(new Rect(0, 0, screenshotRenderTexture.width, screenshotRenderTexture.height), 0, 0);
         screenshot.Apply();
 
-        if (Physics.Raycast(transform.position, _rayDirection, out RaycastHit hitInfo, 20000f, _layerAsLayerMask))
+        if (RaycastShooter.HitDetected)
         {
+            if (snapshotQuestCleared)
+            {
+                return;
+            }
             YamiQuestManager.Instance.ProceedQuest();
-            NullifyQuest(hitInfo);
+            snapshotQuestCleared = true;
         }
 
-        if (Physics.Raycast(transform.position, _rayDirection, out hitInfo, 20000f, _qrLayerMask))
+        if (RaycastShooter.FoundQRCode)
         {
             DecodeQRCode(screenshot);
         }
@@ -360,10 +307,5 @@ public class ScreenshotManager : MonoBehaviour
     {
         Application.OpenURL(_savedURL);
         jumpToInternetPopup.alpha = 0f;
-    }
-
-    private void NullifyQuest(RaycastHit hitInfo)
-    {
-        hitInfo.collider.gameObject.layer = LayerMask.NameToLayer("Default");
     }
 }

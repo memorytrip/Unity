@@ -13,7 +13,7 @@ public class ConnectPlayerToTree : NetworkBehaviour
     
     private void ConnectCharacterMeshToTree()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
         {
             _characterMeshes = GetComponentsInChildren<SkinnedMeshRenderer>();
         }
@@ -25,7 +25,7 @@ public class ConnectPlayerToTree : NetworkBehaviour
         {
             return;
         }
-        HideCharacter();
+        //HideCharacter();
     }
 
     private void OnTriggerExit(Collider other)
@@ -34,7 +34,7 @@ public class ConnectPlayerToTree : NetworkBehaviour
         {
             return;
         }
-        ShowCharacter();
+        //ShowCharacter();
     }
 
     private void HideCharacter()

@@ -11,6 +11,6 @@ public class SimpleShowcaseRotation : MonoBehaviour
 
     private void Rotate()
     {
-        transform.RotateAround(transform.position, Vector3.up, 90f * rotateSpeed * Time.fixedDeltaTime);
+        transform.RotateAround(transform.position, Vector3.up, 90f * rotateSpeed * Time.deltaTime);
     }
 }

@@ -23,8 +23,9 @@ namespace KMG.Scripts.Dummy
             // RunnerManager.Instance.Connect(inputField.text);
             try
             {
-                connectButton.interactable = false;    
-                await SceneManager.Instance.MoveRoom(inputField.text);
+                connectButton.interactable = false;
+                PlayerPrefs.SetString("NickName", inputField.text);
+                await SceneManager.Instance.MoveRoom(SceneManager.SquareScene);
             }
             catch (Exception e)
             {
@@ -35,11 +36,6 @@ namespace KMG.Scripts.Dummy
                 if (connectButton != null)
                     connectButton.interactable = true;    
             }
-        }
-
-        private void Disconnect()
-        {
-            RunnerManager.Instance.Disconnect().Forget();
         }
     }
 }

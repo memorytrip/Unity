@@ -44,8 +44,8 @@ public class ToggleYggdrasil : MonoBehaviour
     
     private void Start()
     {
-        defaultCamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
-        defaultCamera.Prioritize();
+        //defaultCamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
+        //defaultCamera.Prioritize();
         StartCoroutine(LoadGems());
     }
 
@@ -74,7 +74,7 @@ public class ToggleYggdrasil : MonoBehaviour
         }
         content.SetActive(true);
         //yggdrasilCamera.Prioritize();
-        Debug.Log($"Yggdrasil camera is now {yggdrasilCamera.gameObject}, Priority: {yggdrasilCamera.Priority}");
+        //Debug.Log($"Yggdrasil camera is now {yggdrasilCamera.gameObject}, Priority: {yggdrasilCamera.Priority}");
         //yggdrasilCamera.SetActive(true);
         DeactivateBackgroundGems();
         // 열람 가능한 열매가 화면 상단에서 중앙으로 슬라이드

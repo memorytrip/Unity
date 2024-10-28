@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4105582481195439229}
   - component: {fileID: 20360145353379479}
   - component: {fileID: 5817256964011514131}
-  - component: {fileID: 3489679472794201254}
+  - component: {fileID: 1415241702373538025}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -50,7 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec29529b813c439ea9d77119d8f2a9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cinemachineCamera: {fileID: 0}
   state: 0
 --- !u!114 &7031300577035295829
 MonoBehaviour:
@@ -67,7 +66,6 @@ MonoBehaviour:
   Runner: {fileID: 0}
   networkEvents: {fileID: 0}
   connectInvoker: {fileID: 0}
-  nickNameManager: {fileID: 0}
 --- !u!114 &4937572610410619089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +117,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b2bfb273e04f78aa51a68a48259eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ambienceVolume: 1
+  bgmVolume: 1
+  sfxVolume: 1
+  systemVolume: 1
 --- !u!114 &20360145353379479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b1afeec6204968b844c6917e3652c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3489679472794201254
+--- !u!114 &1415241702373538025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
