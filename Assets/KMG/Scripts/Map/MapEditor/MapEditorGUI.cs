@@ -1,3 +1,4 @@
+using System;
 using Common;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -40,6 +41,13 @@ namespace Map.Editor
         public void SwitchState(MapEditorGUIState state)
         {
             this.state = state;
+        }
+
+        private void OnDestroy()
+        {
+            InputManager.Instance.OnFingerDown -= OnTouchStart;
+            InputManager.Instance.OnFingerMove -= OnTouchPerform;
+            InputManager.Instance.OnFingerUp -= OnTouchCanceled;
         }
     }
 }
