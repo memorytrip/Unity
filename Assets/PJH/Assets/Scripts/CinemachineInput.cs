@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Common;
 using UnityEngine;
 using GUI;
 using Unity.Cinemachine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
@@ -38,7 +40,11 @@ public class CinemachineInput : MonoBehaviour
     
     void OnTouchStart(Finger finger)
     {
-        Debug.Log(Utility.RaycastWithPoint(finger.screenPosition));
+        List<RaycastResult> adsf = Utility.RaycastWithPoint(finger.screenPosition);
+        foreach (var res in adsf)
+        {
+            Debug.Log(res.gameObject.name);
+        }
         if (!Utility.IsPointOverGUI(finger.screenPosition))
         {
             lookFingerIndex = finger.index;
