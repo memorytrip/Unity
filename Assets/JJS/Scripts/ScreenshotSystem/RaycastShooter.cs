@@ -48,7 +48,7 @@ public class RaycastShooter : NetworkBehaviour
     
     public void DetectQuestObject()
     {
-        Debug.Log(ScreenshotManager.IsScreenshotModeEnabled);
+        // Debug.Log(ScreenshotManager.IsScreenshotModeEnabled);
 
         if (!ScreenshotManager.IsScreenshotModeEnabled)
         {

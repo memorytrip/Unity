@@ -53,11 +53,21 @@ namespace Common.Network
 
         private async UniTaskVoid SpawnAvatar()
         {
+            await UniTask.WaitUntil(() => SceneManager.Instance.curScene != null);
             switch (SceneManager.Instance.curScene)
             {
                 case "MultiPlayTest":
                 case "Square":
-                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 20, 0), Quaternion.identity);
+                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
+                    break;
+                case "MyRoomTest":
+                    currenctCharacter = await SpawnProcess("Player");
+                    break;
+                case "PlayReady":
+                    currenctCharacter = await SpawnProcess("PlayReadyState");
+                    Debug.Log(currenctCharacter);
+                    break;
+                default:
                     break;
             }
         }

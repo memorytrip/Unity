@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
         switch (scene.name)
         {
             case "Login":
+            case "PlayReady":
                 mainMenu.alpha = 1f;
                 Debug.Log($"MainMenu alpha: {mainMenu.alpha}");
                 sideMenu.alpha = 0f;
