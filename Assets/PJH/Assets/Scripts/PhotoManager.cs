@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Common.Network;
@@ -5,6 +6,9 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Fusion;
 using TMPro;
+using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
+using SceneManager = Common.SceneManager;
 
 public class PhotoManager : NetworkBehaviour, IListener
 {
@@ -14,6 +18,7 @@ public class PhotoManager : NetworkBehaviour, IListener
     private GameObject hitObject;
     private int findedPhoto = 0;
     private NetworkObject hitNetworkObject;
+    public TMP_Text findedPhotoCount;
 
     void Start()
     {
@@ -34,7 +39,6 @@ public class PhotoManager : NetworkBehaviour, IListener
             int photoName = i;
             photoDict[photoName] = GetRandomPosition(); 
             var photoObject = await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName], Quaternion.identity);
-            // NetworkObject photoObject = RunnerManager.Instance.Runner.Spawn(photoPrefab, photoDict[photoName], Quaternion.identity);
             PhotoData photodata = photoObject.GetComponent<PhotoData>();
             if (photodata != null)
             {
@@ -69,7 +73,20 @@ public class PhotoManager : NetworkBehaviour, IListener
         {
             var photo = hitNetworkObject.GetComponent<Photo>();
             photo.RpcDespawn();
+            findedPhoto++;
+            findedPhotoCount.text = findedPhoto + " / 8";
+
+            if (findedPhoto > 7)
+            {
+                StartCoroutine(EndGame());
+            }
         }
+    }
+
+    private IEnumerator EndGame()
+    {
+        findedPhoto = 0;
+        yield return SceneManager.Instance.MoveSceneProcess("SelectPhotoScene");
     }
 }
 
