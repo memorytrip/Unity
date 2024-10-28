@@ -35,7 +35,6 @@ public class PlayerInteraction : NetworkBehaviour
             {
                 {
                     EventManager.Instance.PostNotification(EventType.eRaycasting, this, new RaycastInfo(true, hits));
-                    Debug.Log("닿는다");
                 }
             }
             else
