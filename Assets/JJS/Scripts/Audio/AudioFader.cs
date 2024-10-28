@@ -16,7 +16,7 @@ public class AudioFader : MonoBehaviour
 
     private void Start()
     {
-        SceneManager.Instance.EndScene += FadeIn;
+        SceneManager.Instance.OnSceneUnloaded += FadeIn;
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += ResumeBGM;
         AudioManager.Instance.PlayVideo += FadeIn;
         AudioManager.Instance.StopVideo += FadeOut;
@@ -24,7 +24,7 @@ public class AudioFader : MonoBehaviour
 
     private void OnDestroy()
     {
-        SceneManager.Instance.EndScene -= FadeIn;
+        SceneManager.Instance.OnSceneUnloaded -= FadeIn;
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= ResumeBGM;
         AudioManager.Instance.PlayVideo -= FadeIn;
         AudioManager.Instance.StopVideo -= FadeOut;

@@ -65,7 +65,7 @@ namespace Common.Network
                     break;
                 case "PlayReady":
                     currenctCharacter = await SpawnProcess("PlayReadyState");
-                    SceneManager.Instance.OnLoadScene += () => SpawnAvatar().Forget();
+                    SceneManager.Instance.OnSceneLoaded += () => SpawnAvatar().Forget();
                     break;
                 case "MultiPlayTest":
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 0, 0), Quaternion.identity);

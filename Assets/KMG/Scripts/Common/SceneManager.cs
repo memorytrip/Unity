@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using GUI;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace Common
 {
@@ -18,14 +19,14 @@ namespace Common
         
         public static SceneManager Instance = null;
         [HideInInspector] public string curScene;
-        [HideInInspector] public event Action OnLoadScene;
+        public event Action OnSceneLoaded;
         [SerializeField] private FadeController fader;
 
-        public event Action EndScene;
+        public event Action OnSceneUnloaded;
 
         public void OnSceneEnded()
         {
-            EndScene?.Invoke();
+            OnSceneUnloaded?.Invoke();
         }
 
         private void Awake()
@@ -33,6 +34,9 @@ namespace Common
             if (Instance == null) Instance = this;
             else Destroy(this);
             DontDestroyOnLoad(gameObject);
+
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += (s, m) => OnSceneLoaded?.Invoke();
+            UnityEngine.SceneManagement.SceneManager.sceneUnloaded += (s) => OnSceneUnloaded?.Invoke();
         }
 
 #region MoveRoom
@@ -104,15 +108,6 @@ namespace Common
                 yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
             }
             curScene = sceneName;
-
-            try
-            {
-                OnLoadScene?.Invoke();
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-            }
         }
 
         private IEnumerator FadeIn()
