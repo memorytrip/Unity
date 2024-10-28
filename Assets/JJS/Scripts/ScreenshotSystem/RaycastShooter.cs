@@ -1,10 +1,8 @@
-using Fusion;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RaycastShooter : NetworkBehaviour
+public class RaycastShooter : MonoBehaviour
 {
-    private Vector3 addPosition = new (0, 2f, 0);
     private Vector3 _rayDirection;
     private int _layerAsLayerMask;
     private int _qrLayerMask;
@@ -16,7 +14,7 @@ public class RaycastShooter : NetworkBehaviour
     public static bool HitDetected { get; private set; }
     public static bool FoundQRCode {get; private set;}
 
-    public override void Spawned()
+    private void Start()
     {
         _layerAsLayerMask = 1 << LayerMask.NameToLayer("Quest");
         _qrLayerMask = 1 << LayerMask.NameToLayer("QR");
@@ -55,10 +53,10 @@ public class RaycastShooter : NetworkBehaviour
             return;
         }
         
-        HitDetected = Physics.BoxCast(_hitBoxCollider.bounds.center + addPosition, transform.localScale * 0.5f, _rayDirection,
+        HitDetected = Physics.BoxCast(_hitBoxCollider.bounds.center, transform.localScale * 0.5f, _rayDirection,
             out _hit, transform.rotation, _maxDistance, _layerAsLayerMask);
 
-        FoundQRCode = Physics.BoxCast(_hitBoxCollider.bounds.center + addPosition, transform.localScale * 0.5f, _rayDirection,
+        FoundQRCode = Physics.BoxCast(_hitBoxCollider.bounds.center, transform.localScale * 0.5f, _rayDirection,
             out _hit, transform.rotation, _maxDistance, _qrLayerMask);
     }
     
@@ -70,17 +68,17 @@ public class RaycastShooter : NetworkBehaviour
         if (HitDetected)
         {
             //Draw a Ray forward from GameObject toward the hit
-            Gizmos.DrawRay(transform.position + addPosition, transform.forward * _hit.distance);
+            Gizmos.DrawRay(transform.position, transform.forward * _hit.distance);
             //Draw a cube that extends to where the hit exists
-            Gizmos.DrawWireCube(transform.position + addPosition + transform.forward * _hit.distance, transform.localScale);
+            Gizmos.DrawWireCube(transform.position + transform.forward * _hit.distance, transform.localScale);
         }
         //If there hasn't been a hit yet, draw the ray at the maximum distance
         else
         {
             //Draw a Ray forward from GameObject toward the maximum distance
-            Gizmos.DrawRay(transform.position + addPosition, transform.forward * _maxDistance);
+            Gizmos.DrawRay(transform.position, transform.forward * _maxDistance);
             //Draw a cube at the maximum distance
-            Gizmos.DrawWireCube(transform.position + addPosition + transform.forward * _maxDistance, transform.localScale);
+            Gizmos.DrawWireCube(transform.position + transform.forward * _maxDistance, transform.localScale);
         }
     }
     

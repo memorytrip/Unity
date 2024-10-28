@@ -3,7 +3,21 @@ using UnityEngine;
 
 public class YamiQuestManager : MonoBehaviour
 {
-    public static YamiQuestManager Instance;
+    private QuestPopup _questPopup;
+    
+    private static YamiQuestManager _instance;
+    public static YamiQuestManager Instance 
+    { 
+        get 
+        { 
+            if (_instance == null)
+            {
+                _instance = FindAnyObjectByType<YamiQuestManager>();
+            }
+            return _instance; 
+        } 
+    }
+    
     public event Action CompleteQuest;
 
     private void OnQuestComplete()
@@ -29,14 +43,7 @@ public class YamiQuestManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(this);
-            return;
-        }
-        
-        Instance = this;
-        DontDestroyOnLoad(this);
+        _questPopup = FindAnyObjectByType<QuestPopup>();
         CompleteQuest += ProceedQuest;
     }
 
@@ -44,12 +51,12 @@ public class YamiQuestManager : MonoBehaviour
     {
         if (AllQuestsCleared())
         {
-            allClearPopup.SetActive(true);
+            _questPopup.allClearPopup.SetActive(true);
             Debug.Log("All Quests Cleared!");
         }
         else
         {
-            questPopup.SetActive(true);
+            _questPopup.questPopup.SetActive(true);
             Debug.Log("One Quest Completed");
         }
     }
