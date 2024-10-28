@@ -57,7 +57,6 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
 
             if (Runner.IsSceneAuthority && readyCount == Connection.list.Count) {
                 ActiveStart();
-                readyButton.onClick.AddListener(GameStart);
             }
             else
             {
@@ -88,15 +87,18 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     private void ActiveStart() {
         readyButton.interactable = true;
         readyButton.GetComponentInChildren<TMP_Text>().text = "Start";
-        readyButton.onClick.RemoveListener(Ready);
-        // readyButton.onClick.AddListener();
+        // readyButton.onClick.RemoveListener(Ready);
+        readyButton.onClick.RemoveAllListeners();
+        readyButton.onClick.AddListener(RpcGameStart);
     }
     
     private void DeactiveStart() {
         readyButton.interactable = true;
         readyButton.GetComponentInChildren<TMP_Text>().text = "Ready";
+        // readyButton.onClick.RemoveListener(GameStart);
+        readyButton.onClick.RemoveAllListeners();
         readyButton.onClick.AddListener(Ready);
-        // readyButton.onClick.AddListener();
+        
     }
     
     private void Exit()
@@ -111,9 +113,12 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
         exitButton.onClick.AddListener(Exit);
         readyButton.onClick.AddListener(Ready);
     }
-
-    private void GameStart()
+    
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RpcGameStart()
     {
+        Debug.Log("start game");
+        cts.Cancel();
         SceneManager.Instance.MoveScene("MultiPlayTest");
     }
 }
