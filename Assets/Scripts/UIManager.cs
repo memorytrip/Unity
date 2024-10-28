@@ -3,7 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance;
+    private static UIManager _instance;
+
+    public static UIManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindAnyObjectByType<UIManager>();
+            }
+            return _instance;
+        }
+    }
     
     [SerializeField] private CanvasGroup mainMenu;
     [SerializeField] private CanvasGroup sideMenu;
@@ -12,16 +24,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(this);
-        }
-
+        DontDestroyOnLoad(Instance);
         SceneManager.sceneLoaded += ToggleUI;
     }
     

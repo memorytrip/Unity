@@ -80,7 +80,7 @@ public class ScreenshotManager : MonoBehaviour
     {
         InitializeDirectory();
 
-        screenshotUi.alpha = 0f;
+        HideUi(screenshotUi);
 
         _slider = GetComponentInChildren<Slider>();
         _slider.minValue = MinFieldOfView;
@@ -164,17 +164,29 @@ public class ScreenshotManager : MonoBehaviour
         switch (CameraMode)
         {
             case ECameraMode.Screenshot:
-                screenshotUi.interactable = screenshotUi.blocksRaycasts = true;
-                screenshotUi.alpha = 1f;
+                ShowUi(screenshotUi);
                 Debug.Log("Screenshot UI Active");
                 break;
             case ECameraMode.Default:
             default:
-                screenshotUi.interactable = screenshotUi.blocksRaycasts = false;
-                screenshotUi.alpha = 0f;
+                HideUi(screenshotUi);
                 Debug.Log("Screenshot UI Inactive");
                 break;
         }
+    }
+
+    private void ShowUi(CanvasGroup target)
+    {
+        target.interactable = true;
+        target.blocksRaycasts = true;
+        target.alpha = 1f;
+    }
+
+    private void HideUi(CanvasGroup target)
+    {
+        target.interactable = false;
+        target.blocksRaycasts = false;
+        target.alpha = 0f;
     }
 
     private void FlipCamera()
@@ -302,12 +314,12 @@ public class ScreenshotManager : MonoBehaviour
 
         Debug.Log($"QR code found!: BarcodeFormat({result.BarcodeFormat}), ResultText({result.Text})");
         _savedURL = result.Text;
-        jumpToInternetPopup.alpha = 1f;
+        ShowUi(jumpToInternetPopup);
     }
 
     private void JumpToURL()
     {
         Application.OpenURL(_savedURL);
-        jumpToInternetPopup.alpha = 0f;
+        HideUi(jumpToInternetPopup);
     }
 }

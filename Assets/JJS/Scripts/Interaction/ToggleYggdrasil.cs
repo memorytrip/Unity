@@ -38,7 +38,7 @@ public class ToggleYggdrasil : MonoBehaviour
         {
             Debug.LogWarning("Animator is not initialized!");
         }
-        
+
         content.SetActive(false);
     }
     
@@ -72,6 +72,7 @@ public class ToggleYggdrasil : MonoBehaviour
         {
             gem.Stop();
         }
+
         content.SetActive(true);
         //yggdrasilCamera.Prioritize();
         //Debug.Log($"Yggdrasil camera is now {yggdrasilCamera.gameObject}, Priority: {yggdrasilCamera.Priority}");
@@ -120,13 +121,7 @@ public class ToggleYggdrasil : MonoBehaviour
         {
             gem.Play();
         }
-        HideContentUi();
-    }
-
-    private void HideContentUi()
-    {
         content.SetActive(false);
-        //defaultCamera.Prioritize();
     }
 
     /*private void DeactivateButtons(MemoryGem[] memoryGemSet)
