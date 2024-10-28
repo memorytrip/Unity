@@ -54,6 +54,14 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
                 playerNameTextList[i].text = "-";
             }
 
+            if (Runner.IsSceneAuthority && readyCount == Connection.list.Count) {
+                ActiveStart();
+            }
+            else
+            {
+                DeactiveStart();
+            }
+            
             await UniTask.Delay(500);
 
             if (token.IsCancellationRequested) break;
@@ -66,22 +74,27 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
         {
             connection.currenctCharacter.GetComponent<PlayReadyState>().Ready();
         }
-        readyCount++;
         
         DeactiveByReady();
-        if (Runner.IsSceneAuthority && readyCount == Connection.list.Count) {
-            ActiveStart();
-        }
     }
 
     private void DeactiveByReady()
     {
-        readyButton.interactable = false;
+        // readyButton.interactable = false;
     }
 
     private void ActiveStart() {
         readyButton.interactable = true;
         readyButton.GetComponentInChildren<TMP_Text>().text = "Start";
+        readyButton.onClick.RemoveListener(Ready);
+        // readyButton.onClick.AddListener();
+    }
+    
+    private void DeactiveStart() {
+        readyButton.interactable = true;
+        readyButton.GetComponentInChildren<TMP_Text>().text = "Ready";
+        readyButton.onClick.AddListener(Ready);
+        // readyButton.onClick.AddListener();
     }
     
     private void Exit()

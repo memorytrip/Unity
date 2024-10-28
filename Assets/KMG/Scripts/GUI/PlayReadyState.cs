@@ -14,10 +14,11 @@ namespace GUI
                 RpcReady();
         }
 
-        [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+        // [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
         private void RpcReady()
         {
-            ready = true;
+            // ready = true;
+            ready = !ready;
         }
     }
 }
