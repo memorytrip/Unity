@@ -2,17 +2,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using Common;
 using Fusion;
 using NUnit.Framework;
 
-public class CanvasController : NetworkBehaviour
+public class PhotoSelect : NetworkBehaviour
 {
     public ButtonWithRawImage[] buttons;
     public List<RawImage> PhotoList = new List<RawImage>();
     public RawImage[] selectedPhotoArray;
+    public Button submitButton;
 
     void Start()
     {
+        submitButton.gameObject.SetActive(false);
         foreach (var button in buttons)
         {
             button.OnButtonClicked.AddListener(OnButtonRawImageClicked);
@@ -31,18 +34,30 @@ public class CanvasController : NetworkBehaviour
     public void RpcAddPhotoToList(int buttonID)
     {
         RawImage rawImage = buttons[buttonID].childRawImage;
+        Debug.Log($"포토 리스트: {PhotoList.Count}");
             if (rawImage != null)
             {
-                if (!PhotoList.Contains(rawImage) && PhotoList.Count < 4)
+                if (PhotoList.Count <= 4)
                 {
-                    PhotoList.Add(rawImage);
-                    Debug.Log("사진 추가");
+                    submitButton.gameObject.SetActive(false);
+                    if (!PhotoList.Contains(rawImage))
+                    {
+                        PhotoList.Add(rawImage);
+                        Debug.Log("사진 추가");
+                    }
+                    else
+                    {
+                        PhotoList.Remove(rawImage);
+                        Debug.Log("사진 제거");
+                    }
+
+                    if (PhotoList.Count == 4 && HasStateAuthority)
+                    {
+                        submitButton.gameObject.SetActive(true);
+                        submitButton.onClick.AddListener(()=>RpcSceneChange("VideoLoadTest"));
+                    }
                 }
-                else
-                {
-                    PhotoList.Remove(rawImage);
-                    Debug.Log("사진 제거");
-                }
+                
             }
             else
             {
@@ -50,7 +65,6 @@ public class CanvasController : NetworkBehaviour
             }
             
             int maxIndex = Mathf.Min(selectedPhotoArray.Length, PhotoList.Count);
-            Debug.Log(maxIndex);
             {
                 for (int i = 0; i < maxIndex; i++)
                 {
@@ -65,4 +79,9 @@ public class CanvasController : NetworkBehaviour
             }
     }
     
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    void RpcSceneChange(string scenename)
+    {
+        SceneManager.Instance.MoveScene(scenename);
+    }
 }
