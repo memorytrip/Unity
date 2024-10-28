@@ -78,15 +78,22 @@ public class PhotoManager : NetworkBehaviour, IListener
 
             if (findedPhoto > 7)
             {
-                StartCoroutine(EndGame());
+                RpcSceneChange();
+                findedPhoto = 0;
             }
         }
     }
+    
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RpcSceneChange()
+    {
+        SceneManager.Instance.MoveScene("SelectPhotoScene");
+    }
 
-    private IEnumerator EndGame()
+    /*private IEnumerator EndGame()
     {
         findedPhoto = 0;
         yield return SceneManager.Instance.MoveSceneProcess("SelectPhotoScene");
-    }
+    }*/
 }
 

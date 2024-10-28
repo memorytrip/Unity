@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -56,6 +57,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
 
             if (Runner.IsSceneAuthority && readyCount == Connection.list.Count) {
                 ActiveStart();
+                readyButton.onClick.AddListener(GameStart);
             }
             else
             {
@@ -108,5 +110,10 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
         Debug.Log($"sachanged");
         exitButton.onClick.AddListener(Exit);
         readyButton.onClick.AddListener(Ready);
+    }
+
+    private void GameStart()
+    {
+        SceneManager.Instance.MoveScene("MultiPlayTest");
     }
 }
