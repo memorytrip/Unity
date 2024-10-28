@@ -164,13 +164,13 @@ public class ScreenshotManager : MonoBehaviour
         switch (CameraMode)
         {
             case ECameraMode.Screenshot:
-                screenshotUi.interactable = true;
+                screenshotUi.interactable = screenshotUi.blocksRaycasts = true;
                 screenshotUi.alpha = 1f;
                 Debug.Log("Screenshot UI Active");
                 break;
             case ECameraMode.Default:
             default:
-                screenshotUi.interactable = false;
+                screenshotUi.interactable = screenshotUi.blocksRaycasts = false;
                 screenshotUi.alpha = 0f;
                 Debug.Log("Screenshot UI Inactive");
                 break;

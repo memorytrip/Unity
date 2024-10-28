@@ -38,6 +38,7 @@ public class CinemachineInput : MonoBehaviour
     
     void OnTouchStart(Finger finger)
     {
+        Debug.Log(Utility.RaycastWithPoint(finger.screenPosition));
         if (!Utility.IsPointOverGUI(finger.screenPosition))
         {
             lookFingerIndex = finger.index;
@@ -69,7 +70,7 @@ public class CinemachineInput : MonoBehaviour
             previousScreenPosition = Vector2.zero;
         }
 
-        if (Touch.activeFingers.Count == 1)
+        if (Touch.activeFingers.Count == 1 && gameObject.activeSelf)
         {
             retarget = StartCoroutine(RetargetProcess());
         }
