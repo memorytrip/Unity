@@ -2,7 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Map.MapEditor
+namespace Map.Editor
 {
     public class ThumbnailCapture: MonoBehaviour
     {
