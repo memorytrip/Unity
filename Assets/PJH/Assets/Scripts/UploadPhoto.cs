@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System.IO;
+using Fusion;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine.UI;
@@ -11,13 +12,14 @@ public class UploadPhoto : MonoBehaviour
 {
     public RawImage img;
     private float photoCapacity = 5000000000000f;
+    //private string File = "Application.temporaryCachePath";
 
     public void OnClickImageLoad()
     {
         NativeGallery.GetImageFromGallery((file) => //갤러리를 열었음
         {
             FileInfo selected = new FileInfo(file); //selected -> 선택한 이미지
-            
+            Debug.Log("파일 위치" + file);
             //용량 제한
             if (selected.Length > photoCapacity)   //byte
             {
@@ -39,7 +41,7 @@ public class UploadPhoto : MonoBehaviour
 
         byte[] fileData = File.ReadAllBytes(path);
         string filename = Path.GetFileName(path).Split('.')[0];
-        string savePath = Application.persistentDataPath + "/Image";
+        string savePath = Application.persistentDataPath + "/Image"; //안드로이드는 Application.temporaryCachePath이라고함 (팩트 체크 필요)
         Debug.Log("경로:" + savePath);
 
         if (!Directory.Exists(savePath))
