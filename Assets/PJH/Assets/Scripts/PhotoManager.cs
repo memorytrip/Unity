@@ -1,16 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Common.Network;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Fusion;
+using Fusion.Sockets;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using SceneManager = Common.SceneManager;
 
-public class PhotoManager : NetworkBehaviour, IListener
+public class PhotoManager : NetworkRunnerCallbacks, IListener
 {
     private float yValue = 1f;
     private Dictionary<int, Vector3> photoPositions;
@@ -19,12 +21,25 @@ public class PhotoManager : NetworkBehaviour, IListener
     private int findedPhoto = 0;
     private NetworkObject hitNetworkObject;
     public TMP_Text findedPhotoCount;
+    private int numberOfPhoto;
 
     void Start()
     {
         EventManager.Instance.AddListener(EventType.eRaycasting, this);
         photoPositions = new Dictionary<int, Vector3>();
-        HidePhoto(photoPositions, 8).Forget();
+    }
+    
+    public override void Spawned()
+    {
+        RpcTotalPhoto();
+        Debug.Log(numberOfPhoto);
+        HidePhoto(photoPositions, numberOfPhoto).Forget();
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    private void RpcTotalPhoto() //이후 사진 받은걸로 바꿔야함
+    {
+        numberOfPhoto += 2;
     }
     
     private Vector3 GetRandomPosition()
@@ -34,8 +49,6 @@ public class PhotoManager : NetworkBehaviour, IListener
 
     public async UniTaskVoid HidePhoto(Dictionary<int, Vector3> photoDict, int numberOfPhotos)
     {
-        if (HasStateAuthority)
-        {
             for (var i = 1; i <= numberOfPhotos; i++)
             {
                 int photoName = i;
@@ -49,7 +62,7 @@ public class PhotoManager : NetworkBehaviour, IListener
                     photodata.SetPhotoName(photoName);
                 }
             }
-        }
+        
     }
     
     public void OnEvent(EventType eventType, Component sender, object param = null)
@@ -78,18 +91,23 @@ public class PhotoManager : NetworkBehaviour, IListener
         {
             var photo = hitNetworkObject.GetComponent<Photo>();
             photo.RpcDespawn();
-            findedPhoto++;
-            findedPhotoCount.text = findedPhoto + " / 8";
-
-            if (findedPhoto > 7)
+            RpcUpdateFindedPhoto();
+            if (findedPhoto >= numberOfPhoto)
             {
                 RpcSceneChange();
                 findedPhoto = 0;
             }
         }
     }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void RpcUpdateFindedPhoto()
+    {
+        findedPhoto++;
+        findedPhotoCount.text = findedPhoto + " / " + numberOfPhoto;
+    }
     
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void RpcSceneChange()
     {
         SceneManager.Instance.MoveScene("SelectPhotoScene");
@@ -100,5 +118,9 @@ public class PhotoManager : NetworkBehaviour, IListener
         findedPhoto = 0;
         yield return SceneManager.Instance.MoveSceneProcess("SelectPhotoScene");
     }*/
+    public override void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+    {
+        findedPhotoCount.text = findedPhoto + " / " + runner.ActivePlayers.Count();
+    }
 }
 
