@@ -33,13 +33,13 @@ public class UIManager : MonoBehaviour
         switch (scene.name)
         {
             case "Login":
-            case "PlayReady":
-            case "MapEdit":
                 ShowUI(mainMenu);
                 HideUI(sideMenu);
                 HideUI(chat);
                 HideUI(joystick);
                 break;
+            case "MapEdit":
+            case "PlayReady":
             case "SelectPhotoScene":
             case "VideoLoadTest":
                 HideUI(mainMenu);
