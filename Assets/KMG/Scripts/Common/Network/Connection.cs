@@ -26,7 +26,7 @@ namespace Common.Network
                 return;
             Init();
             DontDestroyOnLoad(gameObject);
-            SpawnAvatar().Forget();
+            SpawnAvatar();
         }
 
         private void OnEnable()
@@ -51,7 +51,9 @@ namespace Common.Network
             hasSceneAuthority = Runner.IsSceneAuthority;
         }
 
-        private async UniTaskVoid SpawnAvatar()
+        private void SpawnAvatar() => SpawnAvatarAsync().Forget();
+        
+        private async UniTaskVoid SpawnAvatarAsync()
         {
             await UniTask.WaitUntil(() => SceneManager.Instance.curScene != null);
             switch (SceneManager.Instance.curScene)
@@ -65,9 +67,10 @@ namespace Common.Network
                     break;
                 case "PlayReady":
                     currenctCharacter = await SpawnProcess("PlayReadyState");
-                    SceneManager.Instance.OnSceneLoaded += () => SpawnAvatar().Forget();
+                    SceneManager.Instance.OnSceneLoaded += SpawnAvatar;
                     break;
                 case "MultiPlayTest":
+                    SceneManager.Instance.OnSceneLoaded -= SpawnAvatar;
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 0, 0), Quaternion.identity);
                     break;
                 default:
@@ -83,8 +86,10 @@ namespace Common.Network
         
         public async UniTask<NetworkObject> SpawnProcess(string prefabName, Vector3 position, Quaternion rotation) 
         {
-            GameObject connectionPrefab = await Resources.LoadAsync<GameObject>("Prefabs/" + prefabName) as GameObject;
-            return await Runner.SpawnAsync(connectionPrefab, position, rotation);
+            GameObject prefab = await Resources.LoadAsync<GameObject>("Prefabs/" + prefabName) as GameObject;
+            // Debug.Log($"Runner: {Runner}, Prefab: {prefab}");
+            Debug.Log($"Connection count: {Connection.list.Count}");
+            return await Runner.SpawnAsync(prefab, position, rotation);
         }
 
         public void PlayerLeft(PlayerRef player)
