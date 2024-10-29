@@ -9,6 +9,13 @@ namespace Map
      */
     public class MapInfo
     {
+        public static MapInfo GetDefaultMap()
+        {
+            MapInfo res = new MapInfo();
+            res.data =
+                "{\"themeId\":\"0\",\"mapObjectList\":[]}";
+            return res;
+        }
         public string formatVersion = "0.0.1";
         public string id;
         public string thumbnail;

@@ -24,8 +24,18 @@ namespace Myroom
             {
                 directoryInfo.Create();
             }
-            string rawData = File.ReadAllText(path + filename);
-            MapInfo mapInfo = JsonConvert.DeserializeObject<MapInfo>(rawData);
+
+            MapInfo mapInfo;
+            if (File.Exists(path + filename))
+            {
+                string rawData = await File.ReadAllTextAsync(path + filename);
+                mapInfo = JsonConvert.DeserializeObject<MapInfo>(rawData);
+            }
+            else
+            {
+                mapInfo = MapInfo.GetDefaultMap();
+            }
+            Debug.Log(mapInfo);
             MapConcrete map = await MapConverter.ConvertMapInfoToMapConcrete(mapInfo);
             map.rootObject.layer = LayerMask.NameToLayer("Ground");
         }

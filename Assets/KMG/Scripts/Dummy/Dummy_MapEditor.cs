@@ -39,8 +39,17 @@ namespace GUI
             {
                 directoryInfo.Create();
             }
-            string rawData = File.ReadAllText(path + filename);
-            MapInfo mapInfo = JsonConvert.DeserializeObject<MapInfo>(rawData);
+
+            MapInfo mapInfo;
+            if (File.Exists(path + filename))
+            {
+                string rawData = await File.ReadAllTextAsync(path + filename);
+                mapInfo = JsonConvert.DeserializeObject<MapInfo>(rawData);
+            }
+            else
+            {
+                mapInfo = MapInfo.GetDefaultMap();
+            }
             return await MapConverter.ConvertMapInfoToMapConcrete(mapInfo);
         }
 
@@ -55,6 +64,7 @@ namespace GUI
                 directoryInfo.Create();
             }
             await File.WriteAllTextAsync(path + filename, JsonConvert.SerializeObject(mapInfo));
+            Debug.Log($"File save: {path + filename}");
         }
 
         private void Exit()
