@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - HiddenItem
+  - FusionConnector
+  - Yggdrasil
   layers:
   - Default
   - TransparentFX
@@ -11,10 +14,10 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Quest
+  - Interactable
+  - QR
+  - Ground
   - 
   - 
   - 
