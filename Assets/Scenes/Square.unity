@@ -10773,6 +10773,10 @@ PrefabInstance:
       propertyPath: m_TargetAudioSources.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 313189836883933610, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ab8149ec4775284bada96c1b85b4a09, type: 2}
     - target: {fileID: 565247582815992067, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -10813,6 +10817,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 682159517432485984, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ab8149ec4775284bada96c1b85b4a09, type: 2}
     - target: {fileID: 1118636448952566972, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
       propertyPath: m_VideoClip
       value: 
@@ -10889,6 +10897,10 @@ PrefabInstance:
       propertyPath: m_TargetAudioSources.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3229465835256978090, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ab8149ec4775284bada96c1b85b4a09, type: 2}
     - target: {fileID: 3933866889792580681, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
       propertyPath: m_VideoClip
       value: 
@@ -10941,6 +10953,18 @@ PrefabInstance:
       propertyPath: m_TargetAudioSources.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5252742385688613724, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ab8149ec4775284bada96c1b85b4a09, type: 2}
+    - target: {fileID: 5640449838456063257, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ab8149ec4775284bada96c1b85b4a09, type: 2}
+    - target: {fileID: 6413660156626216896, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ab8149ec4775284bada96c1b85b4a09, type: 2}
     - target: {fileID: 6964439646713736573, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
       propertyPath: m_VideoClip
       value: 
@@ -10989,6 +11013,22 @@ PrefabInstance:
       propertyPath: m_TargetAudioSources.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8020214825643867700, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ab8149ec4775284bada96c1b85b4a09, type: 2}
+    - target: {fileID: 8421805618825713322, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ab8149ec4775284bada96c1b85b4a09, type: 2}
+    - target: {fileID: 8530555098888689568, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ab8149ec4775284bada96c1b85b4a09, type: 2}
+    - target: {fileID: 8591822404377630619, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ab8149ec4775284bada96c1b85b4a09, type: 2}
     - target: {fileID: 8615987424825622912, guid: 0f24c55e1db174a41bf4a5a51df45a90, type: 3}
       propertyPath: content
       value: 
@@ -12135,13 +12175,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417053526}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.18223555, z: 0, w: 0.9832549}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 500, y: 500, z: 500}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1703789620}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 21, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1030.0006, y: 0}
