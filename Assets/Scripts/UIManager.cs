@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class UIManager : MonoBehaviour
     
     [SerializeField] private CanvasGroup mainMenu;
     [SerializeField] private CanvasGroup sideMenu;
+    [SerializeField] private Button screenshotButton;
     [SerializeField] private CanvasGroup chat;
     [SerializeField] private CanvasGroup joystick;
 
@@ -37,6 +39,13 @@ public class UIManager : MonoBehaviour
                 HideUI(sideMenu);
                 HideUI(chat);
                 HideUI(joystick);
+                break;
+            case "MyRoom":
+                ShowUI(mainMenu);
+                ShowUI(sideMenu);
+                screenshotButton.interactable = false;
+                HideUI(chat);
+                ShowUI(joystick);
                 break;
             case "MapEdit":
             case "PlayReady":

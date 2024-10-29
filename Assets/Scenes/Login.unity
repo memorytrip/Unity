@@ -278,6 +278,7 @@ GameObject:
   - component: {fileID: 60652906}
   - component: {fileID: 60652905}
   - component: {fileID: 60652908}
+  - component: {fileID: 60652909}
   m_Layer: 5
   m_Name: ScreenshotCameraButton
   m_TagString: Untagged
@@ -399,6 +400,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724b7e203fa6a844f9c513ac1b1628e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &60652909
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60652903}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &116209031
 GameObject:
   m_ObjectHideFlags: 0
@@ -4510,6 +4523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 2109923940}
   sideMenu: {fileID: 1055336156}
+  screenshotButton: {fileID: 60652909}
   chat: {fileID: 1366241567}
   joystick: {fileID: 2099277972}
 --- !u!1 &1459162919
@@ -6403,7 +6417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6202766, g: 0.88679236, b: 0.74821645, a: 0.7058824}
+  m_Color: {r: 0.6202766, g: 0.88679236, b: 0.74821645, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
