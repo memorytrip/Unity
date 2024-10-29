@@ -60,7 +60,6 @@ GameObject:
   - component: {fileID: 4706521619132637490}
   - component: {fileID: 4751748418977364367}
   - component: {fileID: 2049515914353393291}
-  - component: {fileID: 5349870865396255097}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -203,36 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab0f4cc10a7b994289a6996b34bf4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5349870865396255097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3944214150824222631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_NotificationBehavior: 3
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Gamepad
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &5640782578263524699
 GameObject:
   m_ObjectHideFlags: 0
