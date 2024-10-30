@@ -64,6 +64,7 @@ public class ScreenshotManager : MonoBehaviour
 
     #region Save System
 
+    private string _directory;
     private const string SubDirectory = "/Screenshots/";
     private const string FileType = ".png";
 
@@ -250,10 +251,31 @@ public class ScreenshotManager : MonoBehaviour
 
     private void InitializeDirectory()
     {
-        if (!Directory.Exists(Application.persistentDataPath + SubDirectory))
+        if (Application.platform != RuntimePlatform.Android)
         {
-            Directory.CreateDirectory(Application.persistentDataPath + SubDirectory);
+            _directory = Application.persistentDataPath;
+            
+            if (!Directory.Exists(_directory + SubDirectory))
+            {
+                Directory.CreateDirectory(_directory + SubDirectory);
+            }
         }
+        else
+        {
+            _directory = GetAndroidExternalStoragePath();
+            
+            if (!Directory.Exists(_directory + SubDirectory))
+            {
+                Directory.CreateDirectory(_directory + SubDirectory);
+            }
+        }
+    }
+
+    private string GetAndroidExternalStoragePath()
+    {
+        var androidJavaClass = new AndroidJavaClass("android.os.Environment");
+        var path = androidJavaClass.CallStatic<AndroidJavaObject>("getExternalStoragePublicDirectory", androidJavaClass.GetStatic<string>("DIRECTORY_DCIM")).Call<string>("getAbsolutePath");
+        return path;
     }
 
     private void CaptureScreenshot()
@@ -297,7 +319,7 @@ public class ScreenshotManager : MonoBehaviour
         var formattedDate = now.ToString("yyyyMMdd_HHmmssfff");
 
         byte[] bytes = screenshot.EncodeToPNG();
-        string path = Path.Combine(Application.persistentDataPath + SubDirectory + formattedDate + FileType);
+        string path = Path.Combine(_directory + SubDirectory + formattedDate + FileType);
         File.WriteAllBytes(path, bytes);
 
         Debug.Log($"Screenshot saved to {path}");
