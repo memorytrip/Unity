@@ -1,38 +1,42 @@
-using Unity.VisualScripting;
+using System.Collections;
+using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
-public class RotateLetterPhoto : MonoBehaviour
+public class SelectLetterPhoto : MonoBehaviour
 {
     //public GameObject letterPhoto;
-    private float rotateY = 0f;
     public float turnSpeed = 7200f;
-    
+    private bool isActive;
+
     void Awake()
     {
+        isActive = false;
+    }
+    
+    public void ShowLetter(CanvasGroup c)
+    {
+        StartCoroutine(FadeIn(c));
     }
 
-    // Update is called once per frame
-    void Update()
+    public void HideLetter(CanvasGroup c)
     {
-        
+        StartCoroutine(FadeOut(c));
+    }
+    
+    public IEnumerator FadeIn(CanvasGroup canvasGroup)
+    {
+        if (isActive) yield break;
+        isActive = true;
+        canvasGroup.interactable = canvasGroup.blocksRaycasts = true;
+        yield return canvasGroup.DOFade(1f, 0.5f).WaitForCompletion();
     }
 
-    public void RotateImage(GameObject letterPhoto)
+    public IEnumerator FadeOut(CanvasGroup canvasGroup)
     {
-        Debug.Log("버튼 눌림");
-        if (letterPhoto.transform.rotation.y <= 90f && letterPhoto.transform.rotation.y >= 270)
-        {
-            rotateY += 180f;
-            Vector3 dir = new Vector3(0f, rotateY, 0f);
-            Quaternion targetRotationY = Quaternion.LookRotation(dir, Vector3.up);
-            transform.rotation =
-                Quaternion.RotateTowards(transform.rotation, targetRotationY, turnSpeed * Time.deltaTime);
-            letterPhoto.transform.GetChild(1).gameObject.SetActive(true);
-        }
-        else
-        {
-            letterPhoto.transform.GetChild(0).gameObject.SetActive(false);
-            rotateY -= 180f;
-        }
+        if (!isActive) yield break;
+        isActive = false;
+        canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
+        yield return canvasGroup.DOFade(0f, 0.5f).WaitForCompletion();
     }
 }
