@@ -92,5 +92,8 @@ public class UploadPhoto : MonoBehaviour
             img.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, x);
             img.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, y);
         }
+
+        img.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+        img.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
     }
 }

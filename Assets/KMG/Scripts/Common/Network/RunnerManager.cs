@@ -38,7 +38,7 @@ namespace Common.Network
         /**
          * TODO: 방 접속 후 실행할 머시깽이 넣기
          */
-        public async UniTask Connect(string roomName)
+        public async UniTask Connect(string roomName, int playerCount = 4)
         {
             if (isRunnerExist)
                 throw new Exception("Trying fusion Connect while Runner is already exist");
@@ -52,7 +52,7 @@ namespace Common.Network
             {
                 GameMode = GameMode.Shared,
                 SessionName = roomName,
-                PlayerCount = 4,
+                PlayerCount = playerCount,
                 SceneManager = RunnerObject.AddComponent<NetworkSceneManagerDefault>()
             };
 
