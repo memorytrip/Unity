@@ -4523,7 +4523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 2109923940}
   sideMenu: {fileID: 1055336156}
-  screenshotButton: {fileID: 60652909}
+  screenshotButton: {fileID: 60652905}
   chat: {fileID: 1366241567}
   joystick: {fileID: 2099277972}
 --- !u!1 &1459162919

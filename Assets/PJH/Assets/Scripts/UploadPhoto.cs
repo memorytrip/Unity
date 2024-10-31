@@ -50,7 +50,7 @@ public class UploadPhoto : MonoBehaviour
         File.WriteAllBytes(savePath + filename + ".png", fileData);
         var temp = File.ReadAllBytes(savePath + filename + ".png");
 
-        Texture2D tex = new Texture2D(0, 0);
+        Texture2D tex = new Texture2D(2, 2);
         tex.LoadImage(temp);
 
         img.texture = tex;
