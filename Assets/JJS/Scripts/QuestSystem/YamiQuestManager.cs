@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class YamiQuestManager : MonoBehaviour
 {
     private QuestPopup _questPopup;
+    private readonly WaitForSeconds _displayTime = new(1.5f);
     
     private static YamiQuestManager _instance;
     public static YamiQuestManager Instance 
@@ -48,21 +50,26 @@ public class YamiQuestManager : MonoBehaviour
     {
         if (AllQuestsCleared())
         {
-            ShowUi(_questPopup.allClearPopup);
+            StartCoroutine(ShowUi(_questPopup.allClearPopup, false));
             Debug.Log("All Quests Cleared!");
         }
         else
         {
-            ShowUi(_questPopup.questPopup);
+            StartCoroutine(ShowUi(_questPopup.questPopup));
             Debug.Log("One Quest Completed");
         }
     }
 
-    private void ShowUi(CanvasGroup target)
+    private IEnumerator ShowUi(CanvasGroup target, bool disappear = true)
     {
         target.alpha = 1f;
         target.interactable = true;
         target.blocksRaycasts = true;
+        if (disappear)
+        {
+            yield return _displayTime;
+            HideUi(target);
+        }
     }
 
     private void HideUi(CanvasGroup target)

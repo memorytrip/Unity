@@ -52,9 +52,13 @@ namespace Common
         {
             try
             {
+                int playerCount = 4;
+                
                 if (RunnerManager.Instance.isRunnerExist)
                     await RunnerManager.Instance.Disconnect();
-                await RunnerManager.Instance.Connect(roomName);
+                if (roomName == SquareScene)
+                    playerCount = 20;
+                await RunnerManager.Instance.Connect(roomName, playerCount);
                 Debug.Log($"Move to Room ({roomName})");
             }
             catch (Exception e)
@@ -67,7 +71,7 @@ namespace Common
         private string RoutingScene(string roomName)
         {
             // return "MultiPlayTest";
-            if (roomName == "0") return "Square";
+            if (roomName == SquareScene) return "Square";
             if (roomName.Length == 4) return "PlayReady";
             if (roomName.Contains("player_")) return "MyRoom";
             if (roomName == "1") return "MultiPlayTest";

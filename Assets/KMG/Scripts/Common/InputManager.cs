@@ -34,7 +34,6 @@ namespace Common
             InitAction();
             InitPinch();
             InitPanning();
-            
         }
 
         private void InitAction()

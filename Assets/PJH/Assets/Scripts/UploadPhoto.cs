@@ -50,12 +50,12 @@ public class UploadPhoto : MonoBehaviour
         File.WriteAllBytes(savePath + filename + ".png", fileData);
         var temp = File.ReadAllBytes(savePath + filename + ".png");
 
-        Texture2D tex = new Texture2D(0, 0);
+        Texture2D tex = new Texture2D(2, 2);
         tex.LoadImage(temp);
 
         img.texture = tex;
         img.SetNativeSize();
-        ImageSizeSetting(img, 360f, 240f);
+        ImageSizeSetting(img, 540f, 360f);
     }
 
     void ImageSizeSetting(RawImage img, float x, float y)
@@ -92,5 +92,8 @@ public class UploadPhoto : MonoBehaviour
             img.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, x);
             img.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, y);
         }
+
+        img.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+        img.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
     }
 }
