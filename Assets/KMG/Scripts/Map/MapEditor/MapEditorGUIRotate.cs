@@ -1,17 +1,20 @@
-using Map.Editor;
+
+using Map.Editor.Operations;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
-namespace KMG.Scripts.Map.MapEditor
+namespace Map.Editor
 {
     public class MapEditorGUIRotate: MapEditorGUIState
     {
         private float startX = 0f;
         private const float unitX = 100;
+        private Operations.Rotate command;
 
         public MapEditorGUIRotate(MapEditorGUI context, float startX = 0f) : base(context)
         {
             this.startX = startX;
+            command = new Rotate(context.target.focusObject, context.target.focusObject.transform.rotation);
         }
 
         public override void OnTouchStart(Finger finger)
