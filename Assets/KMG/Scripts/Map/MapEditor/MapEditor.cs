@@ -7,9 +7,16 @@ namespace Map.Editor
     public class MapEditor
     {
         public MapConcrete mapConcrete;
-        public MapObject focusObject;
-        
+        private MapObject _focusObject;
+        public MapObject focusObject { get => _focusObject; }
+
         private List<Operations.IMapEditOperation> operationQueue;
+        private Material outlineMaterial;
+
+        public MapEditor()
+        {
+            outlineMaterial = new Material(Shader.Find("Shader Graphs/Outline"));
+        }
 
         public void CreateObj(Vector3 position, Model model)
         {
@@ -21,14 +28,36 @@ namespace Map.Editor
             mapConcrete.DeleteMapObject(mapObject);
         }
 
-        public void Execute(Operations.Create oper)
+        public void FocusOn(MapObject mapObject)
         {
-            throw new NotImplementedException();
+            FocusOff();
+            
+            // 외곽선 쉐이더 적용
+            // https://bloodstrawberry.tistory.com/707
+            _focusObject = mapObject;
+            Renderer renderer = focusObject.GetComponent<Renderer>();
+            
+            List<Material> materialList = new List<Material>();
+            materialList.AddRange(renderer.sharedMaterials);
+            materialList.Add(outlineMaterial);
+            
+            renderer.materials = materialList.ToArray();
         }
-        
-        public void Execute(Operations.Delete oper)
+
+        public void FocusOff()
         {
-            throw new NotImplementedException();
+            if (focusObject == null) return;
+            
+            // 외곽선 쉐이더 해제
+            Renderer renderer = focusObject.GetComponent<Renderer>();
+            
+            List<Material> materialList = new List<Material>();
+            materialList.AddRange(renderer.sharedMaterials);
+            materialList.Remove(outlineMaterial);
+            
+            renderer.materials = materialList.ToArray();
+
+            _focusObject = null;
         }
     }
 }

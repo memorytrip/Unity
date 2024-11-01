@@ -4,6 +4,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.UI;
 
 namespace Map.Editor
 {
@@ -11,6 +12,7 @@ namespace Map.Editor
     {
         [SerializeField] public CinemachineInputAxisController cinemachineController;
         public MapEditor target;
+        [SerializeField] public Button rotationButton;
         private MapEditorGUIState state;
         
         void Start()
@@ -20,12 +22,14 @@ namespace Map.Editor
             InputManager.Instance.OnFingerMove += OnTouchPerform;
             InputManager.Instance.OnFingerUp += OnTouchCanceled;
             cinemachineController.enabled = false;
+            rotationButton.gameObject.SetActive(false);
             state = new MapEditorGUIIdle(this);
         }
 
         void OnTouchStart(Finger finger)
         {
             state.OnTouchStart(finger);
+            SwitchActiveRotationIcon();
         }
 
         void OnTouchPerform(Finger finger)
@@ -41,6 +45,23 @@ namespace Map.Editor
         public void SwitchState(MapEditorGUIState state)
         {
             this.state = state;
+        }
+
+        private void SwitchActiveRotationIcon()
+        {
+            if (target.focusObject != null)
+            {
+                rotationButton.gameObject.SetActive(true);
+                Vector3 buttonPos = Camera.main.WorldToScreenPoint(target.focusObject.transform.position);
+                buttonPos.y += 100;
+                rotationButton.transform.position = buttonPos;
+
+            }
+            else
+            {
+                rotationButton.gameObject.SetActive(false);
+            }
+            
         }
 
         private void OnDestroy()

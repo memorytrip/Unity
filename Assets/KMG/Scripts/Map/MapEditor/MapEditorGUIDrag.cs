@@ -18,8 +18,14 @@ namespace Map.Editor
             {
                 context.target.focusObject.gameObject.SetActive(true);
                 context.target.focusObject.transform.position = QuantizatePosition(hitdata.point);
+                
+                context.rotationButton.gameObject.SetActive(true);
+                Vector3 buttonPos = Camera.main.WorldToScreenPoint(context.target.focusObject.transform.position);
+                buttonPos.y += 100;
+                context.rotationButton.transform.position = buttonPos;
             } else {
                 context.target.focusObject.gameObject.SetActive(false);
+                context.rotationButton.gameObject.SetActive(false);
             }
         }
 
