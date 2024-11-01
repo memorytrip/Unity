@@ -16,16 +16,24 @@ namespace Map.Editor
         [SerializeField] public Button undoButton;
         private MapEditorGUIState state;
         
+        private const string mapObjectProtoPrefabPath = "Prefabs/MapObjectProto";
+        public GameObject mapObjectProtoPrefab;
+        public GameObject mapObjectProto;
+        
         void Start()
         {
             target = new MapEditor();
+            state = new MapEditorGUIIdle(this);
+            
             InputManager.Instance.OnFingerDown += OnTouchStart;
             InputManager.Instance.OnFingerMove += OnTouchPerform;
             InputManager.Instance.OnFingerUp += OnTouchCanceled;
+            
             cinemachineController.enabled = false;
             rotationButton.gameObject.SetActive(false);
             undoButton.onClick.AddListener(target.Undo);
-            state = new MapEditorGUIIdle(this);
+            
+            mapObjectProtoPrefab = Resources.Load<GameObject>(mapObjectProtoPrefabPath);
         }
 
         private void Update()

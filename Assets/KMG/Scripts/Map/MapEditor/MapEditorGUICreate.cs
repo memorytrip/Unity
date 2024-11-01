@@ -20,22 +20,25 @@ namespace KMG.Scripts.Map.MapEditor
             RaycastHit hitdata;
             if (Physics.Raycast(mouseRay, out hitdata))
             {
-                context.target.ActiveFocus();
-                context.target.Move(MapEditorGUI.QuantizatePosition(hitdata.point));
-            } else {
-                context.target.DeactiveFocus();
+                // context.target.ActiveFocus();
+                // context.target.Move(MapEditorGUI.QuantizatePosition(hitdata.point));
+                context.mapObjectProto.SetActive(true);
+                context.mapObjectProto.transform.position = MapEditorGUI.QuantizatePosition(hitdata.point);
+            } 
+            else 
+            {
+                // context.target.DeactiveFocus();
+                context.mapObjectProto.SetActive(false);
             }
         }
 
         public override void OnTouchCanceled(Finger finger)
         {
-            if (context.target.GetActiveOfFocus()) {
-                context.target.Delete();
-                context.target.Execute(new Create(context, context.target.GetPositionOfFocus(), model));
-                context.target.EnableCollider();
-            } else {
-                context.target.Delete();
+            if (context.mapObjectProto.activeSelf) {
+                context.target.Execute(new Create(context, context.mapObjectProto.transform.position, model));
+                // context.target.EnableCollider();
             }
+            MonoBehaviour.Destroy(context.mapObjectProto);
             context.SwitchState(new MapEditorGUIIdle(context));
         }
 

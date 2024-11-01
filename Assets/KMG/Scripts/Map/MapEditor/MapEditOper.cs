@@ -85,6 +85,7 @@ namespace Map.Editor.Operations
 
     public class Create : MapEditOperation
     {
+        private MapObject fromFocus;
         private Vector3 position;
         private Model model;
         public Create(MapEditorGUI context, Vector3 position, Model model) : base(context)
@@ -95,12 +96,14 @@ namespace Map.Editor.Operations
 
         public override void Execute()
         {
-            target.Create(position, model);
+            fromFocus = context.target.focusObject;
+            context.target.FocusOn(target.Create(position, model));
         }
 
         public override void UnExecute()
         {
             target.Delete();
+            context.target.FocusOn(fromFocus);
         }
     }
 

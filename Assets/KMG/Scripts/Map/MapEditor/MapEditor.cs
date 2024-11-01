@@ -41,6 +41,9 @@ namespace Map.Editor
         public void FocusOn(MapObject mapObject)
         {
             FocusOff();
+
+            if (mapObject == null) 
+                return;
             
             // 외곽선 쉐이더 적용
             // https://bloodstrawberry.tistory.com/707
@@ -56,7 +59,8 @@ namespace Map.Editor
 
         public void FocusOff()
         {
-            if (focusObject == null) return;
+            if (focusObject == null) 
+                return;
             
             // 외곽선 쉐이더 해제
             Renderer renderer = focusObject.GetComponent<Renderer>();

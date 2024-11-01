@@ -23,10 +23,15 @@ namespace Map.Editor
                     // TODO: 배치될 때 까지는 임시 오브젝트로 보여주는 게 좋겠다
                     MapEditorItem item;
                     if (result.gameObject.TryGetComponent<MapEditorItem>(out item)) {
-                        MapObject mapObject = context.target.Create(Vector3.zero, item.model);
-                        context.target.FocusOn(mapObject);
-                        context.target.DeactiveFocus();
-                        context.target.DisableCollider();
+                        // MapObject mapObject = context.target.Create(Vector3.zero, item.model);
+                        // context.target.FocusOn(mapObject);
+                        // context.target.DeactiveFocus();
+                        // context.target.DisableCollider();
+                        GameObject proto = MonoBehaviour.Instantiate(context.mapObjectProtoPrefab);
+                        proto.SetActive(false);
+                        proto.GetComponent<Collider>().enabled = false;
+                        proto.GetComponent<MeshFilter>().mesh = item.model.mesh;
+                        context.mapObjectProto = proto;
 						context.SwitchState(new MapEditorGUICreate(context).SetModel(item.model));
                         break;
                     }
