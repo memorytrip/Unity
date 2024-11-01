@@ -49,10 +49,10 @@ namespace Map.Editor
 
         private void SwitchActiveRotationIcon()
         {
-            if (target.focusObject != null)
+            if (target.IsFocusing())
             {
                 rotationButton.gameObject.SetActive(true);
-                Vector3 buttonPos = Camera.main.WorldToScreenPoint(target.focusObject.transform.position);
+                Vector3 buttonPos = Camera.main.WorldToScreenPoint(target.GetPositionOfFocus());
                 buttonPos.y += 100;
                 rotationButton.transform.position = buttonPos;
 

@@ -16,25 +16,25 @@ namespace Map.Editor
             RaycastHit hitdata;
             if (Physics.Raycast(mouseRay, out hitdata))
             {
-                context.target.focusObject.gameObject.SetActive(true);
-                context.target.focusObject.transform.position = QuantizatePosition(hitdata.point);
+                context.target.ActiveFocus();
+                context.target.Move(QuantizatePosition(hitdata.point));
                 
                 context.rotationButton.gameObject.SetActive(true);
-                Vector3 buttonPos = Camera.main.WorldToScreenPoint(context.target.focusObject.transform.position);
+                Vector3 buttonPos = Camera.main.WorldToScreenPoint(context.target.GetPositionOfFocus());
                 buttonPos.y += 100;
                 context.rotationButton.transform.position = buttonPos;
             } else {
-                context.target.focusObject.gameObject.SetActive(false);
+                context.target.DeactiveFocus();
                 context.rotationButton.gameObject.SetActive(false);
             }
         }
 
         public override void OnTouchCanceled(Finger finger)
         {
-            if (context.target.focusObject.gameObject.activeSelf) {
-				context.target.focusObject.GetComponent<Collider>().enabled = true;
+            if (context.target.GetActiveOfFocus()) {
+				context.target.EnableCollider();
             } else {
-                context.target.mapConcrete.DeleteMapObject(context.target.focusObject);
+                context.target.Delete();
             }
             context.SwitchState(new MapEditorGUIIdle(context));
         }

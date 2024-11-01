@@ -2,97 +2,35 @@ using UnityEngine;
 
 namespace Map.Editor.Operations
 {
-    public interface IMapEditOperation
+    // public interface IMapEditOperation
+    public abstract class MapEditOperation
     {
-        public void Execute(MapEditor context);
-        public void UnExecute(MapEditor context);
-    }
-
-    public class Move : IMapEditOperation
-    {
-        private MapObject target;
-        private Vector3 from;
-        private Vector3 to;
-
-        public Move(MapObject target, Vector3 to)
+        
+        protected MapEditor target;
+        protected MapEditorGUI context;
+        public MapEditOperation(MapEditor target, MapEditorGUI context)
         {
             this.target = target;
-            this.from = target.transform.position;
-            this.to = to;
+            this.context = context;
         }
         
-        public void Execute(MapEditor context)
-        {
-            target.transform.position = to;
-        }
-
-        public void UnExecute(MapEditor context)
-        {
-            target.transform.position = from;
-        }
+        public abstract void Execute(MapEditor context);
+        public abstract void UnExecute(MapEditor context);
     }
     
-    public class Rotate : IMapEditOperation
+    public class Move: MapEditOperation
     {
-        private MapObject target;
-        private Quaternion from;
-        private Quaternion to;
-
-        public Rotate(MapObject target, Quaternion to)
-        {
-            this.target = target;
-            this.from = target.transform.rotation;
-            this.to = to;
-        }
         
-        public void Execute(MapEditor context)
+        public Move(MapEditor target, MapEditorGUI context) : base(target, context)
         {
-            target.transform.rotation = to;
         }
 
-        public void UnExecute(MapEditor context)
+        public override void Execute(MapEditor context)
         {
-            target.transform.rotation = from;
-        }
-    }
-
-    public class Create : IMapEditOperation
-    {
-        private Model model;
-        private Vector3 position;
-        private Quaternion rotation;
-        private MapObject target;
-
-        public Create(Vector3 position, Quaternion rotation, Model model)
-        {
-            this.model = model;
-            this.position = position;
-            this.rotation = rotation;
-        }
-        
-        public void Execute(MapEditor context)
-        {
-            context.CreateObj(position, model);
+            
         }
 
-        public void UnExecute(MapEditor context)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
-    
-    public class Delete: IMapEditOperation
-    {
-        private Model model;
-        private Vector3 position;
-        private Quaternion rotation;
-        
-        public void Execute(MapEditor context)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void UnExecute(MapEditor context)
+        public override void UnExecute(MapEditor context)
         {
             throw new System.NotImplementedException();
         }

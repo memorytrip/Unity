@@ -20,9 +20,9 @@ namespace Map.Editor
                     // 새 오브젝트 생성
                     MapEditorItem item;
                     if (result.gameObject.TryGetComponent<MapEditorItem>(out item)) {
-                        MapObject mapObject = context.target.mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, item.model);
-                        SelectObject(mapObject);
-                        context.target.focusObject.gameObject.SetActive(false);
+                        context.target.Create(Vector3.zero, item.model);
+                        context.target.ActiveFocus();
+                        context.target.DisableCollider();
 						context.SwitchState(new MapEditorGUIDrag(context));
                         break;
                     }
@@ -46,7 +46,8 @@ namespace Map.Editor
                 MapObject mapObject;
                 if (hit.transform.TryGetComponent(out mapObject))
                 {
-                    SelectObject(mapObject);
+                    context.target.FocusOn(mapObject);
+                    context.target.DisableCollider();
                     context.SwitchState(new MapEditorGUIDrag(context));
                     return;
                 }
