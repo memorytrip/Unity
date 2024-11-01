@@ -12,7 +12,8 @@ namespace Map.Editor
     {
         [SerializeField] public CinemachineInputAxisController cinemachineController;
         public MapEditor target;
-        [SerializeField] public Button rotationButton;
+        [SerializeField] public GameObject rotationButton;
+        [SerializeField] public Button undoButton;
         private MapEditorGUIState state;
         
         void Start()
@@ -23,13 +24,18 @@ namespace Map.Editor
             InputManager.Instance.OnFingerUp += OnTouchCanceled;
             cinemachineController.enabled = false;
             rotationButton.gameObject.SetActive(false);
+            undoButton.onClick.AddListener(target.Undo);
             state = new MapEditorGUIIdle(this);
+        }
+
+        private void Update()
+        {
+            UpdateRotationIcon();
         }
 
         void OnTouchStart(Finger finger)
         {
             state.OnTouchStart(finger);
-            SwitchActiveRotationIcon();
         }
 
         void OnTouchPerform(Finger finger)
@@ -46,22 +52,20 @@ namespace Map.Editor
         {
             this.state = state;
         }
+        
 
-        private void SwitchActiveRotationIcon()
+        private void UpdateRotationIcon()
         {
-            if (target.IsFocusing())
+            if (target.IsFocusing() && target.GetActiveOfFocus())
             {
                 rotationButton.gameObject.SetActive(true);
                 Vector3 buttonPos = Camera.main.WorldToScreenPoint(target.GetPositionOfFocus());
                 buttonPos.y += 100;
                 rotationButton.transform.position = buttonPos;
-
-            }
-            else
+            } else
             {
                 rotationButton.gameObject.SetActive(false);
             }
-            
         }
 
         private void OnDestroy()

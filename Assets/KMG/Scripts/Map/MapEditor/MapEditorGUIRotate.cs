@@ -9,6 +9,8 @@ namespace Map.Editor
     {
         private float startX = 0f;
         private const float unitX = 100;
+        private Quaternion fromRotation;
+        private Quaternion toRotation;
 
         public MapEditorGUIRotate(MapEditorGUI context, float startX = 0f) : base(context)
         {
@@ -24,12 +26,20 @@ namespace Map.Editor
         {
             float deltaX = finger.screenPosition.x - startX;
             float rotateY = -Mathf.Round(deltaX / unitX) * 15;
-            context.target.Rotate(Quaternion.Euler(0f, rotateY, 0f));
+            toRotation = Quaternion.Euler(0f, rotateY, 0f);
+            context.target.Rotate(toRotation);
         }
 
         public override void OnTouchCanceled(Finger finger)
         {
+            context.target.Execute(new Rotate(context, fromRotation, toRotation));
             context.SwitchState(new MapEditorGUIIdle(context));
+        }
+
+        public MapEditorGUIRotate SetFrom(Quaternion from)
+        {
+            fromRotation = from;
+            return this;
         }
     }
 }

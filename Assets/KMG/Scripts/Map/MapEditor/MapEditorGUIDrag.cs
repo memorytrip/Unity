@@ -1,3 +1,4 @@
+using Map.Editor.Operations;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
@@ -5,6 +6,7 @@ namespace Map.Editor
 {
     public class MapEditorGUIDrag: MapEditorGUIState
     {
+        private Vector3 fromPosition;
         public MapEditorGUIDrag(MapEditorGUI context) : base(context) { }
 
         public override void OnTouchStart(Finger finger)
@@ -18,20 +20,15 @@ namespace Map.Editor
             {
                 context.target.ActiveFocus();
                 context.target.Move(QuantizatePosition(hitdata.point));
-                
-                context.rotationButton.gameObject.SetActive(true);
-                Vector3 buttonPos = Camera.main.WorldToScreenPoint(context.target.GetPositionOfFocus());
-                buttonPos.y += 100;
-                context.rotationButton.transform.position = buttonPos;
             } else {
                 context.target.DeactiveFocus();
-                context.rotationButton.gameObject.SetActive(false);
             }
         }
 
         public override void OnTouchCanceled(Finger finger)
         {
             if (context.target.GetActiveOfFocus()) {
+                context.target.Execute(new Move(context, fromPosition, context.target.GetPositionOfFocus()));
 				context.target.EnableCollider();
             } else {
                 context.target.Delete();
@@ -45,6 +42,12 @@ namespace Map.Editor
             pos.y = Mathf.Round(pos.y) + 0.5f;
             pos.z = Mathf.Round(pos.z);
             return pos;
+        }
+
+        public MapEditorGUIDrag SetFrom(Vector3 position)
+        {
+            fromPosition = position;
+            return this;
         }
     }
 }

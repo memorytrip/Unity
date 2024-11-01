@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Map.Editor.Operations;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -21,17 +22,19 @@ namespace Map.Editor
                     MapEditorItem item;
                     if (result.gameObject.TryGetComponent<MapEditorItem>(out item)) {
                         context.target.Create(Vector3.zero, item.model);
-                        context.target.ActiveFocus();
+                        context.target.DeactiveFocus();
                         context.target.DisableCollider();
-						context.SwitchState(new MapEditorGUIDrag(context));
+						context.SwitchState(new MapEditorGUIDrag(context).SetFrom(Vector3.zero));
                         break;
                     }
 
                     // 회전
-                    Button button;
-                    if (result.gameObject.TryGetComponent<Button>(out button))
+                    if (result.gameObject == context.rotationButton)
                     {
-                        context.SwitchState(new MapEditorGUIRotate(context, finger.screenPosition.x));
+                        context.SwitchState(
+                            new MapEditorGUIRotate(context, finger.screenPosition.x)
+                                .SetFrom(context.target.GetRotationOfFocus())
+                        );
                     }
                 }
                 return;
@@ -46,9 +49,10 @@ namespace Map.Editor
                 MapObject mapObject;
                 if (hit.transform.TryGetComponent(out mapObject))
                 {
-                    context.target.FocusOn(mapObject);
+                    // context.target.FocusOn(mapObject);
+                    context.target.Execute(new Focus(context, mapObject));
                     context.target.DisableCollider();
-                    context.SwitchState(new MapEditorGUIDrag(context));
+                    context.SwitchState(new MapEditorGUIDrag(context).SetFrom(context.target.GetPositionOfFocus()));
                     return;
                 }
             }
@@ -56,7 +60,7 @@ namespace Map.Editor
             // 카메라 이동
             context.cinemachineController.enabled = true;
             context.SwitchState(new MapEditorGUIMove(context));
-            context.target.FocusOff();
+            context.target.Execute(new Focus(context, null));
                 
         }
 

@@ -8,31 +8,100 @@ namespace Map.Editor.Operations
         
         protected MapEditor target;
         protected MapEditorGUI context;
-        public MapEditOperation(MapEditor target, MapEditorGUI context)
+        public MapEditOperation(MapEditorGUI context)
         {
-            this.target = target;
             this.context = context;
+            this.target = context.target;
         }
         
-        public abstract void Execute(MapEditor context);
-        public abstract void UnExecute(MapEditor context);
+        public abstract void Execute();
+        public abstract void UnExecute();
+    }
+
+    public class Focus : MapEditOperation
+    {
+        private MapObject from;
+        private MapObject to;
+
+        public Focus(MapEditorGUI context, MapObject to) : base(context)
+        {
+            this.from = target.focusObject;
+            this.to = to;
+        }
+
+        public override void Execute()
+        { 
+            target.FocusOff();
+            if (to != null) target.FocusOn(to);
+        }
+
+        public override void UnExecute()
+        {
+            target.FocusOff();
+            if (from != null) target.FocusOn(from);
+        }
     }
     
     public class Move: MapEditOperation
     {
-        
-        public Move(MapEditor target, MapEditorGUI context) : base(target, context)
+        private Vector3 from;
+        private Vector3 to;
+        public Move(MapEditorGUI context, Vector3 from, Vector3 to) : base(context)
         {
+            this.from = from;
+            this.to = to;
         }
 
-        public override void Execute(MapEditor context)
+        public override void Execute()
         {
-            
+            target.Move(to);
         }
 
-        public override void UnExecute(MapEditor context)
+        public override void UnExecute()
         {
-            throw new System.NotImplementedException();
+            target.Move(from);
+        }
+    }
+
+    public class Rotate : MapEditOperation
+    {
+        private Quaternion from;
+        private Quaternion to;
+        public Rotate(MapEditorGUI context, Quaternion from, Quaternion to) : base(context)
+        {
+            this.from = from;
+            this.to = to;
+        }
+
+        public override void Execute()
+        {
+            target.Rotate(to);
+        }
+
+        public override void UnExecute()
+        {
+            target.Rotate(from);
+        }
+    }
+
+    public class Create : MapEditOperation
+    {
+        private Vector3 position;
+        private Model model;
+        public Create(MapEditorGUI context, Vector3 position, Model model) : base(context)
+        {
+            this.position = position;
+            this.model = model;
+        }
+
+        public override void Execute()
+        {
+            target.Create(position, model);
+        }
+
+        public override void UnExecute()
+        {
+            target.Delete();
         }
     }
 }
