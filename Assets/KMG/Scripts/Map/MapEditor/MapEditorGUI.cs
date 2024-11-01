@@ -74,5 +74,14 @@ namespace Map.Editor
             InputManager.Instance.OnFingerMove -= OnTouchPerform;
             InputManager.Instance.OnFingerUp -= OnTouchCanceled;
         }
+        
+
+        public static Vector3 QuantizatePosition(Vector3 pos)
+        {
+            pos.x = Mathf.Round(pos.x);
+            pos.y = Mathf.Round(pos.y) + 0.5f;
+            pos.z = Mathf.Round(pos.z);
+            return pos;
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using KMG.Scripts.Map.MapEditor;
 using Map.Editor.Operations;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,12 +20,14 @@ namespace Map.Editor
                 foreach (var result in results) {
                     
                     // 새 오브젝트 생성
+                    // TODO: 배치될 때 까지는 임시 오브젝트로 보여주는 게 좋겠다
                     MapEditorItem item;
                     if (result.gameObject.TryGetComponent<MapEditorItem>(out item)) {
-                        context.target.Create(Vector3.zero, item.model);
+                        MapObject mapObject = context.target.Create(Vector3.zero, item.model);
+                        context.target.FocusOn(mapObject);
                         context.target.DeactiveFocus();
                         context.target.DisableCollider();
-						context.SwitchState(new MapEditorGUIDrag(context).SetFrom(Vector3.zero));
+						context.SwitchState(new MapEditorGUICreate(context).SetModel(item.model));
                         break;
                     }
 
@@ -52,14 +55,19 @@ namespace Map.Editor
                     // context.target.FocusOn(mapObject);
                     context.target.Execute(new Focus(context, mapObject));
                     context.target.DisableCollider();
-                    context.SwitchState(new MapEditorGUIDrag(context).SetFrom(context.target.GetPositionOfFocus()));
+                    context.SwitchState(
+                        new MapEditorGUIMove(context)
+                            .SetFromPosition(context.target.GetPositionOfFocus())
+                            .SetFromRotation(context.target.GetRotationOfFocus())
+                            .SetModel(context.target.GetModel())
+                        );
                     return;
                 }
             }
             
             // 카메라 이동
             context.cinemachineController.enabled = true;
-            context.SwitchState(new MapEditorGUIMove(context));
+            context.SwitchState(new MapEditorGUICam(context));
             context.target.Execute(new Focus(context, null));
                 
         }

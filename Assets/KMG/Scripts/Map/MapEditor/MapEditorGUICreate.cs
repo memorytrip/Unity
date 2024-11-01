@@ -1,16 +1,18 @@
+using Map;
+using Map.Editor;
 using Map.Editor.Operations;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
-namespace Map.Editor
+namespace KMG.Scripts.Map.MapEditor
 {
-    public class MapEditorGUIDrag: MapEditorGUIState
+    public class MapEditorGUICreate: MapEditorGUIState
     {
-        private Vector3 fromPosition;
-        public MapEditorGUIDrag(MapEditorGUI context) : base(context) { }
+        public MapEditorGUICreate(MapEditorGUI context) : base(context) { }
 
-        public override void OnTouchStart(Finger finger)
-        { }
+        private Model model;
+
+        public override void OnTouchStart(Finger finger) { }
 
         public override void OnTouchPerform(Finger finger)
         {
@@ -19,7 +21,7 @@ namespace Map.Editor
             if (Physics.Raycast(mouseRay, out hitdata))
             {
                 context.target.ActiveFocus();
-                context.target.Move(QuantizatePosition(hitdata.point));
+                context.target.Move(MapEditorGUI.QuantizatePosition(hitdata.point));
             } else {
                 context.target.DeactiveFocus();
             }
@@ -28,25 +30,18 @@ namespace Map.Editor
         public override void OnTouchCanceled(Finger finger)
         {
             if (context.target.GetActiveOfFocus()) {
-                context.target.Execute(new Move(context, fromPosition, context.target.GetPositionOfFocus()));
-				context.target.EnableCollider();
+                context.target.Delete();
+                context.target.Execute(new Create(context, context.target.GetPositionOfFocus(), model));
+                context.target.EnableCollider();
             } else {
                 context.target.Delete();
             }
             context.SwitchState(new MapEditorGUIIdle(context));
         }
 
-        private Vector3 QuantizatePosition(Vector3 pos)
+        public MapEditorGUICreate SetModel(Model model)
         {
-            pos.x = Mathf.Round(pos.x);
-            pos.y = Mathf.Round(pos.y) + 0.5f;
-            pos.z = Mathf.Round(pos.z);
-            return pos;
-        }
-
-        public MapEditorGUIDrag SetFrom(Vector3 position)
-        {
-            fromPosition = position;
+            this.model = model;
             return this;
         }
     }

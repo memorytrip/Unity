@@ -24,18 +24,16 @@ namespace Map.Editor
         public void Move(Vector3 position) => focusObject.transform.position = position;
         public void Rotate(Quaternion rotation) => focusObject.transform.rotation = rotation;
         
-        public void Create(Vector3 position, Model model) => mapConcrete.AddMapObject(position, Quaternion.identity, model); 
-        // {
-        //     MapObject mapObject = mapConcrete.AddMapObject(position, Quaternion.identity, model); 
-        //     FocusOn(mapObject);
-        // }
-
+        public MapObject Create(Vector3 position, Model model) => mapConcrete.AddMapObject(position, Quaternion.identity, model); 
+        public MapObject Create(Vector3 position, Quaternion rotation, Model model)
+            => mapConcrete.AddMapObject(position, rotation, model);
         public void Delete() => mapConcrete.DeleteMapObject(focusObject);
         public void ActiveFocus() => focusObject.gameObject.SetActive(true);
         public void DeactiveFocus() => focusObject.gameObject.SetActive(false);
 
         public void EnableCollider() => focusObject.GetComponent<Collider>().enabled = true;
         public void DisableCollider() => focusObject.GetComponent<Collider>().enabled = false;
+        public Model GetModel() => focusObject.GetModel();
         public bool GetActiveOfFocus() => focusObject.gameObject.activeSelf;
         public Vector3 GetPositionOfFocus() => focusObject.transform.position;
         public Quaternion GetRotationOfFocus() => focusObject.transform.rotation;
@@ -74,7 +72,7 @@ namespace Map.Editor
 
         public void Execute(MapEditOperation oper)
         {
-            Debug.Log(oper);
+            Debug.Log($"push: {oper}");
             operationQueue.Push(oper);
             oper.Execute();
         }
@@ -84,7 +82,7 @@ namespace Map.Editor
 
             if (operationQueue.Count > 0)
             {
-                Debug.Log(operationQueue.Peek());
+                Debug.Log($"pop: {operationQueue.Peek()}");
                 operationQueue.Pop().UnExecute();
             }
         }

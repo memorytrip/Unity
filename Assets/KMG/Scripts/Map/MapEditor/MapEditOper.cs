@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Map.Editor.Operations
 {
-    // public interface IMapEditOperation
     public abstract class MapEditOperation
     {
         
@@ -102,6 +101,29 @@ namespace Map.Editor.Operations
         public override void UnExecute()
         {
             target.Delete();
+        }
+    }
+
+    public class Remove : MapEditOperation
+    {
+        private Vector3 position;
+        private Quaternion rotation;
+        private Model model;
+        public Remove(MapEditorGUI context, Vector3 position, Quaternion rotation, Model model) : base(context)
+        {
+            this.position = position;
+            this.rotation = rotation;
+            this.model = model;
+        }
+
+        public override void Execute()
+        {
+            target.Delete();
+        }
+
+        public override void UnExecute()
+        {
+            target.Create(position, rotation, model);
         }
     }
 }
