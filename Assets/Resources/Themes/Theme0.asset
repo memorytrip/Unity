@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Theme0
   m_EditorClassIdentifier: 
   id: 0
-  mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  mesh: {fileID: -613200878065603006, guid: 3842c6a8ed19b2f48bd4481068fcf927, type: 3}
   material: {fileID: 2100000, guid: 6b38742730e330c488cc8d7964788813, type: 2}

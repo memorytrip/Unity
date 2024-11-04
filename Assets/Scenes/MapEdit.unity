@@ -399,6 +399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cinemachineController: {fileID: 1662441113}
   rotationButton: {fileID: 746475376}
+  ItemList: {fileID: 0}
 --- !u!1 &646280048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,7 +1431,7 @@ Transform:
   m_GameObject: {fileID: 1398318878}
   serializedVersion: 2
   m_LocalRotation: {x: 0.15349244, y: 0.37736508, z: -0.06357866, w: 0.91103977}
-  m_LocalPosition: {x: -5.6409926, y: 2.766663, z: -5.6409917}
+  m_LocalPosition: {x: -34.03403, y: 16.692219, z: -34.034023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1839,13 +1840,13 @@ MonoBehaviour:
   Radius: 10
   Orbits:
     Top:
-      Radius: 6
-      Height: 5
+      Radius: 25
+      Height: 15
     Center:
-      Radius: 8
-      Height: 3
+      Radius: 35
+      Height: 8
     Bottom:
-      Radius: 6
+      Radius: 25
       Height: 1
     SplineCurvature: 0.5
   RecenteringTarget: 2
@@ -1931,7 +1932,7 @@ Transform:
   m_GameObject: {fileID: 1662441112}
   serializedVersion: 2
   m_LocalRotation: {x: 0.15349244, y: 0.37736508, z: -0.06357866, w: 0.91103977}
-  m_LocalPosition: {x: -5.6409926, y: 2.766663, z: -5.6409917}
+  m_LocalPosition: {x: -34.03403, y: 16.692219, z: -34.034023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

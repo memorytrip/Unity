@@ -42,7 +42,7 @@ namespace Map.Editor
         private Vector3 QuantizatePosition(Vector3 pos)
         {
             pos.x = Mathf.Round(pos.x);
-            pos.y = Mathf.Round(pos.y) + 0.5f;
+            pos.y = Mathf.Round(pos.y);
             pos.z = Mathf.Round(pos.z);
             return pos;
         }

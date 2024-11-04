@@ -31,32 +31,16 @@ namespace Map.Editor
         public void FocusOn(MapObject mapObject)
         {
             FocusOff();
-            
-            // 외곽선 쉐이더 적용
-            // https://bloodstrawberry.tistory.com/707
+
             _focusObject = mapObject;
-            Renderer renderer = focusObject.GetComponent<Renderer>();
-            
-            List<Material> materialList = new List<Material>();
-            materialList.AddRange(renderer.sharedMaterials);
-            materialList.Add(outlineMaterial);
-            
-            renderer.materials = materialList.ToArray();
+            focusObject.GetComponent<Outline>().enabled = true;
         }
 
         public void FocusOff()
         {
             if (focusObject == null) return;
             
-            // 외곽선 쉐이더 해제
-            Renderer renderer = focusObject.GetComponent<Renderer>();
-            
-            List<Material> materialList = new List<Material>();
-            materialList.AddRange(renderer.sharedMaterials);
-            materialList.Remove(outlineMaterial);
-            
-            renderer.materials = materialList.ToArray();
-
+            focusObject.GetComponent<Outline>().enabled = false;
             _focusObject = null;
         }
     }

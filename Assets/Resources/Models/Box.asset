@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e54a7bdc3200d5b45b7b15ef2cfb961b, type: 3}
-  m_Name: Plane
+  m_Name: Box
   m_EditorClassIdentifier: 
   id: 2
-  mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 0f29e3c1c576f6641b9e474f6b194480, type: 2}
-  size: {x: 10, y: 1, z: 10}
+  mesh: {fileID: 9009893830714642796, guid: 491098d47eac6844fbfcc6b99fd976c7, type: 3}
+  material: {fileID: 2100000, guid: 382e2b1b7fbf94945963320a17603c7c, type: 2}
+  size: {x: 1, y: 1, z: 1}

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Common;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace Map.Editor
         public MapEditor target;
         [SerializeField] public Button rotationButton;
         private MapEditorGUIState state;
+        [SerializeField] private Transform ItemList;
         
         void Start()
         {
@@ -24,12 +26,12 @@ namespace Map.Editor
             cinemachineController.enabled = false;
             rotationButton.gameObject.SetActive(false);
             state = new MapEditorGUIIdle(this);
+            RefreshItemList();
         }
 
         void OnTouchStart(Finger finger)
         {
             state.OnTouchStart(finger);
-            SwitchActiveRotationIcon();
         }
 
         void OnTouchPerform(Finger finger)
@@ -47,7 +49,12 @@ namespace Map.Editor
             this.state = state;
         }
 
-        private void SwitchActiveRotationIcon()
+        private void Update()
+        {
+            UpdateRotationIcon();
+        }
+
+        private void UpdateRotationIcon()
         {
             if (target.focusObject != null)
             {
@@ -55,11 +62,27 @@ namespace Map.Editor
                 Vector3 buttonPos = Camera.main.WorldToScreenPoint(target.focusObject.transform.position);
                 buttonPos.y += 100;
                 rotationButton.transform.position = buttonPos;
-
             }
             else
             {
                 rotationButton.gameObject.SetActive(false);
+            }
+        }
+
+        private void RefreshItemList()
+        {
+            InitModelList();
+        }
+
+        private void InitModelList()
+        {
+            DirectoryInfo dir = new DirectoryInfo("Assets/Resources/Models");
+            if (!dir.Exists)
+                return;
+            
+            foreach (var fileInfo in dir.GetFiles())
+            {
+                // fileInfo.
             }
             
         }
