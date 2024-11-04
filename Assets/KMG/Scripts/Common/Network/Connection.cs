@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Fusion;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
@@ -71,6 +73,7 @@ namespace Common.Network
                     break;
                 case "MultiPlayTest":
                     SceneManager.Instance.OnSceneLoaded -= SpawnAvatar;
+                    await UniTask.Delay(TimeSpan.FromSeconds(3.5f));
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 0, 0), Quaternion.identity);
                     break;
                 default:
