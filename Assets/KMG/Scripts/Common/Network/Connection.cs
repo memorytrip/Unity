@@ -60,7 +60,7 @@ namespace Common.Network
             {
                 
                 case "Square":
-                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
+                    currenctCharacter = await SpawnProcess("Player", new Vector3(0f, 2f, -22f), Quaternion.identity);
                     break;
                 case "MyRoom":
                     currenctCharacter = await SpawnProcess("Player");
