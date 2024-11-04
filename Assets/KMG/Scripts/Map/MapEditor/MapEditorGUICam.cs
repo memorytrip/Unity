@@ -16,7 +16,14 @@ namespace Map.Editor
 
         public override void OnTouchPerform(Finger finger)
         {
-            
+            if (Touch.activeFingers.Count == 1)
+            {
+                context.cinemachineController.enabled = true;
+            }
+            else
+            {
+                context.cinemachineController.enabled = false;
+            }
         }
 
         public override void OnTouchCanceled(Finger finger)
