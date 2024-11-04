@@ -4,6 +4,7 @@ using Common.Network;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace KMG.Scripts.Dummy
@@ -15,7 +16,7 @@ namespace KMG.Scripts.Dummy
 
         private void Awake()
         {
-            connectButton.onClick.AddListener(()=>Connect().Forget());
+            connectButton.onClick.AddListener(() => Connect().Forget());
         }
 
         private async UniTaskVoid Connect()

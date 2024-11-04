@@ -15,11 +15,14 @@ using SceneManager = Common.SceneManager;
 public class PhotoManager : NetworkRunnerCallbacks, IListener
 {
     private float yValue = 1f;
+
     private Dictionary<int, Vector3> photoPositions;
+
     public NetworkPrefabRef photoPrefab;
-    private GameObject hitObject;
-    private int findedPhoto = 0;
     private NetworkObject hitNetworkObject;
+
+    private GameObject hitObject;
+    private int foundPhoto = 0;
     public TMP_Text findedPhotoCount;
     private int numberOfPhoto;
 
@@ -28,7 +31,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
         EventManager.Instance.AddListener(EventType.eRaycasting, this);
         photoPositions = new Dictionary<int, Vector3>();
     }
-    
+
     public override void Spawned()
     {
         RpcTotalPhoto();
@@ -36,35 +39,11 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
         HidePhoto(photoPositions, numberOfPhoto).Forget();
     }
 
-    [Rpc(RpcSources.All, RpcTargets.All)]
-    private void RpcTotalPhoto() //이후 사진 받은걸로 바꿔야함
+    public override void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        numberOfPhoto += 2;
-    }
-    
-    private Vector3 GetRandomPosition()
-    {
-        return new Vector3(Random.Range(-10, 11), yValue, Random.Range(-10, 11));
+        findedPhotoCount.text = foundPhoto + " / " + runner.ActivePlayers.Count();
     }
 
-    public async UniTaskVoid HidePhoto(Dictionary<int, Vector3> photoDict, int numberOfPhotos)
-    {
-            for (var i = 1; i <= numberOfPhotos; i++)
-            {
-                int photoName = i;
-                photoDict[photoName] = GetRandomPosition();
-                var photoObject =
-                    await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName],
-                        Quaternion.identity);
-                PhotoData photodata = photoObject.GetComponent<PhotoData>();
-                if (photodata != null)
-                {
-                    photodata.SetPhotoName(photoName);
-                }
-            }
-        
-    }
-    
     public void OnEvent(EventType eventType, Component sender, object param = null)
     {
         switch (eventType)
@@ -78,11 +57,44 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
                         hitNetworkObject = hitObject.GetComponent<NetworkObject>();
                     }
                 }
-                
+
                 break;
-                
         }
-        
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    private void RpcTotalPhoto() //이후 사진 받은걸로 바꿔야함
+    {
+        numberOfPhoto += 2;
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    void RpcUpdateFoundPhoto()
+    {
+        foundPhoto++;
+        findedPhotoCount.text = foundPhoto + " / " + numberOfPhoto;
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RpcSceneChange()
+    {
+        SceneManager.Instance.MoveScene("SelectPhotoScene");
+    }
+
+    public async UniTaskVoid HidePhoto(Dictionary<int, Vector3> photoDict, int numberOfPhotos)
+    {
+        for (var i = 1; i <= numberOfPhotos; i++)
+        {
+            int photoName = i;
+            photoDict[photoName] = GetRandomPosition();
+            
+            var photoObject =
+                await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName], Quaternion.identity);
+            
+            var photoData = photoObject.GetComponent<PhotoData>();
+            photoData?.SetPhotoName(photoName);
+        }
+
     }
 
     public void OnDestroyPhoto()
@@ -91,26 +103,14 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
         {
             var photo = hitNetworkObject.GetComponent<Photo>();
             photo.RpcDespawn();
-            RpcUpdateFindedPhoto();
-            if (findedPhoto >= numberOfPhoto)
+            RpcUpdateFoundPhoto();
+            
+            if (foundPhoto >= numberOfPhoto)
             {
                 RpcSceneChange();
-                findedPhoto = 0;
+                foundPhoto = 0;
             }
         }
-    }
-
-    [Rpc(RpcSources.All, RpcTargets.All)]
-    public void RpcUpdateFindedPhoto()
-    {
-        findedPhoto++;
-        findedPhotoCount.text = findedPhoto + " / " + numberOfPhoto;
-    }
-    
-    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    public void RpcSceneChange()
-    {
-        SceneManager.Instance.MoveScene("SelectPhotoScene");
     }
 
     /*private IEnumerator EndGame()
@@ -118,9 +118,10 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
         findedPhoto = 0;
         yield return SceneManager.Instance.MoveSceneProcess("SelectPhotoScene");
     }*/
-    public override void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+    private Vector3 GetRandomPosition()
     {
-        findedPhotoCount.text = findedPhoto + " / " + runner.ActivePlayers.Count();
+        return new Vector3(Random.Range(-10, 11), yValue, Random.Range(-10, 11));
     }
+
 }
 

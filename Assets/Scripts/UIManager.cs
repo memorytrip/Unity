@@ -51,6 +51,7 @@ public class UIManager : MonoBehaviour
             case "PlayReady":
             case "SelectPhotoScene":
             case "VideoLoadTest":
+            case "LetterScene":
                 HideUI(mainMenu);
                 HideUI(sideMenu);
                 HideUI(chat);

@@ -17,7 +17,7 @@ public class PhotoHide : NetworkBehaviour, IListener
             return;
         EventManager.Instance.AddListener(EventType.eRaycasting, this);
         photoPositions = new Dictionary<string, Vector3>();
-        HidePhoto(photoPositions, 8); 
+        SpawnPhoto(photoPositions, 8); 
     }
     
     private Vector3 GetRandomPosition()
@@ -25,7 +25,7 @@ public class PhotoHide : NetworkBehaviour, IListener
         return new Vector3(Random.Range(-10, 11), yValue, Random.Range(-10, 11));
     }
 
-    public void HidePhoto(Dictionary<string, Vector3> photoDict, int numberOfPhotos)
+    public void SpawnPhoto(Dictionary<string, Vector3> photoDict, int numberOfPhotos)
     {
         for (int i = 1; i <= numberOfPhotos; i++)
         {
