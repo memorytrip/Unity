@@ -58,7 +58,7 @@ namespace Map.Editor
                 if (hit.transform.TryGetComponent(out mapObject))
                 {
                     // context.target.FocusOn(mapObject);
-                    context.target.Execute(new Focus(context, mapObject));
+                    context.target.Execute(new Focus(context, mapObject.id));
                     context.target.DisableCollider();
                     context.SwitchState(
                         new MapEditorGUIMove(context)

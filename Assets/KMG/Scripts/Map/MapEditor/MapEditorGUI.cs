@@ -17,8 +17,8 @@ namespace Map.Editor
         private MapEditorGUIState state;
         
         private const string mapObjectProtoPrefabPath = "Prefabs/MapObjectProto";
-        public GameObject mapObjectProtoPrefab;
-        public GameObject mapObjectProto;
+        [HideInInspector] public GameObject mapObjectProtoPrefab;
+        [HideInInspector] public GameObject mapObjectProto;
         
         void Start()
         {

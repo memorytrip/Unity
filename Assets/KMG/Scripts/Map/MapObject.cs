@@ -14,7 +14,7 @@ namespace Map
         /**
          * TODO: 맵에디팅에 사용할 Id 부여하기
          */
-        private string _id;
+        private string _id = null;
         public string id
         {
             get { return _id; }

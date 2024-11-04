@@ -401,6 +401,8 @@ MonoBehaviour:
   cinemachineController: {fileID: 1662441113}
   rotationButton: {fileID: 746475374}
   undoButton: {fileID: 792024213}
+  mapObjectProtoPrefab: {fileID: 0}
+  mapObjectProto: {fileID: 0}
 --- !u!1 &646280048
 GameObject:
   m_ObjectHideFlags: 0

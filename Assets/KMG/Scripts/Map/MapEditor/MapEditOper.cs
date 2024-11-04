@@ -19,26 +19,27 @@ namespace Map.Editor.Operations
 
     public class Focus : MapEditOperation
     {
-        private MapObject from;
-        private MapObject to;
+        private string fromGuid;
+        private string toGuid;
 
-        public Focus(MapEditorGUI context, MapObject to) : base(context)
+        public Focus(MapEditorGUI context, string to) : base(context)
         {
-            this.from = target.focusObject;
-            this.to = to;
+            this.fromGuid = target.focusObject?.id;
+            this.toGuid = to;
         }
 
         public override void Execute()
         { 
             target.FocusOff();
-            if (to != null) target.FocusOn(to);
+            if (toGuid != null) target.FocusOn(target.FindObjectByGuid(toGuid));
         }
 
         public override void UnExecute()
         {
             target.FocusOff();
-            if (from != null) target.FocusOn(from);
+            if (fromGuid != null) target.FocusOn(target.FindObjectByGuid(fromGuid));
         }
+        
     }
     
     public class Move: MapEditOperation
@@ -85,6 +86,7 @@ namespace Map.Editor.Operations
 
     public class Create : MapEditOperation
     {
+        private string guid;
         private MapObject fromFocus;
         private Vector3 position;
         private Model model;
@@ -97,7 +99,8 @@ namespace Map.Editor.Operations
         public override void Execute()
         {
             fromFocus = context.target.focusObject;
-            context.target.FocusOn(target.Create(position, model));
+            context.target.FocusOn(target.Create(position, Quaternion.identity, model, guid));
+            guid = context.target.focusObject.id;
         }
 
         public override void UnExecute()
@@ -109,6 +112,7 @@ namespace Map.Editor.Operations
 
     public class Remove : MapEditOperation
     {
+        private string guid;
         private Vector3 position;
         private Quaternion rotation;
         private Model model;
@@ -117,6 +121,7 @@ namespace Map.Editor.Operations
             this.position = position;
             this.rotation = rotation;
             this.model = model;
+            guid = context.target.focusObject.id;
         }
 
         public override void Execute()
@@ -126,10 +131,7 @@ namespace Map.Editor.Operations
 
         public override void UnExecute()
         {
-            target.Create(position, rotation, model);
+            context.target.FocusOn(target.Create(position, rotation, model, guid));
         }
     }
 }
-// TODO: undo 구현하기
-// 맵오브젝트마다 uuid 부여해서 각 operation이 mapobject를 직접 참조하는 게 아니라 uuid를 통해서 참조하도록...
-// 그렇게 해야 delete undo가 가능해질 것 같다.

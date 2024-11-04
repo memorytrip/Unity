@@ -25,8 +25,8 @@ namespace Map.Editor
         public void Rotate(Quaternion rotation) => focusObject.transform.rotation = rotation;
         
         public MapObject Create(Vector3 position, Model model) => mapConcrete.AddMapObject(position, Quaternion.identity, model); 
-        public MapObject Create(Vector3 position, Quaternion rotation, Model model)
-            => mapConcrete.AddMapObject(position, rotation, model);
+        public MapObject Create(Vector3 position, Quaternion rotation, Model model, string guid = null)
+            => mapConcrete.AddMapObject(position, rotation, model, guid);
         public void Delete() => mapConcrete.DeleteMapObject(focusObject);
         public void ActiveFocus() => focusObject.gameObject.SetActive(true);
         public void DeactiveFocus() => focusObject.gameObject.SetActive(false);
@@ -83,13 +83,16 @@ namespace Map.Editor
 
         public void Undo()
         {
-
             if (operationQueue.Count > 0)
             {
                 Debug.Log($"pop: {operationQueue.Peek()}");
                 operationQueue.Pop().UnExecute();
             }
         }
-        
+
+        public MapObject FindObjectByGuid(string guid)
+        {
+            return mapConcrete.mapObjects.Find((e) => e.id == guid);
+        }
     }
 }
