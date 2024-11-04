@@ -5,9 +5,9 @@ namespace Map.Editor
     /**
      * 카메라 움직이는 상태
      */
-    public class MapEditorGUIMove: MapEditorGUIState
+    public class MapEditorGUICam: MapEditorGUIState
     {
-        public MapEditorGUIMove(MapEditorGUI context) : base(context) { }
+        public MapEditorGUICam(MapEditorGUI context) : base(context) { }
 
         public override void OnTouchStart(Finger finger)
         {

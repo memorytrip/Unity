@@ -54,7 +54,7 @@ namespace Map.Editor
             
             // 카메라 이동
             context.cinemachineController.enabled = true;
-            context.SwitchState(new MapEditorGUIMove(context));
+            context.SwitchState(new MapEditorGUICam(context));
             context.target.FocusOff();
                 
         }
