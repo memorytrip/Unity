@@ -42,9 +42,11 @@ namespace Map.Editor
         private Vector3 QuantizatePosition(Vector3 pos)
         {
             pos.x = Mathf.Round(pos.x);
-            pos.y = Mathf.Round(pos.y);
+            pos.y = 100; //Mathf.Round(pos.y);
             pos.z = Mathf.Round(pos.z);
-            return pos;
+            RaycastHit hit;
+            Physics.Raycast(pos, Vector3.down, out hit, 150f);
+            return hit.point;
         }
     }
 }
