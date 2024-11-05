@@ -32,6 +32,9 @@ public class PlayerMovement : NetworkBehaviour
 
     private ChatDisplay _chatDisplay;
     private PlayerInput _playerInput;
+
+    [Header("ScreenshotCam LookAt Target")]
+    [SerializeField] private Transform screenshotCameraTarget;
     
     private void Awake()
     {
@@ -66,7 +69,7 @@ public class PlayerMovement : NetworkBehaviour
             var screenshotCam = cam.transform.Find("ScreenshotCamera_Default")?.GetComponent<CinemachineCamera>();
             if (screenshotCam != null)
             {
-                screenshotCam.Target.TrackingTarget = transform;
+                screenshotCam.Target.TrackingTarget = screenshotCameraTarget;
                 Debug.Log($"ScreenshotCam: {screenshotCam} Tracking Target: {screenshotCam.Target.TrackingTarget}");
             }
             else
@@ -77,7 +80,7 @@ public class PlayerMovement : NetworkBehaviour
             if (screenshotSelfieCam != null)
             {
                 var lookAtTransform = transform;
-                screenshotSelfieCam.Target.TrackingTarget = transform;
+                screenshotSelfieCam.Target.TrackingTarget = screenshotCameraTarget;
                 Debug.Log($"ScreenshotCam: {screenshotSelfieCam} Tracking Target: {screenshotSelfieCam.Target.TrackingTarget}");
             }
             else

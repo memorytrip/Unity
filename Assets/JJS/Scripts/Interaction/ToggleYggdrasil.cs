@@ -2,8 +2,6 @@ using UnityEngine;
 using System.Collections;
 using Fusion;
 using Unity.Cinemachine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 using UnityEngine.Video;
 
 // 플레이어가 접근하면 기존에 나무에 달린 열매들의 비디오/사진이 사라지고 (열매 모델만 남음)
@@ -14,12 +12,18 @@ using UnityEngine.Video;
 public class ToggleYggdrasil : MonoBehaviour
 {
     private static readonly int Exit = Animator.StringToHash("Exit");
+    private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
     private Yggdrasil _yggdrasil;
     
     // 불러올 열매들을 저장하는 배열
     private MemoryGem[] _memoryGemSet;
-    [FormerlySerializedAs("backgroundMemoryGemSet")] [SerializeField] private VideoPlayer[] backgroundMemoryGemSetVideo = new VideoPlayer [10]; // 이거는 그냥 서버에서 이미지나 비디오만 가져올 것
-    [SerializeField] private RawImage[] backgroundMemoryGemSetImage;
+    [SerializeField] private Material memoryGemMaterial;
+    [SerializeField] private Material memoryGemUiMaterial;
+    private Color _memoryGemDefaultColor;
+    private Color _memoryGemVideoColor;
+    private const string MemoryGemDefaultColorHex = "#E5B34B";
+    private const string MemoryGemVideoColorHex = "#FFFFFF";
+    [SerializeField] private VideoPlayer[] backgroundMemoryGemSetVideo = new VideoPlayer [10]; // 이거는 그냥 서버에서 이미지나 비디오만 가져올 것
     private const int MaxGems = 7; // TODO: 변동 가능. 일단은 길이를 7로 잡기
     [SerializeField] private GameObject content;
     private Animator _contentUiAnimator;
@@ -38,6 +42,9 @@ public class ToggleYggdrasil : MonoBehaviour
         {
             Debug.LogWarning("Animator is not initialized!");
         }
+
+        ColorUtility.TryParseHtmlString(MemoryGemDefaultColorHex, out _memoryGemDefaultColor);
+        ColorUtility.TryParseHtmlString(MemoryGemVideoColorHex, out _memoryGemVideoColor);
 
         content.SetActive(false);
     }
@@ -63,7 +70,6 @@ public class ToggleYggdrasil : MonoBehaviour
             return;
 
         StartCoroutine(ViewGems());
-        Debug.Log($"Player entered {gameObject}");
     }
 
     private IEnumerator ViewGems()
@@ -73,6 +79,8 @@ public class ToggleYggdrasil : MonoBehaviour
             gem.Stop();
         }
 
+        memoryGemMaterial.SetColor(BaseColor, _memoryGemDefaultColor);
+        
         content.SetActive(true);
         //yggdrasilCamera.Prioritize();
         //Debug.Log($"Yggdrasil camera is now {yggdrasilCamera.gameObject}, Priority: {yggdrasilCamera.Priority}");
@@ -117,6 +125,9 @@ public class ToggleYggdrasil : MonoBehaviour
 
         _contentUiAnimator.SetTrigger(Exit);
         yield return _exitClipLength;
+        
+        memoryGemMaterial.SetColor(BaseColor, _memoryGemVideoColor);
+        
         foreach (var gem in backgroundMemoryGemSetVideo)
         {
             gem.Play();
