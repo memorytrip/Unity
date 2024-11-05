@@ -36,6 +36,7 @@ namespace Map.Editor
             } else {
                 context.target.mapConcrete.DeleteMapObject(context.target.focusObject);
             }
+            context.scrollRect.horizontal = true;
             context.SwitchState(new MapEditorGUIIdle(context));
         }
 

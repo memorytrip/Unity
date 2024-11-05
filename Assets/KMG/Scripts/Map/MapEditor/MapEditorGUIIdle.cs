@@ -23,13 +23,14 @@ namespace Map.Editor
                         MapObject mapObject = context.target.mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, item.model);
                         SelectObject(mapObject);
                         context.target.focusObject.gameObject.SetActive(false);
+                        context.scrollRect.horizontal = false;
 						context.SwitchState(new MapEditorGUIDrag(context));
                         break;
                     }
 
                     // 회전
-                    Button button;
-                    if (result.gameObject.TryGetComponent<Button>(out button))
+                    // if (result.gameObject.TryGetComponent<Button>(out button))
+                    if (result.gameObject.CompareTag("MapEditRotationButton"))
                     {
                         context.SwitchState(new MapEditorGUIRotate(context, finger.screenPosition.x));
                     }

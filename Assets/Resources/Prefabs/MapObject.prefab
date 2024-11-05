@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2985417790769487321}
   - component: {fileID: 5309749095516065977}
   - component: {fileID: 8356906134402611356}
-  - component: {fileID: 6544986643974791476}
   - component: {fileID: -5323608141118783794}
+  - component: {fileID: 545106954868821661}
   m_Layer: 0
   m_Name: MapObject
   m_TagString: Untagged
@@ -100,27 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5c050f60f211640b09f9bcdba1402b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &6544986643974791476
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2836837265716292793}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-5323608141118783794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,3 +118,25 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!64 &545106954868821661
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836837265716292793}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}

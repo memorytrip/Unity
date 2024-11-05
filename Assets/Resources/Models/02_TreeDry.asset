@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e54a7bdc3200d5b45b7b15ef2cfb961b, type: 3}
-  m_Name: Cube
+  m_Name: 02_TreeDry
   m_EditorClassIdentifier: 
-  id: 0
-  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 0f29e3c1c576f6641b9e474f6b194480, type: 2}
+  id: 2
+  mesh: {fileID: 4889233533220674444, guid: 59bfb68b67435c44f9decaf95cfac373, type: 3}
+  material: {fileID: 2100000, guid: e5c8ac6092e78214fb866cab5f020f2a, type: 2}
   size: {x: 1, y: 1, z: 1}

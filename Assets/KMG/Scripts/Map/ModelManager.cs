@@ -21,8 +21,8 @@ namespace Map
                 return _instance;
             }
         }
-        private List<Model> downloadModelList;
-        private List<Theme> downloadThemeList;
+        public List<Model> downloadModelList;
+        public List<Theme> downloadThemeList;
         private bool isLoaded;
 
         private ModelManager()

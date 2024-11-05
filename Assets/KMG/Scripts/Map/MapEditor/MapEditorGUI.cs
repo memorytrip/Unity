@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.IO;
 using Common;
 using Unity.Cinemachine;
@@ -17,7 +18,12 @@ namespace Map.Editor
         public MapEditor target;
         [SerializeField] public Button rotationButton;
         private MapEditorGUIState state;
+        
+        [Header("ItemList")]
         [SerializeField] private Transform ItemList;
+        [SerializeField] public ScrollRect scrollRect;
+        [SerializeField] private GameObject ModelItemPrefab;
+        [SerializeField] private RenderTexture itemRenderTexture;
         
         void Start()
         {
@@ -87,8 +93,9 @@ namespace Map.Editor
             if (target.focusObject != null)
             {
                 rotationButton.gameObject.SetActive(true);
-                Vector3 buttonPos = Camera.main.WorldToScreenPoint(target.focusObject.transform.position);
-                buttonPos.y += 100;
+                // Vector3 buttonPos = Camera.main.WorldToScreenPoint(target.focusObject.transform.position);
+                Vector3 buttonPos = target.focusObject.transform.position;
+                buttonPos.y += 10;
                 rotationButton.transform.position = buttonPos;
             }
             else
@@ -99,20 +106,17 @@ namespace Map.Editor
 
         private void RefreshItemList()
         {
-            InitModelList();
-        }
-
-        private void InitModelList()
-        {
-            DirectoryInfo dir = new DirectoryInfo("Assets/Resources/Models");
-            if (!dir.Exists)
-                return;
-            
-            foreach (var fileInfo in dir.GetFiles())
+            foreach (Transform child in ItemList)
             {
-                // fileInfo.
+                Destroy(child.gameObject);
             }
             
+            foreach (var model in ModelManager.Instance.downloadModelList)
+            {
+                var item = Instantiate(ModelItemPrefab, ItemList);
+                item.GetComponent<MapEditorItem>().model = model;
+                item.GetComponent<MapEditorItem>().InitThumbnail();
+            }
         }
 
         private void OnDestroy()
