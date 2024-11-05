@@ -24,6 +24,7 @@ public class MapEditorItem : MonoBehaviour
 	private void Update()
 	{
 		// rotate += 5f * Time.deltaTime;
-		thumbnail.transform.Rotate(0f, 15f * Time.deltaTime, 0f);
+		if (thumbnail != null)
+			thumbnail.transform.Rotate(0f, 15f * Time.deltaTime, 0f);
 	}
 }

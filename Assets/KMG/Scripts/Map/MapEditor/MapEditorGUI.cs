@@ -24,6 +24,17 @@ namespace Map.Editor
         [SerializeField] public ScrollRect scrollRect;
         [SerializeField] private GameObject ModelItemPrefab;
         [SerializeField] private RenderTexture itemRenderTexture;
+
+        [Header("Tab")] 
+        [SerializeField] private Button themeTab;
+        [SerializeField] private Button modelTab;
+
+        private enum TabState
+        {
+            Theme,
+            Model
+        };
+        private TabState tabState = TabState.Theme;
         
         void Start()
         {
@@ -33,10 +44,14 @@ namespace Map.Editor
             InputManager.Instance.OnFingerUp += OnTouchCanceled;
             InputManager.Instance.OnPinch += OnZoom;
             InputManager.Instance.OnPanning += OnPanningCam;
+            
             cinemachineController.enabled = false;
             rotationButton.gameObject.SetActive(false);
             state = new MapEditorGUIIdle(this);
             RefreshItemList();
+            
+            themeTab.onClick.AddListener(SwitchTabToTheme);
+            modelTab.onClick.AddListener(SwitchTabToModel);
         }
 
         void OnTouchStart(Finger finger)
@@ -78,6 +93,18 @@ namespace Map.Editor
             }
         }
 
+        public void SwitchTabToTheme()
+        {
+            tabState = TabState.Theme;
+            RefreshItemList();
+        }
+        
+        public void SwitchTabToModel()
+        {
+            tabState = TabState.Model;
+            RefreshItemList();
+        }
+        
         public void SwitchState(MapEditorGUIState state)
         {
             this.state = state;
@@ -111,6 +138,27 @@ namespace Map.Editor
                 Destroy(child.gameObject);
             }
             
+            switch (tabState)
+            {
+                case TabState.Theme:
+                    RefreshThemeItemList();
+                    break;
+                case TabState.Model:
+                    RefreshModelItemList();
+                    break;
+            }
+        }
+
+        private void RefreshThemeItemList()
+        {
+            foreach (var model in ModelManager.Instance.downloadThemeList)
+            {
+                var item = Instantiate(ModelItemPrefab, ItemList);
+            }
+        }
+
+        private void RefreshModelItemList()
+        {
             foreach (var model in ModelManager.Instance.downloadModelList)
             {
                 var item = Instantiate(ModelItemPrefab, ItemList);
