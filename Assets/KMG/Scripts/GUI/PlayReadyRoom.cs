@@ -17,7 +17,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     [SerializeField] private List<TMP_Text> playerNameTextList;
     [SerializeField] private Button readyButton;
     [SerializeField] private Button exitButton;
-    [SerializeField] private TMP_Text roomNameText;
+    [SerializeField] public TMP_Text roomNameText;
     private int readyCount = 0;
     private CancellationTokenSource cts;
     public override void Spawned()

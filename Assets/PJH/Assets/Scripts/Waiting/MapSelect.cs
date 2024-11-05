@@ -1,25 +1,33 @@
+using System;
+using System.Collections.Generic;
+using Common;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using Unity.VisualScripting;
+using Map;
+
 
 public class MapSelectionController : MonoBehaviour
 {
     public ScrollRect scrollRect;
-    public Button leftArrowButton; 
+    public Button leftArrowButton;
     public Button rightArrowButton;
-    public float scrollDuration = 0.5f; 
-    public int totalPages = 2; // 맵 페이지 수 -1 (아마 나중에 맵List.length 가 되어야 할 듯함)
+    public float scrollDuration = 0.5f;
+    private int totalPages;
     private float initialPosition;
     private int currentPage = 0;
 
-    private void Start()
+    private async UniTask Start()
     {
+        List<MapInfo> mapList = await MapManager.Instance.LoadMapList(new User()); //user정보에서 맵갯수 다운받아야 함
+        totalPages = mapList.Count;
         initialPosition = scrollRect.content.anchoredPosition.x;
         UpdateArrowButtons();
         //scrollRect.content.sizeDelta = new Vector2(800 * totalPages, 700f);
         leftArrowButton.onClick.AddListener(PreviousPage);
         rightArrowButton.onClick.AddListener(NextPage);
+        Debug.Log(totalPages);
     }
 
     void NextPage()

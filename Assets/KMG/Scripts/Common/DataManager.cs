@@ -41,7 +41,7 @@ namespace Common
             }
         }
 
-        private async UniTask<string> Post(string api, string jsonData, int timeout = 5)
+        public async UniTask<string> Post(string api, string jsonData, int timeout = 5)
         {
             string url = baseURL + api;
             UnityWebRequest request = new UnityWebRequest(url, "POST");
