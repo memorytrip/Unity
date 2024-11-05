@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a8c5f08a6459f3340848fa5e423bf1d4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 243211
+  packageName: Clay Outdoors Pack
+  packageVersion: 1.0
+  assetPath: Assets/UnicornOne/ClayNature/Demos/Scripts/CycleGameObjects.cs
+  uploadId: 563991

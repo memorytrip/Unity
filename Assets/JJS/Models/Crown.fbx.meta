@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 96a5197ff6022c94ca3ba1abacbfe13c
+guid: 139b0368e21f7ee45a196eb58e5755a6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crown
+    second: {fileID: 2100000, guid: 0014deeb68b5b8b49acdb8378722edc3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
