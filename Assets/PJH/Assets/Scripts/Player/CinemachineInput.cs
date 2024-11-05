@@ -73,7 +73,7 @@ public class CinemachineInput : MonoBehaviour
 
         if (Touch.activeFingers.Count == 1 && gameObject.activeSelf)
         {
-            retarget = StartCoroutine(RetargetProcess());
+            //retarget = StartCoroutine(RetargetProcess());
         }
     }
 
