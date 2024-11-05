@@ -56,16 +56,16 @@ namespace Map.Editor
 
         void OnPanningCam(object sender, PanningEventArgs args)
         {
-            var diff = args.difference / 100;
+            var diff = - args.difference;
             var center = new Vector2(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
-            var ray = Camera.main.ScreenPointToRay(center);
+            var ray = Camera.main.ScreenPointToRay(center + diff);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 1000f, LayerMask.GetMask("Water")))
             {
                 var point = hit.point;
                 Debug.Log($"{center + diff}, {point}");
             
-                var toPosition = new Vector3(point.x, 0f, point.z);
+                var toPosition = new Vector3(point.x, point.y, point.z);
                 toPosition.x = Mathf.Clamp(point.x, -20f, 20f);
                 toPosition.z = Mathf.Clamp(point.z, -20f, 20f);
                 camTarget.position = toPosition;
