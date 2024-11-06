@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244e33ad9d728214690bd4eca3229338, type: 3}
+  m_Name: IntroGuide_B
+  m_EditorClassIdentifier: 
+  dialogueSegments:
+  - speakerName: "\uD2B8\uB808\uBC84"
+    dialogueText: "\uC774 \uACF5\uAC04\uC740 \uC911\uC559\uC758 \uB098\uBB34\uB85C\uBD80\uD130
+      \uC5D0\uB108\uC9C0\uB97C \uBC1B\uC544\uC11C \uAD6C\uD604\uB418\uC5C8\uC5B4."
+    displayTime: 3
+    nextCutscene: {fileID: 0}
+    choices: []
+  - speakerName: "\uD2B8\uB808\uBC84"
+    dialogueText: "\uC67C\uCABD\uC5D0 \uC774\uC815\uD45C\uAC00 \uC788\uC744 \uAC70\uC57C."
+    displayTime: 2
+    nextCutscene: {fileID: 0}
+    choices: []
+  - speakerName: "\uD2B8\uB808\uBC84"
+    dialogueText: "\uB2E4 \uB05D\uB09C \uB2E4\uC74C\uC5D0\uB294 \uC624\uB978\uCABD\uC758
+      \uB9C8\uC774\uB8F8\uC5D0 \uB4E4\uB7EC\uBCF4\uB294 \uAC83\uB3C4 \uC78A\uC9C0
+      \uB9D0\uACE0."
+    displayTime: 3
+    nextCutscene: {fileID: 0}
+    choices: []
+  - speakerName: "\uD2B8\uB808\uBC84"
+    dialogueText: "\uADF8\uB7FC \uC798 \uBD80\uD0C1\uD560\uAC8C!"
+    displayTime: 3
+    nextCutscene: {fileID: 0}
+    choices: []
+  followupDialogue: {fileID: 0}
