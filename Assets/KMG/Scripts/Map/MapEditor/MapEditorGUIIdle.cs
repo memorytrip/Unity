@@ -23,6 +23,7 @@ namespace Map.Editor
                     {
                         Theme theme = themeItem.theme;
                         context.target.SetTheme(theme);
+                        break;
                     }
                     
                     
