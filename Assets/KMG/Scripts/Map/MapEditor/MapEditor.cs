@@ -11,12 +11,6 @@ namespace Map.Editor
         public MapObject focusObject { get => _focusObject; }
 
         private List<Operations.IMapEditOperation> operationQueue;
-        private Material outlineMaterial;
-
-        public MapEditor()
-        {
-            outlineMaterial = new Material(Shader.Find("Shader Graphs/Outline"));
-        }
 
         public void CreateObj(Vector3 position, Model model)
         {
