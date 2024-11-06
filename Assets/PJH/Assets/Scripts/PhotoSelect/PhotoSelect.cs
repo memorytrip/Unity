@@ -22,6 +22,7 @@ public class PhotoSelect : NetworkBehaviour
         }
     }
     
+    
     private void OnButtonRawImageClicked(int buttonID)
     {
         if (HasStateAuthority)

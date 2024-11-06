@@ -99,5 +99,11 @@ namespace Common.Network
         {
             hasSceneAuthority = Runner.IsSceneAuthority;
         }
+        
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void RpcChatMsg(string msg)
+        {
+            Chat.Instance.Append(msg);
+        }
     }
 }

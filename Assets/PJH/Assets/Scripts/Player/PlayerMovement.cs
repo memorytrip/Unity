@@ -31,14 +31,14 @@ public class PlayerMovement : NetworkBehaviour
     public float maxDistance = 1f;
 
     private ChatDisplay _chatDisplay;
-    private PlayerInput _playerInput;
+    //private PlayerInput _playerInput;
 
     [Header("ScreenshotCam LookAt Target")]
     [SerializeField] private Transform screenshotCameraTarget;
     
     private void Awake()
     {
-        _playerInput = GetComponent<PlayerInput>();
+        //_playerInput = GetComponent<PlayerInput>();
         cc = GetComponent<CharacterController>();
         cc.enabled = false;
         //networkanim = GetComponentInChildren<NetworkMecanimAnimator>();
@@ -154,20 +154,16 @@ public class PlayerMovement : NetworkBehaviour
     // 텍스트창 입력 시 움직임 금지
     private void ToggleMovement(bool isTyping)
     {
-        if (isTyping)
-        {
-            _playerInput.DeactivateInput();
-            Debug.Log("얼음");
-        }
-        else
-        {
-            _playerInput.ActivateInput();
-            Debug.Log($"얼음 -> 땡");
-        }
+        this.enabled = !isTyping;
+        Debug.Log("이건 타이핑중인지 확인하는 것이여: " + isTyping);
     }
     
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
         InputManager.Instance.jumpAction.started -= PlayerJump;
+        _chatDisplay.StartTyping -= ToggleMovement;
+        _chatDisplay.StopTyping -= ToggleMovement;
     }
+    
+   
 }
