@@ -19,8 +19,8 @@ TagManager:
   - QR
   - Ground
   - PostProcessing
-  - 
-  - 
+  - Clickable3dObject
+  - CutsceneObject
   - 
   - 
   - 
