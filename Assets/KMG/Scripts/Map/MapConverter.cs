@@ -16,8 +16,9 @@ namespace Map
             
             // MapConcrete 초기화
             MapConcrete mapConcrete = new MapConcrete();
+            mapConcrete.isLoading = true;
             mapConcrete.info = info;
-            mapConcrete.SetTheme(mapData.themeId).Forget();
+            await mapConcrete.SetTheme(mapData.themeId);
             
             // MapConcrete에 MapObject 추가
             foreach (var mapObjectData in mapData.mapObjectList)
@@ -25,7 +26,8 @@ namespace Map
                 Model model = await ModelManager.Instance.Get(mapObjectData);
                 mapConcrete.AddMapObject(mapObjectData.position.ToVector3(), mapObjectData.rotation.ToQuaternion(), model);
             }
-            
+
+            mapConcrete.isLoading = false;
             return mapConcrete;
         }
         
@@ -37,7 +39,7 @@ namespace Map
         public static MapInfo ConvertMapConcreteToMapInfo(MapConcrete mapConcrete)
         {
             MapData mapData = new MapData();
-            mapData.themeId = mapConcrete.themeId;
+            mapData.themeId = mapConcrete.theme.id;
             mapData.mapObjectList = new List<MapData.MapObjectData>(mapConcrete.mapObjects.Count);
             foreach (var mapObject in mapConcrete.mapObjects)
             {

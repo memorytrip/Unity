@@ -46,7 +46,16 @@ namespace Map.Editor
 
         public void SetTheme(Theme theme)
         {
-            mapConcrete.SetTheme(theme.id).Forget();
+            mapConcrete.SetTheme(theme);
+            ResetModels();
+        }
+
+        public void ResetModels()
+        {
+            foreach (var mapObject in mapConcrete.mapObjects.ToArray())
+            {
+                mapConcrete.DeleteMapObject(mapObject);
+            }
         }
     }
 }

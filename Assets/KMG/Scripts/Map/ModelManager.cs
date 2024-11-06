@@ -47,8 +47,8 @@ namespace Map
             downloadThemeList = new List<Theme>();
             
             // load default assets
-            downloadModelList.AddRange(await LoadDefaultModelList());
-            downloadThemeList.AddRange(await LoadDefaultThemeList());
+            downloadModelList.AddRange(LoadDefaultModelList());
+            downloadThemeList.AddRange(LoadDefaultThemeList());
             
             // load downloaded assets
             // ...
@@ -56,7 +56,7 @@ namespace Map
             isLoaded = true;
         }
 
-        private async UniTask<Model[]> LoadDefaultModelList()
+        private Model[] LoadDefaultModelList()
         {
             // string[] modelNames = new[] { "Cube", "Sphere", "Box" };
             //
@@ -71,7 +71,7 @@ namespace Map
             return assets;
         }
         
-        private async UniTask<Theme[]> LoadDefaultThemeList()
+        private Theme[] LoadDefaultThemeList()
         {
             // string[] themeNames = new[] { "Theme0", "Theme1", "Theme2" };
             // List<UniTask<Theme>> tasks = new List<UniTask<Theme>>();

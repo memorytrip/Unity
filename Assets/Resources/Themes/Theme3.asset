@@ -15,3 +15,4 @@ MonoBehaviour:
   id: 3
   mesh: {fileID: -1489221372541979182, guid: 700bbdcc74999b7429393c9c889f23f3, type: 3}
   material: {fileID: 2100000, guid: e5c8ac6092e78214fb866cab5f020f2a, type: 2}
+  water: {fileID: 11400000, guid: bba8da7c233024b45aed57a022c3d7ad, type: 2}

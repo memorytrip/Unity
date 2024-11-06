@@ -38,6 +38,21 @@ namespace Myroom
             Debug.Log(mapInfo);
             MapConcrete map = await MapConverter.ConvertMapInfoToMapConcrete(mapInfo);
             map.rootObject.layer = LayerMask.NameToLayer("Ground");
+            LoadWater(map);
+        }
+
+        private async UniTaskVoid LoadWater(MapConcrete mapConcrete)
+        {
+            await UniTask.WaitWhile(() => mapConcrete.isLoading);
+            Theme theme = mapConcrete.theme;
+            if (theme.water != null)
+            {
+                GameObject water = new GameObject("Water", typeof(MeshFilter), typeof(MeshRenderer));
+                water.transform.SetParent(mapConcrete.rootObject.transform);
+                water.GetComponent<MeshFilter>().mesh = theme.water.mesh;
+                water.GetComponent<MeshRenderer>().material = theme.water.material;
+                water.transform.position = theme.water.position;
+            }
         }
     }
 }

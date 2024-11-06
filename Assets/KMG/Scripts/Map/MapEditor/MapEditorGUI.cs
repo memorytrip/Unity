@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using Common;
 using Unity.Cinemachine;
@@ -162,7 +163,8 @@ namespace Map.Editor
 
         private void RefreshModelItemList()
         {
-            foreach (var model in ModelManager.Instance.downloadModelList)
+            List<Model> models = ModelManager.Instance.downloadModelList.FindAll(e => e.theme == target.mapConcrete.theme.id);
+            foreach (var model in models)
             {
                 var item = Instantiate(ModelItemPrefab, ItemList);
                 item.GetComponent<MapEditorModelItem>().model = model;

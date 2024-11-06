@@ -11,6 +11,6 @@ namespace Map {
         public string id;
         public Mesh mesh;
         public Material material;
-        public Vector3 size;
+        public string theme;
     }
 }
