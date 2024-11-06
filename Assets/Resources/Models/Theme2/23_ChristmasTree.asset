@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e54a7bdc3200d5b45b7b15ef2cfb961b, type: 3}
-  m_Name: 16_Barrel
+  m_Name: 23_ChristmasTree
   m_EditorClassIdentifier: 
-  id: 15
-  mesh: {fileID: -2643173543783292932, guid: ff5ea9abf543a2a4283fd884a715c071, type: 3}
+  id: 23
+  mesh: {fileID: 5355273683673816504, guid: 3d84d036ecd4c32448dc907beb8de3b2, type: 3}
   material: {fileID: 2100000, guid: e5c8ac6092e78214fb866cab5f020f2a, type: 2}
-  theme: 1
+  theme: 2
