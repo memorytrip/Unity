@@ -22,7 +22,14 @@ namespace Map.Editor
                     if (result.gameObject.TryGetComponent<MapEditorThemeItem>(out themeItem))
                     {
                         Theme theme = themeItem.theme;
-                        context.target.SetTheme(theme);
+                        context.changeThemePanel.SetActive(true);
+                        context.changeThemeOKButton.onClick.RemoveAllListeners();
+                        context.changeThemeOKButton.onClick.AddListener(()=>
+                        {
+                            context.target.SetTheme(theme);
+                            context.changeThemePanel.SetActive(false);
+                        });
+                        // context.target.SetTheme(theme);
                         break;
                     }
                     

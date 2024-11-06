@@ -17,6 +17,7 @@ public class MapEditorModelItem : MonoBehaviour
 		thumbnail.gameObject.layer = LayerMask.NameToLayer("UI");
 		thumbnail.transform.SetParent(transform);
 		thumbnail.transform.localPosition = new Vector3(0, -65, 0);
+		thumbnail.transform.localScale = new Vector3(18f, 18f, 18f);
 		thumbnail.GetComponent<MeshFilter>().mesh = model.mesh;
 		thumbnail.GetComponent<MeshRenderer>().material = model.material;
 	}

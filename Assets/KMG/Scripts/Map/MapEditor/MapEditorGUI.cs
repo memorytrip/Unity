@@ -31,6 +31,10 @@ namespace Map.Editor
         [SerializeField] private Button themeTab;
         [SerializeField] private Button modelTab;
 
+        [Header("Popup")] 
+        [SerializeField] public GameObject changeThemePanel;
+        [SerializeField] public Button changeThemeOKButton; 
+
         private enum TabState
         {
             Theme,
