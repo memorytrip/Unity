@@ -492,6 +492,7 @@ MonoBehaviour:
   ItemList: {fileID: 2046161882}
   scrollRect: {fileID: 1634236952}
   ModelItemPrefab: {fileID: 4296228244359438715, guid: 9828467277e2fae4d8eabb757ad92cc4, type: 3}
+  ThemeItemPrefab: {fileID: 4296228244359438715, guid: 0df5dbd4c880c4f4091e7716d79efe39, type: 3}
   itemRenderTexture: {fileID: 8400000, guid: fc10fcdfdc511d342b47f4c49f677ab1, type: 2}
   themeTab: {fileID: 1531917936}
   modelTab: {fileID: 1533698357}

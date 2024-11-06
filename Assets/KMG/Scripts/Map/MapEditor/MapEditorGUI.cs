@@ -23,6 +23,7 @@ namespace Map.Editor
         [SerializeField] private Transform ItemList;
         [SerializeField] public ScrollRect scrollRect;
         [SerializeField] private GameObject ModelItemPrefab;
+        [SerializeField] private GameObject ThemeItemPrefab;
         [SerializeField] private RenderTexture itemRenderTexture;
 
         [Header("Tab")] 
@@ -151,9 +152,11 @@ namespace Map.Editor
 
         private void RefreshThemeItemList()
         {
-            foreach (var model in ModelManager.Instance.downloadThemeList)
+            foreach (var theme in ModelManager.Instance.downloadThemeList)
             {
-                var item = Instantiate(ModelItemPrefab, ItemList);
+                var item = Instantiate(ThemeItemPrefab, ItemList);
+                item.GetComponent<MapEditorThemeItem>().theme = theme;
+                item.GetComponent<MapEditorThemeItem>().InitThumbnail();
             }
         }
 
@@ -162,8 +165,8 @@ namespace Map.Editor
             foreach (var model in ModelManager.Instance.downloadModelList)
             {
                 var item = Instantiate(ModelItemPrefab, ItemList);
-                item.GetComponent<MapEditorItem>().model = model;
-                item.GetComponent<MapEditorItem>().InitThumbnail();
+                item.GetComponent<MapEditorModelItem>().model = model;
+                item.GetComponent<MapEditorModelItem>().InitThumbnail();
             }
         }
 

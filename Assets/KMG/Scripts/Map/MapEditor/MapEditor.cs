@@ -43,5 +43,10 @@ namespace Map.Editor
             focusObject.GetComponent<Outline>().enabled = false;
             _focusObject = null;
         }
+
+        public void SetTheme(Theme theme)
+        {
+            mapConcrete.SetTheme(theme.id).Forget();
+        }
     }
 }

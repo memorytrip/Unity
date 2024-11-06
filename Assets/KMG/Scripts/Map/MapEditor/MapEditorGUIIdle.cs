@@ -17,10 +17,19 @@ namespace Map.Editor
                 
                 foreach (var result in results) {
                     
+                    // 테마 설정
+                    MapEditorThemeItem themeItem;
+                    if (result.gameObject.TryGetComponent<MapEditorThemeItem>(out themeItem))
+                    {
+                        Theme theme = themeItem.theme;
+                        context.target.SetTheme(theme);
+                    }
+                    
+                    
                     // 새 오브젝트 생성
-                    MapEditorItem item;
-                    if (result.gameObject.TryGetComponent<MapEditorItem>(out item)) {
-                        MapObject mapObject = context.target.mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, item.model);
+                    MapEditorModelItem modelItem;
+                    if (result.gameObject.TryGetComponent<MapEditorModelItem>(out modelItem)) {
+                        MapObject mapObject = context.target.mapConcrete.AddMapObject(Vector3.zero, Quaternion.identity, modelItem.model);
                         SelectObject(mapObject);
                         context.target.focusObject.gameObject.SetActive(false);
                         context.scrollRect.horizontal = false;

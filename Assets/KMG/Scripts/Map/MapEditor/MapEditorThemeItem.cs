@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using Map;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class MapEditorItem : MonoBehaviour
+public class MapEditorThemeItem : MonoBehaviour
 {
-	public Model model;
+	public Theme theme;
 
 	private GameObject thumbnail;
 	private float rotate = 0f;
@@ -16,9 +17,10 @@ public class MapEditorItem : MonoBehaviour
 		thumbnail = new GameObject("ItemThumbnail", typeof(MeshFilter), typeof(MeshRenderer));
 		thumbnail.gameObject.layer = LayerMask.NameToLayer("UI");
 		thumbnail.transform.SetParent(transform);
-		thumbnail.transform.localPosition = new Vector3(0, -65, 0);
-		thumbnail.GetComponent<MeshFilter>().mesh = model.mesh;
-		thumbnail.GetComponent<MeshRenderer>().material = model.material;
+		thumbnail.transform.localPosition = new Vector3(0, 0, -50);
+		thumbnail.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
+		thumbnail.GetComponent<MeshFilter>().mesh = theme.mesh;
+		thumbnail.GetComponent<MeshRenderer>().material = theme.material;
 	}
 
 	private void Update()
