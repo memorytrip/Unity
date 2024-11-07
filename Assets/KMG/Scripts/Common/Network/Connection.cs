@@ -65,7 +65,7 @@ namespace Common.Network
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0f, 2f, -22f), Quaternion.identity);
                     break;
                 case "MyRoom":
-                    currenctCharacter = await SpawnProcess("Player");
+                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
                     break;
                 case "PlayReady":
                     currenctCharacter = await SpawnProcess("PlayReadyState");
@@ -74,7 +74,7 @@ namespace Common.Network
                 case "MultiPlayTest":
                     SceneManager.Instance.OnSceneLoaded -= SpawnAvatar;
                     await UniTask.Delay(TimeSpan.FromSeconds(3.5f));
-                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 0, 0), Quaternion.identity);
+                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
                     break;
                 default:
                     break;

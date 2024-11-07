@@ -28,7 +28,6 @@ namespace GUI
             
             mapConcrete = await ConvertFileToMapConcrete();
             mapEditorGUI.target.mapConcrete = mapConcrete;
-            cam.Target.TrackingTarget = mapConcrete.rootObject.transform;
             exitButton.onClick.AddListener(Exit);
         }
 

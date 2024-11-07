@@ -3,6 +3,7 @@ using Fusion;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("PlayerMove")] 
     public float playerMoveSpeed;
+    private float _playerMoveSpeed;
     public Vector3 playerDir;
 
     [Header("PlayerJump")] 
@@ -34,7 +36,7 @@ public class PlayerMovement : NetworkBehaviour
     //private PlayerInput _playerInput;
 
     [Header("ScreenshotCam LookAt Target")]
-    [SerializeField] private Transform screenshotCameraTarget;
+    [SerializeField] private Transform screenshotCamPosition;
     
     private void Awake()
     {
@@ -66,21 +68,24 @@ public class PlayerMovement : NetworkBehaviour
         if (cam != null)
         {
             cam.Target.TrackingTarget = transform;
+            
             var screenshotCam = cam.transform.Find("ScreenshotCamera_Default")?.GetComponent<CinemachineCamera>();
             if (screenshotCam != null)
             {
-                screenshotCam.Target.TrackingTarget = screenshotCameraTarget;
+                screenshotCam.Target.TrackingTarget = screenshotCamPosition;
                 Debug.Log($"ScreenshotCam: {screenshotCam} Tracking Target: {screenshotCam.Target.TrackingTarget}");
             }
             else
             {
                 Debug.Log("Screenshot cam is not found");
             }
+            
             var screenshotSelfieCam = cam.transform.Find("ScreenshotCamera_Player")?.GetComponent<CinemachineCamera>();
             if (screenshotSelfieCam != null)
             {
                 var lookAtTransform = transform;
-                screenshotSelfieCam.Target.TrackingTarget = screenshotCameraTarget;
+                screenshotSelfieCam.Target.TrackingTarget = screenshotCamPosition;
+                screenshotSelfieCam.Target.LookAtTarget = lookAtTransform;
                 Debug.Log($"ScreenshotCam: {screenshotSelfieCam} Tracking Target: {screenshotSelfieCam.Target.TrackingTarget}");
             }
             else
@@ -103,15 +108,15 @@ public class PlayerMovement : NetworkBehaviour
     private void ApplyMovement()
     {
         // if (joystick.isInput)
-        if (InputManager.Instance.moveAction.ReadValue<Vector2>().magnitude > 0f)
+        if (InputManager.Instance.moveAction.ReadValue<Vector2>().magnitude <= 0f)
         {
-            playerMoveSpeed = 8f;
+            _playerMoveSpeed = 0f;
         }
         else
         {
-            playerMoveSpeed = 0f;
+            _playerMoveSpeed = playerMoveSpeed;
         }
-        cc.Move(new Vector3(playerDir.x * playerMoveSpeed, velocity, playerDir.z * playerMoveSpeed) * Time.fixedDeltaTime);
+        cc.Move(new Vector3(playerDir.x * _playerMoveSpeed, velocity, playerDir.z * _playerMoveSpeed) * Time.fixedDeltaTime);
     }
     
     private void ApplyGravity()

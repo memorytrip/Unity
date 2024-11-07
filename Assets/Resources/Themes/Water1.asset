@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007158d9302a4b4cbfbc3ed8e94dd431, type: 3}
+  m_Name: Water1
+  m_EditorClassIdentifier: 
+  themeId: 1
+  mesh: {fileID: -5971022145622365102, guid: abe26545c14209942903e8f64bb87f19, type: 3}
+  material: {fileID: 2100000, guid: e5c8ac6092e78214fb866cab5f020f2a, type: 2}
+  position: {x: -1.7, y: 2.5, z: -4.5}

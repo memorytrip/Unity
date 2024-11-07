@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7205526737736897954}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Eyewear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4228939742289715700}
   - component: {fileID: 4849646562414466922}
   - component: {fileID: 3912337461693696949}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1063290245032245905}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CharacterDemo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 4281085474938082273}
   - component: {fileID: 2422027066903383125}
   - component: {fileID: 3450015942464879821}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2363573292128683201}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1154050369788581672}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 5558599787522652494}
   - component: {fileID: 5396844388698407757}
   - component: {fileID: 1970120198101172128}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 1432971522298970004}
   - component: {fileID: 2615794875809820721}
   - component: {fileID: 263984896869827835}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sunglasses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +497,7 @@ GameObject:
   - component: {fileID: 1474953824082062261}
   - component: {fileID: 666229626028170869}
   - component: {fileID: 4412655046742254066}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Horn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -581,7 +581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4103114995661116251}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 2604455217650671163}
   - component: {fileID: 1408282727827116446}
   - component: {fileID: 3778466091528152404}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Crown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8332520117622558915}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Equipment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -803,6 +803,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1150664564828375464}
+  - {fileID: 6470807958865917543}
   - {fileID: 5109780273806055354}
   - {fileID: 4315405739454036525}
   m_Father: {fileID: 0}
@@ -889,13 +890,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0febf2955981294479247c35c52d9881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMoveSpeed: 50
+  playerMoveSpeed: 35
   playerDir: {x: 0, y: 0, z: 0}
-  jumpForce: 10
+  jumpForce: 15
   turnSpeed: 1000
   boxSize: {x: 0, y: 0, z: 0}
   maxDistance: 1
-  screenshotCameraTarget: {fileID: 1150664564828375464}
+  selfieCamPosition: {fileID: 1150664564828375464}
+  screenshotCamPosition: {fileID: 6470807958865917543}
 --- !u!114 &4751748418977364367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,7 +936,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4404185509202212951}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -968,7 +970,7 @@ GameObject:
   - component: {fileID: 7579885366631582603}
   - component: {fileID: 4263802353001381640}
   - component: {fileID: 8963002419623846405}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1054,7 +1056,7 @@ GameObject:
   - component: {fileID: 2844609557464592691}
   - component: {fileID: 9043212567074139375}
   - component: {fileID: 8068594957276903636}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Circle.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1140,7 +1142,7 @@ GameObject:
   - component: {fileID: 5520572246255787657}
   - component: {fileID: 8877395997894627628}
   - component: {fileID: 6689586977549526502}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WatermelonIceBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1226,7 +1228,7 @@ GameObject:
   - component: {fileID: 6479978168632578281}
   - component: {fileID: 3652811591728538920}
   - component: {fileID: 1715586845314375834}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1312,7 +1314,7 @@ GameObject:
   - component: {fileID: 1245895898836938788}
   - component: {fileID: 6177129061850254632}
   - component: {fileID: 393746074427736639}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1397,7 +1399,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1150664564828375464}
   m_Layer: 3
-  m_Name: LookAt
+  m_Name: SelfieCamPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1412,7 +1414,7 @@ Transform:
   m_GameObject: {fileID: 5640782578263524699}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.6, z: 8}
+  m_LocalPosition: {x: 0, y: 4.66, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1429,7 +1431,7 @@ GameObject:
   - component: {fileID: 8919611859907061945}
   - component: {fileID: 7039911382076744351}
   - component: {fileID: 160945606692858188}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1516,7 +1518,7 @@ GameObject:
   - component: {fileID: 7200321836749653897}
   - component: {fileID: 1028058077437869085}
   - component: {fileID: 7823187420173750366}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1602,7 +1604,7 @@ GameObject:
   - component: {fileID: 1613825323698882461}
   - component: {fileID: 5660313070785948501}
   - component: {fileID: 4537917094776420600}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Horns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1686,7 +1688,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7017732620141011549}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Headgear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1708,6 +1710,37 @@ Transform:
   m_Children:
   - {fileID: 4103114995661116251}
   m_Father: {fileID: 7207563060146223122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6596746477902706009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6470807958865917543}
+  m_Layer: 3
+  m_Name: CamPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6470807958865917543
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6596746477902706009}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.66, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4819387880945232801}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7021063393270116308
 GameObject:
@@ -1735,7 +1768,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2363573292128683201}
@@ -1752,7 +1785,7 @@ GameObject:
   - component: {fileID: 5125500020174618455}
   - component: {fileID: 5189942585537688448}
   - component: {fileID: 2778548906442577777}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1838,7 +1871,7 @@ GameObject:
   - component: {fileID: 7207563060146223122}
   - component: {fileID: 1853761006644058390}
   - component: {fileID: 5694423968683320609}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1926,7 +1959,7 @@ GameObject:
   - component: {fileID: 9115303846510988188}
   - component: {fileID: 7122288586892995615}
   - component: {fileID: 6838616159666452480}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244e33ad9d728214690bd4eca3229338, type: 3}
+  m_Name: IntroGuide_A
+  m_EditorClassIdentifier: 
+  dialogueSegments:
+  - speakerName: ??
+    dialogueText: "\uB0B4 \uC774\uB984\uC740 \uD2B8\uB808\uBC84! \uB098\uB294 \uC5EC\uD589\uD558\uB294
+      \uC0AC\uB78C\uB4E4\uC758 \uCD94\uC5B5\uC744 \uAD00\uB9AC\uD558\uB294 \uC694\uC815\uC774\uC57C.
+      \uC774\uACF3\uC73C\uB85C \uB4E4\uC5B4\uC628 \uAC78 \uBCF4\uB2C8 \uB108\uB294
+      \uB0B4\uAC00 \uCC3E\uB358 \uD2B9\uBCC4\uD55C \uC5EC\uD589\uC790\uAD6C\uB098?"
+    displayTime: 3
+    nextCutscene: {fileID: 0}
+    choices:
+    - choiceText: "\uB9DE\uC544! \uB09C \uC5EC\uD589\uC744 \uC88B\uC544\uD558\uAC70\uB4E0."
+      followupDialogue: {fileID: 11400000, guid: 22e0f4d99461f0d4fb7a4a72ec7ebba2, type: 2}
+    - choiceText: "\uC5EC\uD589? \uADC0\uCC2E\uC544... \uC7AC\uBC0C\uB294 \uAC74
+        \uC5C6\uB2C8?"
+      followupDialogue: {fileID: 11400000, guid: 01132fb75218f2947a3e5ae950c33884, type: 2}
+    - choiceText: "\uC5B4\uC5B4...... \uAE00\uC384......?"
+      followupDialogue: {fileID: 11400000, guid: 1c7d686fc28853e41aa8d084bbe20a01, type: 2}
+  followupDialogue: {fileID: 0}

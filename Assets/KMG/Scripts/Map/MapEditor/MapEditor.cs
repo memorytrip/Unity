@@ -7,8 +7,9 @@ namespace Map.Editor
     public class MapEditor
     {
         public MapConcrete mapConcrete;
-        public MapObject focusObject;
-        
+        private MapObject _focusObject;
+        public MapObject focusObject { get => _focusObject; }
+
         private List<Operations.IMapEditOperation> operationQueue;
 
         public void CreateObj(Vector3 position, Model model)
@@ -21,14 +22,34 @@ namespace Map.Editor
             mapConcrete.DeleteMapObject(mapObject);
         }
 
-        public void Execute(Operations.Create oper)
+        public void FocusOn(MapObject mapObject)
         {
-            throw new NotImplementedException();
+            FocusOff();
+
+            _focusObject = mapObject;
+            focusObject.GetComponent<Outline>().enabled = true;
         }
-        
-        public void Execute(Operations.Delete oper)
+
+        public void FocusOff()
         {
-            throw new NotImplementedException();
+            if (focusObject == null) return;
+            
+            focusObject.GetComponent<Outline>().enabled = false;
+            _focusObject = null;
+        }
+
+        public void SetTheme(Theme theme)
+        {
+            mapConcrete.SetTheme(theme);
+            ResetModels();
+        }
+
+        public void ResetModels()
+        {
+            foreach (var mapObject in mapConcrete.mapObjects.ToArray())
+            {
+                mapConcrete.DeleteMapObject(mapObject);
+            }
         }
     }
 }
