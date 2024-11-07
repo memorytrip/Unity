@@ -105,5 +105,11 @@ namespace Common.Network
         {
             Chat.Instance.Append(msg);
         }
+
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void RpcNewChatMsg(string msg)
+        {
+            NewChat.Instance.InstantiateChat(msg);
+        }
     }
 }

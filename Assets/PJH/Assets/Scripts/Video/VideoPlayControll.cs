@@ -1,3 +1,4 @@
+using GUI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Video;
@@ -5,20 +6,23 @@ using UnityEngine.Video;
 public class VideoPlay : MonoBehaviour
 {
     public VideoPlayer player;
-    public TMP_Text playButton;
+    public CanvasGroup playButton;
+    public CanvasGroup resumeButton;
     private bool isPlaying = false;
     
     public void VideoPlayControll()
     {
         if (!isPlaying)
         {
-            playButton.text = "Pause";
+            UIManager.HideUI(playButton);
+            UIManager.ShowUI(resumeButton);
             player.Play();
             isPlaying = true;
         }
         else
         {
-            playButton.text = "Play";
+            UIManager.ShowUI(playButton);
+            UIManager.HideUI(resumeButton);
             player.Pause();
             isPlaying = false;
         }
