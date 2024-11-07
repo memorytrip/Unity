@@ -486,8 +486,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe400fda2fdafe4bbbd3ea64467d659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 1662441117}
-  camTarget: {fileID: 47243719}
+  mainCamera: {fileID: 1398318880}
+  cinemachineCam: {fileID: 1662441117}
+  cinemachineCamTarget: {fileID: 47243719}
   cinemachineController: {fileID: 1662441113}
   rotationButton: {fileID: 746475376}
   ItemList: {fileID: 2046161882}
@@ -1082,7 +1083,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 200
   field of view: 60
   orthographic: 1
   orthographic size: 25
@@ -1159,7 +1160,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 30, y: -45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &746475374
 GameObject:
   m_ObjectHideFlags: 0

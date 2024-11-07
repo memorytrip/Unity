@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -53,6 +54,27 @@ namespace Common
             
             await request.SendWebRequest();
 
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                return request.downloadHandler.text;
+            }
+            else
+            {
+                throw new Exception(request.error);
+            }
+        }
+
+        private async UniTask<string> Post(string api, List<IMultipartFormSection> data, int timeout = 5)
+        {
+            throw new NotImplementedException();
+            string url = baseURL + api;
+            UnityWebRequest request = new UnityWebRequest(url, "POST");
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.timeout = timeout;
+            request.SetRequestHeader("Content-Type", "multipart/form-data");
+
+            await request.SendWebRequest();
+            
             if (request.result == UnityWebRequest.Result.Success)
             {
                 return request.downloadHandler.text;

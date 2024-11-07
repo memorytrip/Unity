@@ -8,6 +8,7 @@ namespace Common.Network
     public class SessionManager: MonoBehaviour
     {
         public static SessionManager Instance = null;
+        public Session currentSession;
         private string baseURL = "127.0.0.1";
         private void Awake()
         {
@@ -21,6 +22,11 @@ namespace Common.Network
         }
 
         public void Logout()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private Session CreateSession()
         {
             throw new System.NotImplementedException();
         }
