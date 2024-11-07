@@ -38,6 +38,7 @@ namespace Map
             this.model = model;
             GetComponent<MeshFilter>().mesh = model.mesh;
             GetComponent<MeshRenderer>().material = model.material;
+            GetComponent<MeshCollider>().sharedMesh = model.mesh;
         }
         
         public Model GetModel()

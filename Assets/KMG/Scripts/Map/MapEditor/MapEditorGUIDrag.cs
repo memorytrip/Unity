@@ -18,8 +18,14 @@ namespace Map.Editor
             {
                 context.target.focusObject.gameObject.SetActive(true);
                 context.target.focusObject.transform.position = QuantizatePosition(hitdata.point);
+                
+                context.rotationButton.gameObject.SetActive(true);
+                Vector3 buttonPos = Camera.main.WorldToScreenPoint(context.target.focusObject.transform.position);
+                buttonPos.y += 100;
+                context.rotationButton.transform.position = buttonPos;
             } else {
                 context.target.focusObject.gameObject.SetActive(false);
+                context.rotationButton.gameObject.SetActive(false);
             }
         }
 
@@ -30,15 +36,18 @@ namespace Map.Editor
             } else {
                 context.target.mapConcrete.DeleteMapObject(context.target.focusObject);
             }
+            context.scrollRect.horizontal = true;
             context.SwitchState(new MapEditorGUIIdle(context));
         }
 
         private Vector3 QuantizatePosition(Vector3 pos)
         {
             pos.x = Mathf.Round(pos.x);
-            pos.y = Mathf.Round(pos.y) + 0.5f;
+            pos.y = 100; //Mathf.Round(pos.y);
             pos.z = Mathf.Round(pos.z);
-            return pos;
+            RaycastHit hit;
+            Physics.Raycast(pos, Vector3.down, out hit, 150f);
+            return hit.point;
         }
     }
 }

@@ -13,7 +13,8 @@ namespace Map
         
         public MapInfo info;
         public GameObject rootObject;
-        public string themeId;
+        public Theme theme;
+        public bool isLoading = false;
         public List<MapObject> mapObjects;
         private GameObject mapObjectPrefab;
 
@@ -53,10 +54,18 @@ namespace Map
             MonoBehaviour.Destroy(mapObject.gameObject);
         }
 
-        public async UniTaskVoid SetTheme(string themeId)
+        public async UniTask SetTheme(string themeId)
         {
             Theme theme = await ModelManager.Instance.GetTheme(themeId);
-            this.themeId = themeId;
+            this.theme = theme;
+            rootMeshFilter.mesh = theme.mesh;
+            rootMeshRenderer.material = theme.material;
+            rootMeshCollider.sharedMesh = theme.mesh;
+        }
+
+        public void SetTheme(Theme theme)
+        {
+            this.theme = theme;
             rootMeshFilter.mesh = theme.mesh;
             rootMeshRenderer.material = theme.material;
             rootMeshCollider.sharedMesh = theme.mesh;

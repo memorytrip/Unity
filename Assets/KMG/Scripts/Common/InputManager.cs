@@ -59,6 +59,11 @@ namespace Common
                 prevPinchMagnitude = magnitude;
                 OnPinch?.Invoke(this, new PinchEventArgs(difference));
             };
+
+            OnFingerUp += _ =>
+            {
+                prevPinchMagnitude = -1;
+            };
         }
 
         private void InitPanning()

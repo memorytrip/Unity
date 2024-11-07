@@ -15,7 +15,7 @@ namespace KMG.Scripts.Dummy
         private const string defaultMapInfo =
             "{\"formatVersion\":\"0.0.1\",\"id\":null,\"thumbnail\":null,\"data\":\"{\\\"themeId\\\":\\\"0\\\",\\\"mapObjectList\\\":[]}\"}";
         [SerializeField] private GameObject mapConcreteRoot;
-        [SerializeField] private Map.Editor.MapEditorGUI mapEditorGUI;
+        [SerializeField] private MapEditorGUI mapEditorGUI;
         [SerializeField] private Button mapConvertButton;
         [SerializeField] private ThumbnailCapture capturer;
         [SerializeField] private CinemachineCamera cam;
