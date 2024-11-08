@@ -13,9 +13,14 @@ namespace Myroom
         private async UniTaskVoid Start()
         {
             // TODO: BE에서 mapInfo 불러와서 하기
-            // List<MapInfo> mapInfos = await MapManager.Instance.LoadMapList(new User());
-            // MapConcrete map = await MapManager.Instance.LoadMap(mapInfos[0]);
+
+            MapInfo mapInfo = await LoadFromLocal();
             
+            LoadMap(mapInfo).Forget();
+        }
+
+        private async UniTask<MapInfo> LoadFromLocal()
+        {
             string path = Application.persistentDataPath + "/Maps/";
             string filename = "asdf.json";
             
@@ -25,20 +30,28 @@ namespace Myroom
                 directoryInfo.Create();
             }
 
-            MapInfo mapInfo;
+            MapInfo mapInfo = MapInfo.GetDefaultMap();;
             if (File.Exists(path + filename))
             {
                 string rawData = await File.ReadAllTextAsync(path + filename);
                 mapInfo = JsonConvert.DeserializeObject<MapInfo>(rawData);
             }
-            else
-            {
-                mapInfo = MapInfo.GetDefaultMap();
-            }
-            Debug.Log(mapInfo);
+
+            return mapInfo;
+        }
+
+        private async UniTask<MapInfo> LoadFromServer()
+        {
+            string data = await DataManager.Get("/myroom");
+            MapInfo mapInfo = JsonConvert.DeserializeObject<MapInfo>(data);
+            return mapInfo;
+        }
+
+        private async UniTaskVoid LoadMap(MapInfo mapInfo)
+        {
             MapConcrete map = await MapConverter.ConvertMapInfoToMapConcrete(mapInfo);
             map.rootObject.layer = LayerMask.NameToLayer("Ground");
-            LoadWater(map);
+            LoadWater(map).Forget();
         }
 
         private async UniTaskVoid LoadWater(MapConcrete mapConcrete)

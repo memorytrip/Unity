@@ -18,29 +18,30 @@ namespace Common.Network
             else Destroy(this);
         }
 
-        public async UniTask<string> SignUp(string email, string password, string playerName)
+        public async UniTask<string> SignUp(string email, string password, string comfirmPassword, string playerName)
         {
             SignupData data = new SignupData();
             data.email = email;
             data.password = password;
+            data.confirmPassword = comfirmPassword;
             data.playerName = playerName;
             string rawData = JsonConvert.SerializeObject(data);
             
-            string response = await DataManager.Post("/signup", rawData);
+            string response = await DataManager.Post("/api/auth/signup", rawData);
             return response;
 
         }
         public async UniTask Login(string email, string password)
         {
             if (currentSession != null)
-                throw new Exception("Try to create session while current session already occupied");
+                throw new Exception("Try to create session while already log-in");
     
             LoginData data = new LoginData();
             data.email = email;
             data.password = password;
             string rawData = JsonConvert.SerializeObject(data);
 
-            string response = await DataManager.Post("/login", rawData);
+            string response = await DataManager.Post("/api/auth/login", rawData);
             LoginResult result = JsonConvert.DeserializeObject<LoginResult>(response);
             
             // 로그인 성공 시
@@ -50,6 +51,8 @@ namespace Common.Network
             currentSession.user = new User();
             currentSession.user.email = email;
             currentSession.user.nickName = result.nickname;
+            
+            Debug.Log($"JWT: {currentSession.token}");
         }
 
         public void Logout()
@@ -66,6 +69,7 @@ namespace Common.Network
         {
             public string email;
             public string password;
+            public string confirmPassword;
             public string playerName;
         }
 

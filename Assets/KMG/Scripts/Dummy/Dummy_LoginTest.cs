@@ -78,7 +78,7 @@ public class Dummy_LoginTest : MonoBehaviour
         string name = signupNickNameField.text;
         try
         {
-            await SessionManager.Instance.SignUp(id, pw, name);
+            await SessionManager.Instance.SignUp(id, pw, pw, name);
         }
         catch (Exception e)
         {

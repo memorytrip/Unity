@@ -1,5 +1,5 @@
-using System;
 using Common;
+using Common.Network;
 using Cysharp.Threading.Tasks;
 using Fusion;
 using UnityEngine;
@@ -14,14 +14,14 @@ namespace GUI
 
         private void Awake()
         {
-            
-            
             enterButton.onClick.AddListener(Enter);
         }
 
         private void Enter()
         {
-            SceneManager.Instance.MoveRoom("player_").Forget();
+            // User user = SessionManager.Instance.currentSession.user;
+            // SceneManager.Instance.MoveRoom($"player_{user.nickName}").Forget();
+            SceneManager.Instance.MoveRoom($"player_").Forget();
         }
 
         private void OnTriggerEnter(Collider other)
