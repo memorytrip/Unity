@@ -4,12 +4,6 @@ namespace Map.Editor
 {
     public abstract class MapEditorGUIState
     {
-        enum State
-        {
-            Idle,
-            Drag,
-            Move
-        }
         protected MapEditorGUI context;
 
         public MapEditorGUIState(MapEditorGUI context)
