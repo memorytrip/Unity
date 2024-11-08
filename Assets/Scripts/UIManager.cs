@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -29,17 +34,19 @@ public class UIManager : MonoBehaviour
         DontDestroyOnLoad(Instance);
         SceneManager.sceneLoaded += ToggleUI;
     }
+
+    private void Start()
+    {
+        ShowUI(mainMenu);
+        HideUI(sideMenu);
+        HideUI(chat);
+        HideUI(joystick);
+    }
     
     private void ToggleUI(Scene scene, LoadSceneMode mode)
     {
         switch (scene.name)
         {
-            case "Login":
-                ShowUI(mainMenu);
-                HideUI(sideMenu);
-                HideUI(chat);
-                HideUI(joystick);
-                break;
             case "MyRoom":
                 ShowUI(mainMenu);
                 ShowUI(sideMenu);
@@ -56,12 +63,6 @@ public class UIManager : MonoBehaviour
                 HideUI(chat);
                 HideUI(joystick);
                 break;
-            default:
-                ShowUI(mainMenu);
-                ShowUI(sideMenu);
-                ShowUI(chat);
-                ShowUI(joystick);
-                break;
         }
     }
 
@@ -77,6 +78,25 @@ public class UIManager : MonoBehaviour
         canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
     }
 
+    public async Task TemporarilyHideUI()
+    {
+        HideUI(mainMenu);
+        HideUI(sideMenu);
+        HideUI(chat);
+        HideUI(joystick);
+        await UniTask.Delay(TimeSpan.FromSeconds(8));
+        StartCoroutine(ProcessTemporaryToggle());
+    }
+
+    private IEnumerator ProcessTemporaryToggle()
+    {
+        ShowUI(mainMenu);
+        ShowUI(sideMenu);
+        ShowUI(chat);
+        ShowUI(joystick);
+        yield break;
+    }
+    
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= ToggleUI;
