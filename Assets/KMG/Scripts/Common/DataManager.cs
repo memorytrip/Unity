@@ -22,7 +22,7 @@ namespace Common
             else Destroy(this);
         }
         
-        private async UniTask<string> Get(string api, int timeout = 5)
+        public async UniTask<string> Get(string api, int timeout = 5)
         {
             string url = baseURL + api;
             UnityWebRequest request = new UnityWebRequest(url, "GET");

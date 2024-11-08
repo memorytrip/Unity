@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
 using Common.Network;
 using Cysharp.Threading.Tasks;
+using ExitGames.Client.Photon.StructWrapping;
 using JinsolTest.KMG.Common;
+using Newtonsoft.Json;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -12,6 +16,9 @@ public class PhotoInfo
 {
     public string imageData;
     public string roomCode;
+    public string letter;
+    public string userCount;
+    public string userID;
 }
 
 public class LetterInfo
@@ -48,7 +55,7 @@ public class PostLetterAndPhoto : MonoBehaviour
     {
         Texture2D texture = image.texture as Texture2D;
 
-        byte[] imageBytes = texture.EncodeToJPG();
+        byte[] imageBytes = texture.EncodeToPNG();
         string base64Image = System.Convert.ToBase64String(imageBytes);
         var data = new PhotoInfo
         {
@@ -72,6 +79,18 @@ public class PostLetterAndPhoto : MonoBehaviour
         
     }
 
+    private async UniTask GetPhoto(string roomCode)
+    {
+        string response = await DataManager.Instance.Get("api/asd"); 
+        List<string> responseData = JsonConvert.DeserializeObject<List<string>>(response);
+
+        for (int i = 0; i < responseData.Count; i++)
+        {
+            byte[] imageBytes = Convert.FromBase64String(responseData[i]);
+            
+        }
+    }
+
     private async UniTask PostLetter(string letterData)
     {
         var data = new LetterInfo
@@ -93,4 +112,6 @@ public class PostLetterAndPhoto : MonoBehaviour
             Debug.LogError("POST 요청 중 오류 발생: " + ex.Message);
         }
     }
+    
+    
 }

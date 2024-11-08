@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button screenshotButton;
     [SerializeField] private CanvasGroup chat;
     [SerializeField] private CanvasGroup joystick;
+    [SerializeField] private CanvasGroup newChat;
 
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class UIManager : MonoBehaviour
                 HideUI(sideMenu);
                 HideUI(chat);
                 HideUI(joystick);
+                HideUI(newChat);
                 break;
             case "MyRoom":
                 ShowUI(mainMenu);
@@ -46,22 +48,49 @@ public class UIManager : MonoBehaviour
                 screenshotButton.interactable = false;
                 HideUI(chat);
                 ShowUI(joystick);
+                HideUI(newChat);
                 break;
             case "MapEdit":
+                ShowUI(mainMenu);
+                ShowUI(sideMenu);
+                ShowUI(chat);
+                ShowUI(joystick);
+                HideUI(newChat);
+                break;
             case "PlayReady":
+                HideUI(mainMenu);
+                HideUI(sideMenu);
+                HideUI(chat);
+                HideUI(joystick);
+                HideUI(newChat);
+                break;
             case "SelectPhotoScene":
+                HideUI(mainMenu);
+                HideUI(sideMenu);
+                HideUI(chat);
+                HideUI(joystick);
+                ShowUI(newChat);
+                break;  
             case "VideoLoadTest":
+                HideUI(mainMenu);
+                HideUI(sideMenu);
+                HideUI(chat);
+                HideUI(joystick);
+                ShowUI(newChat);
+                break;
             case "LetterScene":
                 HideUI(mainMenu);
                 HideUI(sideMenu);
                 HideUI(chat);
                 HideUI(joystick);
+                ShowUI(newChat);
                 break;
             default:
                 ShowUI(mainMenu);
                 ShowUI(sideMenu);
                 ShowUI(chat);
                 ShowUI(joystick);
+                HideUI(newChat);
                 break;
         }
     }
