@@ -12,17 +12,18 @@ namespace Map.Editor
 
         public override void OnTouchPerform(Finger finger)
         {
-            Ray mouseRay = Camera.main.ScreenPointToRay(finger.screenPosition);
+            Debug.Log(context.mainCamera.gameObject.name);
+            Ray mouseRay = context.mainCamera.ScreenPointToRay(finger.screenPosition);
             RaycastHit hitdata;
             if (Physics.Raycast(mouseRay, out hitdata))
             {
                 context.target.focusObject.gameObject.SetActive(true);
                 context.target.focusObject.transform.position = QuantizatePosition(hitdata.point);
                 
-                context.rotationButton.gameObject.SetActive(true);
-                Vector3 buttonPos = Camera.main.WorldToScreenPoint(context.target.focusObject.transform.position);
-                buttonPos.y += 100;
-                context.rotationButton.transform.position = buttonPos;
+                // context.rotationButton.gameObject.SetActive(true);
+                // Vector3 buttonPos = Camera.main.WorldToScreenPoint(context.target.focusObject.transform.position);
+                // buttonPos.y += 100;
+                // context.rotationButton.transform.position = buttonPos;
             } else {
                 context.target.focusObject.gameObject.SetActive(false);
                 context.rotationButton.gameObject.SetActive(false);

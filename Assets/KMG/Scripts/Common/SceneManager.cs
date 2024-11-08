@@ -4,8 +4,6 @@ using Common.Network;
 using Cysharp.Threading.Tasks;
 using GUI;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 namespace Common
 {
