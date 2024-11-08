@@ -87,12 +87,12 @@ namespace Map.Editor
         {
             var diff = - args.difference;
             var center = new Vector2(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
-            var ray = Camera.main.ScreenPointToRay(center + diff);
+            var ray = mainCamera.ScreenPointToRay(center + diff);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000f, LayerMask.GetMask("Water")))
             {
                 var point = hit.point;
-                Debug.Log($"{center + diff}, {point}");
+                // Debug.Log($"{center + diff}, {point}");
             
                 var toPosition = new Vector3(point.x, point.y, point.z);
                 toPosition.x = Mathf.Clamp(point.x, -20f, 20f);
@@ -128,9 +128,9 @@ namespace Map.Editor
             if (target.focusObject != null)
             {
                 rotationButton.gameObject.SetActive(true);
-                // Vector3 buttonPos = mainCamera.WorldToScreenPoint(target.focusObject.transform.position);
-                Vector3 buttonPos = target.focusObject.transform.position;
-                buttonPos.y += 10;
+                Vector3 buttonPos = mainCamera.WorldToScreenPoint(target.focusObject.transform.position);
+                // Vector3 buttonPos = target.focusObject.transform.position;
+                buttonPos.y += 100;
                 rotationButton.transform.position = buttonPos;
             }
             else
