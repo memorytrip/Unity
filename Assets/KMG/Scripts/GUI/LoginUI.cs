@@ -54,6 +54,8 @@ namespace GUI
             Utility.EnablePanel(loginPanel);
             openLoginPanelButton.interactable = false;
             openSignupPanelButton.interactable = false;
+            
+            AutomateInput().Forget();
         }
 
         private void OpenSignUpPanel()
@@ -68,6 +70,7 @@ namespace GUI
             Utility.DisablePanel(loginPanel);
             openLoginPanelButton.interactable = true;
             openSignupPanelButton.interactable = true;
+            ClearInput();
         }
 
         private void CloseSignupPanel()
@@ -75,6 +78,7 @@ namespace GUI
             Utility.DisablePanel(signupPanel);
             openLoginPanelButton.interactable = true;
             openSignupPanelButton.interactable = true;
+            ClearInput();
         }
 
         private async UniTaskVoid Login()
@@ -91,6 +95,40 @@ namespace GUI
             string pw = signupPWField.text;
             string name = signupNickNameField.text;
             await SessionManager.Instance.SignUp(id, pw, pw, name);
+        }
+        
+        
+        private async UniTaskVoid AutomateInput()
+        { 
+            const string IdKey = "Traver";
+            const string PasswordKey = "Pass!1234"; // 기절할 비밀번호 조합
+            
+            await UniTask.Delay(1000);
+            loginIDField.ActivateInputField();
+            foreach (var character in IdKey.ToCharArray())
+            {
+                loginIDField.text += character;
+                loginIDField.caretPosition = loginIDField.text.Length;
+                await UniTask.Delay(50);
+            }
+            await UniTask.Delay(1000);
+            loginPWField.ActivateInputField();
+            foreach (var character in PasswordKey.ToCharArray())
+            {
+                loginPWField.text += character;
+                loginPWField.caretPosition = loginPWField.text.Length;
+                await UniTask.Delay(50);
+            }
+        }
+
+        private void ClearInput()
+        {
+            loginIDField.text = string.Empty;
+            loginPWField.text = string.Empty;
+            signupIDField.text = string.Empty;
+            signupPWField.text = string.Empty;
+            signupNickNameField.text = string.Empty;
+            signupConfirmPWField.text = string.Empty;
         }
     }
 }

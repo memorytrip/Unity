@@ -44,10 +44,11 @@ namespace Map
 
         private async UniTask<List<MapInfo>> LoadCustomMapListFromServer()
         {
-            List<MapInfo> mapInfos = new List<MapInfo>();
+            List<MapInfo> mapIndexes = new List<MapInfo>();
             string data = await DataManager.Get("/api/map/list");
+            mapIndexes = JsonConvert.DeserializeObject<MapList>(data).mapInfos;
             
-            return mapInfos;
+            return mapIndexes;
         }
 
         private async UniTask<List<MapInfo>> LoadCustomMapListFromLocal()
@@ -73,13 +74,6 @@ namespace Map
         {
             TextAsset textAsset = await Resources.LoadAsync<TextAsset>("Maps/" + mapName) as TextAsset;
             return textAsset.text;
-        }
-#endregion
-        
-#region Load MapConcrete        
-        public async UniTask<MapConcrete> LoadMap(MapInfo mapInfo)
-        {
-            return await MapConverter.ConvertMapInfoToMapConcrete(mapInfo);
         }
 #endregion
 

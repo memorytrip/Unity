@@ -64,6 +64,7 @@ namespace Common.Network
                     break;
                 case "MyRoom":
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
+                    currenctCharacter.transform.Find("Scale").transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     break;
                 case "PlayReady":
                     currenctCharacter = await SpawnProcess("PlayReadyState");
@@ -72,6 +73,7 @@ namespace Common.Network
                 case "MultiPlayTest":
                     SceneManager.Instance.OnSceneLoaded -= SpawnAvatar;
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
+                    currenctCharacter.transform.Find("Scale").transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     break;
                 default:
                     break;
