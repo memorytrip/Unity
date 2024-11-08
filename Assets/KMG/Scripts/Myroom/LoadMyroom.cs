@@ -23,6 +23,7 @@ namespace Myroom
         {
             string path = Application.persistentDataPath + "/Maps/";
             string filename = "asdf.json";
+            Debug.Log(path + filename);
             
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)

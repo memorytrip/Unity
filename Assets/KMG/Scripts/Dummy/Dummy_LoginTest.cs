@@ -60,14 +60,7 @@ public class Dummy_LoginTest : MonoBehaviour
     {
         string id = loginIDField.text;
         string pw = loginPWField.text;
-        try
-        {
-            await SessionManager.Instance.Login(id, pw);
-        }
-        catch (Exception e)
-        {
-            Debug.LogAssertion(e.Message);
-        }
+        await SessionManager.Instance.Login(id, pw);
         
     }
 
@@ -76,13 +69,6 @@ public class Dummy_LoginTest : MonoBehaviour
         string id = signupIDField.text;
         string pw = signupPWField.text;
         string name = signupNickNameField.text;
-        try
-        {
-            await SessionManager.Instance.SignUp(id, pw, pw, name);
-        }
-        catch (Exception e)
-        {
-            Debug.LogAssertion(e.Message);
-        }
+        await SessionManager.Instance.SignUp(id, pw, pw, name);
     }
 }

@@ -16,13 +16,14 @@ namespace Common
 
         private const string AIANALIZE = "api/ai/analyze";
 
-        private static string token => SessionManager.Instance.currentSession.token;
+        private static string token => SessionManager.Instance.currentSession?.token;
         
         public static async UniTask<string> Get(string api, int timeout = 5)
         {
             string url = baseURL + api;
             UnityWebRequest request = new UnityWebRequest(url, "GET");
-            request.SetRequestHeader("authorization", token);
+            if (token != null)
+                request.SetRequestHeader("authorization", token);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.timeout = timeout;
 
@@ -43,7 +44,8 @@ namespace Common
             string url = baseURL + api;
             UnityWebRequest request = new UnityWebRequest(url, "POST");
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            request.SetRequestHeader("authorization", token);
+            if (token != null)
+                request.SetRequestHeader("authorization", token);
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.timeout = timeout;
@@ -66,7 +68,8 @@ namespace Common
             string url = baseURL + api;
             UnityWebRequest request = new UnityWebRequest(url, "POST");
             byte[] boundary = System.Text.Encoding.UTF8.GetBytes("----Boundary");
-            request.SetRequestHeader("authorization", token);
+            if (token != null)
+                request.SetRequestHeader("authorization", token);
             request.uploadHandler = new UploadHandlerRaw(UnityWebRequest.SerializeFormSections(formdata, boundary));
             request.downloadHandler = new DownloadHandlerBuffer();
             request.timeout = timeout;
