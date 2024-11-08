@@ -5,7 +5,7 @@ Shader "Vefects/SH_Vefects_VFX_AdvParticle_New_Item_Pickup"
 	Properties
 	{
 		[HideInInspector] _EmissionColor("Emission Color", Color) = (1,1,1,1)
-		[HideInInspector] _AlphaCutoff("Alpha Cutoff ", Range(0, 1)) = 0.5
+		[HideInInspector] _AlphaCutoff("Alpha Cutoff ", Range(0, 1)) = 1
 		_Erosion_Texture("Erosion_Texture", 2D) = "white" {}
 		_ColorGradientMask("Color Gradient Mask", 2D) = "white" {}
 		_Mask_Texture("Mask_Texture", 2D) = "white" {}
