@@ -57,6 +57,8 @@ public class ScreenshotManager : MonoBehaviour
     [SerializeField] private Button jumpToInternetButton;
     private string _savedURL;
 
+    private ToggleCanvasGroup _toggleCanvasGroup;
+
     private float DefaultFOV()
     {
         return _screenshotCameras[(int)EScreenshotCameraType.Selfie].IsLive ? 24f : 36f;
@@ -70,6 +72,11 @@ public class ScreenshotManager : MonoBehaviour
 
     #endregion
 
+    private void Awake()
+    {
+        _toggleCanvasGroup = GetComponentInParent<ToggleCanvasGroup>();
+    }
+    
     private void Start()
     {
         toggleScreenshotModeButton = FindAnyObjectByType<ScreenshotButton>().GetComponent<Button>();
@@ -94,6 +101,7 @@ public class ScreenshotManager : MonoBehaviour
         }
 
         toggleScreenshotModeButton.onClick.AddListener(ToggleScreenshotMode);
+        toggleScreenshotModeButton.onClick.AddListener(_toggleCanvasGroup.Toggle);
         flipButton.onClick.AddListener(FlipCamera);
         snapshotButton.onClick.AddListener(CaptureScreenshot);
         jumpToInternetButton.onClick.AddListener(JumpToURL);

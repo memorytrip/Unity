@@ -1,9 +1,9 @@
+using System.Collections;
 using Common;
 using Fusion;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -38,6 +38,8 @@ public class PlayerMovement : NetworkBehaviour
     [Header("ScreenshotCam LookAt Target")]
     [SerializeField] private Transform screenshotCamPosition;
     
+    private readonly WaitForSeconds _wait = new WaitForSeconds(6f);
+    
     private void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
@@ -57,6 +59,8 @@ public class PlayerMovement : NetworkBehaviour
         _chatDisplay = FindAnyObjectByType<ChatDisplay>();
         _chatDisplay.StartTyping += ToggleMovement;
         _chatDisplay.StopTyping += ToggleMovement;
+
+        StartCoroutine(WaitUntilTransitionEnd());
     }
 
 
@@ -167,8 +171,16 @@ public class PlayerMovement : NetworkBehaviour
         else
         {
             _playerInput.ActivateInput();
-            Debug.Log($"얼음 -> 땡");
+            Debug.Log("얼음 -> 땡");
         }
+    }
+
+    private IEnumerator WaitUntilTransitionEnd()
+    {
+        _playerInput.DeactivateInput();
+        yield return _wait;
+        _playerInput.ActivateInput();
+        Debug.Log("얼음 -> 땡");
     }
     
     public override void Despawned(NetworkRunner runner, bool hasState)
