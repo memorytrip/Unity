@@ -86,7 +86,7 @@ namespace Map.Editor
         void OnPanningCam(object sender, PanningEventArgs args)
         {
             var diff = - args.difference;
-            var center = new Vector2(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
+            var center = new Vector2(mainCamera.pixelWidth / 2, mainCamera.pixelHeight / 2);
             var ray = mainCamera.ScreenPointToRay(center + diff);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000f, LayerMask.GetMask("Water")))

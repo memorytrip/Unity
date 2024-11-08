@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7031300577035295829}
   - component: {fileID: 4937572610410619089}
   - component: {fileID: 4105582481195439229}
-  - component: {fileID: 20360145353379479}
   - component: {fileID: 5817256964011514131}
   - component: {fileID: 1415241702373538025}
   m_Layer: 0
@@ -121,18 +120,6 @@ MonoBehaviour:
   bgmVolume: 1
   sfxVolume: 1
   systemVolume: 1
---- !u!114 &20360145353379479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7555971560589672104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3463b34480cf42a7b7d95b50358b35ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5817256964011514131
 MonoBehaviour:
   m_ObjectHideFlags: 0

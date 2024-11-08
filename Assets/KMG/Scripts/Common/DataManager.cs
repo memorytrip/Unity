@@ -9,21 +9,13 @@ namespace Common
     /**
      * TODO: RESTful을 통한 json 송/수신
      */
-    public class DataManager: MonoBehaviour
+    public static class DataManager
     {
-        public static DataManager Instance = null;
         private const string baseURL = "http://125.132.216.190:12222/";
 
         private const string AIANALIZE = "api/ai/analyze";
         
-        
-        private void Awake()
-        {
-            if (Instance == null) Instance = this;
-            else Destroy(this);
-        }
-        
-        private async UniTask<string> Get(string api, int timeout = 5)
+        public static async UniTask<string> Get(string api, int timeout = 5)
         {
             string url = baseURL + api;
             UnityWebRequest request = new UnityWebRequest(url, "GET");
@@ -42,7 +34,7 @@ namespace Common
             }
         }
 
-        private async UniTask<string> Post(string api, string jsonData, int timeout = 5)
+        public static async UniTask<string> Post(string api, string jsonData, int timeout = 5)
         {
             string url = baseURL + api;
             UnityWebRequest request = new UnityWebRequest(url, "POST");
@@ -64,7 +56,7 @@ namespace Common
             }
         }
 
-        private async UniTask<string> Post(string api, List<IMultipartFormSection> data, int timeout = 5)
+        public static async UniTask<string> Post(string api, List<IMultipartFormSection> data, int timeout = 5)
         {
             throw new NotImplementedException();
             string url = baseURL + api;
