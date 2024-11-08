@@ -42,9 +42,9 @@ namespace Map
             return mapInfos;
         }
 
-        private async UniTask<List<MapIndex>> LoadCustomMapListFromServer()
+        private async UniTask<List<MapInfo>> LoadCustomMapListFromServer()
         {
-            List<MapIndex> mapIndexes = new List<MapIndex>();
+            List<MapInfo> mapIndexes = new List<MapInfo>();
             string data = await DataManager.Get("/api/map/list");
             mapIndexes = JsonConvert.DeserializeObject<MapList>(data).mapInfos;
             
@@ -79,13 +79,7 @@ namespace Map
 
         class MapList
         {
-            public List<MapIndex> mapInfos;
-        }
-
-        class MapIndex
-        {
-            public int id;
-            public string thumbnail;
+            public List<MapInfo> mapInfos;
         }
     }
 }
