@@ -67,7 +67,7 @@ public class PostLetterAndPhoto : MonoBehaviour
         string jsonString = JsonUtility.ToJson(data);
         try
         {
-            string response = await DataManager.Instance.Post(api, jsonString, 20);
+            string response = await DataManager.Post(api, jsonString, 20);
             Debug.Log("응답: " + response);
             
         }
@@ -81,7 +81,7 @@ public class PostLetterAndPhoto : MonoBehaviour
 
     private async UniTask GetPhoto(string roomCode)
     {
-        string response = await DataManager.Instance.Get("api/asd"); 
+        string response = await DataManager.Get("api/asd"); 
         List<string> responseData = JsonConvert.DeserializeObject<List<string>>(response);
 
         for (int i = 0; i < responseData.Count; i++)
@@ -103,7 +103,7 @@ public class PostLetterAndPhoto : MonoBehaviour
         
         try
         {
-            string response = await DataManager.Instance.Post(api, jsonString, 20);
+            string response = await DataManager.Post(api, jsonString, 20);
             Debug.Log("응답: " + response);
             
         }

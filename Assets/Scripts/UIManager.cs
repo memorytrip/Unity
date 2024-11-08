@@ -46,15 +46,15 @@ public class UIManager : MonoBehaviour
                 ShowUI(mainMenu);
                 ShowUI(sideMenu);
                 screenshotButton.interactable = false;
-                HideUI(chat);
+                ShowUI(chat);   
                 ShowUI(joystick);
                 HideUI(newChat);
                 break;
             case "MapEdit":
                 ShowUI(mainMenu);
-                ShowUI(sideMenu);
-                ShowUI(chat);
-                ShowUI(joystick);
+                HideUI(sideMenu);
+                HideUI(chat);
+                HideUI(joystick);   
                 HideUI(newChat);
                 break;
             case "PlayReady":
