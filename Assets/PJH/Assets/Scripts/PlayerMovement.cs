@@ -4,9 +4,12 @@ using Fusion;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 public class PlayerMovement : NetworkBehaviour
 {
+    private static readonly int IsMoving = Animator.StringToHash("IsMoving");
+
     [Header("References")]
     private CharacterController cc;
     //private NetworkMecanimAnimator networkanim;
@@ -38,7 +41,10 @@ public class PlayerMovement : NetworkBehaviour
     [Header("ScreenshotCam LookAt Target")]
     [SerializeField] private Transform screenshotCamPosition;
     
-    private readonly WaitForSeconds _wait = new WaitForSeconds(6f);
+    private readonly WaitForSeconds _wait = new WaitForSeconds(4f);
+    
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
     
     private void Awake()
     {
@@ -114,10 +120,12 @@ public class PlayerMovement : NetworkBehaviour
         // if (joystick.isInput)
         if (InputManager.Instance.moveAction.ReadValue<Vector2>().magnitude <= 0f)
         {
+            animator.SetBool(IsMoving, false);
             _playerMoveSpeed = 0f;
         }
         else
         {
+            animator.SetBool(IsMoving, true);
             _playerMoveSpeed = playerMoveSpeed;
         }
         cc.Move(new Vector3(playerDir.x * _playerMoveSpeed, velocity, playerDir.z * _playerMoveSpeed) * Time.fixedDeltaTime);
@@ -147,7 +155,7 @@ public class PlayerMovement : NetworkBehaviour
     }
     
     public void PlayerMove()
-    { 
+    {
         // playerDir = new Vector3(joystick.inputDirection.x, 0f, joystick.inputDirection.y);
         Vector2 inputVector = InputManager.Instance.moveAction.ReadValue<Vector2>();
         playerDir = new Vector3(inputVector.x, 0f, inputVector.y);
@@ -177,6 +185,10 @@ public class PlayerMovement : NetworkBehaviour
 
     private IEnumerator WaitUntilTransitionEnd()
     {
+        if (SceneManager.GetActiveScene().name != "Square")
+        {
+            yield break;
+        }
         _playerInput.DeactivateInput();
         yield return _wait;
         _playerInput.ActivateInput();
