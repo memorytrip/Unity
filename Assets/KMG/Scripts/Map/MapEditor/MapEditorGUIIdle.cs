@@ -56,7 +56,7 @@ namespace Map.Editor
             }
 
             // 배치된 오브젝트 선택
-            Ray mouseRay = Camera.main.ScreenPointToRay(finger.screenPosition);
+            Ray mouseRay = context.mainCamera.ScreenPointToRay(finger.screenPosition);
             RaycastHit hit;
             if (Physics.Raycast(mouseRay, out hit))
             {

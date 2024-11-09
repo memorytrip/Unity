@@ -13,5 +13,6 @@ namespace Common.Network
 
         public State state;
         public User user;
+        public string token;
     }
 }
