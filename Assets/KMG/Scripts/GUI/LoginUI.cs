@@ -1,8 +1,8 @@
+using System.Collections;
 using Common.Network;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace GUI
@@ -31,6 +31,12 @@ namespace GUI
         [SerializeField] private Button signUpButton;
         [SerializeField] private Button closeSignupPanelButton;
 
+        private readonly WaitForSeconds _wait = new WaitForSeconds(0.5f);
+        private readonly WaitForSeconds _typeDelay = new WaitForSeconds(0.05f);
+        private const string IdKey = "Traver";
+        private const string PasswordKey = "Pass!1234";
+        private const string NicknameKey = "트래버";
+        
         private enum Panel
         {
             Login,
@@ -54,6 +60,7 @@ namespace GUI
             Utility.EnablePanel(loginPanel);
             openLoginPanelButton.interactable = false;
             openSignupPanelButton.interactable = false;
+            StartCoroutine(AutomateLoginInput());
         }
 
         private void OpenSignUpPanel()
@@ -61,10 +68,13 @@ namespace GUI
             Utility.EnablePanel(signupPanel);
             openLoginPanelButton.interactable = false;
             openSignupPanelButton.interactable = false;
+            StartCoroutine(AutomateSignupInput());
         }
 
         private void CloseLoginPanel()
         {
+            ClearForm(loginIDField);
+            ClearForm(loginPWField);
             Utility.DisablePanel(loginPanel);
             openLoginPanelButton.interactable = true;
             openSignupPanelButton.interactable = true;
@@ -72,6 +82,10 @@ namespace GUI
 
         private void CloseSignupPanel()
         {
+            ClearForm(signupIDField);
+            ClearForm(signupNickNameField);
+            ClearForm(signupPWField);
+            ClearForm(signupConfirmPWField);
             Utility.DisablePanel(signupPanel);
             openLoginPanelButton.interactable = true;
             openSignupPanelButton.interactable = true;
@@ -91,6 +105,68 @@ namespace GUI
             string pw = signupPWField.text;
             string name = signupNickNameField.text;
             await SessionManager.Instance.SignUp(id, pw, pw, name);
+        }
+        
+        private IEnumerator AutomateLoginInput()
+        {
+            yield return _wait;
+            loginIDField.ActivateInputField();
+            foreach (var character in IdKey.ToCharArray())
+            {
+                loginIDField.text += character;
+                loginIDField.caretPosition = loginIDField.text.Length;
+                yield return _typeDelay;
+            }
+            yield return _wait;
+            loginPWField.ActivateInputField();
+            foreach (var character in PasswordKey.ToCharArray())
+            {
+                loginPWField.text += character;
+                loginPWField.caretPosition = loginPWField.text.Length;
+                yield return _typeDelay;
+            }
+        }
+
+        private IEnumerator AutomateSignupInput()
+        {
+            yield return _wait;
+            signupIDField.ActivateInputField();
+            foreach (var character in IdKey.ToCharArray())
+            {
+                signupIDField.text += character;
+                signupIDField.caretPosition = signupIDField.text.Length;
+                yield return _typeDelay;
+            }
+            yield return _wait;
+            signupNickNameField.ActivateInputField();
+            foreach (var character in NicknameKey.ToCharArray())
+            {
+                signupNickNameField.text += character;
+                signupNickNameField.caretPosition = signupNickNameField.text.Length;
+                yield return _typeDelay;
+            }
+            yield return _wait;
+            signupPWField.ActivateInputField();
+            foreach (var character in PasswordKey.ToCharArray())
+            {
+                signupPWField.text += character;
+                signupPWField.caretPosition = signupPWField.text.Length;
+                yield return _typeDelay;
+            }
+            yield return _wait;
+            signupConfirmPWField.ActivateInputField();
+            foreach (var character in PasswordKey.ToCharArray())
+            {
+                signupConfirmPWField.text += character;
+                signupConfirmPWField.caretPosition = signupConfirmPWField.text.Length;
+                yield return _typeDelay;
+            }
+        }
+
+        private void ClearForm(TMP_InputField inputField)
+        {
+            inputField.text = string.Empty;
+            inputField.DeactivateInputField();
         }
     }
 }
