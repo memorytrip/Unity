@@ -1,3 +1,4 @@
+using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
 using TMPro;
@@ -30,14 +31,6 @@ namespace GUI
         [SerializeField] private TMP_InputField signupNickNameField;
         [SerializeField] private Button signUpButton;
         [SerializeField] private Button closeSignupPanelButton;
-
-        private enum Panel
-        {
-            Login,
-            Signup
-        }
-
-        private Panel panelState;
 
         private void Awake()
         {
@@ -86,6 +79,7 @@ namespace GUI
             string id = loginIDField.text;
             string pw = loginPWField.text;
             await SessionManager.Instance.Login(id, pw);
+            await SceneManager.Instance.MoveRoom(SceneManager.SquareScene);
 
         }
 
@@ -93,8 +87,9 @@ namespace GUI
         {
             string id = signupIDField.text;
             string pw = signupPWField.text;
+            string confirmPw = signupConfirmPWField.text;
             string name = signupNickNameField.text;
-            await SessionManager.Instance.SignUp(id, pw, pw, name);
+            await SessionManager.Instance.SignUp(id, pw, confirmPw, name);
         }
         
         
