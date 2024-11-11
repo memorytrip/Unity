@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 17e5f8e77d25d9641b31448a0cba363c
+guid: da318d925c4b73a42b8942e9ae1fc2f2
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GiltBronzeSeatedAmitabhaBuddha
+    second: {fileID: 2100000, guid: a5849f63e9ad1df4a8d2c6f38344a45b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
