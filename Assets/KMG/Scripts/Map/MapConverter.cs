@@ -12,7 +12,8 @@ namespace Map
     {
         public static async UniTask<MapConcrete> ConvertMapInfoToMapConcrete(MapInfo info)
         {
-            MapData mapData = ConvertJsonToMapData(info.data);
+            // MapData mapData = ConvertJsonToMapData(info.data);
+            MapData mapData = info.data;
             
             // MapConcrete 초기화
             MapConcrete mapConcrete = new MapConcrete();
@@ -52,7 +53,8 @@ namespace Map
 
             //TODO: mapInfo.id, mapInfo.thmbnail 채우기
             MapInfo mapInfo = new MapInfo();
-            mapInfo.data = ConvertMapDataToJson(mapData);
+            // mapInfo.data = ConvertMapDataToJson(mapData);
+            mapInfo.data = mapData;
             return mapInfo;
         }
 

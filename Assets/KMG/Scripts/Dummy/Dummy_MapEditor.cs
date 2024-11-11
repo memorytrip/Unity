@@ -55,7 +55,7 @@ namespace GUI
         private async UniTaskVoid ConvertMapConcreteToFile(MapConcrete mapConcrete)
         {
             MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
-            mapInfo.thumbnail = await capturer.CaptureToBase64();
+            mapInfo.thumbnail = ""; //await capturer.CaptureToBase64();
             
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)

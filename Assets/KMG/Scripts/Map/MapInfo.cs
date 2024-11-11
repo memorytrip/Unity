@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -12,12 +13,14 @@ namespace Map
         public static MapInfo GetDefaultMap()
         {
             MapInfo res = new MapInfo();
-            res.data =
-                "{\"themeId\":\"0\",\"mapObjectList\":[]}";
+            // res.data = "{\"themeId\":\"0\",\"mapObjectList\":[]}";
+            res.data = new MapData();
+            res.data.themeId = "0";
+            res.data.mapObjectList = new List<MapData.MapObjectData>();
             return res;
         }
         public string id;
         public string thumbnail;
-        public string data;
+        public MapData data;
     }
 }
