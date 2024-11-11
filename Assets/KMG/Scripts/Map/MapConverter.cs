@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Common;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Map
 {
@@ -12,7 +14,6 @@ namespace Map
     {
         public static async UniTask<MapConcrete> ConvertMapInfoToMapConcrete(MapInfo info)
         {
-            // MapData mapData = ConvertJsonToMapData(info.data);
             MapData mapData = info.data;
             
             // MapConcrete 초기화
@@ -32,10 +33,6 @@ namespace Map
             return mapConcrete;
         }
         
-        private static MapData ConvertJsonToMapData(string data)
-        {
-            return JsonConvert.DeserializeObject<MapData>(data);
-        }
 
         public static MapInfo ConvertMapConcreteToMapInfo(MapConcrete mapConcrete)
         {
@@ -53,14 +50,91 @@ namespace Map
 
             //TODO: mapInfo.id, mapInfo.thmbnail 채우기
             MapInfo mapInfo = new MapInfo();
-            // mapInfo.data = ConvertMapDataToJson(mapData);
             mapInfo.data = mapData;
             return mapInfo;
         }
 
-        private static string ConvertMapDataToJson(MapData mapData)
+        public static MapInfo ConvertJsonToMapInfo(string jsondata)
         {
-            return JsonConvert.SerializeObject(mapData);
+            MapInfo mapInfo = new MapInfo();
+            MapInfoRaw mapInfoRaw = JsonConvert.DeserializeObject<MapInfoRaw>(jsondata);
+            
+            mapInfo.id = mapInfoRaw.id;
+            mapInfo.thumbnail = mapInfo.thumbnail;
+
+            mapInfo.data = new MapData();
+            mapInfo.data.themeId = mapInfoRaw.data.themeId;
+            
+            mapInfo.data.mapObjectList = new List<MapData.MapObjectData>();
+            MapInfoRaw.MapData mapData = mapInfoRaw.data;
+            MapInfoRaw.MapData.MapObjectData[] mapObjectData = mapData.mapObjectList;
+            foreach (var data in mapObjectData)
+            {
+                MapData.MapObjectData mapObject = new MapData.MapObjectData();
+                mapObject.modelId = data.modelId;
+                mapObject.position = new SerializedVector3(data.positionX, data.positionY, data.positionZ);
+                mapObject.rotation =
+                    new SerializedQuaternion(data.rotationW, data.rotationX, data.rotationY, data.rotationZ);
+                mapInfo.data.mapObjectList.Add(mapObject);
+            }
+
+            return mapInfo;
         }
+        public static string ConvertMapInfoToJson(MapInfo mapInfo)
+        {
+            MapInfoRaw mapInfoRaw = new MapInfoRaw();
+
+            mapInfoRaw.id = mapInfo.id;
+            mapInfoRaw.thumbnailUrl = mapInfo.thumbnail;
+
+            mapInfoRaw.data = new MapInfoRaw.MapData();
+            mapInfoRaw.data.themeId = mapInfo.data.themeId;
+
+            mapInfoRaw.data.mapObjectList = new MapInfoRaw.MapData.MapObjectData[mapInfo.data.mapObjectList.Count];
+            int i = 0;
+            foreach (var data in mapInfo.data.mapObjectList)
+            {
+                MapInfoRaw.MapData.MapObjectData mapObject = new MapInfoRaw.MapData.MapObjectData();
+                mapObject.modelId = data.modelId;
+                mapObject.positionX = data.position.x;
+                mapObject.positionY = data.position.y;
+                mapObject.positionZ = data.position.z;
+                mapObject.rotationW = data.rotation.w;
+                mapObject.rotationX = data.rotation.x;
+                mapObject.rotationY = data.rotation.y;
+                mapObject.rotationZ = data.rotation.z;
+                mapInfoRaw.data.mapObjectList[i++] = mapObject;
+            }
+
+            return JsonConvert.SerializeObject(mapInfoRaw);
+        }
+    }
+    
+    
+    [Serializable]
+    class MapInfoRaw
+    {
+        public string id;
+        public string thumbnailUrl;
+        public class MapData
+        {
+            public string themeId;
+
+            public class MapObjectData
+            {
+                public string modelId;
+                public float positionX;
+                public float positionY;
+                public float positionZ;
+                public float rotationW;
+                public float rotationX;
+                public float rotationY;
+                public float rotationZ;
+            }
+
+            public MapObjectData[] mapObjectList;
+        }
+
+        public MapData data;
     }
 }

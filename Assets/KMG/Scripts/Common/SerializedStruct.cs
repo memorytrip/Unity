@@ -41,6 +41,14 @@ namespace Common
         public float z;
 
         public SerializedQuaternion() {}
+
+        public SerializedQuaternion(float w, float x, float y, float z)
+        {
+            this.w = w;
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
         public SerializedQuaternion(Quaternion quaternion)
         {
             w = quaternion.w;

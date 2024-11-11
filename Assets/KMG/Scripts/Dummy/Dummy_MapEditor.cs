@@ -43,7 +43,8 @@ namespace GUI
             if (File.Exists(path + filename))
             {
                 string rawData = await File.ReadAllTextAsync(path + filename);
-                mapInfo = JsonConvert.DeserializeObject<MapInfo>(rawData);
+                // mapInfo = JsonConvert.DeserializeObject<MapInfo>(rawData);
+                mapInfo = MapConverter.ConvertJsonToMapInfo(rawData);
             }
             else
             {
@@ -62,7 +63,8 @@ namespace GUI
             {
                 directoryInfo.Create();
             }
-            await File.WriteAllTextAsync(path + filename, JsonConvert.SerializeObject(mapInfo));
+            // await File.WriteAllTextAsync(path + filename, JsonConvert.SerializeObject(mapInfo));
+            await File.WriteAllTextAsync(path + filename, MapConverter.ConvertMapInfoToJson(mapInfo));
             Debug.Log($"File save: {path + filename}");
         }
 

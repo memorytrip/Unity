@@ -35,7 +35,7 @@ namespace Myroom
             if (File.Exists(path + filename))
             {
                 string rawData = await File.ReadAllTextAsync(path + filename);
-                mapInfo = JsonConvert.DeserializeObject<MapInfo>(rawData);
+                mapInfo = MapConverter.ConvertJsonToMapInfo(rawData);
             }
 
             return mapInfo;
