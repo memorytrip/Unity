@@ -2,6 +2,7 @@ using Common;
 using System.Collections;
 using Common.Network;
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -117,8 +118,9 @@ namespace GUI
             }
             catch (UnityWebRequestException e)
             {
-                OpenPopupPanel(e.Message);
-                Debug.LogAssertion(e);
+                Debug.LogAssertion(e.Message);
+                ErrorResult error = JsonConvert.DeserializeObject<ErrorResult>(e.Text);
+                OpenPopupPanel(error.response);
                 return;
             }
 
@@ -141,7 +143,18 @@ namespace GUI
             string pw = signupPWField.text;
             string confirmPw = signupConfirmPWField.text;
             string name = signupNickNameField.text;
-            await SessionManager.Instance.SignUp(id, pw, confirmPw, name);
+
+            try
+            {
+                await SessionManager.Instance.SignUp(id, pw, confirmPw, name);
+            }
+            catch (UnityWebRequestException e)
+            {
+                Debug.LogAssertion(e.Message);
+                ErrorResult error = JsonConvert.DeserializeObject<ErrorResult>(e.Text);
+                OpenPopupPanel(error.response);
+                return;
+            }
         }
         
         private IEnumerator AutomateLoginInput()
@@ -204,6 +217,12 @@ namespace GUI
         {
             inputField.text = string.Empty;
             inputField.DeactivateInputField();
+        }
+
+        class ErrorResult
+        {
+            public bool success;
+            public string response;
         }
     }
 }
