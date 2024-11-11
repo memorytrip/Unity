@@ -52,7 +52,6 @@ namespace Common.Network
             {
                 currentSession = new Session();
                 currentSession.token = response.token;
-                currentSession.state = Session.State.Connect;
                 currentSession.user = new User();
                 currentSession.user.email = email;
                 currentSession.user.nickName = result.email;

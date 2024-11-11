@@ -16,7 +16,6 @@ namespace Map
                 "{\"themeId\":\"0\",\"mapObjectList\":[]}";
             return res;
         }
-        public string formatVersion = "0.0.1";
         public string id;
         public string thumbnail;
         public string data;
