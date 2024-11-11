@@ -1,3 +1,4 @@
+using Common;
 using System.Collections;
 using Common.Network;
 using Cysharp.Threading.Tasks;
@@ -36,14 +37,6 @@ namespace GUI
         private const string IdKey = "Traver";
         private const string PasswordKey = "Pass!1234";
         private const string NicknameKey = "트래버";
-        
-        private enum Panel
-        {
-            Login,
-            Signup
-        }
-
-        private Panel panelState;
 
         private void Awake()
         {
@@ -96,6 +89,7 @@ namespace GUI
             string id = loginIDField.text;
             string pw = loginPWField.text;
             await SessionManager.Instance.Login(id, pw);
+            await SceneManager.Instance.MoveRoom(SceneManager.SquareScene);
 
         }
 
@@ -103,8 +97,9 @@ namespace GUI
         {
             string id = signupIDField.text;
             string pw = signupPWField.text;
+            string confirmPw = signupConfirmPWField.text;
             string name = signupNickNameField.text;
-            await SessionManager.Instance.SignUp(id, pw, pw, name);
+            await SessionManager.Instance.SignUp(id, pw, confirmPw, name);
         }
         
         private IEnumerator AutomateLoginInput()
