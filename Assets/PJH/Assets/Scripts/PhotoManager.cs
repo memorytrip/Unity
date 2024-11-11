@@ -22,6 +22,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     private NetworkObject hitNetworkObject;
     public TMP_Text findedPhotoCount;
     private int numberOfPhoto;
+    private readonly WaitForSeconds _waitForAnimation = new WaitForSeconds(3f);
 
     void Start()
     {
@@ -94,10 +95,16 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
             RpcUpdateFindedPhoto();
             if (findedPhoto >= numberOfPhoto)
             {
-                RpcSceneChange();
-                findedPhoto = 0;
+                StartCoroutine(FindLastPhoto());
             }
         }
+    }
+
+    private IEnumerator FindLastPhoto()
+    {
+        yield return _waitForAnimation;
+        RpcSceneChange();
+        findedPhoto = 0;
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
