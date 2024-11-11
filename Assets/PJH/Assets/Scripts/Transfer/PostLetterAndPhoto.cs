@@ -28,8 +28,8 @@ public class PostLetterAndPhoto : MonoBehaviour
     public RawImage photo1;
     public RawImage photo2;
     public TMP_InputField letter;
-    
-    private string api = "api"; //진짜 api 불러오기
+
+    private string api = "photos/upload"; // + userID; //진짜 api 불러오기
 
     public void Start()
     {
@@ -92,7 +92,7 @@ public class PostLetterAndPhoto : MonoBehaviour
                 new MultipartFormDataSection("Letter", letterInfo)
             };
             // DataManager를 통해 POST 요청 보내기
-            string response = await DataManager.Post(/*"your-api-endpoint",*/ formData);
+            string response = await DataManager.Post(api, formData);
             
             // 성공적으로 응답을 받았을 때의 처리
             Debug.Log("Success: " + response);

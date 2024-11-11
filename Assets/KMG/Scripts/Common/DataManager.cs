@@ -13,17 +13,17 @@ namespace Common
     public class DataManager: MonoBehaviour
     {
         public static DataManager Instance = null;
-        private const string baseURL = "http://125.132.216.190:12222/";
+        public const string baseURL = "http://memorytrip-env.eba-73mrisxy.ap-northeast-2.elasticbeanstalk.com/";
 
         private const string AIANALIZE = "api/ai/analyze";
 
-        private static string token => SessionManager.Instance.currentSession.token;
+        public static string token => SessionManager.Instance.currentSession.token;
         
         public static async UniTask<string> Get(string api, int timeout = 5)
         {
             string url = baseURL + api;
             UnityWebRequest request = new UnityWebRequest(url, "GET");
-            request.SetRequestHeader("authorization", token);
+            //request.SetRequestHeader("authorization", token);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.timeout = timeout;
 
@@ -64,10 +64,10 @@ namespace Common
 
         public static async UniTask<string> Post(string api, List<IMultipartFormSection> formdata, int timeout = 5)
         {
-            string url = baseURL + api;
+            string url =baseURL + api;
             UnityWebRequest request = new UnityWebRequest(url, "POST");
             byte[] boundary = System.Text.Encoding.UTF8.GetBytes("----Boundary");
-            request.SetRequestHeader("authorization", token);
+            //request.SetRequestHeader("authorization", token);
             request.uploadHandler = new UploadHandlerRaw(UnityWebRequest.SerializeFormSections(formdata, boundary));
             request.downloadHandler = new DownloadHandlerBuffer();
             request.timeout = timeout;

@@ -44,7 +44,7 @@ public class GetLetterAndPhoto : MonoBehaviour
     
     public RawImage[] photoImages; // Inspector에서 8개의 RawImage 할당
     private Text[] letterTexts;     // Inspector에서 8개의 Text 할당
-    private const string endPoint = "";
+    private const string endPoint = "api/photos/user/1";
 
     public async void ButtonClicked()
     {
