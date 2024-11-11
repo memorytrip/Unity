@@ -47,12 +47,20 @@ public class UIManager : MonoBehaviour
     {
         switch (scene.name)
         {
+            case "Square":
+            case "MultiPlayTest":
+                ShowUI(mainMenu);
+                ShowUI(sideMenu);
+                ShowUI(chat);
+                ShowUI(joystick);
+                screenshotButton.interactable = true;
+                break;
             case "MyRoom":
                 ShowUI(mainMenu);
                 ShowUI(sideMenu);
-                screenshotButton.interactable = false;
                 HideUI(chat);
                 ShowUI(joystick);
+                screenshotButton.interactable = false;
                 break;
             case "MapEdit":
             case "PlayReady":

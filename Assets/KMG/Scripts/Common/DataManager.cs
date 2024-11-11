@@ -15,10 +15,10 @@ namespace Common
         
         public static async UniTask<string> Get(string api, int timeout = 5)
         {
-            string url = baseURL + api;
+            string url = baseURL + CheckSlash(api);
             UnityWebRequest request = new UnityWebRequest(url, "GET");
             if (token != null)
-                request.SetRequestHeader("authorization", token);
+                request.SetRequestHeader("Authorization", token);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.timeout = timeout;
 
@@ -36,11 +36,11 @@ namespace Common
 
         public static async UniTask<string> Post(string api, string jsonData, int timeout = 5)
         {
-            string url = baseURL + api;
+            string url = baseURL + CheckSlash(api);
             UnityWebRequest request = new UnityWebRequest(url, "POST");
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
             if (token != null)
-                request.SetRequestHeader("authorization", token);
+                request.SetRequestHeader("Authorization", token);
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.timeout = timeout;
@@ -62,11 +62,11 @@ namespace Common
 
         public static async UniTask<string> Post(string api, List<IMultipartFormSection> formdata, int timeout = 5)
         {
-            string url = baseURL + api;
+            string url = baseURL + CheckSlash(api);
             UnityWebRequest request = new UnityWebRequest(url, "POST");
             byte[] boundary = System.Text.Encoding.UTF8.GetBytes("----Boundary");
             if (token != null)
-                request.SetRequestHeader("authorization", token);
+                request.SetRequestHeader("Authorization", token);
             request.uploadHandler = new UploadHandlerRaw(UnityWebRequest.SerializeFormSections(formdata, boundary));
             request.downloadHandler = new DownloadHandlerBuffer();
             request.timeout = timeout;
@@ -86,11 +86,11 @@ namespace Common
         
         public static async UniTask<ResponseWithToken> PostAndGetToken(string api, string jsonData, int timeout = 5)
         {
-            string url = baseURL + api;
+            string url = baseURL + CheckSlash(api);
             UnityWebRequest request = new UnityWebRequest(url, "POST");
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
             if (token != null)
-                request.SetRequestHeader("authorization", token);
+                request.SetRequestHeader("Authorization", token);
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.timeout = timeout;
@@ -110,6 +110,13 @@ namespace Common
             {
                 throw new Exception(request.error);
             }
+        }
+
+        private static string CheckSlash(string str)
+        {
+            if (str[0] != '/') 
+                return "/" + str;
+            return str;
         }
     }
 
