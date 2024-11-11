@@ -29,7 +29,7 @@ namespace Map
         {
             List<MapInfo> mapInfos = new List<MapInfo>(4);
             mapInfos.AddRange(await LoadDefaultsMapList());
-            mapInfos.AddRange(await LoadCustomMapList());
+            mapInfos.AddRange(await LoadCustomMapListFromLocal());
             return mapInfos;
         }
         
@@ -42,7 +42,16 @@ namespace Map
             return mapInfos;
         }
 
-        private async UniTask<List<MapInfo>> LoadCustomMapList()
+        private async UniTask<List<MapInfo>> LoadCustomMapListFromServer()
+        {
+            List<MapInfo> mapIndexes = new List<MapInfo>();
+            string data = await DataManager.Get("/api/map/list");
+            mapIndexes = JsonConvert.DeserializeObject<MapList>(data).mapInfos;
+            
+            return mapIndexes;
+        }
+
+        private async UniTask<List<MapInfo>> LoadCustomMapListFromLocal()
         {
             List<MapInfo> mapInfos = new List<MapInfo>();
             
@@ -67,13 +76,10 @@ namespace Map
             return textAsset.text;
         }
 #endregion
-        
-#region Load MapConcrete        
-        public async UniTask<MapConcrete> LoadMap(MapInfo mapInfo)
+
+        class MapList
         {
-            return await MapConverter.ConvertMapInfoToMapConcrete(mapInfo);
+            public List<MapInfo> mapInfos;
         }
-#endregion
-        
     }
 }

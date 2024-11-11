@@ -38,6 +38,18 @@ namespace GUI
             EventSystem.current.RaycastAll(pointerEventData, results);
             return results;
         }
+
+        public static void EnablePanel(CanvasGroup canvasGroup)
+        {
+            canvasGroup.alpha = 1;
+            canvasGroup.interactable = canvasGroup.blocksRaycasts = true;
+        }
+
+        public static void DisablePanel(CanvasGroup canvasGroup)
+        {
+            canvasGroup.alpha = 0;
+            canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
+        }
     }
 
 }

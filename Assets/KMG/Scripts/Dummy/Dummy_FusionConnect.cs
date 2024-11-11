@@ -17,6 +17,7 @@ namespace KMG.Scripts.Dummy
         {
             connectButton.onClick.AddListener(() => Connect().Forget());
             connectButton.onClick.AddListener(NewChat.Instance.ChatClear);
+            connectButton.onClick.AddListener(async () => await UIManager.Instance.TemporarilyHideUI());
         }
 
         private async UniTaskVoid Connect()
