@@ -83,7 +83,6 @@ public class UIManager : MonoBehaviour
 
     public void TemporarilyHideUI()
     {
-        Debug.Log("Starting coroutine...UI where are u");
         StartCoroutine(ProcessTemporaryToggle());
     }
 
@@ -98,7 +97,6 @@ public class UIManager : MonoBehaviour
         ShowUI(sideMenu);
         ShowUI(chat);
         ShowUI(joystick);
-        Debug.Log("HELLO??????");
     }
     
     private void OnDestroy()

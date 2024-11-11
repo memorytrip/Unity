@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Snowglobe
-    second: {fileID: 2100000, guid: 5e88a93148f69984e968ecc92408960f, type: 2}
+    second: {fileID: 2100000, guid: a9e7aade97f59234d957739f36ec6eaf, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: SnowglobeStand
-    second: {fileID: 2100000, guid: 9f74a13152dad544abedc7538eb3182c, type: 2}
+    second: {fileID: 2100000, guid: ece5e251a4b8f8d4287f56efa1ba66d2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
