@@ -16,6 +16,14 @@ public class NewChat : MonoBehaviour
     {
         Instance = this;
     }
+
+    public void ChatClear()
+    {
+        for (int i = 0; i < chatMessages.Count; i++)
+        {
+            Destroy(chatMessages[i]);
+        }
+    }
     
     public void ButtonClicked()
     {

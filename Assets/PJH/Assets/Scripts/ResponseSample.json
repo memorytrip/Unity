@@ -1,0 +1,34 @@
+[
+  {
+    "imageUrl" : "url1",
+    "card" : "text1"
+  },
+  {
+    "imageUrl" : "url2",
+    "card" : "text2"
+  },
+  {
+    "imageUrl" : "url3",
+    "card" : "text3"
+  },
+  {
+    "imageUrl" : "url4",
+    "card" : "text4"
+  },
+  {
+    "imageUrl" : "url4",
+    "card" : "text4"
+  },
+  {
+    "imageUrl" : "url4",
+    "card" : "text4"
+  },
+  {
+    "imageUrl" : "url4",
+    "card" : "text4"
+  },
+  {
+    "imageUrl" : "url4",
+    "card" : "text4"
+  }
+]

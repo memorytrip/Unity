@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Common.Network;
 using Cysharp.Threading.Tasks;
 using ExitGames.Client.Photon.StructWrapping;
@@ -21,12 +22,6 @@ public class PhotoInfo
     public string userID;
 }
 
-public class LetterInfo
-{
-    public string letter;
-    public string roomCode;
-}
-
 public class PostLetterAndPhoto : MonoBehaviour
 {
     public Button startButton;
@@ -45,13 +40,13 @@ public class PostLetterAndPhoto : MonoBehaviour
     {
         if (startButton.gameObject.GetComponentInChildren<TMP_Text>().text == "Start")
         {
-            await PostPhoto(photo1);
-            await PostPhoto(photo2);
-            await PostLetter(letter.text); 
+            await PostPhoto(photo1, letter.text);
+            await PostPhoto(photo2, "");
+            //await PostLetter(letter.text); 
         }
 }
-    
-    private async UniTask PostPhoto(RawImage image)
+    //json으로 Post
+    /*private async UniTask PostPhoto(RawImage image)
     {
         Texture2D texture = image.texture as Texture2D;
 
@@ -77,21 +72,39 @@ public class PostLetterAndPhoto : MonoBehaviour
         }
         
         
-    }
+    }*/
 
-    private async UniTask GetPhoto(string roomCode)
+    //formData로 Post
+    private async UniTask PostPhoto(RawImage photo, string letterInfo)
     {
-        string response = await DataManager.Get("api/asd"); 
-        List<string> responseData = JsonConvert.DeserializeObject<List<string>>(response);
+        Texture2D texture = photo.texture as Texture2D;
 
-        for (int i = 0; i < responseData.Count; i++)
+        byte[] imageBytes = texture.EncodeToPNG();
+        try
         {
-            byte[] imageBytes = Convert.FromBase64String(responseData[i]);
+            // multipart/form-data 형식으로 데이터 준비
+            List<IMultipartFormSection> formData = new List<IMultipartFormSection>
+            {
+                new MultipartFormDataSection("PhotoData", imageBytes),
+                new MultipartFormDataSection("roomCode", "ww"/*RunnerManager.Instance.Runner.SessionInfo.Name*/),
+                new MultipartFormDataSection("UserID", "1"),
+                new MultipartFormDataSection("UserCount", "4"/*RunnerManager.Instance.Runner.ActivePlayers.Count().ToString()*/),
+                new MultipartFormDataSection("Letter", letterInfo)
+            };
+            // DataManager를 통해 POST 요청 보내기
+            string response = await DataManager.Post(/*"your-api-endpoint",*/ formData);
             
+            // 성공적으로 응답을 받았을 때의 처리
+            Debug.Log("Success: " + response);
+        }
+        catch (Exception e)
+        {
+            // 에러 처리
+            Debug.LogError("Error sending photo info: " + e.Message);
         }
     }
-
-    private async UniTask PostLetter(string letterData)
+    
+    /*private async UniTask PostLetter(string letterData)
     {
         var data = new LetterInfo
         {
@@ -111,7 +124,7 @@ public class PostLetterAndPhoto : MonoBehaviour
         {
             Debug.LogError("POST 요청 중 오류 발생: " + ex.Message);
         }
-    }
+    }*/
     
     
 }
