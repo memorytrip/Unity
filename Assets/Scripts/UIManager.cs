@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour
         canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
     }
 
-    public async Task TemporarilyHideUI()
+    public async UniTask TemporarilyHideUI()
     {
         HideUI(mainMenu);
         HideUI(sideMenu);

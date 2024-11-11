@@ -135,6 +135,8 @@ namespace GUI
                 return;
             }
 
+            UIManager.Instance.TemporarilyHideUI().Forget();
+
         }
 
         private async UniTaskVoid Signup()
