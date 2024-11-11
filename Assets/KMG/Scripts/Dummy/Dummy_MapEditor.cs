@@ -69,7 +69,9 @@ namespace GUI
         private void Exit()
         {
             ConvertMapConcreteToFile(mapConcrete).Forget();
-            SceneManager.Instance.MoveRoom("player_").Forget();
+            User user = Common.Network.SessionManager.Instance.currentSession.user;
+            SceneManager.Instance.MoveRoom($"player_{user.nickName}").Forget();
+            // SceneManager.Instance.MoveRoom("player_").Forget();
         }
     }
 }

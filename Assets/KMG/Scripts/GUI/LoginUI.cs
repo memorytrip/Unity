@@ -112,6 +112,9 @@ namespace GUI
             string id = loginIDField.text;
             string pw = loginPWField.text;
 
+            loginButton.interactable = false;
+            closeLoginPanelButton.interactable = false;
+            
             try
             {
                 await SessionManager.Instance.Login(id, pw);
@@ -121,6 +124,8 @@ namespace GUI
                 Debug.LogAssertion(e.Message);
                 ErrorResult error = JsonConvert.DeserializeObject<ErrorResult>(e.Text);
                 OpenPopupPanel(error.response);
+                loginButton.interactable = true;
+                closeLoginPanelButton.interactable = true;
                 return;
             }
 
@@ -132,6 +137,8 @@ namespace GUI
             { 
                 OpenPopupPanel(e.Message);
                 Debug.LogAssertion(e);
+                loginButton.interactable = true;
+                closeLoginPanelButton.interactable = true;
                 return;
             }
 
@@ -146,6 +153,9 @@ namespace GUI
             string confirmPw = signupConfirmPWField.text;
             string name = signupNickNameField.text;
 
+            signUpButton.interactable = false;
+            closeSignupPanelButton.interactable = false;
+            
             try
             {
                 await SessionManager.Instance.SignUp(id, pw, confirmPw, name);
@@ -155,8 +165,15 @@ namespace GUI
                 Debug.LogAssertion(e.Message);
                 ErrorResult error = JsonConvert.DeserializeObject<ErrorResult>(e.Text);
                 OpenPopupPanel(error.response);
+                signUpButton.interactable = true;
+                closeSignupPanelButton.interactable = true;
                 return;
             }
+            
+            signUpButton.interactable = true;
+            closeSignupPanelButton.interactable = true;
+            CloseSignupPanel();
+            OpenPopupPanel("회원가입이 완료되었습니다");
         }
         
         private IEnumerator AutomateLoginInput()
