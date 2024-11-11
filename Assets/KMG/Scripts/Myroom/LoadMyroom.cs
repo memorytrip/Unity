@@ -43,7 +43,7 @@ namespace Myroom
 
         private async UniTask<MapInfo> LoadFromServer()
         {
-            string data = await DataManager.Get("/myroom");
+            string data = (await DataManager.Get("/myroom")).text;
             MapInfo mapInfo = JsonConvert.DeserializeObject<MapInfo>(data);
             return mapInfo;
         }

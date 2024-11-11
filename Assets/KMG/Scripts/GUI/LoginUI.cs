@@ -99,6 +99,7 @@ namespace GUI
             string pw = signupPWField.text;
             string confirmPw = signupConfirmPWField.text;
             string name = signupNickNameField.text;
+
             await SessionManager.Instance.SignUp(id, pw, confirmPw, name);
         }
         

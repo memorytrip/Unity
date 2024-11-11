@@ -45,7 +45,7 @@ namespace Map
         private async UniTask<List<MapInfo>> LoadCustomMapListFromServer()
         {
             List<MapInfo> mapIndexes = new List<MapInfo>();
-            string data = await DataManager.Get("/api/map/list");
+            string data = (await DataManager.Get("/api/map/list")).text;
             mapIndexes = JsonConvert.DeserializeObject<MapList>(data).mapInfos;
             
             return mapIndexes;

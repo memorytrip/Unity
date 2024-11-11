@@ -4,6 +4,7 @@ using System.Text;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Common.Network
 {
@@ -26,12 +27,12 @@ namespace Common.Network
             data.email = email;
             data.password = HashingPW(password);
             data.confirmPassword = HashingPW(confirmPassword);
-            data.playerName = playerName;
+            data.nickname = playerName;
             string rawData = JsonConvert.SerializeObject(data);
             Debug.Log(rawData);
             
-            string response = await DataManager.Post("/api/auth/signup", rawData);
-            return response;
+            ResponseData response = await DataManager.Post("/api/auth/signup", rawData);
+            return response.text;
 
         }
         public async UniTask Login(string email, string password)
@@ -45,16 +46,15 @@ namespace Common.Network
             string rawData = JsonConvert.SerializeObject(data);
             Debug.Log(rawData);
 
-            string response = await DataManager.Post("/api/auth/login", rawData);
-            LoginResult result = JsonConvert.DeserializeObject<LoginResult>(response);
+            ResponseData response = await DataManager.Post("/api/auth/login", rawData);
+            LoginResult result = JsonConvert.DeserializeObject<LoginResult>(response.text);
             
             // 로그인 성공 시
             currentSession = new Session();
-            currentSession.token = result.token;
+            currentSession.token = response.token;
             currentSession.state = Session.State.Connect;
             currentSession.user = new User();
-            currentSession.user.email = email;
-            currentSession.user.nickName = result.nickname;
+            currentSession.user.nickName = result.email;
             
             Debug.Log($"JWT: {currentSession.token}");
         }
@@ -76,7 +76,7 @@ namespace Common.Network
             public string email;
             public string password;
             public string confirmPassword;
-            public string playerName;
+            public string nickname;
         }
 
         class SignupResult
@@ -92,9 +92,9 @@ namespace Common.Network
 
         class LoginResult
         {
-            public string result;
-            public string nickname;
-            public string token;
+            public string success;
+            public string email;
+            public string response;
         }
     }
 }

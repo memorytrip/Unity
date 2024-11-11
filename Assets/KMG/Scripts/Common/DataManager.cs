@@ -7,18 +7,13 @@ using UnityEngine.Networking;
 
 namespace Common
 {
-    /**
-     * TODO: RESTful을 통한 json 송/수신
-     */
     public static class DataManager
     {
-        private const string baseURL = "http://125.132.216.190:12222/";
-
-        private const string AIANALIZE = "api/ai/analyze";
+        private const string baseURL = "http://memorytrip-env.eba-73mrisxy.ap-northeast-2.elasticbeanstalk.com";
 
         private static string token => SessionManager.Instance.currentSession?.token;
         
-        public static async UniTask<string> Get(string api, int timeout = 5)
+        public static async UniTask<ResponseData> Get(string api, int timeout = 5)
         {
             string url = baseURL + api;
             UnityWebRequest request = new UnityWebRequest(url, "GET");
@@ -29,9 +24,13 @@ namespace Common
 
             await request.SendWebRequest();
 
+            ResponseData response = new ResponseData();
+            response.text = request.downloadHandler.text;
+            response.token = request.GetResponseHeader("Authorization");
+
             if (request.result == UnityWebRequest.Result.Success)
             {
-                return request.downloadHandler.text;
+                return response;
             }
             else
             {
@@ -39,9 +38,10 @@ namespace Common
             }
         }
 
-        public static async UniTask<string> Post(string api, string jsonData, int timeout = 5)
+        public static async UniTask<ResponseData> Post(string api, string jsonData, int timeout = 5)
         {
             string url = baseURL + api;
+            Debug.Log($"Post to {url}");
             UnityWebRequest request = new UnityWebRequest(url, "POST");
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
             if (token != null)
@@ -53,9 +53,13 @@ namespace Common
             
             await request.SendWebRequest();
 
+            ResponseData response = new ResponseData();
+            response.text = request.downloadHandler.text;
+            response.token = request.GetResponseHeader("Authorization");
+            
             if (request.result == UnityWebRequest.Result.Success)
             {
-                return request.downloadHandler.text;
+                return response;
             }
             else
             {
@@ -63,7 +67,7 @@ namespace Common
             }
         }
 
-        public static async UniTask<string> Post(string api, List<IMultipartFormSection> formdata, int timeout = 5)
+        public static async UniTask<ResponseData> Post(string api, List<IMultipartFormSection> formdata, int timeout = 5)
         {
             string url = baseURL + api;
             UnityWebRequest request = new UnityWebRequest(url, "POST");
@@ -77,14 +81,24 @@ namespace Common
 
             await request.SendWebRequest();
             
+            ResponseData response = new ResponseData();
+            response.text = request.downloadHandler.text;
+            response.token = request.GetResponseHeader("Authorization");
+            
             if (request.result == UnityWebRequest.Result.Success)
             {
-                return request.downloadHandler.text;
+                return response;
             }
             else
             {
                 throw new Exception(request.error);
             }
         }
+    }
+
+    public class ResponseData
+    {
+        public string text;
+        public string token;
     }
 }
