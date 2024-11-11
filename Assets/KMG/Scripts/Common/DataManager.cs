@@ -7,14 +7,9 @@ using UnityEngine.Networking;
 
 namespace Common
 {
-    /**
-     * TODO: RESTful을 통한 json 송/수신
-     */
     public static class DataManager
     {
-        private const string baseURL = "http://125.132.216.190:12222/";
-
-        private const string AIANALIZE = "api/ai/analyze";
+        private const string baseURL = "http://memorytrip-env.eba-73mrisxy.ap-northeast-2.elasticbeanstalk.com";
 
         private static string token => SessionManager.Instance.currentSession?.token;
         
@@ -62,6 +57,8 @@ namespace Common
                 throw new Exception(request.error);
             }
         }
+        
+
 
         public static async UniTask<string> Post(string api, List<IMultipartFormSection> formdata, int timeout = 5)
         {
@@ -86,5 +83,39 @@ namespace Common
                 throw new Exception(request.error);
             }
         }
+        
+        public static async UniTask<ResponseWithToken> PostAndGetToken(string api, string jsonData, int timeout = 5)
+        {
+            string url = baseURL + api;
+            UnityWebRequest request = new UnityWebRequest(url, "POST");
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            if (token != null)
+                request.SetRequestHeader("authorization", token);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.timeout = timeout;
+            request.SetRequestHeader("Content-Type", "application/json");
+            
+            await request.SendWebRequest();
+
+            ResponseWithToken response = new ResponseWithToken();
+            response.data = request.downloadHandler.text;
+            response.token = request.GetResponseHeader("Authorization");
+            
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                return response;
+            }
+            else
+            {
+                throw new Exception(request.error);
+            }
+        }
+    }
+
+    public class ResponseWithToken
+    {
+        public string data;
+        public string token;
     }
 }
