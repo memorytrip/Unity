@@ -48,8 +48,10 @@ public class ScreenshotManager : MonoBehaviour
 
     // Quest
     private Vector3 _rayDirection;
-    [SerializeField] private GameObject questAlert;
+    [SerializeField] private CanvasGroup questAlert;
     private bool snapshotQuestCleared;
+    [SerializeField] private QuestInfoSO questData;
+    private YamiQuestBridge _yamiQuestBridge;
 
     // QR
     private int _qrLayerMask;
@@ -65,11 +67,17 @@ public class ScreenshotManager : MonoBehaviour
     #region Save System
 
     private string _directory;
+    private const string FolderName = "MemoryTrip";
     private const string SubDirectory = "/Screenshots/";
     private const string FileType = ".png";
 
     #endregion
 
+    private void Awake()
+    {
+        _yamiQuestBridge = FindAnyObjectByType<YamiQuestBridge>();
+    }
+    
     private void Start()
     {
         toggleScreenshotModeButton = FindAnyObjectByType<ScreenshotButton>().GetComponent<Button>();
@@ -122,7 +130,14 @@ public class ScreenshotManager : MonoBehaviour
 
     private void DetectQuestObject()
     {
-        questAlert.SetActive(RaycastShooter.HitDetected);
+        if (RaycastShooter.HitDetected)
+        {
+            ShowUi(questAlert);
+        }
+        else
+        {
+            HideUi(questAlert);
+        }
     }
 
     private void ToggleScreenshotMode()
@@ -292,11 +307,23 @@ public class ScreenshotManager : MonoBehaviour
 
         if (RaycastShooter.HitDetected)
         {
+            Debug.Log("??? HitDetected");
             if (snapshotQuestCleared)
             {
+                Debug.Log("??? You already cleared this quest");
                 return;
             }
-            YamiQuestManager.Instance.ProceedQuest();
+
+            _yamiQuestBridge.SetData(YamiQuestManager.Instance.AllQuestsCleared(),questData.questName, questData.reward.rewardSprite, questData.message);
+            _yamiQuestBridge.ShowUi(YamiQuestManager.Instance.AllQuestsCleared());
+            YamiQuestManager.Instance.OnQuestComplete();
+            //YamiQuestManager.Instance.ProceedQuest();
+            
+            if (YamiQuestManager.Instance.AllQuestsCleared())
+            {
+                YamiQuestManager.Instance.GiveFinalReward();
+            }
+            
             snapshotQuestCleared = true;
         }
 
@@ -317,11 +344,15 @@ public class ScreenshotManager : MonoBehaviour
         // Save the screenshot as a PNG file
         var now = DateTime.Now;
         var formattedDate = now.ToString("yyyyMMdd_HHmmssfff");
-
+        var fileName = FolderName + formattedDate;
         byte[] bytes = screenshot.EncodeToPNG();
+        
+#if UNITY_EDITOR
         string path = Path.Combine(_directory + SubDirectory + formattedDate + FileType);
         File.WriteAllBytes(path, bytes);
-
+#elif UNITY_ANDROID
+        NativeGallery.SaveImageToGallery(bytes, FolderName, fileName);
+#endif
         Debug.Log($"Screenshot saved to {path}");
     }
 

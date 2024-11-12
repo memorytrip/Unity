@@ -4,8 +4,26 @@ using UnityEngine;
 
 public class YamiQuestManager : MonoBehaviour
 {
-    private QuestPopup _questPopup;
-    private readonly WaitForSeconds _displayTime = new(1.5f);
+    public enum QuestName
+    {
+        FirstVisit,
+        VisitTree,
+        PlayGame,
+        EnterMyRoom,
+        VisitPhotoSpot,
+        VisitBooth,
+        TakeScreenshot,
+        CompleteStampRally,
+    }
+
+    public enum QuestState
+    {
+        OneQuestCleared,
+        AllQuestsCleared
+    }
+    
+    private YamiQuestBridge _yamiQuestBridge;
+    [SerializeField] private QuestInfoSO finalQuestData;
     
     private static YamiQuestManager _instance;
     public static YamiQuestManager Instance 
@@ -22,17 +40,17 @@ public class YamiQuestManager : MonoBehaviour
     
     public event Action CompleteQuest;
 
-    private void OnQuestComplete()
+    public void OnQuestComplete()
     {
         CompleteQuest?.Invoke();
     }
     
     public int CurrentQuestIndex { get; private set; }
-    private const int RequiredQuestNumber = 7;
-
-    private bool AllQuestsCleared()
+    private const int RequiredQuestNumber = 8;
+    
+    public bool AllQuestsCleared()
     {
-        if (CurrentQuestIndex == RequiredQuestNumber)
+        if (CurrentQuestIndex == RequiredQuestNumber - 1)
         {
             return true;
         }
@@ -42,50 +60,34 @@ public class YamiQuestManager : MonoBehaviour
 
     private void Awake()
     {
-        _questPopup = FindAnyObjectByType<QuestPopup>();
+        _yamiQuestBridge = FindAnyObjectByType<YamiQuestBridge>();
         CompleteQuest += ProceedQuest;
     }
 
-    private void CheckState()
-    {
-        if (AllQuestsCleared())
-        {
-            StartCoroutine(ShowUi(_questPopup.allClearPopup, false));
-            Debug.Log("All Quests Cleared!");
-        }
-        else
-        {
-            StartCoroutine(ShowUi(_questPopup.questPopup));
-            Debug.Log("One Quest Completed");
-        }
-    }
-
-    private IEnumerator ShowUi(CanvasGroup target, bool disappear = true)
-    {
-        target.alpha = 1f;
-        target.interactable = true;
-        target.blocksRaycasts = true;
-        if (disappear)
-        {
-            yield return _displayTime;
-            HideUi(target);
-        }
-    }
-
-    private void HideUi(CanvasGroup target)
-    {
-        target.alpha = 0f;
-        target.interactable = false;
-        target.blocksRaycasts = false;
-    }
-    
-    public void ProceedQuest()
+    private void ProceedQuest()
     {
         CurrentQuestIndex++;
-        CheckState();
+
+        if (CurrentQuestIndex >= RequiredQuestNumber)
+        {
+            CurrentQuestIndex = RequiredQuestNumber - 1;
+            Debug.LogWarning("Something's wrong here?????");
+        }
+    }
+
+    public void GiveFinalReward()
+    {
+        StartCoroutine(ProcessFinalReward());
     }
     
-    private void OnTriggerEnter(Collider other)
+    private IEnumerator ProcessFinalReward()
+    {
+        yield return new WaitForSeconds(2f);
+        _yamiQuestBridge.SetData(true, finalQuestData.questName, finalQuestData.reward.rewardSprite, finalQuestData.message);
+        _yamiQuestBridge.ShowUi(true);
+    }
+
+    /*private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
         {
@@ -96,5 +98,5 @@ public class YamiQuestManager : MonoBehaviour
         {
             OnQuestComplete();
         }
-    }
+    }*/
 }
