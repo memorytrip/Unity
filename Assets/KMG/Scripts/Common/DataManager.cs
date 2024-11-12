@@ -37,6 +37,7 @@ namespace Common
         public static async UniTask<string> Post(string api, string jsonData, int timeout = 5)
         {
             string url = baseURL + CheckSlash(api);
+            Debug.Log($"Post to {url}");
             UnityWebRequest request = new UnityWebRequest(url, "POST");
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
             if (token != null)

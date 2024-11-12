@@ -68,12 +68,22 @@ namespace GUI
             Debug.Log($"File save: {path + filename}");
         }
 
+        private async UniTaskVoid SendMapToServer(MapConcrete mapConcrete)
+        {
+            MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
+            string data = MapConverter.ConvertMapInfoToJson(mapInfo);
+            
+            Debug.Log(data);
+            string response = await DataManager.Post("/api/map/create", data);
+            Debug.Log(response);
+        }
+
         private void Exit()
         {
             ConvertMapConcreteToFile(mapConcrete).Forget();
+            SendMapToServer(mapConcrete).Forget();
             User user = Common.Network.SessionManager.Instance.currentSession.user;
             SceneManager.Instance.MoveRoom($"player_{user.nickName}").Forget();
-            // SceneManager.Instance.MoveRoom("player_").Forget();
         }
     }
 }

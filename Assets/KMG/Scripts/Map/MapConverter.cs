@@ -4,6 +4,7 @@ using Common;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Map
 {
@@ -59,19 +60,18 @@ namespace Map
             MapInfo mapInfo = new MapInfo();
             MapInfoRaw mapInfoRaw = JsonConvert.DeserializeObject<MapInfoRaw>(jsondata);
             
-            mapInfo.id = mapInfoRaw.id;
+            // mapInfo.id = mapInfoRaw.id;
             mapInfo.thumbnail = mapInfo.thumbnail;
 
             mapInfo.data = new MapData();
-            mapInfo.data.themeId = mapInfoRaw.data.themeId;
+            mapInfo.data.themeId = mapInfoRaw.theme;
             
             mapInfo.data.mapObjectList = new List<MapData.MapObjectData>();
-            MapInfoRaw.MapData mapData = mapInfoRaw.data;
-            MapInfoRaw.MapData.MapObjectData[] mapObjectData = mapData.mapObjectList;
+            MapInfoRaw.MapObjectData[] mapObjectData = mapInfoRaw.objects;
             foreach (var data in mapObjectData)
             {
                 MapData.MapObjectData mapObject = new MapData.MapObjectData();
-                mapObject.modelId = data.modelId;
+                mapObject.modelId =  data.modelId.ToString();
                 mapObject.position = new SerializedVector3(data.positionX, data.positionY, data.positionZ);
                 mapObject.rotation =
                     new SerializedQuaternion(data.rotationW, data.rotationX, data.rotationY, data.rotationZ);
@@ -84,18 +84,16 @@ namespace Map
         {
             MapInfoRaw mapInfoRaw = new MapInfoRaw();
 
-            mapInfoRaw.id = mapInfo.id;
+            // mapInfoRaw.id = mapInfo.id;
             mapInfoRaw.thumbnailUrl = mapInfo.thumbnail;
+            mapInfoRaw.theme = mapInfo.data.themeId;
 
-            mapInfoRaw.data = new MapInfoRaw.MapData();
-            mapInfoRaw.data.themeId = mapInfo.data.themeId;
-
-            mapInfoRaw.data.mapObjectList = new MapInfoRaw.MapData.MapObjectData[mapInfo.data.mapObjectList.Count];
+            mapInfoRaw.objects = new MapInfoRaw.MapObjectData[mapInfo.data.mapObjectList.Count];
             int i = 0;
             foreach (var data in mapInfo.data.mapObjectList)
             {
-                MapInfoRaw.MapData.MapObjectData mapObject = new MapInfoRaw.MapData.MapObjectData();
-                mapObject.modelId = data.modelId;
+                MapInfoRaw.MapObjectData mapObject = new MapInfoRaw.MapObjectData();
+                mapObject.modelId = long.Parse(data.modelId);
                 mapObject.positionX = data.position.x;
                 mapObject.positionY = data.position.y;
                 mapObject.positionZ = data.position.z;
@@ -103,7 +101,7 @@ namespace Map
                 mapObject.rotationX = data.rotation.x;
                 mapObject.rotationY = data.rotation.y;
                 mapObject.rotationZ = data.rotation.z;
-                mapInfoRaw.data.mapObjectList[i++] = mapObject;
+                mapInfoRaw.objects[i++] = mapObject;
             }
 
             return JsonConvert.SerializeObject(mapInfoRaw);
@@ -114,27 +112,22 @@ namespace Map
     [Serializable]
     class MapInfoRaw
     {
-        public string id;
-        public string thumbnailUrl;
-        public class MapData
+        // public string id;
+        public string thumbnailUrl = "";
+        public string theme = "";
+
+        public class MapObjectData
         {
-            public string themeId;
-
-            public class MapObjectData
-            {
-                public string modelId;
-                public float positionX;
-                public float positionY;
-                public float positionZ;
-                public float rotationW;
-                public float rotationX;
-                public float rotationY;
-                public float rotationZ;
-            }
-
-            public MapObjectData[] mapObjectList;
+            public long modelId;
+            public double positionX;
+            public double positionY;
+            public double positionZ;
+            public double rotationW;
+            public double rotationX;
+            public double rotationY;
+            public double rotationZ;
         }
 
-        public MapData data;
+        public MapObjectData[] objects;
     }
 }

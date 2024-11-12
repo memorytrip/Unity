@@ -42,7 +42,7 @@ namespace Common.Network
 
         private void Init()
         {
-            playerName = SessionManager.Instance.currentSession.user.nickName;
+            playerName = SessionManager.Instance.currentSession?.user.nickName;
             Debug.Log($"Connection Init PlayerName : {playerName}");
             
             StateAuthInstance = this;
