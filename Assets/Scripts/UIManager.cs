@@ -57,6 +57,12 @@ public class UIManager : MonoBehaviour
                 HideUI(chat);
                 ShowUI(joystick);
                 break;
+            case "FindPhoto":
+                ShowUI(mainMenu);
+                ShowUI(sideMenu);
+                ShowUI(chat);
+                ShowUI(joystick);
+                break;
             case "MapEdit":
             case "PlayReady":
             case "SelectPhotoScene":

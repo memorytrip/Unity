@@ -14,7 +14,7 @@ using SceneManager = Common.SceneManager;
 
 public class PhotoManager : NetworkRunnerCallbacks, IListener
 {
-    private float yValue = 5f;
+    private float yValue = 15f;
     private Dictionary<int, Vector3> photoPositions;
     public NetworkPrefabRef photoPrefab;
     private GameObject hitObject;
@@ -23,6 +23,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     public TMP_Text findedPhotoCount;
     private int numberOfPhoto;
     private readonly WaitForSeconds _waitForAnimation = new WaitForSeconds(3f);
+    [SerializeField] private LoadFindPhotoMap loadFindPhotoMap;
 
     void Start()
     {
@@ -45,25 +46,28 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     
     private Vector3 GetRandomPosition()
     {
-        return new Vector3(Random.Range(-40, 40), yValue, Random.Range(-40, 40));
+        Vector3 rayOrigin = new Vector3(Random.Range(-40, 40), yValue, Random.Range(-40, 40));
+        RaycastHit hit;
+        Physics.Raycast(rayOrigin, Vector3.down, out hit, yValue);
+        return hit.point;
     }
 
     public async UniTaskVoid HidePhoto(Dictionary<int, Vector3> photoDict, int numberOfPhotos)
     {
-            for (var i = 1; i <= numberOfPhotos; i++)
+        await UniTask.WaitWhile(() => loadFindPhotoMap.isLoading);
+        for (var i = 1; i <= numberOfPhotos; i++)
+        {
+            int photoName = i;
+            photoDict[photoName] = GetRandomPosition();
+            var photoObject =
+                await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName],
+                    Quaternion.identity);
+            PhotoData photodata = photoObject.GetComponent<PhotoData>();
+            if (photodata != null)
             {
-                int photoName = i;
-                photoDict[photoName] = GetRandomPosition();
-                var photoObject =
-                    await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName],
-                        Quaternion.identity);
-                PhotoData photodata = photoObject.GetComponent<PhotoData>();
-                if (photodata != null)
-                {
-                    photodata.SetPhotoName(photoName);
-                }
+                photodata.SetPhotoName(photoName);
             }
-        
+        }
     }
     
     public void OnEvent(EventType eventType, Component sender, object param = null)
