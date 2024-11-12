@@ -112,7 +112,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6d4d383c18f8e3e40af9beeb34ac4502, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6c0a9db97c555dc42a47ea098e841910, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCapTex:
