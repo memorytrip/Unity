@@ -4,6 +4,7 @@ using Common.Network;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Windows;
 
 namespace Common
 {
@@ -113,6 +114,11 @@ namespace Common
             }
         }
 
+        public static async UniTask<byte[]> Read(string path)
+        {
+            return await System.IO.File.ReadAllBytesAsync(path);
+        }
+        
         private static string CheckSlash(string str)
         {
             if (str[0] != '/') 

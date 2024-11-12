@@ -65,7 +65,7 @@ namespace Myroom
                 water.transform.SetParent(mapConcrete.rootObject.transform);
                 water.GetComponent<MeshFilter>().mesh = theme.water.mesh;
                 water.GetComponent<MeshRenderer>().material = theme.water.material;
-                water.transform.position = theme.water.position;
+                water.transform.localPosition = theme.water.position;
             }
         }
     }

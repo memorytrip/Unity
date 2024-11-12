@@ -17,7 +17,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     [SerializeField] private List<TMP_Text> playerNameTextList;
     [SerializeField] private Button readyButton;
     [SerializeField] private Button exitButton;
-    [SerializeField] private TMP_Text roomNameText;
+    [SerializeField] public TMP_Text roomNameText;
     private int readyCount = 0;
     private CancellationTokenSource cts;
     public override void Spawned()
@@ -63,7 +63,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
                 DeactiveStart();
             }
             
-            await UniTask.Delay(500);
+            await UniTask.Delay(500, cancellationToken: token);
 
             if (token.IsCancellationRequested) break;
         }
@@ -119,6 +119,6 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     {
         Debug.Log("start game");
         cts.Cancel();
-        SceneManager.Instance.MoveScene("MultiPlayTest");
+        SceneManager.Instance.MoveScene("FindPhoto");
     }
 }

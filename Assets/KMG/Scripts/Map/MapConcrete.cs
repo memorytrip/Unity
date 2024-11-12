@@ -70,10 +70,5 @@ namespace Map
             rootMeshRenderer.material = theme.material;
             rootMeshCollider.sharedMesh = theme.mesh;
         }
-
-        public void RefreshInfo()
-        {
-            info = MapConverter.ConvertMapConcreteToMapInfo(this);
-        }
     }
 }

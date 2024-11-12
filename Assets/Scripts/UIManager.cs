@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Threading.Tasks;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -28,6 +25,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button screenshotButton;
     [SerializeField] private CanvasGroup chat;
     [SerializeField] private CanvasGroup joystick;
+    [SerializeField] private CanvasGroup newChat;
 
     private void Awake()
     {
@@ -40,6 +38,7 @@ public class UIManager : MonoBehaviour
         ShowUI(mainMenu);
         HideUI(sideMenu);
         HideUI(chat);
+        HideUI(newChat);
         HideUI(joystick);
     }
     
@@ -50,21 +49,62 @@ public class UIManager : MonoBehaviour
             case "Square":
                 TemporarilyHideUI();
                 break;
+            case "Login":
+                ShowUI(mainMenu);
+                HideUI(sideMenu);
+                HideUI(chat);
+                HideUI(joystick);
+                HideUI(newChat);
+                break;
             case "MyRoom":
                 ShowUI(mainMenu);
                 ShowUI(sideMenu);
                 screenshotButton.interactable = false;
-                HideUI(chat);
+                ShowUI(chat);   
                 ShowUI(joystick);
+                HideUI(newChat);
                 break;
             case "MapEdit":
+                ShowUI(mainMenu);
+                HideUI(sideMenu);
+                HideUI(chat);
+                HideUI(joystick);   
+                HideUI(newChat);
+                break;
             case "PlayReady":
+                HideUI(mainMenu);
+                HideUI(sideMenu);
+                HideUI(chat);
+                HideUI(joystick);
+                HideUI(newChat);
+                break;
             case "SelectPhotoScene":
+                HideUI(mainMenu);
+                HideUI(sideMenu);
+                HideUI(chat);
+                HideUI(joystick);
+                ShowUI(newChat);
+                break;  
             case "VideoLoadTest":
                 HideUI(mainMenu);
                 HideUI(sideMenu);
                 HideUI(chat);
                 HideUI(joystick);
+                ShowUI(newChat);
+                break;
+            case "LetterScene":
+                HideUI(mainMenu);
+                HideUI(sideMenu);
+                HideUI(chat);
+                HideUI(joystick);
+                ShowUI(newChat);
+                break;
+            default:
+                ShowUI(mainMenu);
+                ShowUI(sideMenu);
+                ShowUI(chat);
+                ShowUI(joystick);
+                HideUI(newChat);
                 break;
         }
     }

@@ -1,7 +1,11 @@
 using System;
+using System.Collections;
+using DG.Tweening;
+using GUI;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class ChatDisplay : MonoBehaviour
 {
@@ -10,7 +14,7 @@ public class ChatDisplay : MonoBehaviour
         Shrink,
         Expand,
     }
-
+    
     public bool isTyping;
     
     public event Action<bool> StartTyping;
@@ -27,7 +31,8 @@ public class ChatDisplay : MonoBehaviour
         StopTyping?.Invoke(typingStatus);
     }
     
-    private RectTransform _chatDisplayArea;
+    public CanvasGroup _chatDisplay;
+    public CanvasGroup chatScroll;
     private TMP_InputField _inputField;
     [SerializeField] private Button expandChatButton;
     private ChatDisplayMode _chatDisplayMode;
@@ -36,8 +41,8 @@ public class ChatDisplay : MonoBehaviour
     
     private void Awake()
     {
-        _chatDisplayArea = GetComponent<RectTransform>();
-        _chatDisplayArea.sizeDelta = new Vector2(_chatDisplayArea.sizeDelta.x, MinHeight);
+        //_chatDisplayArea = GetComponent<RectTransform>();
+        //_chatDisplayArea.sizeDelta = new Vector2(_chatDisplayArea.sizeDelta.x, MinHeight);
         _chatDisplayMode = ChatDisplayMode.Shrink;
         
         expandChatButton.onClick.AddListener(ToggleChat);
@@ -96,19 +101,33 @@ public class ChatDisplay : MonoBehaviour
         switch (_chatDisplayMode)
         {
             case ChatDisplayMode.Shrink:
-                _chatDisplayArea.sizeDelta = new Vector2(_chatDisplayArea.sizeDelta.x, MaxHeight);
+                StartCoroutine(FadeIn(0.5f, chatScroll));
+                StartCoroutine(FadeOut(0.5f, _chatDisplay));
                 _inputField.enabled = true;
                 _inputField.interactable = true;
                 _chatDisplayMode = ChatDisplayMode.Expand;
                 Debug.Log("Expand chat");
                 break;
             case ChatDisplayMode.Expand:
-                _chatDisplayArea.sizeDelta = new Vector2(_chatDisplayArea.sizeDelta.x, MinHeight);
+                StartCoroutine(FadeOut(0.5f, chatScroll));
+                StartCoroutine(FadeIn(0.5f, _chatDisplay));
                 _inputField.enabled = false;
                 _inputField.interactable = false;
                 _chatDisplayMode = ChatDisplayMode.Shrink;
                 Debug.Log("Shrink chat");
                 break;
         }
+    }
+    
+    public IEnumerator FadeIn(float seconds, CanvasGroup canvasGroup)
+    {
+        canvasGroup.interactable = canvasGroup.blocksRaycasts = true;
+        yield return canvasGroup.DOFade(1f, seconds).WaitForCompletion();
+    }
+
+    public IEnumerator FadeOut(float seconds, CanvasGroup canvasGroup)
+    {
+        canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
+        yield return canvasGroup.DOFade(0f, seconds).WaitForCompletion();
     }
 }

@@ -58,29 +58,12 @@ namespace Map
 
         private Model[] LoadDefaultModelList()
         {
-            // string[] modelNames = new[] { "Cube", "Sphere", "Box" };
-            //
-            // List<UniTask<Model>> tasks = new List<UniTask<Model>>();
-            // foreach (var modelName in modelNames)
-            // {
-            //     tasks.Add(LoadModelFromResources(modelName));
-            // }
-
-            // Model[] assets = await UniTask.WhenAll(tasks);
             Model[] assets = Resources.LoadAll<Model>("Models");
             return assets;
         }
         
         private Theme[] LoadDefaultThemeList()
         {
-            // string[] themeNames = new[] { "Theme0", "Theme1", "Theme2" };
-            // List<UniTask<Theme>> tasks = new List<UniTask<Theme>>();
-            // foreach (var themeName in themeNames)
-            // {
-            //     tasks.Add(LoadThemeFromResources(themeName));
-            // }
-
-            // Theme[] assets = await UniTask.WhenAll(tasks);
             Theme[] assets = Resources.LoadAll<Theme>("Themes");
             return assets;
         }

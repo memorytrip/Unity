@@ -122,7 +122,7 @@ namespace GUI
             catch (UnityWebRequestException e)
             {
                 Debug.LogAssertion(e.Message);
-                if (e.ResponseHeaders["Content-Type"] == "text/json")
+                if (e.ResponseHeaders["Content-Type"] == "application/json")
                 {
                     ErrorResult error = JsonConvert.DeserializeObject<ErrorResult>(e.Text);
                     OpenPopupPanel(error.response);    
@@ -133,7 +133,7 @@ namespace GUI
                 }
                 loginButton.interactable = true;
                 closeLoginPanelButton.interactable = true;
-                // return;
+                return;
             }
 
             try

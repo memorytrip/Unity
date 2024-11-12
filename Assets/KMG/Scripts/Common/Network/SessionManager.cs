@@ -13,6 +13,7 @@ namespace Common.Network
     public class SessionManager: MonoBehaviour
     {
         public static SessionManager Instance = null;
+        public User currentUser => currentSession.user;
         public Session currentSession;
         private void Awake()
         {
