@@ -61,7 +61,8 @@ namespace Map
             foreach (var mapJson in directoryInfo.GetFiles("*.json"))
             {
                 StreamReader reader = mapJson.OpenText();
-                MapInfo mapInfo = JsonConvert.DeserializeObject<MapInfo>(await reader.ReadToEndAsync());
+                // MapInfo mapInfo = JsonConvert.DeserializeObject<MapInfo>(await reader.ReadToEndAsync());
+                MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(await reader.ReadToEndAsync());
                 mapInfos.Add(mapInfo);
             }
 

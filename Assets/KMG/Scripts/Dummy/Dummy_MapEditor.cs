@@ -56,14 +56,13 @@ namespace GUI
         private async UniTaskVoid ConvertMapConcreteToFile(MapConcrete mapConcrete)
         {
             MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete, capturer);
-            mapInfo.thumbnail = ""; //await capturer.CaptureToBase64();
             
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)
             {
                 directoryInfo.Create();
             }
-            // await File.WriteAllTextAsync(path + filename, JsonConvert.SerializeObject(mapInfo));
+
             await File.WriteAllTextAsync(path + filename, MapConverter.ConvertMapInfoToJson(mapInfo));
             Debug.Log($"File save: {path + filename}");
         }
@@ -81,7 +80,7 @@ namespace GUI
         private void Exit()
         {
             ConvertMapConcreteToFile(mapConcrete).Forget();
-            SendMapToServer(mapConcrete).Forget();
+            // SendMapToServer(mapConcrete).Forget();
             User user = Common.Network.SessionManager.Instance.currentSession.user;
             SceneManager.Instance.MoveRoom($"player_{user.nickName}").Forget();
         }

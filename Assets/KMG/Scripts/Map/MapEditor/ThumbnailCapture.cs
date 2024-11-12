@@ -12,20 +12,19 @@ namespace Map.Editor
         
         public async UniTask<string> CaptureToBase64()
         {
-            await UniTask.Yield();
-
-            Texture2D tex = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.ARGB32, false, true);
-            RenderTexture.active = renderTexture;
-            tex.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
-
-            await UniTask.Yield();
-
-            var data = tex.EncodeToPNG();
+            var data = (await Capture()).EncodeToPNG();
             string b64 = Convert.ToBase64String(data);
             return b64;
         }
         
         public async UniTaskVoid CaptureToLocal()
+        {
+            var data = (await Capture()).EncodeToPNG();
+            string filePath = Application.persistentDataPath + "/Maps/asdf.png";
+            File.WriteAllBytes(filePath, data);
+        }
+
+        public async UniTask<Texture2D> Capture()
         {
             await UniTask.Yield();
 
@@ -35,9 +34,7 @@ namespace Map.Editor
 
             await UniTask.Yield();
 
-            var data = tex.EncodeToPNG();
-            string filePath = Application.persistentDataPath + "/Maps/asdf.png";
-            File.WriteAllBytes(filePath, data);
+            return tex;
         }
     }
 }

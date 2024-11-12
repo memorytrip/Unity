@@ -534,7 +534,7 @@ MonoBehaviour:
   scrollRect: {fileID: 178642092}
   scrollContent: {fileID: 2102623939}
   mapThumbnailPrefab: {fileID: 4968333609267169264, guid: c6f58d0aefd08b443ac1cf0b82e6cb89, type: 3}
-  EmptySprite: {fileID: 21300000, guid: 5853bc00e6bfda84ea9030e0486a1c44, type: 3}
+  EmptySprite: {fileID: 21300000, guid: a183c7ba63a6fd84095da9de3454705c, type: 3}
   leftArrowButton: {fileID: 1603426034}
   rightArrowButton: {fileID: 1072547526}
   scrollDuration: 0.5

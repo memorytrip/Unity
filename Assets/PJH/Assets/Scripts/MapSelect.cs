@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
@@ -54,14 +55,26 @@ public class MapSelectionController : MonoBehaviour
     {
         Image image = Instantiate(mapThumbnailPrefab, scrollContent).GetComponent<Image>();
 
-        if (!Uri.TryCreate(mapInfo.thumbnail, UriKind.Absolute, out Uri uri))
+        if (Uri.TryCreate(mapInfo.thumbnail, UriKind.Absolute, out Uri uri))
         {
-            image.sprite = EmptySprite;    
-            return;
+            image.sprite = await LoadMapThumbnailFromServer(mapInfo.thumbnail);
         }
-        
-        UnityWebRequest request = new UnityWebRequest(mapInfo.thumbnail, "GET");
+        else if (File.Exists(mapInfo.thumbnail))
+        {
+            image.sprite = await LoadMapThumbnailFromLocal(mapInfo.thumbnail);
+        }
+        else
+        {
+            image.sprite = EmptySprite;
+        }
+    }
+
+    private async UniTask<Sprite> LoadMapThumbnailFromServer(string uri)
+    {
+        UnityWebRequest request = new UnityWebRequest(uri, "GET");
         request.downloadHandler = new DownloadHandlerTexture();
+        
+        Sprite sprite;
         
         try
         {
@@ -69,21 +82,35 @@ public class MapSelectionController : MonoBehaviour
         }
         catch (UnityWebRequestException e)
         {
-            image.sprite = EmptySprite;
+            return EmptySprite;
         }
         finally
         {
             if (request.result == UnityWebRequest.Result.Success)
             {
                 Texture2D texture = DownloadHandlerTexture.GetContent(request);
-                Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                image.sprite = sprite;
+                sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             }
             else
             {
-                image.sprite = EmptySprite;
+                sprite = EmptySprite;
             }
         }
+        return sprite;
+    }
+
+    private async UniTask<Sprite> LoadMapThumbnailFromLocal(string path)
+    {
+        if (File.Exists(path))
+        {
+            byte[] rawdata = await DataManager.Read(path);
+            Texture2D texture = new Texture2D(2, 2);
+            if (texture.LoadImage(rawdata))
+            {
+                return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            }
+        }
+        return EmptySprite;
     }
 
     void NextPage()

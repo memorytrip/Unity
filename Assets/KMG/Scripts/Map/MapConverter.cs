@@ -53,7 +53,7 @@ namespace Map
             //TODO: mapInfo.id, mapInfo.thmbnail 채우기
             MapInfo mapInfo = new MapInfo();
             mapInfo.id = null;
-            mapInfo.thumbnail = "dummy";
+            mapInfo.thumbnail = "file://" + Application.persistentDataPath + "/Maps/asdf.png";
             capture.CaptureToLocal().Forget();
             mapInfo.data = mapData;
             return mapInfo;
@@ -135,7 +135,7 @@ namespace Map
         {
             List<MapInfo> mapInfos = new List<MapInfo>();
             MapInfoRaw[] mapInfosRaw = JsonConvert.DeserializeObject<MapInfoRaw[]>(jsondata);
-            Debug.Log($"ConvertJsonToMapList: {jsondata}");
+
             foreach (var mapInfoRaw in mapInfosRaw)
             {
                 mapInfos.Add(ConvertMapInfoRawToMapInfo(mapInfoRaw));
