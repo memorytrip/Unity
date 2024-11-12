@@ -282,6 +282,7 @@ Material:
     - _SpecularUV: 0
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
+    - _StencilID: 0
     - _Surface: 0
     - _TransparencyMaskAmount: 1
     - _TransparencyMaskContrast: 1

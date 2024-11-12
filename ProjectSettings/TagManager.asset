@@ -23,10 +23,10 @@ TagManager:
   - Clickable3dObject
   - CutsceneObject
   - NPC
-  - 
-  - 
-  - 
-  - 
+  - Stencil1
+  - Stencil2
+  - Stencil3
+  - Stencil4
   - 
   - 
   - 
