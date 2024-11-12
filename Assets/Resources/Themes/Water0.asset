@@ -15,3 +15,4 @@ MonoBehaviour:
   themeId: 0
   mesh: {fileID: 4111559097179453198, guid: 3b4e3290fa5d770418458b0093b9d7e9, type: 3}
   material: {fileID: 2100000, guid: e5c8ac6092e78214fb866cab5f020f2a, type: 2}
+  position: {x: 0, y: 0, z: 0}

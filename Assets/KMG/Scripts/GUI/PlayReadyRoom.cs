@@ -63,7 +63,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
                 DeactiveStart();
             }
             
-            await UniTask.Delay(500);
+            await UniTask.Delay(500, cancellationToken: token);
 
             if (token.IsCancellationRequested) break;
         }
@@ -119,6 +119,6 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     {
         Debug.Log("start game");
         cts.Cancel();
-        SceneManager.Instance.MoveScene("MultiPlayTest");
+        SceneManager.Instance.MoveScene("FindPhoto");
     }
 }
