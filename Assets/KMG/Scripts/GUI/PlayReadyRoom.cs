@@ -119,6 +119,6 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     {
         Debug.Log("start game");
         cts.Cancel();
-        SceneManager.Instance.MoveScene("MultiPlayTest");
+        SceneManager.Instance.MoveScene("FindPhoto");
     }
 }

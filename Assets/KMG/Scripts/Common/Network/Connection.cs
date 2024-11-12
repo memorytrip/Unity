@@ -69,7 +69,7 @@ namespace Common.Network
                     currenctCharacter = await SpawnProcess("PlayReadyState");
                     SceneManager.Instance.OnSceneLoaded += SpawnAvatar;
                     break;
-                case "MultiPlayTest":
+                case "FindPhoto":
                     SceneManager.Instance.OnSceneLoaded -= SpawnAvatar;
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
                     currenctCharacter.transform.Find("Scale").transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);

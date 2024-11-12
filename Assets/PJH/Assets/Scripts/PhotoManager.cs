@@ -14,7 +14,7 @@ using SceneManager = Common.SceneManager;
 
 public class PhotoManager : NetworkRunnerCallbacks, IListener
 {
-    private float yValue = 1f;
+    private float yValue = 5f;
     private Dictionary<int, Vector3> photoPositions;
     public NetworkPrefabRef photoPrefab;
     private GameObject hitObject;
@@ -45,7 +45,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     
     private Vector3 GetRandomPosition()
     {
-        return new Vector3(Random.Range(-10, 11), yValue, Random.Range(-10, 11));
+        return new Vector3(Random.Range(-40, 40), yValue, Random.Range(-40, 40));
     }
 
     public async UniTaskVoid HidePhoto(Dictionary<int, Vector3> photoDict, int numberOfPhotos)
