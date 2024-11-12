@@ -1,5 +1,12 @@
 fileFormatVersion: 2
-guid: e06e02ddef17ebb4bacad74afef4491d
+guid: bdf24fde8f534f04ba921960d667d212
+AssetOrigin:
+  serializedVersion: 1
+  productId: 58821
+  packageName: Low Poly Mega Pack - Polyworks
+  packageVersion: 6.0
+  assetPath: Assets/Off Axis Studios/Polyworks/Meshes/MaterialsOnly/Terrain/Terrain_Modular_Tiles_Sand_Dirt_Flat_01.fbx
+  uploadId: 533731
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,18 +14,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Snowglobe
-    second: {fileID: 2100000, guid: a9e7aade97f59234d957739f36ec6eaf, type: 2}
+      name: Brown34
+    second: {fileID: 2100000, guid: 1cf03a9e6f1781a4cb1f0d2c8d34654d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: SnowglobeStand
-    second: {fileID: 2100000, guid: ece5e251a4b8f8d4287f56efa1ba66d2, type: 2}
+      name: Yellow08
+    second: {fileID: 2100000, guid: 8d678fcfa2d4e3b4d92a0599997308fe, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -40,10 +47,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 15
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -53,7 +60,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    nodeNameCollisionStrategy: 1
+    nodeNameCollisionStrategy: 0
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -71,7 +78,7 @@ ModelImporter:
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
-    secondaryUVMarginMethod: 1
+    secondaryUVMarginMethod: 0
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
@@ -98,7 +105,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.015000001
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
@@ -108,9 +115,9 @@ ModelImporter:
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 1
-  remapMaterialsIfMaterialImportModeIsNone: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

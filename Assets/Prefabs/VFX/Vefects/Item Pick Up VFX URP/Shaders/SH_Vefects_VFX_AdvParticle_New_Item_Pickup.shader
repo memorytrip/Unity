@@ -547,9 +547,9 @@ Shader "Vefects/SH_Vefects_VFX_AdvParticle_New_Item_Pickup"
 					LODFadeCrossFade( IN.positionCS );
 				#endif
 
-				#ifdef ASE_FOG
+				/*#ifdef ASE_FOG
 					Color = MixFog( Color, IN.fogFactor );
-				#endif
+				#endif*/
 
 				#ifdef _WRITE_RENDERING_LAYERS
 					uint renderingLayers = GetMeshRenderingLayer();

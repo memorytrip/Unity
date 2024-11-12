@@ -12,9 +12,15 @@ public class TriggerDialogue : MonoBehaviour, IClickable3dObject
     [SerializeField] private PlayableDirector director;
     [SerializeField] private PlayableAsset[] cutscenes;
     private bool _isDirty;
+    public bool CanTalk { get; private set; }
     
     public void OnClick()
     {
+        if (!CanTalk)
+        {
+            return;
+        }
+        
         if (!_isDirty)
         {
             director.playableAsset = cutscenes[(int)Cutscenes.Intro];
@@ -25,5 +31,21 @@ public class TriggerDialogue : MonoBehaviour, IClickable3dObject
             director.playableAsset = cutscenes[(int)Cutscenes.Default];
         }
         director.Play();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            CanTalk = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            CanTalk = false;
+        }
     }
 }

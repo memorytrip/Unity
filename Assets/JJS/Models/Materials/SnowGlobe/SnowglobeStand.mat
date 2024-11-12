@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dabotab
+  m_Name: SnowglobeStand
   m_Shader: {fileID: 4800000, guid: a2a06e22c08354d9699356710b69ca9c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -17,8 +17,8 @@ Material:
   - DIFFUSE
   - FOG
   - MATCAP_PERSPECTIVE
-  - NORMAL_MAP
   - OUTLINE_PASS_DISABLED
+  - RIM
   - SHADOWS_ENABLED
   - _DETAILBLEND_MULTIPLY
   - _DETAILUV_UV1
@@ -33,8 +33,7 @@ Material:
   - _RIMBLEND_ADDITIVE
   - _SHADOWOVERLAYANIMATION_SCROLL
   - _SPECULARUV_UV1
-  m_InvalidKeywords:
-  - _NORMALMAP
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -112,7 +111,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
-        m_Texture: {fileID: 2800000, guid: c13a2a10923e08a449c5d449e1d805c1, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex2:
@@ -259,8 +258,8 @@ Material:
     - _ReflectionAmount: 1
     - _ReflectionRim: 0
     - _ReflectionSpecular: 0
-    - _Rim: 0
-    - _RimAmount: 1
+    - _Rim: 1
+    - _RimAmount: 25
     - _RimBlend: 1
     - _RimContrast: 5
     - _RimInverse: 0
@@ -315,8 +314,8 @@ Material:
     - _AnimeColor1: {r: 1, g: 1, b: 1, a: 1}
     - _AnimeColor2: {r: 1.35, g: 1.35, b: 1.35, a: 1}
     - _AnimeColor3: {r: 2, g: 2, b: 2, a: 1}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.3584904, g: 0.3584904, b: 0.3584904, a: 1}
+    - _BaseColor: {r: 0.21293801, g: 0.16271676, b: 0.16271676, a: 1}
+    - _Color: {r: 0.21293801, g: 0.16271676, b: 0.16271676, a: 1}
     - _DetailColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _Emissive: {r: 0, g: 0, b: 0, a: 0}
@@ -329,14 +328,14 @@ Material:
     - _MatCapRot: {r: 0, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 0.9784366, g: 0.83350194, b: 0.6791035, a: 1}
     - _RimDirection: {r: 0, g: 0, b: 0, a: 0}
     - _ShadowColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &6123053626115390447
+--- !u!114 &4899925619809826050
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
