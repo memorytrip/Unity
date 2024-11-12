@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Fusion;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
@@ -71,6 +73,7 @@ namespace Common.Network
                     break;
                 case "MultiPlayTest":
                     SceneManager.Instance.OnSceneLoaded -= SpawnAvatar;
+                    await UniTask.Delay(TimeSpan.FromSeconds(3.5f));
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
                     currenctCharacter.transform.Find("Scale").transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     break;
@@ -96,6 +99,18 @@ namespace Common.Network
         public void PlayerLeft(PlayerRef player)
         {
             hasSceneAuthority = Runner.IsSceneAuthority;
+        }
+        
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void RpcChatMsg(string msg)
+        {
+            Chat.Instance.Append(msg);
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void RpcNewChatMsg(string msg)
+        {
+            NewChat.Instance.InstantiateChat(msg);
         }
     }
 }

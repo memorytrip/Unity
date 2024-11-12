@@ -3,6 +3,7 @@ using Common;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace KMG.Scripts.Dummy
@@ -14,7 +15,8 @@ namespace KMG.Scripts.Dummy
 
         private void Awake()
         {
-            connectButton.onClick.AddListener(()=>Connect().Forget());
+            connectButton.onClick.AddListener(() => Connect().Forget());
+            connectButton.onClick.AddListener(NewChat.Instance.ChatClear);
         }
 
         private async UniTaskVoid Connect()

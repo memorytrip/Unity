@@ -14,13 +14,7 @@ namespace Common.Network
     {
         public static RunnerManager Instance = null;
 
-        public bool isRunnerExist
-        {
-            get
-            {
-                return (Runner != null);
-            }
-        }
+        public bool isRunnerExist => Runner != null;
 
         [HideInInspector] public NetworkRunner Runner;
         [HideInInspector] public NetworkEvents networkEvents;
@@ -30,11 +24,13 @@ namespace Common.Network
 
         private void Awake()
         {
-            if (Instance == null) Instance = this;
-            else Destroy(this);
+            if (Instance == null)
+                Instance = this;
+            else
+                Destroy(this);
             DontDestroyOnLoad(gameObject);
         }
-
+        
         /**
          * TODO: 방 접속 후 실행할 머시깽이 넣기
          */
@@ -53,7 +49,7 @@ namespace Common.Network
                 GameMode = GameMode.Shared,
                 SessionName = roomName,
                 PlayerCount = playerCount,
-                SceneManager = RunnerObject.AddComponent<NetworkSceneManagerDefault>()
+                SceneManager = RunnerObject.AddComponent<NetworkSceneManagerDefault>(),
             };
 
             StartGameResult result = await Runner.StartGame(args);
