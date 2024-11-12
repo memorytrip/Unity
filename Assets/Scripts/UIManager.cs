@@ -112,7 +112,7 @@ public class UIManager : MonoBehaviour
         canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
     }
 
-    /*public async Task TemporarilyHideUI()
+    public async Task TemporarilyHideUI()
     {
         HideUI(mainMenu);
         HideUI(sideMenu);
@@ -129,7 +129,7 @@ public class UIManager : MonoBehaviour
         ShowUI(chat);
         ShowUI(joystick);
         yield break;
-    }*/
+    }
     
     private void OnDestroy()
     {

@@ -22,8 +22,8 @@ namespace Common
         {
             string url = baseURL + api;
             UnityWebRequest request = new UnityWebRequest(url, "GET");
-            if (token != null)
-                request.SetRequestHeader("authorization", token);
+            /*if (token != null)
+                request.SetRequestHeader("authorization", token);*/
             request.downloadHandler = new DownloadHandlerBuffer();
             request.timeout = timeout;
 
