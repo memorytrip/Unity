@@ -35,20 +35,18 @@ namespace Map
         
         private async UniTask<List<MapInfo>> LoadDefaultsMapList()
         {
-            List<MapInfo> mapInfos = new List<MapInfo>(4);
-            mapInfos.Add(JsonConvert.DeserializeObject<MapInfo>(await LoadMapFileFromResources("DummyMap01")));
-            mapInfos.Add(JsonConvert.DeserializeObject<MapInfo>(await LoadMapFileFromResources("DummyMap02")));
-
+            string rawData = await DataManager.Get("/api/map");
+            List<MapInfo> mapInfos = MapConverter.ConvertJsonToMapList(rawData);
             return mapInfos;
         }
 
         private async UniTask<List<MapInfo>> LoadCustomMapListFromServer()
         {
-            List<MapInfo> mapIndexes = new List<MapInfo>();
+            List<MapInfo> mapIndices = new List<MapInfo>();
             string data = await DataManager.Get("/api/map/list");
-            mapIndexes = JsonConvert.DeserializeObject<MapList>(data).mapInfos;
+            mapIndices = JsonConvert.DeserializeObject<MapList>(data).mapInfos;
             
-            return mapIndexes;
+            return mapIndices;
         }
 
         private async UniTask<List<MapInfo>> LoadCustomMapListFromLocal()

@@ -1,15 +1,25 @@
+using System;
+using System.Collections.Generic;
+using Common;
+using Common.Network;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Map;
 using Unity.VisualScripting;
+using UnityEngine.Networking;
 
 public class MapSelectionController : MonoBehaviour
 {
     public ScrollRect scrollRect;
+    public Transform scrollContent;
+    public GameObject mapThumbnailPrefab;
+    public Sprite EmptySprite;
     public Button leftArrowButton; 
     public Button rightArrowButton;
     public float scrollDuration = 0.5f; 
-    public int totalPages = 2; // 맵 페이지 수 -1 (아마 나중에 맵List.length 가 되어야 할 듯함)
+    public int totalPages = 0; // 맵 페이지 수 -1 (아마 나중에 맵List.length 가 되어야 할 듯함)
     private float initialPosition;
     private int currentPage = 0;
 
@@ -20,6 +30,60 @@ public class MapSelectionController : MonoBehaviour
         //scrollRect.content.sizeDelta = new Vector2(800 * totalPages, 700f);
         leftArrowButton.onClick.AddListener(PreviousPage);
         rightArrowButton.onClick.AddListener(NextPage);
+        
+        InitMapList().Forget();
+    }
+
+    private async UniTaskVoid InitMapList()
+    {
+        User user = SessionManager.Instance.currentUser;
+        List<MapInfo> mapList = await MapManager.Instance.LoadMapList(user);
+
+        List<UniTask> tasks = new List<UniTask>(mapList.Count);
+        foreach (var mapInfo in mapList)
+        {
+            tasks.Add(LoadMapThumbnail(mapInfo));
+        }
+        await UniTask.WhenAll(tasks);
+        
+        totalPages = mapList.Count;
+        UpdateArrowButtons();
+    }
+
+    private async UniTask LoadMapThumbnail(MapInfo mapInfo)
+    {
+        Image image = Instantiate(mapThumbnailPrefab, scrollContent).GetComponent<Image>();
+
+        if (!Uri.TryCreate(mapInfo.thumbnail, UriKind.Absolute, out Uri uri))
+        {
+            image.sprite = EmptySprite;    
+            return;
+        }
+        
+        UnityWebRequest request = new UnityWebRequest(mapInfo.thumbnail, "GET");
+        request.downloadHandler = new DownloadHandlerTexture();
+        
+        try
+        {
+            await request.SendWebRequest();
+        }
+        catch (UnityWebRequestException e)
+        {
+            image.sprite = EmptySprite;
+        }
+        finally
+        {
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Texture2D texture = DownloadHandlerTexture.GetContent(request);
+                Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                image.sprite = sprite;
+            }
+            else
+            {
+                image.sprite = EmptySprite;
+            }
+        }
     }
 
     void NextPage()

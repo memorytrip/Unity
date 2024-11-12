@@ -63,7 +63,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
                 DeactiveStart();
             }
             
-            await UniTask.Delay(500);
+            await UniTask.Delay(500, cancellationToken: token);
 
             if (token.IsCancellationRequested) break;
         }

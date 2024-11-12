@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Common;
 using Cysharp.Threading.Tasks;
+using Map.Editor;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,7 +10,7 @@ using UnityEngine.Serialization;
 namespace Map
 {
     /**
-     * MapInfo <-> MapConcrete 변환
+     * Json <-> MapInfo <-> MapConcrete 변환
      */
     public class MapConverter
     {
@@ -35,7 +36,7 @@ namespace Map
         }
         
 
-        public static MapInfo ConvertMapConcreteToMapInfo(MapConcrete mapConcrete)
+        public static MapInfo ConvertMapConcreteToMapInfo(MapConcrete mapConcrete, ThumbnailCapture capture)
         {
             MapData mapData = new MapData();
             mapData.themeId = mapConcrete.theme.id;
@@ -51,23 +52,46 @@ namespace Map
 
             //TODO: mapInfo.id, mapInfo.thmbnail 채우기
             MapInfo mapInfo = new MapInfo();
+            mapInfo.id = null;
+            mapInfo.thumbnail = "dummy";
+            capture.CaptureToLocal().Forget();
             mapInfo.data = mapData;
             return mapInfo;
         }
 
         public static MapInfo ConvertJsonToMapInfo(string jsondata)
         {
-            MapInfo mapInfo = new MapInfo();
             MapInfoRaw mapInfoRaw = JsonConvert.DeserializeObject<MapInfoRaw>(jsondata);
             
-            // mapInfo.id = mapInfoRaw.id;
-            mapInfo.thumbnail = mapInfo.thumbnail;
+            return ConvertMapInfoRawToMapInfo(mapInfoRaw);
+        }
+        
+        private static MapInfo ConvertMapInfoRawToMapInfo(MapInfoRaw mapInfoRaw)
+        {
+            MapInfo mapInfo = new MapInfo();
+            
+            mapInfo.id = mapInfoRaw.id;
+            mapInfo.thumbnail = mapInfoRaw.thumbnailUrl;
 
             mapInfo.data = new MapData();
             mapInfo.data.themeId = mapInfoRaw.theme;
             
             mapInfo.data.mapObjectList = new List<MapData.MapObjectData>();
-            MapInfoRaw.MapObjectData[] mapObjectData = mapInfoRaw.objects;
+
+            MapInfoRaw.MapObjectData[] mapObjectData;
+            if (mapInfoRaw.objects != null)
+            {
+                mapObjectData = mapInfoRaw.objects;    
+            }
+            else if (mapInfoRaw.mapObjectResDTO != null)
+            {
+                mapObjectData = mapInfoRaw.mapObjectResDTO;
+            }
+            else
+            {
+                throw new ArgumentException($"ConvertMapInfoRawToMapInfo: {mapInfoRaw}");
+            }
+            
             foreach (var data in mapObjectData)
             {
                 MapData.MapObjectData mapObject = new MapData.MapObjectData();
@@ -84,7 +108,7 @@ namespace Map
         {
             MapInfoRaw mapInfoRaw = new MapInfoRaw();
 
-            // mapInfoRaw.id = mapInfo.id;
+            mapInfoRaw.id = mapInfo.id;
             mapInfoRaw.thumbnailUrl = mapInfo.thumbnail;
             mapInfoRaw.theme = mapInfo.data.themeId;
 
@@ -106,14 +130,28 @@ namespace Map
 
             return JsonConvert.SerializeObject(mapInfoRaw);
         }
+
+        public static List<MapInfo> ConvertJsonToMapList(string jsondata)
+        {
+            List<MapInfo> mapInfos = new List<MapInfo>();
+            MapInfoRaw[] mapInfosRaw = JsonConvert.DeserializeObject<MapInfoRaw[]>(jsondata);
+            Debug.Log($"ConvertJsonToMapList: {jsondata}");
+            foreach (var mapInfoRaw in mapInfosRaw)
+            {
+                mapInfos.Add(ConvertMapInfoRawToMapInfo(mapInfoRaw));
+            }
+
+            return mapInfos;
+        }
     }
     
     
     [Serializable]
     class MapInfoRaw
     {
-        // public string id;
-        public string thumbnailUrl = "";
+        public string userid = null;
+        public string id = null;
+        public string thumbnailUrl = null;
         public string theme = "";
 
         public class MapObjectData
@@ -128,6 +166,34 @@ namespace Map
             public double rotationZ;
         }
 
-        public MapObjectData[] objects;
+        public MapObjectData[] objects = null;
+        
+        
+        public class MapObjectDTO: MapObjectData
+        {
+            public long id;
+        }
+
+        public MapObjectDTO[] mapObjectResDTO = null;
+
+        public bool ShouldSerializeid()
+        {
+            return id != null;
+        }
+
+        public bool ShouldSerializeuserid()
+        {
+            return !String.IsNullOrEmpty(userid);
+        }
+
+        public bool ShouldSerializeobjects()
+        {
+            return objects != null;
+        }
+
+        public bool ShouldSerializemapObjectResDTO()
+        {
+            return mapObjectResDTO != null;
+        }
     }
 }
