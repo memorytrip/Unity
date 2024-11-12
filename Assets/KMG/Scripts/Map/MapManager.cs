@@ -28,7 +28,7 @@ namespace Map
         {
             List<MapInfo> mapInfos = new List<MapInfo>(4);
             mapInfos.AddRange(await LoadDefaultsMapListFromLocal());
-            // mapInfos.AddRange(await LoadCustomMapListFromLocal());
+            mapInfos.AddRange(await LoadCustomMapListFromServer());
             return mapInfos;
         }
 #region LoadDefaultsMapList
@@ -57,7 +57,7 @@ namespace Map
         private async UniTask<List<MapInfo>> LoadCustomMapListFromServer()
         {
             List<MapInfo> mapIndices = new List<MapInfo>();
-            string data = await DataManager.Get("/api/map/list");
+            string data = await DataManager.Get("/api/custom-map");
             mapIndices = MapConverter.ConvertJsonToMapList(data);
             
             return mapIndices;
