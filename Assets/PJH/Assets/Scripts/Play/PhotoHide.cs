@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Common.Network;
 using Fusion;
 using UnityEngine;
@@ -6,7 +7,6 @@ using UnityEngine;
 public class PhotoHide : NetworkBehaviour, IListener
 {
     private float yValue = 1f;
-    private Dictionary<string, Vector3> photoPositions;
     public GameObject photoPrefab;
     private GameObject hitObject;
 
@@ -16,8 +16,7 @@ public class PhotoHide : NetworkBehaviour, IListener
         if (!Runner.IsSceneAuthority)
             return;
         EventManager.Instance.AddListener(EventType.eRaycasting, this);
-        photoPositions = new Dictionary<string, Vector3>();
-        SpawnPhoto(photoPositions, 8); 
+        SpawnPhoto(); 
     }
     
     private Vector3 GetRandomPosition()
@@ -25,14 +24,15 @@ public class PhotoHide : NetworkBehaviour, IListener
         return new Vector3(Random.Range(-10, 11), yValue, Random.Range(-10, 11));
     }
 
-    public void SpawnPhoto(Dictionary<string, Vector3> photoDict, int numberOfPhotos)
+    public void SpawnPhoto()
     {
-        for (int i = 1; i <= numberOfPhotos; i++)
+        foreach (var res in RecievedPhotoData.PhotoResponses)
         {
-            string photoName = "Photo" + i;
-            photoDict[photoName] = GetRandomPosition(); 
-            // Instantiate(photoPrefab, photoDict[photoName], Quaternion.identity);
-            Runner.Spawn(photoPrefab, photoDict[photoName]);
+            var pos = GetRandomPosition(); 
+            var spawnedPhoto = Runner.Spawn(photoPrefab, pos);
+            var photo = spawnedPhoto.GetComponent<Photo>();
+            if (photo != null)
+                photo.Info = res;
         }
     }
 

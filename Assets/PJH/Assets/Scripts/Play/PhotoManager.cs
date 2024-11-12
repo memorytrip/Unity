@@ -14,7 +14,7 @@ using SceneManager = Common.SceneManager;
 
 public class PhotoManager : NetworkRunnerCallbacks, IListener
 {
-    private float yValue = 5f;
+    private float yValue = 1f;
     private Dictionary<int, Vector3> photoPositions;
     public NetworkPrefabRef photoPrefab;
     private GameObject hitObject;
@@ -45,24 +45,23 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     
     private Vector3 GetRandomPosition()
     {
-        return new Vector3(Random.Range(-40, 40), yValue, Random.Range(-40, 40));
+        return new Vector3(Random.Range(-10, 11), yValue, Random.Range(-10, 11));
     }
 
     public async UniTaskVoid HidePhoto(Dictionary<int, Vector3> photoDict, int numberOfPhotos)
     {
-            for (var i = 1; i <= numberOfPhotos; i++)
-            {
-                int photoName = i;
-                photoDict[photoName] = GetRandomPosition();
-                var photoObject =
-                    await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName],
-                        Quaternion.identity);
-                PhotoData photodata = photoObject.GetComponent<PhotoData>();
-                if (photodata != null)
-                {
-                    photodata.SetPhotoName(photoName);
-                }
-            }
+        for (var i = 1; i <= numberOfPhotos; i++)
+        {
+            int photoName = i;
+            photoDict[photoName] = GetRandomPosition();
+
+                await UniTask.Delay(TimeSpan.FromSeconds(3.5f));
+            var photoObject =
+                await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName], Quaternion.identity);
+            
+            var photoData = photoObject.GetComponent<PhotoData>();
+            photoData?.SetPhotoName(photoName);
+        }
         
     }
     
@@ -79,11 +78,9 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
                         hitNetworkObject = hitObject.GetComponent<NetworkObject>();
                     }
                 }
-                
+
                 break;
-                
         }
-        
     }
 
     public void OnDestroyPhoto()
