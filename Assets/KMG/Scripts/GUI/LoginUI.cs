@@ -148,9 +148,6 @@ namespace GUI
                 closeLoginPanelButton.interactable = true;
                 return;
             }
-
-            UIManager.Instance.TemporarilyHideUI().Forget();
-
         }
 
         private async UniTaskVoid Signup()

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -10,6 +9,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;
+    private readonly WaitForSeconds _wait = new WaitForSeconds(7f);
 
     public static UIManager Instance
     {
@@ -48,19 +48,14 @@ public class UIManager : MonoBehaviour
         switch (scene.name)
         {
             case "Square":
-            case "MultiPlayTest":
-                ShowUI(mainMenu);
-                ShowUI(sideMenu);
-                ShowUI(chat);
-                ShowUI(joystick);
-                screenshotButton.interactable = true;
+                TemporarilyHideUI();
                 break;
             case "MyRoom":
                 ShowUI(mainMenu);
                 ShowUI(sideMenu);
+                screenshotButton.interactable = false;
                 HideUI(chat);
                 ShowUI(joystick);
-                screenshotButton.interactable = false;
                 break;
             case "MapEdit":
             case "PlayReady":
@@ -86,23 +81,22 @@ public class UIManager : MonoBehaviour
         canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
     }
 
-    public async UniTask TemporarilyHideUI()
+    public void TemporarilyHideUI()
     {
-        HideUI(mainMenu);
-        HideUI(sideMenu);
-        HideUI(chat);
-        HideUI(joystick);
-        await UniTask.Delay(TimeSpan.FromSeconds(8));
         StartCoroutine(ProcessTemporaryToggle());
     }
 
     private IEnumerator ProcessTemporaryToggle()
     {
+        HideUI(mainMenu);
+        HideUI(sideMenu);
+        HideUI(chat);
+        HideUI(joystick);
+        yield return _wait;
         ShowUI(mainMenu);
         ShowUI(sideMenu);
         ShowUI(chat);
         ShowUI(joystick);
-        yield break;
     }
     
     private void OnDestroy()

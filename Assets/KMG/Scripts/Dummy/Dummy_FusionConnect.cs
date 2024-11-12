@@ -15,7 +15,6 @@ namespace KMG.Scripts.Dummy
         private void Awake()
         {
             connectButton.onClick.AddListener(()=>Connect().Forget());
-            connectButton.onClick.AddListener(async () => await UIManager.Instance.TemporarilyHideUI());
         }
 
         private async UniTaskVoid Connect()
