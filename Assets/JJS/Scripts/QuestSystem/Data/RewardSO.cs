@@ -17,10 +17,11 @@ public class RewardSO : ScriptableObject
     [Header("보상 이름 - 획득 시 팝업에 UI 표시")]
     public string rewardName;
     [Space(10f)]
-    [Header("보상 내용 - 획득 시 팝업에 UI 표시")]
-    [TextArea(15, 20)] public string rewardDescription; // TODO: 적절히 바꿔주기
+    [Header("보상 미리보기 이미지")]
+    public Sprite rewardSprite;
+    [Header("UI가 있을 경우 선택했을 때 풍선 띄우기")] // TODO: 와우
+    [TextArea(15, 20)] public string rewardDescription;
     
-    // TODO: 이거 왜 있는지 잊어버렸다
     private void OnValidate()
     {
 #if UNITY_EDITOR

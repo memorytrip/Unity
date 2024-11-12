@@ -46,6 +46,8 @@ public class PlayerMovement : NetworkBehaviour
     
     [Header("Animation")]
     [SerializeField] private Animator animator;
+
+    private bool isRestricted = false;
     
     private void Awake()
     {
@@ -109,6 +111,8 @@ public class PlayerMovement : NetworkBehaviour
     public override void FixedUpdateNetwork()
     {
         if (!HasStateAuthority)
+            return;
+        if (isRestricted)
             return;
         PlayerMove();
         PlayerRotation();
@@ -177,12 +181,14 @@ public class PlayerMovement : NetworkBehaviour
         
         if (isTyping)
         {
-            _playerInput.DeactivateInput();
+            // _playerInput.DeactivateInput();
+            isRestricted = true;
             Debug.Log("얼음");
         }
         else
         {
             _playerInput.ActivateInput();
+            isRestricted = false;
             Debug.Log("얼음 -> 땡");
         }
     }
@@ -193,9 +199,11 @@ public class PlayerMovement : NetworkBehaviour
         {
             yield break;
         }
-        _playerInput.DeactivateInput();
+        // _playerInput.DeactivateInput();
+        isRestricted = true;
         yield return _wait;
-        _playerInput.ActivateInput();
+        // _playerInput.ActivateInput();
+        isRestricted = false;
         Debug.Log("얼음 -> 땡");
     }
     

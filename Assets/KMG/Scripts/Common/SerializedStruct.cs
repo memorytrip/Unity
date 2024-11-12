@@ -7,12 +7,12 @@ namespace Common
     [Serializable]
     public class SerializedVector3
     {
-        public float x;
-        public float y;
-        public float z;
+        public double x;
+        public double y;
+        public double z;
 
         public SerializedVector3() {}
-        public SerializedVector3(float x, float y, float z)
+        public SerializedVector3(double x, double y, double z)
         {
             this.x = x;
             this.y = y;
@@ -28,19 +28,27 @@ namespace Common
 
         public Vector3 ToVector3()
         {
-            return new Vector3(x, y, z);
+            return new Vector3((float)x, (float)y, (float)z);
         }
     }
 
     [Serializable]
     public class SerializedQuaternion
     {
-        public float w;
-        public float x;
-        public float y;
-        public float z;
+        public double w;
+        public double x;
+        public double y;
+        public double z;
 
         public SerializedQuaternion() {}
+
+        public SerializedQuaternion(double w, double x, double y, double z)
+        {
+            this.w = w;
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
         public SerializedQuaternion(Quaternion quaternion)
         {
             w = quaternion.w;
@@ -51,7 +59,7 @@ namespace Common
 
         public Quaternion ToQuaternion()
         {
-            return new Quaternion(x, y, z, w);
+            return new Quaternion((float)x, (float)y, (float)z, (float)w);
         }
     }
 }

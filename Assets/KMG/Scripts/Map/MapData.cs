@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
 
 namespace Map
 {
+    [Serializable]
     public class MapData
     {
         public string themeId;

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -10,6 +9,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;
+    private readonly WaitForSeconds _wait = new WaitForSeconds(7f);
 
     public static UIManager Instance
     {
@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
         SceneManager.sceneLoaded += ToggleUI;
     }
     
+    
     private void ToggleUI(Scene scene, LoadSceneMode mode)
     {
         switch (scene.name)
@@ -46,6 +47,9 @@ public class UIManager : MonoBehaviour
                 HideUI(chat);
                 HideUI(joystick);
                 HideUI(newChat);
+                break;
+            case "Square":
+                TemporarilyHideUI();
                 break;
             case "MyRoom":
                 ShowUI(mainMenu);
@@ -112,23 +116,22 @@ public class UIManager : MonoBehaviour
         canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
     }
 
-    public async Task TemporarilyHideUI()
+    public void TemporarilyHideUI()
     {
-        HideUI(mainMenu);
-        HideUI(sideMenu);
-        HideUI(chat);
-        HideUI(joystick);
-        await UniTask.Delay(TimeSpan.FromSeconds(8));
         StartCoroutine(ProcessTemporaryToggle());
     }
 
     private IEnumerator ProcessTemporaryToggle()
     {
+        HideUI(mainMenu);
+        HideUI(sideMenu);
+        HideUI(chat);
+        HideUI(joystick);
+        yield return _wait;
         ShowUI(mainMenu);
         ShowUI(sideMenu);
         ShowUI(chat);
         ShowUI(joystick);
-        yield break;
     }
     
     private void OnDestroy()

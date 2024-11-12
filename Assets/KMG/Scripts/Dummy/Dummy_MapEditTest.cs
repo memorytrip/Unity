@@ -41,7 +41,7 @@ namespace KMG.Scripts.Dummy
         private async UniTaskVoid ConvertMap()
         {
             MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
-            mapInfo.thumbnail = await capturer.CaptureToBase64();
+            mapInfo.thumbnail = ""; //await capturer.CaptureToBase64();
             
             string path = Application.persistentDataPath + "/Maps/";
             string filename = "asdf.json";

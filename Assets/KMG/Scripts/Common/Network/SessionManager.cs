@@ -44,19 +44,24 @@ namespace Common.Network
             data.password = HashingPW(password);
             string rawData = JsonConvert.SerializeObject(data);
             Debug.Log(rawData);
+            
+            ResponseWithToken response = await DataManager.PostAndGetToken("/api/auth/login", rawData);
+            LoginResult result = JsonConvert.DeserializeObject<LoginResult>(response.data);
+            
+            if (result.success)
+            {
+                currentSession = new Session();
+                currentSession.token = response.token;
+                currentSession.user = new User();
+                currentSession.user.email = email;
+                currentSession.user.nickName = result.email;
 
-            string response = await DataManager.Post("/api/auth/login", rawData);
-            LoginResult result = JsonConvert.DeserializeObject<LoginResult>(response);
-            
-            // 로그인 성공 시
-            currentSession = new Session();
-            currentSession.token = result.token;
-            currentSession.state = Session.State.Connect;
-            currentSession.user = new User();
-            currentSession.user.email = email;
-            currentSession.user.nickName = result.nickname;
-            
-            Debug.Log($"JWT: {currentSession.token}");
+                Debug.Log($"JWT: {currentSession.token}");
+            }
+            else
+            {
+                throw new Exception(result.response);
+            }
         }
 
         public void Logout()
@@ -92,9 +97,9 @@ namespace Common.Network
 
         class LoginResult
         {
-            public string result;
-            public string nickname;
-            public string token;
+            public bool success;
+            public string response;
+            public string email;
         }
     }
 }

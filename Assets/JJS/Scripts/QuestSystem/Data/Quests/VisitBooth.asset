@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f9f3f8348dca843b278b385ecf4c08, type: 3}
+  m_Name: VisitBooth
+  m_EditorClassIdentifier: 
+  questName: "\uBD80\uC2A4 \uBC29\uBB38\uD558\uAE30"
+  message: "\uC218\uBC15 \uBE59\uACFC \uD68D\uB4DD!"
+  reward: {fileID: 11400000, guid: 7554eba859247b54c95ad07014a63e9b, type: 2}
+  questDescription: 
+  questClear: 0

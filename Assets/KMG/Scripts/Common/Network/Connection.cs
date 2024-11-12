@@ -44,9 +44,8 @@ namespace Common.Network
 
         private void Init()
         {
-            ///// BE로 교체 에정
-            playerName =  PlayerPrefs.GetString("NickName", string.Empty);
-            Debug.Log($"Connection Init() PlayerName : {playerName}");
+            playerName = SessionManager.Instance.currentSession?.user.nickName;
+            Debug.Log($"Connection Init PlayerName : {playerName}");
             
             StateAuthInstance = this;
             playerRef = Runner.LocalPlayer;

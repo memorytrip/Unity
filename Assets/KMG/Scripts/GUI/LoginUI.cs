@@ -2,9 +2,11 @@ using Common;
 using System.Collections;
 using Common.Network;
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Exception = System.Exception;
 
 namespace GUI
 {
@@ -32,6 +34,11 @@ namespace GUI
         [SerializeField] private Button signUpButton;
         [SerializeField] private Button closeSignupPanelButton;
 
+        [Header("Popup Panel")] 
+        [SerializeField] private CanvasGroup popupPanel;
+        [SerializeField] private TMP_Text popupText;
+        [SerializeField] private Button popupButton;
+
         private readonly WaitForSeconds _wait = new WaitForSeconds(0.5f);
         private readonly WaitForSeconds _typeDelay = new WaitForSeconds(0.05f);
         private const string IdKey = "Traver";
@@ -46,6 +53,7 @@ namespace GUI
             closeSignupPanelButton.onClick.AddListener(CloseSignupPanel);
             loginButton.onClick.AddListener(() => Login().Forget());
             signUpButton.onClick.AddListener(() => Signup().Forget());
+            popupButton.onClick.AddListener(ClosePopupPanel);
         }
 
         private void OpenLoginPanel()
@@ -62,6 +70,14 @@ namespace GUI
             openLoginPanelButton.interactable = false;
             openSignupPanelButton.interactable = false;
             StartCoroutine(AutomateSignupInput());
+        }
+
+        private void OpenPopupPanel(string message = "")
+        {
+            Utility.EnablePanel(popupPanel);
+            popupText.text = message;
+            openLoginPanelButton.interactable = false;
+            openSignupPanelButton.interactable = false;
         }
 
         private void CloseLoginPanel()
@@ -84,13 +100,54 @@ namespace GUI
             openSignupPanelButton.interactable = true;
         }
 
+        private void ClosePopupPanel()
+        {
+            Utility.DisablePanel(popupPanel);
+            openLoginPanelButton.interactable = true;
+            openSignupPanelButton.interactable = true;
+        }
+
         private async UniTaskVoid Login()
         {
             string id = loginIDField.text;
             string pw = loginPWField.text;
-            await SessionManager.Instance.Login(id, pw);
-            await SceneManager.Instance.MoveRoom(SceneManager.SquareScene);
 
+            loginButton.interactable = false;
+            closeLoginPanelButton.interactable = false;
+            
+            try
+            {
+                await SessionManager.Instance.Login(id, pw);
+            }
+            catch (UnityWebRequestException e)
+            {
+                Debug.LogAssertion(e.Message);
+                if (e.ResponseHeaders["Content-Type"] == "text/json")
+                {
+                    ErrorResult error = JsonConvert.DeserializeObject<ErrorResult>(e.Text);
+                    OpenPopupPanel(error.response);    
+                }
+                else
+                {
+                    OpenPopupPanel(e.Error);
+                }
+                loginButton.interactable = true;
+                closeLoginPanelButton.interactable = true;
+                // return;
+            }
+
+            try
+            {
+                await SceneManager.Instance.MoveRoom(SceneManager.SquareScene); 
+            }
+            catch (Exception e)
+            { 
+                OpenPopupPanel(e.Message);
+                Debug.LogAssertion(e);
+                loginButton.interactable = true;
+                closeLoginPanelButton.interactable = true;
+                return;
+            }
         }
 
         private async UniTaskVoid Signup()
@@ -99,7 +156,28 @@ namespace GUI
             string pw = signupPWField.text;
             string confirmPw = signupConfirmPWField.text;
             string name = signupNickNameField.text;
-            await SessionManager.Instance.SignUp(id, pw, confirmPw, name);
+
+            signUpButton.interactable = false;
+            closeSignupPanelButton.interactable = false;
+            
+            try
+            {
+                await SessionManager.Instance.SignUp(id, pw, confirmPw, name);
+            }
+            catch (UnityWebRequestException e)
+            {
+                Debug.LogAssertion(e.Message);
+                ErrorResult error = JsonConvert.DeserializeObject<ErrorResult>(e.Text);
+                OpenPopupPanel(error.response);
+                signUpButton.interactable = true;
+                closeSignupPanelButton.interactable = true;
+                return;
+            }
+            
+            signUpButton.interactable = true;
+            closeSignupPanelButton.interactable = true;
+            CloseSignupPanel();
+            OpenPopupPanel("회원가입이 완료되었습니다");
         }
         
         private IEnumerator AutomateLoginInput()
@@ -162,6 +240,12 @@ namespace GUI
         {
             inputField.text = string.Empty;
             inputField.DeactivateInputField();
+        }
+
+        class ErrorResult
+        {
+            public bool success;
+            public string response;
         }
     }
 }

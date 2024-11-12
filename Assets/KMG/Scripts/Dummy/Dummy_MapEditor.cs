@@ -43,7 +43,8 @@ namespace GUI
             if (File.Exists(path + filename))
             {
                 string rawData = await File.ReadAllTextAsync(path + filename);
-                mapInfo = JsonConvert.DeserializeObject<MapInfo>(rawData);
+                // mapInfo = JsonConvert.DeserializeObject<MapInfo>(rawData);
+                mapInfo = MapConverter.ConvertJsonToMapInfo(rawData);
             }
             else
             {
@@ -55,21 +56,34 @@ namespace GUI
         private async UniTaskVoid ConvertMapConcreteToFile(MapConcrete mapConcrete)
         {
             MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
-            mapInfo.thumbnail = await capturer.CaptureToBase64();
+            mapInfo.thumbnail = ""; //await capturer.CaptureToBase64();
             
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)
             {
                 directoryInfo.Create();
             }
-            await File.WriteAllTextAsync(path + filename, JsonConvert.SerializeObject(mapInfo));
+            // await File.WriteAllTextAsync(path + filename, JsonConvert.SerializeObject(mapInfo));
+            await File.WriteAllTextAsync(path + filename, MapConverter.ConvertMapInfoToJson(mapInfo));
             Debug.Log($"File save: {path + filename}");
+        }
+
+        private async UniTaskVoid SendMapToServer(MapConcrete mapConcrete)
+        {
+            MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
+            string data = MapConverter.ConvertMapInfoToJson(mapInfo);
+            
+            Debug.Log(data);
+            string response = await DataManager.Post("/api/map/create", data);
+            Debug.Log(response);
         }
 
         private void Exit()
         {
             ConvertMapConcreteToFile(mapConcrete).Forget();
-            SceneManager.Instance.MoveRoom("player_").Forget();
+            SendMapToServer(mapConcrete).Forget();
+            User user = Common.Network.SessionManager.Instance.currentSession.user;
+            SceneManager.Instance.MoveRoom($"player_{user.nickName}").Forget();
         }
     }
 }
