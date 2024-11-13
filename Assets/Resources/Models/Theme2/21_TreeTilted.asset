@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 21
   mesh: {fileID: 6151184266038526471, guid: 176c48202f5c6d24f9fc3b20c84b85db, type: 3}
   material: {fileID: 2100000, guid: e5c8ac6092e78214fb866cab5f020f2a, type: 2}
-  theme: 2
+  theme: winter

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007158d9302a4b4cbfbc3ed8e94dd431, type: 3}
   m_Name: Water3
   m_EditorClassIdentifier: 
-  themeId: 3
+  themeId: desert
   mesh: {fileID: -4564467876937590043, guid: 048bc3ca35e06e84a9e70f65b3693e8d, type: 3}
   material: {fileID: 2100000, guid: e5c8ac6092e78214fb866cab5f020f2a, type: 2}
+  position: {x: 0, y: 0, z: 0}

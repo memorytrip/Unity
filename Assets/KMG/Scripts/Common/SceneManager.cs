@@ -4,6 +4,7 @@ using Common.Network;
 using Cysharp.Threading.Tasks;
 using GUI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Common
 {
@@ -14,12 +15,13 @@ namespace Common
     public class SceneManager: MonoBehaviour
     {
         public static readonly string SquareScene = "0";
+        private static readonly string EmptyScene = "EmptyScene";
         
         public static SceneManager Instance = null;
         [HideInInspector] public string curScene;
         public event Action OnSceneLoaded;
         [SerializeField] private FadeController fader;
-
+        
         public event Action OnSceneUnloaded;
 
         public void OnSceneEnded()
@@ -35,6 +37,7 @@ namespace Common
 
             UnityEngine.SceneManagement.SceneManager.sceneLoaded += (s, m) => OnSceneLoaded?.Invoke();
             UnityEngine.SceneManagement.SceneManager.sceneUnloaded += (s) => OnSceneUnloaded?.Invoke();
+            curScene = "Login";
         }
 
         
@@ -97,18 +100,24 @@ namespace Common
          */
         private IEnumerator ChangeSceneWithCheckNetworkRunner(string sceneName)
         {
+            string prevScene = curScene;
             curScene = null;
+            Debug.Log($"SceneManager: {prevScene} -> {sceneName}");
             if (RunnerManager.Instance.isRunnerExist)
             {
                 var Runner = RunnerManager.Instance.Runner;
                 if (Runner.IsSceneAuthority)
                 {
+                    yield return Runner.LoadScene(EmptyScene);
                     yield return Runner.LoadScene(sceneName);
                 }
             }
             else
             {
-                yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
+                yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(EmptyScene, LoadSceneMode.Additive);
+                yield return UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(prevScene);
+                yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+                yield return UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(EmptyScene);
             }
             curScene = sceneName;
         }

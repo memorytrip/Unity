@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 79
   mesh: {fileID: -8378393301913556599, guid: e315db6e10bcb794b8217d3b6ddc3839, type: 3}
   material: {fileID: 2100000, guid: e5c8ac6092e78214fb866cab5f020f2a, type: 2}
-  theme: 7
+  theme: station
