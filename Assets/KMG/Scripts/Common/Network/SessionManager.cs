@@ -54,9 +54,10 @@ namespace Common.Network
                 currentSession = new Session();
                 currentSession.token = response.token;
                 currentSession.user = new User();
-                currentSession.user.email = email;
-                currentSession.user.nickName = result.email;
+                currentSession.user.email = result.email;
+                currentSession.user.nickName = result.nickname;
 
+                Debug.Log($"nickname: {currentUser.nickName}");
                 Debug.Log($"JWT: {currentSession.token}");
             }
             else
@@ -101,6 +102,7 @@ namespace Common.Network
             public bool success;
             public string response;
             public string email;
+            public string nickname;
         }
     }
 }
