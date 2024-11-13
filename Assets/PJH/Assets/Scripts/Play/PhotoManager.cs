@@ -59,14 +59,12 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
         {
             int photoName = i;
             photoDict[photoName] = GetRandomPosition();
+                await UniTask.Delay(TimeSpan.FromSeconds(3.5f));
             var photoObject =
-                await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName],
-                    Quaternion.identity);
-            PhotoData photodata = photoObject.GetComponent<PhotoData>();
-            if (photodata != null)
-            {
-                photodata.SetPhotoName(photoName);
-            }
+                await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName], Quaternion.identity);
+            
+            var photoData = photoObject.GetComponent<PhotoData>();
+            photoData?.SetPhotoName(photoName);
         }
     }
     
@@ -83,11 +81,9 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
                         hitNetworkObject = hitObject.GetComponent<NetworkObject>();
                     }
                 }
-                
+
                 break;
-                
         }
-        
     }
 
     public void OnDestroyPhoto()

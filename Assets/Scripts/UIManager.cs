@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -46,15 +49,16 @@ public class UIManager : MonoBehaviour
     {
         switch (scene.name)
         {
-            case "Square":
-                TemporarilyHideUI();
-                break;
             case "Login":
                 ShowUI(mainMenu);
                 HideUI(sideMenu);
                 HideUI(chat);
                 HideUI(joystick);
                 HideUI(newChat);
+                break;
+            case "Square":
+                HideUI(newChat);
+                TemporarilyHideUI();
                 break;
             case "MyRoom":
                 ShowUI(mainMenu);

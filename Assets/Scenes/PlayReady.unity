@@ -763,7 +763,6 @@ MonoBehaviour:
   leftArrowButton: {fileID: 1603426034}
   rightArrowButton: {fileID: 1072547526}
   scrollDuration: 0.5
-  totalPages: 0
 --- !u!114 &165096944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1145,6 +1144,8 @@ GameObject:
   - component: {fileID: 342640184}
   - component: {fileID: 342640183}
   - component: {fileID: 342640182}
+  - component: {fileID: 342640186}
+  - component: {fileID: 342640185}
   m_Layer: 0
   m_Name: Ready
   m_TagString: Untagged
@@ -1213,6 +1214,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &342640185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342640181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e9ddc06a2c20f4fbce77d409aed621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &342640186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342640181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710796d622e79d74ca8262793ae56cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playReadyRoom: {fileID: 0}
+  getLetterAndPhoto: {fileID: 342640185}
+  startButton: {fileID: 122946297}
+  photo1: {fileID: 54655599}
+  photo2: {fileID: 1563690089}
 --- !u!1 &438615991
 GameObject:
   m_ObjectHideFlags: 0
