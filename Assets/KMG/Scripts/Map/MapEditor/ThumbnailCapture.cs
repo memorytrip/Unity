@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Windows;
 
 namespace Map.Editor
 {
@@ -8,13 +9,22 @@ namespace Map.Editor
     {
         // [SerializeField] private Camera cam;
         [SerializeField] private RenderTexture renderTexture;
-
-        public void Test()
-        {
-            CaptureToBase64().Forget();
-        }
         
         public async UniTask<string> CaptureToBase64()
+        {
+            var data = (await Capture()).EncodeToPNG();
+            string b64 = Convert.ToBase64String(data);
+            return b64;
+        }
+        
+        public async UniTaskVoid CaptureToLocal()
+        {
+            var data = (await Capture()).EncodeToPNG();
+            string filePath = Application.persistentDataPath + "/Maps/asdf.png";
+            File.WriteAllBytes(filePath, data);
+        }
+
+        public async UniTask<Texture2D> Capture()
         {
             await UniTask.Yield();
 
@@ -24,9 +34,7 @@ namespace Map.Editor
 
             await UniTask.Yield();
 
-            var data = tex.EncodeToPNG();
-            string b64 = Convert.ToBase64String(data);
-            return b64;
+            return tex;
         }
     }
 }

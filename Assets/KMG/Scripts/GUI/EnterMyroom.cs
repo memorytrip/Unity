@@ -22,8 +22,8 @@ namespace GUI
             User user = SessionManager.Instance.currentSession?.user;
             if (user != null)
                 SceneManager.Instance.MoveRoom($"player_{user.nickName}").Forget();
-            else
-                SceneManager.Instance.MoveRoom($"player_").Forget();
+            // else
+            //     SceneManager.Instance.MoveRoom($"player_").Forget();
         }
 
         private void OnTriggerEnter(Collider other)

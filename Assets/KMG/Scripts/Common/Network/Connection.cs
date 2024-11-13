@@ -71,7 +71,7 @@ namespace Common.Network
                     currenctCharacter = await SpawnProcess("PlayReadyState");
                     SceneManager.Instance.OnSceneLoaded += SpawnAvatar;
                     break;
-                case "MultiPlayTest":
+                case "FindPhoto":
                     SceneManager.Instance.OnSceneLoaded -= SpawnAvatar;
                     await UniTask.Delay(TimeSpan.FromSeconds(3.5f));
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);

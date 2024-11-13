@@ -6,12 +6,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Map;
+using Common.Network;
 
 
 public class MapSelectionController : MonoBehaviour
 {
     public ScrollRect scrollRect;
-    public Button leftArrowButton;
+    public Transform scrollContent;
+    public GameObject mapThumbnailPrefab;
+    public Sprite EmptySprite;
+    public Button leftArrowButton; 
     public Button rightArrowButton;
     public float scrollDuration = 0.5f;
     private int totalPages;
@@ -27,7 +31,32 @@ public class MapSelectionController : MonoBehaviour
         //scrollRect.content.sizeDelta = new Vector2(800 * totalPages, 700f);
         leftArrowButton.onClick.AddListener(PreviousPage);
         rightArrowButton.onClick.AddListener(NextPage);
-        Debug.Log(totalPages);
+        
+        InitMapList().Forget();
+    }
+
+    private async UniTaskVoid InitMapList()
+    {
+        User user = SessionManager.Instance.currentUser;
+        List<MapInfo> mapList = await MapManager.Instance.LoadMapList(user);
+
+        List<UniTask> tasks = new List<UniTask>(mapList.Count);
+        foreach (var mapInfo in mapList)
+        {
+            tasks.Add(LoadMapThumbnail(mapInfo));
+        }
+        await UniTask.WhenAll(tasks);
+        
+        totalPages = mapList.Count;
+        UpdateArrowButtons();
+    }
+
+    private async UniTask LoadMapThumbnail(MapInfo mapInfo)
+    {
+        Image image = Instantiate(mapThumbnailPrefab, scrollContent).GetComponent<Image>();
+        image.sprite = await MapManager.Instance.LoadMapThumbnail(mapInfo);
+        if (image.sprite == null)
+            image.sprite = EmptySprite;
     }
 
     void NextPage()

@@ -55,26 +55,26 @@ namespace GUI
 
         private async UniTaskVoid ConvertMapConcreteToFile(MapConcrete mapConcrete)
         {
-            MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
-            mapInfo.thumbnail = ""; //await capturer.CaptureToBase64();
+            MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete, capturer);
             
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)
             {
                 directoryInfo.Create();
             }
-            // await File.WriteAllTextAsync(path + filename, JsonConvert.SerializeObject(mapInfo));
+
             await File.WriteAllTextAsync(path + filename, MapConverter.ConvertMapInfoToJson(mapInfo));
             Debug.Log($"File save: {path + filename}");
         }
 
         private async UniTaskVoid SendMapToServer(MapConcrete mapConcrete)
         {
-            MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete);
+            MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete, capturer);
             string data = MapConverter.ConvertMapInfoToJson(mapInfo);
             
             Debug.Log(data);
-            string response = await DataManager.Post("/api/map/create", data);
+            // string response = await DataManager.Post("/api/map/create", data);
+            string response = await DataManager.Post("/api/custom-map/create/1", data);
             Debug.Log(response);
         }
 

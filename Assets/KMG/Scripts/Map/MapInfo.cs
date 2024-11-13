@@ -15,10 +15,19 @@ namespace Map
             MapInfo res = new MapInfo();
             // res.data = "{\"themeId\":\"0\",\"mapObjectList\":[]}";
             res.data = new MapData();
+            res.type = MapType.Default;
             res.data.themeId = "0";
             res.data.mapObjectList = new List<MapData.MapObjectData>();
             return res;
         }
+
+        public enum MapType
+        {
+            Default,
+            Custom
+        }
+
+        public MapType type;
         public string id;
         public string thumbnail;
         public MapData data;

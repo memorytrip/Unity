@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Common;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Map
 {
@@ -23,34 +25,42 @@ namespace Map
             if (_instance != null) 
                 return;
         }
-
-#region Load MapList, MapInfo
+        
         public async UniTask<List<MapInfo>> LoadMapList(User user)
         {
             List<MapInfo> mapInfos = new List<MapInfo>(4);
-            mapInfos.AddRange(await LoadDefaultsMapList());
-            mapInfos.AddRange(await LoadCustomMapListFromLocal());
+            mapInfos.AddRange(await LoadDefaultsMapListFromServer());
+            mapInfos.AddRange(await LoadCustomMapListFromServer());
+            return mapInfos;
+        }
+#region LoadDefaultsMapList
+        private async UniTask<List<MapInfo>> LoadDefaultsMapListFromLocal()
+        {
+            string[] defaultsMapName = new[] { "map1", "map2", "map3", "map4" };
+            List<MapInfo> mapInfos = new List<MapInfo>(4);
+            foreach (var mapName in defaultsMapName)
+            {
+                string rawdata = await LoadMapFileFromResources(mapName);
+                MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(rawdata);
+                mapInfo.type = MapInfo.MapType.Default;
+                mapInfos.Add(mapInfo);
+            }
+
             return mapInfos;
         }
         
-        private async UniTask<List<MapInfo>> LoadDefaultsMapList()
+        private async UniTask<List<MapInfo>> LoadDefaultsMapListFromServer()
         {
-            List<MapInfo> mapInfos = new List<MapInfo>(4);
-            mapInfos.Add(JsonConvert.DeserializeObject<MapInfo>(await LoadMapFileFromResources("DummyMap01")));
-            mapInfos.Add(JsonConvert.DeserializeObject<MapInfo>(await LoadMapFileFromResources("DummyMap02")));
-
+            string rawData = await DataManager.Get("/api/map");
+            List<MapInfo> mapInfos = MapConverter.ConvertJsonToMapList(rawData);
+            foreach (var mapInfo in mapInfos)
+            {
+                mapInfo.type = MapInfo.MapType.Default;
+            }
             return mapInfos;
         }
-
-        private async UniTask<List<MapInfo>> LoadCustomMapListFromServer()
-        {
-            List<MapInfo> mapIndexes = new List<MapInfo>();
-            string data = await DataManager.Get("/api/map/list");
-            mapIndexes = JsonConvert.DeserializeObject<MapList>(data).mapInfos;
-            
-            return mapIndexes;
-        }
-
+#endregion
+#region LoadCustomMapList
         private async UniTask<List<MapInfo>> LoadCustomMapListFromLocal()
         {
             List<MapInfo> mapInfos = new List<MapInfo>();
@@ -63,23 +73,93 @@ namespace Map
             foreach (var mapJson in directoryInfo.GetFiles("*.json"))
             {
                 StreamReader reader = mapJson.OpenText();
-                MapInfo mapInfo = JsonConvert.DeserializeObject<MapInfo>(await reader.ReadToEndAsync());
+                MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(await reader.ReadToEndAsync());
+                mapInfo.type = MapInfo.MapType.Custom;
                 mapInfos.Add(mapInfo);
             }
 
             return mapInfos;
         }
-
+        
+        private async UniTask<List<MapInfo>> LoadCustomMapListFromServer()
+        {
+            string data = await DataManager.Get("/api/custom-map");
+            List<MapInfo> mapInfos = MapConverter.ConvertJsonToMapList(data);
+            foreach (var mapInfo in mapInfos)
+            {
+                mapInfo.type = MapInfo.MapType.Custom;
+            }
+            return mapInfos;
+        }
+#endregion
         private async UniTask<string> LoadMapFileFromResources(string mapName)
         {
             TextAsset textAsset = await Resources.LoadAsync<TextAsset>("Maps/" + mapName) as TextAsset;
             return textAsset.text;
         }
-#endregion
-
-        class MapList
+        
+    #region load map thumbnail
+        public async UniTask<Sprite> LoadMapThumbnail(MapInfo mapInfo)
         {
-            public List<MapInfo> mapInfos;
+            
+    
+            if (Uri.TryCreate(mapInfo.thumbnail, UriKind.Absolute, out Uri uri))
+            {
+                return await LoadMapThumbnailFromServer(mapInfo.thumbnail);
+            }
+            else if (File.Exists(mapInfo.thumbnail))
+            {
+                return await LoadMapThumbnailFromLocal(mapInfo.thumbnail);
+            }
+            else
+            {
+                return null;
+            }
         }
+    
+        private async UniTask<Sprite> LoadMapThumbnailFromServer(string uri)
+        {
+            UnityWebRequest request = new UnityWebRequest(uri, "GET");
+            request.downloadHandler = new DownloadHandlerTexture();
+            
+            Sprite sprite;
+            
+            try
+            {
+                await request.SendWebRequest();
+            }
+            catch (UnityWebRequestException e)
+            {
+                return null;
+            }
+            finally
+            {
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    Texture2D texture = DownloadHandlerTexture.GetContent(request);
+                    sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                }
+                else
+                {
+                    sprite = null;
+                }
+            }
+            return sprite;
+        }
+    
+        private async UniTask<Sprite> LoadMapThumbnailFromLocal(string path)
+        {
+            if (File.Exists(path))
+            {
+                byte[] rawdata = await DataManager.Read(path);
+                Texture2D texture = new Texture2D(2, 2);
+                if (texture.LoadImage(rawdata))
+                {
+                    return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                }
+            }
+            return null;
+        }
+        #endregion
     }
 }
