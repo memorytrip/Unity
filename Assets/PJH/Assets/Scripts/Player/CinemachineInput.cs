@@ -1,11 +1,8 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Common;
 using UnityEngine;
 using GUI;
 using Unity.Cinemachine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
@@ -24,6 +21,16 @@ public class CinemachineInput : MonoBehaviour
     {
         // ax = GetComponent<CinemachineInputAxisController>();
         orbitalFollow = GetComponent<CinemachineOrbitalFollow>();
+    }
+
+    private void FixedUpdate()
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        if (Mouse.current.leftButton.isPressed || Mouse.current.rightButton.isPressed)
+        {
+            HandleMouseControl();
+        }
+#endif
     }
 
     /**
@@ -82,6 +89,28 @@ public class CinemachineInput : MonoBehaviour
         yield return wfs;
         orbitalFollow.HorizontalAxis.Recentering.Enabled = true;
         orbitalFollow.VerticalAxis.Recentering.Enabled = true;
+    }
+    
+    private void HandleMouseControl()
+    {
+        Vector2 mouseDelta = Mouse.current.delta.ReadValue() / 10f;
+
+        // Disable recentering while controlling with mouse
+        orbitalFollow.HorizontalAxis.Recentering.Enabled = false;
+        orbitalFollow.VerticalAxis.Recentering.Enabled = false;
+
+        // Apply mouse delta to camera rotation
+        orbitalFollow.HorizontalAxis.Value += mouseDelta.x;
+        orbitalFollow.VerticalAxis.Value -= mouseDelta.y;
+
+        // Clamp the vertical axis as in the touch control
+        orbitalFollow.VerticalAxis.Value = Mathf.Clamp(orbitalFollow.VerticalAxis.Value, -10, 45);
+
+        // Reset recentering if no mouse buttons are held
+        if (!Mouse.current.leftButton.isPressed && !Mouse.current.rightButton.isPressed && retarget == null)
+        {
+            retarget = StartCoroutine(RetargetProcess());
+        }
     }
 
     private void OnDisable()
