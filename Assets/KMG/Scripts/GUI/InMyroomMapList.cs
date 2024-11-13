@@ -4,6 +4,7 @@ using Common.Network;
 using Cysharp.Threading.Tasks;
 using Map;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace GUI
@@ -14,6 +15,8 @@ namespace GUI
         [SerializeField] private GameObject customMapItemPrefab;
         [SerializeField] private Transform content;
         [SerializeField] private Sprite emptySprite;
+        [SerializeField] public GameObject confirmDeletePanel;
+        [SerializeField] public Button confirmDeleteButton;
 
         public async UniTask RefreshListProcess()
         {

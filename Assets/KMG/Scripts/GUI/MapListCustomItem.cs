@@ -19,7 +19,7 @@ namespace GUI
 
         private void Awake()
         {
-            deleteButton.onClick.AddListener(Delete);
+            deleteButton.onClick.AddListener(DeletePopup);
             setHomeButton.onClick.AddListener(SetHome);
         }
 
@@ -28,8 +28,16 @@ namespace GUI
             thumbnail.sprite = sprite;
         }
 
+        private void DeletePopup()
+        {
+            mapList.confirmDeletePanel.SetActive(true);
+            mapList.confirmDeleteButton.onClick.RemoveAllListeners();
+            mapList.confirmDeleteButton.onClick.AddListener(Delete);
+        }
+
         private void Delete()
         {
+            mapList.confirmDeletePanel.SetActive(false);
             DeleteProcess().Forget();
         }
 
