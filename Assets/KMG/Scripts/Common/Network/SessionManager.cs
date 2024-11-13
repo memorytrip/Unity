@@ -27,7 +27,7 @@ namespace Common.Network
             data.email = email;
             data.password = HashingPW(password);
             data.confirmPassword = HashingPW(confirmPassword);
-            data.playerName = playerName;
+            data.nickname = playerName;
             string rawData = JsonConvert.SerializeObject(data);
             Debug.Log(rawData);
             
@@ -82,7 +82,7 @@ namespace Common.Network
             public string email;
             public string password;
             public string confirmPassword;
-            public string playerName;
+            public string nickname;
         }
 
         class SignupResult
