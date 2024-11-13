@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Common;
+using Cysharp.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -42,7 +43,7 @@ namespace Map.Editor
             Theme,
             Model
         };
-        private TabState tabState = TabState.Theme;
+        private TabState tabState = TabState.Model;
         
         void Start()
         {
@@ -152,7 +153,7 @@ namespace Map.Editor
                     RefreshThemeItemList();
                     break;
                 case TabState.Model:
-                    RefreshModelItemList();
+                    RefreshModelItemList().Forget();
                     break;
             }
         }
@@ -167,8 +168,9 @@ namespace Map.Editor
             }
         }
 
-        private void RefreshModelItemList()
+        private async UniTaskVoid RefreshModelItemList()
         {
+            await UniTask.WaitUntil(() => target.mapConcrete != null);
             List<Model> models = ModelManager.Instance.downloadModelList.FindAll(e => e.theme == target.mapConcrete.theme.id);
             foreach (var model in models)
             {
