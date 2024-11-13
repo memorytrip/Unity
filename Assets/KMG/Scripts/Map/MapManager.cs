@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Common;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Map
 {
@@ -27,8 +29,8 @@ namespace Map
         public async UniTask<List<MapInfo>> LoadMapList(User user)
         {
             List<MapInfo> mapInfos = new List<MapInfo>(4);
-            mapInfos.AddRange(await LoadDefaultsMapListFromLocal());
-            // mapInfos.AddRange(await LoadCustomMapListFromLocal());
+            mapInfos.AddRange(await LoadDefaultsMapListFromServer());
+            mapInfos.AddRange(await LoadCustomMapListFromServer());
             return mapInfos;
         }
 #region LoadDefaultsMapList
@@ -40,6 +42,7 @@ namespace Map
             {
                 string rawdata = await LoadMapFileFromResources(mapName);
                 MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(rawdata);
+                mapInfo.type = MapInfo.MapType.Default;
                 mapInfos.Add(mapInfo);
             }
 
@@ -50,19 +53,14 @@ namespace Map
         {
             string rawData = await DataManager.Get("/api/map");
             List<MapInfo> mapInfos = MapConverter.ConvertJsonToMapList(rawData);
+            foreach (var mapInfo in mapInfos)
+            {
+                mapInfo.type = MapInfo.MapType.Default;
+            }
             return mapInfos;
         }
 #endregion
 #region LoadCustomMapList
-        private async UniTask<List<MapInfo>> LoadCustomMapListFromServer()
-        {
-            List<MapInfo> mapIndices = new List<MapInfo>();
-            string data = await DataManager.Get("/api/map/list");
-            mapIndices = MapConverter.ConvertJsonToMapList(data);
-            
-            return mapIndices;
-        }
-
         private async UniTask<List<MapInfo>> LoadCustomMapListFromLocal()
         {
             List<MapInfo> mapInfos = new List<MapInfo>();
@@ -76,9 +74,21 @@ namespace Map
             {
                 StreamReader reader = mapJson.OpenText();
                 MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(await reader.ReadToEndAsync());
+                mapInfo.type = MapInfo.MapType.Custom;
                 mapInfos.Add(mapInfo);
             }
 
+            return mapInfos;
+        }
+        
+        private async UniTask<List<MapInfo>> LoadCustomMapListFromServer()
+        {
+            string data = await DataManager.Get("/api/custom-map");
+            List<MapInfo> mapInfos = MapConverter.ConvertJsonToMapList(data);
+            foreach (var mapInfo in mapInfos)
+            {
+                mapInfo.type = MapInfo.MapType.Custom;
+            }
             return mapInfos;
         }
 #endregion
@@ -87,5 +97,69 @@ namespace Map
             TextAsset textAsset = await Resources.LoadAsync<TextAsset>("Maps/" + mapName) as TextAsset;
             return textAsset.text;
         }
+        
+    #region load map thumbnail
+        public async UniTask<Sprite> LoadMapThumbnail(MapInfo mapInfo)
+        {
+            
+    
+            if (Uri.TryCreate(mapInfo.thumbnail, UriKind.Absolute, out Uri uri))
+            {
+                return await LoadMapThumbnailFromServer(mapInfo.thumbnail);
+            }
+            else if (File.Exists(mapInfo.thumbnail))
+            {
+                return await LoadMapThumbnailFromLocal(mapInfo.thumbnail);
+            }
+            else
+            {
+                return null;
+            }
+        }
+    
+        private async UniTask<Sprite> LoadMapThumbnailFromServer(string uri)
+        {
+            UnityWebRequest request = new UnityWebRequest(uri, "GET");
+            request.downloadHandler = new DownloadHandlerTexture();
+            
+            Sprite sprite;
+            
+            try
+            {
+                await request.SendWebRequest();
+            }
+            catch (UnityWebRequestException e)
+            {
+                return null;
+            }
+            finally
+            {
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    Texture2D texture = DownloadHandlerTexture.GetContent(request);
+                    sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                }
+                else
+                {
+                    sprite = null;
+                }
+            }
+            return sprite;
+        }
+    
+        private async UniTask<Sprite> LoadMapThumbnailFromLocal(string path)
+        {
+            if (File.Exists(path))
+            {
+                byte[] rawdata = await DataManager.Read(path);
+                Texture2D texture = new Texture2D(2, 2);
+                if (texture.LoadImage(rawdata))
+                {
+                    return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                }
+            }
+            return null;
+        }
+        #endregion
     }
 }

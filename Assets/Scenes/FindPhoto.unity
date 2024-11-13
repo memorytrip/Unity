@@ -1634,6 +1634,7 @@ MonoBehaviour:
   photoPrefab:
     RawGuidValue: 49057b33ea71fbb4da4e8f02a8db9f28
   findedPhotoCount: {fileID: 772937589}
+  loadFindPhotoMap: {fileID: 1562566641}
 --- !u!4 &1562566639
 Transform:
   m_ObjectHideFlags: 0

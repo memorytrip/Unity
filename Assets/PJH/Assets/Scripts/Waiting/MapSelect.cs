@@ -54,63 +54,9 @@ public class MapSelectionController : MonoBehaviour
     private async UniTask LoadMapThumbnail(MapInfo mapInfo)
     {
         Image image = Instantiate(mapThumbnailPrefab, scrollContent).GetComponent<Image>();
-
-        if (Uri.TryCreate(mapInfo.thumbnail, UriKind.Absolute, out Uri uri))
-        {
-            image.sprite = await LoadMapThumbnailFromServer(mapInfo.thumbnail);
-        }
-        else if (File.Exists(mapInfo.thumbnail))
-        {
-            image.sprite = await LoadMapThumbnailFromLocal(mapInfo.thumbnail);
-        }
-        else
-        {
+        image.sprite = await MapManager.Instance.LoadMapThumbnail(mapInfo);
+        if (image.sprite == null)
             image.sprite = EmptySprite;
-        }
-    }
-
-    private async UniTask<Sprite> LoadMapThumbnailFromServer(string uri)
-    {
-        UnityWebRequest request = new UnityWebRequest(uri, "GET");
-        request.downloadHandler = new DownloadHandlerTexture();
-        
-        Sprite sprite;
-        
-        try
-        {
-            await request.SendWebRequest();
-        }
-        catch (UnityWebRequestException e)
-        {
-            return EmptySprite;
-        }
-        finally
-        {
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                Texture2D texture = DownloadHandlerTexture.GetContent(request);
-                sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            }
-            else
-            {
-                sprite = EmptySprite;
-            }
-        }
-        return sprite;
-    }
-
-    private async UniTask<Sprite> LoadMapThumbnailFromLocal(string path)
-    {
-        if (File.Exists(path))
-        {
-            byte[] rawdata = await DataManager.Read(path);
-            Texture2D texture = new Texture2D(2, 2);
-            if (texture.LoadImage(rawdata))
-            {
-                return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            }
-        }
-        return EmptySprite;
     }
 
     void NextPage()
