@@ -49,6 +49,7 @@ public class UIManager : MonoBehaviour
                 HideUI(newChat);
                 break;
             case "Square":
+                HideUI(newChat);
                 TemporarilyHideUI();
                 break;
             case "MyRoom":

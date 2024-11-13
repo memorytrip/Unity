@@ -11,17 +11,12 @@ using DataManager = Common.DataManager;
 [System.Serializable]
 public class PhotoLetterResponse
 {
-    public long photoID;
+    public long photoId;
     public string photoUrl;
     public long likeCount;
     public string letterId;
-    public long userId;
+    public long uploaderId;
     public bool isFound;
-
-    public override string ToString()
-    {
-        return $"Photo {photoID}";
-    }
 }
 
 public class PhotoInfo
@@ -53,7 +48,7 @@ public class PostLetterAndPhoto : MonoBehaviour
     {
         startButton.onClick.AddListener(PostButtonClicked);
     }
-
+    
     private async void PostButtonClicked()
     {
         if (startButton.gameObject.GetComponentInChildren<TMP_Text>().text == "Start")
@@ -63,7 +58,7 @@ public class PostLetterAndPhoto : MonoBehaviour
             //await PostLetter(letter.text); 
         }
     }
-
+    
     //formData로 Post
     private async UniTask PostPhoto(RawImage photo, string letterInfo)
     {
@@ -77,9 +72,8 @@ public class PostLetterAndPhoto : MonoBehaviour
             {
                 new MultipartFormDataSection("PhotoData", imageBytes),
                 new MultipartFormDataSection("roomCode", "ww"/*RunnerManager.Instance.Runner.SessionInfo.Name*/),
-                new MultipartFormDataSection("UserID", "1"),
-                new MultipartFormDataSection("UserCount", "4"/*RunnerManager.Instance.Runner.ActivePlayers.Count().ToString()*/),
-                new MultipartFormDataSection("Letter", letterInfo)
+                new MultipartFormDataSection("UserId", "1"),
+                //new MultipartFormDataSection("Letter", letterInfo)
             };
             // DataManager를 통해 POST 요청 보내기
             string response = await DataManager.Post(api, formData);

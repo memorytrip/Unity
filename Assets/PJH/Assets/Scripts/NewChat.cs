@@ -34,7 +34,7 @@ public class NewChat : MonoBehaviour
     public void InstantiateChat(string msg)
     {
         var textInstance = Instantiate(textPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity, transform);
-        textInstance.transform.localPosition = new Vector3(0f, -100f, 0f); // 생성 위치를 고정
+        textInstance.transform.localPosition = new Vector3(0f, -100f, 0f);
         textInstance.text = msg; 
         
         chatMessages.Add(textInstance);
