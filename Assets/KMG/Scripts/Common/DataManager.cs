@@ -18,8 +18,8 @@ namespace Common
         {
             string url = baseURL + CheckSlash(api);
             UnityWebRequest request = new UnityWebRequest(url, "GET");
-            /*if (token != null)
-                request.SetRequestHeader("Authorization", token);*/
+            if (token != null)
+                request.SetRequestHeader("Authorization", token);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.timeout = timeout;
 
@@ -67,8 +67,8 @@ namespace Common
             string url = baseURL + CheckSlash(api);
             UnityWebRequest request = new UnityWebRequest(url, "POST");
             byte[] boundary = System.Text.Encoding.UTF8.GetBytes("----Boundary");
-            /*if (token != null)
-                request.SetRequestHeader("Authorization", token);*/
+            if (token != null)
+                request.SetRequestHeader("Authorization", token);
             request.uploadHandler = new UploadHandlerRaw(UnityWebRequest.SerializeFormSections(formdata, boundary));
             request.downloadHandler = new DownloadHandlerBuffer();
             request.timeout = timeout;
