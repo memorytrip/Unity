@@ -7,10 +7,13 @@ using UnityEngine.Video;
 public class ToggleVideo : MonoBehaviour
 {
     private VideoPlayer _videoPlayer;
+    private Material _material;
+    [SerializeField] private Material[] materials;
     [SerializeField] private VideoClip videoClip;
 
     private void Awake()
     {
+        _material = GetComponent<Renderer>().material;
         _videoPlayer = GetComponent<VideoPlayer>();
         if (videoClip == null)
         {
@@ -39,6 +42,7 @@ private void InitializeVideoPlayer()
         _videoPlayer.playOnAwake = false;
         _videoPlayer.isLooping = true;
         _videoPlayer.clip = videoClip;
+        _material = materials[0];
     }
     
     private void OnTriggerEnter(Collider other)
@@ -48,6 +52,7 @@ private void InitializeVideoPlayer()
             return;
         }
         
+        _material = materials[1];
         StartCoroutine(StartVideoPlayback());
         Debug.Log($"Player entered {gameObject}");
     }
@@ -66,7 +71,8 @@ private void InitializeVideoPlayer()
         {
             return;
         }
-        
+
+        _material = materials[0];
         AudioManager.Instance.OnVideoStopped();
         StopVideoPlayback();
         Debug.Log($"Player exited {gameObject}");

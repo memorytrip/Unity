@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Common;
+using Common.Network;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Map;
+using Unity.VisualScripting;
+using UnityEngine.Networking;
 using Common.Network;
 
 
@@ -56,7 +60,7 @@ public class MapSelectionController : MonoBehaviour
         Image image = Instantiate(mapThumbnailPrefab, scrollContent).GetComponent<Image>();
         image.sprite = await MapManager.Instance.LoadMapThumbnail(mapInfo);
         if (image.sprite == null)
-            image.sprite = EmptySprite;
+            image.sprite = EmptySprite; 
     }
 
     void NextPage()

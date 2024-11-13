@@ -35,7 +35,15 @@ public class UIManager : MonoBehaviour
         DontDestroyOnLoad(Instance);
         SceneManager.sceneLoaded += ToggleUI;
     }
-    
+
+    private void Start()
+    {
+        ShowUI(mainMenu);
+        HideUI(sideMenu);
+        HideUI(chat);
+        HideUI(newChat);
+        HideUI(joystick);
+    }
     
     private void ToggleUI(Scene scene, LoadSceneMode mode)
     {

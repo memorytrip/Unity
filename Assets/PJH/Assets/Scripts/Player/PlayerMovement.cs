@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Common;
 using Fusion;
 using Unity.Cinemachine;
@@ -37,7 +36,7 @@ public class PlayerMovement : NetworkBehaviour
     public float maxDistance = 1f;
 
     private ChatDisplay _chatDisplay;
-    private PlayerInput _playerInput;
+    //private PlayerInput _playerInput;
 
     [Header("ScreenshotCam LookAt Target")]
     [SerializeField] private Transform screenshotCamPosition;
@@ -51,7 +50,7 @@ public class PlayerMovement : NetworkBehaviour
     
     private void Awake()
     {
-        _playerInput = GetComponent<PlayerInput>();
+        //_playerInput = GetComponent<PlayerInput>();
         cc = GetComponent<CharacterController>();
         cc.enabled = false;
         //networkanim = GetComponentInChildren<NetworkMecanimAnimator>();
@@ -178,8 +177,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         this.enabled = !isTyping;
         Debug.Log("이건 타이핑중인지 확인하는 것이여: " + isTyping);
-        
-        if (isTyping)
+        /*if (isTyping)
         {
             // _playerInput.DeactivateInput();
             isRestricted = true;
@@ -190,7 +188,7 @@ public class PlayerMovement : NetworkBehaviour
             _playerInput.ActivateInput();
             isRestricted = false;
             Debug.Log("얼음 -> 땡");
-        }
+        }*/
     }
 
     private IEnumerator WaitUntilTransitionEnd()
@@ -213,6 +211,4 @@ public class PlayerMovement : NetworkBehaviour
         _chatDisplay.StartTyping -= ToggleMovement;
         _chatDisplay.StopTyping -= ToggleMovement;
     }
-    
-   
 }

@@ -11,7 +11,6 @@ using Image = UnityEngine.UI.Image;
 public class UploadPhoto : MonoBehaviour
 {
     public RawImage img;
-    [SerializeField] private RawImage img2 = null;
     private float photoCapacity = 5000000000000f;
     //private string File = "Application.temporaryCachePath";
 
@@ -56,11 +55,9 @@ public class UploadPhoto : MonoBehaviour
         Texture2D tex = new Texture2D(2, 2);
         tex.LoadImage(temp);
 
-        img2.texture = tex;
         img.texture = tex;
         img.SetNativeSize();
         ImageSizeSetting(img, 432f, 288f);
-        ImageSizeSetting(img2, 1142f, 768f);
     }
 
     void ImageSizeSetting(RawImage img, float x, float y)

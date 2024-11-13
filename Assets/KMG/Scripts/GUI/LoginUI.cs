@@ -238,6 +238,7 @@ namespace GUI
 
         private void ClearForm(TMP_InputField inputField)
         {
+            StopAllCoroutines();
             inputField.text = string.Empty;
             inputField.DeactivateInputField();
         }
