@@ -9,6 +9,7 @@ using SceneManager = UnityEngine.SceneManagement.SceneManager;
 public class PlayerMovement : NetworkBehaviour
 {
     private static readonly int IsMoving = Animator.StringToHash("IsMoving");
+    private static readonly int Jump = Animator.StringToHash("Jump");
 
     [Header("References")]
     private CharacterController cc;
@@ -169,7 +170,10 @@ public class PlayerMovement : NetworkBehaviour
     public void PlayerJump(InputAction.CallbackContext ctx)
     {
         if (cc.isGrounded)
+        {
             velocity = jumpForce;
+            animator.SetTrigger(Jump);
+        }
     }
 
     // 텍스트창 입력 시 움직임 금지
