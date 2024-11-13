@@ -79,13 +79,13 @@ namespace Map
             mapInfo.data.mapObjectList = new List<MapData.MapObjectData>();
 
             MapInfoRaw.MapObjectData[] mapObjectData;
-            if (mapInfoRaw.objects != null)
+            if (mapInfoRaw.mapObjectResDTO != null)
             {
-                mapObjectData = mapInfoRaw.objects;    
+                mapObjectData = mapInfoRaw.mapObjectResDTO;    
             }
-            else if (mapInfoRaw.mapObjectResDTO != null)
+            else if (mapInfoRaw.customMapObjects != null)
             {
-                mapObjectData = mapInfoRaw.mapObjectResDTO;
+                mapObjectData = mapInfoRaw.customMapObjects;
             }
             else
             {
@@ -149,7 +149,7 @@ namespace Map
     [Serializable]
     class MapInfoRaw
     {
-        public string userid = null;
+        public string creatorId = null;
         public string id = null;
         public string thumbnailUrl = null;
         public string theme = "";
@@ -166,34 +166,33 @@ namespace Map
             public double rotationZ;
         }
 
+        public MapObjectData[] mapObjectResDTO = null;
+        public MapObjectData[] customMapObjects = null;
         public MapObjectData[] objects = null;
-        
-        
-        public class MapObjectDTO: MapObjectData
-        {
-            public long id;
-        }
-
-        public MapObjectDTO[] mapObjectResDTO = null;
 
         public bool ShouldSerializeid()
         {
             return id != null;
         }
 
-        public bool ShouldSerializeuserid()
+        public bool ShouldSerializecreatorId()
         {
-            return !String.IsNullOrEmpty(userid);
-        }
-
-        public bool ShouldSerializeobjects()
-        {
-            return objects != null;
+            return !String.IsNullOrEmpty(creatorId);
         }
 
         public bool ShouldSerializemapObjectResDTO()
         {
             return mapObjectResDTO != null;
+        }
+
+        public bool ShouldSerializecustomMapObjects()
+        {
+            return customMapObjects != null;
+        }
+
+        public bool ShouldSerializeobjects()
+        {
+            return objects != null;
         }
     }
 }

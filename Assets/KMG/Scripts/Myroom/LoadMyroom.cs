@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Common;
@@ -10,11 +11,13 @@ namespace Myroom
 {
     public class LoadMyroom: MonoBehaviour
     {
+        public static MapInfo.MapType mapType = MapInfo.MapType.Default;
+        public static long mapId = 2;
         private async UniTaskVoid Start()
         {
             // TODO: BE에서 mapInfo 불러와서 하기
 
-            MapInfo mapInfo = await LoadFromLocal();
+            MapInfo mapInfo = await LoadFromServer(mapId);
             
             LoadMap(mapInfo).Forget();
         }
@@ -31,7 +34,7 @@ namespace Myroom
                 directoryInfo.Create();
             }
 
-            MapInfo mapInfo = MapInfo.GetDefaultMap();;
+            MapInfo mapInfo = MapInfo.GetDefaultMap();
             if (File.Exists(path + filename))
             {
                 string rawData = await File.ReadAllTextAsync(path + filename);
@@ -41,10 +44,24 @@ namespace Myroom
             return mapInfo;
         }
 
-        private async UniTask<MapInfo> LoadFromServer()
+        private async UniTask<MapInfo> LoadFromServer(long mapId)
         {
-            string data = await DataManager.Get("/myroom");
-            MapInfo mapInfo = JsonConvert.DeserializeObject<MapInfo>(data);
+            // string data = await DataManager.Get("/myroom");
+            // MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(data);
+            // return await MapManager.Instance.LoadMapInfoFromServer(mapId);
+            MapInfo mapInfo;
+            switch (mapType)
+            {
+                case MapInfo.MapType.Custom:
+                    mapInfo = await MapManager.Instance.LoadCustomMapInfoFromServer(mapId);
+                    break;
+                case MapInfo.MapType.Default:
+                    mapInfo = await MapManager.Instance.LoadDefaultMapInfoFromServer(mapId);
+                    break;
+                default:
+                    throw new Exception();
+            }
+
             return mapInfo;
         }
 

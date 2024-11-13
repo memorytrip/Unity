@@ -33,7 +33,7 @@ namespace Map
             mapInfos.AddRange(await LoadCustomMapListFromServer());
             return mapInfos;
         }
-#region LoadDefaultsMapList
+    #region LoadDefaultsMapList
         private async UniTask<List<MapInfo>> LoadDefaultsMapListFromLocal()
         {
             string[] defaultsMapName = new[] { "map1", "map2", "map3", "map4" };
@@ -59,8 +59,8 @@ namespace Map
             }
             return mapInfos;
         }
-#endregion
-#region LoadCustomMapList
+    #endregion
+    #region LoadCustomMapList
         private async UniTask<List<MapInfo>> LoadCustomMapListFromLocal()
         {
             List<MapInfo> mapInfos = new List<MapInfo>();
@@ -91,13 +91,43 @@ namespace Map
             }
             return mapInfos;
         }
-#endregion
+    #endregion
+
+        public async UniTask<MapInfo> LoadMapInfoFromServer(long mapId)
+        {
+            try
+            {
+                return await LoadDefaultMapInfoFromServer(mapId);
+            }
+            catch (UnityWebRequestException e)
+            {
+                if (e.ResponseCode != 400) 
+                    throw e;
+            }
+            return await LoadCustomMapInfoFromServer(mapId);
+        }
+        
+    #region LoadDefaultMapInfo
+        public async UniTask<MapInfo> LoadDefaultMapInfoFromServer(long mapId)
+        {
+            string rawData = await DataManager.Get($"/api/map/{mapId}");
+            MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(rawData);
+            return mapInfo;
+        }
+    #endregion
+    #region LoadCustomMapInfo
+        public async UniTask<MapInfo> LoadCustomMapInfoFromServer(long mapId)
+        {
+            string rawData = await DataManager.Get($"/api/custom-map/{mapId}");
+            MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(rawData);
+            return mapInfo;
+        }
+    #endregion
         private async UniTask<string> LoadMapFileFromResources(string mapName)
         {
             TextAsset textAsset = await Resources.LoadAsync<TextAsset>("Maps/" + mapName) as TextAsset;
             return textAsset.text;
         }
-        
     #region load map thumbnail
         public async UniTask<Sprite> LoadMapThumbnail(MapInfo mapInfo)
         {
@@ -161,5 +191,6 @@ namespace Map
             return null;
         }
         #endregion
+
     }
 }

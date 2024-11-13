@@ -12,7 +12,6 @@ namespace Map.Editor
 
         public override void OnTouchPerform(Finger finger)
         {
-            Debug.Log(context.mainCamera.gameObject.name);
             Ray mouseRay = context.mainCamera.ScreenPointToRay(finger.screenPosition);
             RaycastHit hitdata;
             if (Physics.Raycast(mouseRay, out hitdata))

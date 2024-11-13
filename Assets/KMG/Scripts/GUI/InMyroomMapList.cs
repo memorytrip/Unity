@@ -52,6 +52,7 @@ namespace GUI
         {
             MapListCustomItem item = Instantiate(customMapItemPrefab, content).GetComponent<MapListCustomItem>();
             item.mapId = mapInfo.id;
+            item.mapList = this;
             Sprite thumbnail = await MapManager.Instance.LoadMapThumbnail(mapInfo);
             if (thumbnail == null)
                 thumbnail = emptySprite;
