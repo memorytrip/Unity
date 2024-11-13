@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Common;
+using Common.Network;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -11,29 +12,38 @@ public class GetLetterAndPhoto : MonoBehaviour
 {
     public RawImage[] photoImages; // Inspector에서 8개의 RawImage 할당
     private Text[] letterTexts;     // Inspector에서 8개의 Text 할당
-    private string endPoint = "api/photos/user/";
-    private string userNickName;
+    private string endPoint = "api/photos/room/";
+    private string roomCode;
 
     private void Awake()
     {
-        userNickName = "1";
-        endPoint += userNickName;
+        roomCode = "Test"; //RunnerManager.Instance.Runner.SessionInfo.Name;
+        endPoint += roomCode;
     }
 
-    public async void ButtonClicked()
+    public async void Start()
     {
-        await LoadPhotosAndLetters(endPoint);
+        await GetPhotosAndLetters(endPoint);
         if (letterTexts == null)
         {
             Debug.Log("1");
         }
-        /*for (int i = 0; i < letterTexts.Length; i++)
-        {
-            Debug.Log(letterTexts[i]);
-        }*/
     }
 
-    public async UniTask LoadPhotosAndLetters(string endpoint)
+    public async void ButtonClicked()
+    {
+        await LoadPhotosAndLetters();
+    }
+
+    private async UniTask GetPhotosAndLetters(string endpoint)
+    {
+        string response = await DataManager.Get(endpoint);
+        var responseArray = JsonConvert.DeserializeObject<PhotoLetterResponse[]>(response);
+        RecievedPhotoData.SetPhotoResponses(responseArray);
+        //PhotoLetterResponse[] data = JsonConvert.DeserializeObject<PhotoLetterResponse[]>(response);
+    }
+
+    private async UniTask LoadPhotosAndLetters()
     {
         try
         {

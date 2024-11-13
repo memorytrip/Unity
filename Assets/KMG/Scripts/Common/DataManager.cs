@@ -18,8 +18,8 @@ namespace Common
         {
             string url = baseURL + CheckSlash(api);
             UnityWebRequest request = new UnityWebRequest(url, "GET");
-            if (token != null)
-                request.SetRequestHeader("Authorization", token);
+            /*if (token != null)
+                request.SetRequestHeader("Authorization", token);*/
             request.downloadHandler = new DownloadHandlerBuffer();
             request.timeout = timeout;
 

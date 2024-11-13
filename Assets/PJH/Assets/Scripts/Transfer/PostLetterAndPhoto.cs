@@ -81,8 +81,9 @@ public class PostLetterAndPhoto : MonoBehaviour
             
             // 성공적으로 응답을 받았을 때의 처리
             Debug.Log("Success: " + response);
-            var responseArray = JsonConvert.DeserializeObject<PhotoLetterResponse[]>(response);
-            RecievedPhotoData.SetPhotoResponses(responseArray);
+            
+            /*var responseArray = JsonConvert.DeserializeObject<PhotoLetterResponse[]>(response);
+            RecievedPhotoData.SetPhotoResponses(responseArray);*/
         }
         
         catch (Exception e)
