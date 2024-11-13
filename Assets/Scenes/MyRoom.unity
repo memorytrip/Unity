@@ -1250,7 +1250,7 @@ MonoBehaviour:
   enterEditModeButton: {fileID: 275923137}
   maplist: {fileID: 1478266132}
   mapListPanel: {fileID: 1478266131}
-  closeMapListButton: {fileID: 0}
+  closeMapListButton: {fileID: 1763088053}
 --- !u!114 &1156171172
 MonoBehaviour:
   m_ObjectHideFlags: 0
