@@ -17,9 +17,9 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     [SerializeField] private Button exitButton;
     [SerializeField] public TMP_Text roomNameText;
 
+    private const string AuthSuffix = " <sprite name=\"Auth\">";
     [SerializeField] private Image[] readyIcons;
     [SerializeField] private Sprite[] readyIconSprites;
-    [SerializeField] private CanvasGroup[] authMarks;
     
     private int readyCount = 0;
     private CancellationTokenSource cts;
@@ -42,9 +42,9 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
             readyCount = 0;
             foreach (var connection in Connection.list) {
                 await UniTask.WaitUntil(() => (connection.currenctCharacter != null));
-                authMarks[i].alpha = connection.hasSceneAuthority ? 1f : 0f;
+                //authMarks[i].alpha = connection.hasSceneAuthority ? 1f : 0f;
                 string playerName = connection.playerName;
-                playerNameTextList[i].text = $"{playerName}";
+                playerNameTextList[i].text = connection.hasSceneAuthority ? playerName + AuthSuffix : playerName;
                 
                 bool isReady = connection.currenctCharacter.GetComponent<PlayReadyState>().ready;
                 readyIcons[i].sprite = isReady ? readyIconSprites[1] : readyIconSprites[0];
@@ -56,7 +56,6 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
             for (; i < playerNameTextList.Count; i++) {
                 playerNameTextList[i].text = string.Empty;
                 readyIcons[i].sprite = readyIconSprites[0];
-                authMarks[i].alpha = 0f;
             }
 
             if (Runner.IsSceneAuthority && readyCount == Connection.list.Count) {
