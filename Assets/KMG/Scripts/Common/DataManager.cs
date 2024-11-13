@@ -16,7 +16,7 @@ namespace Common
         
         public static async UniTask<string> Get(string api, int timeout = 5)
         {
-            string url = "http://125.132.216.190:17778/api/photos/upload"; // baseURL + CheckSlash(api);
+            string url = baseURL + CheckSlash(api);
             UnityWebRequest request = new UnityWebRequest(url, "GET");
             if (token != null)
                 request.SetRequestHeader("Authorization", token);

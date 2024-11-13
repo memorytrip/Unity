@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Common.Network;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using TMPro;
@@ -37,7 +38,7 @@ public class PostLetterAndPhoto : MonoBehaviour
     public RawImage photo2;
     public TMP_InputField letter;
 
-    private string api = "photos/upload"; // + userID; //진짜 api 불러오기
+    private string api = "/api/photos/upload"; // + userID; //진짜 api 불러오기
     private void Awake()
     {
         Instance = this;
@@ -70,9 +71,9 @@ public class PostLetterAndPhoto : MonoBehaviour
             // multipart/form-data 형식으로 데이터 준비
             List<IMultipartFormSection> formData = new List<IMultipartFormSection>
             {
-                new MultipartFormDataSection("PhotoData", imageBytes),
-                new MultipartFormDataSection("roomCode", "ww"/*RunnerManager.Instance.Runner.SessionInfo.Name*/),
-                new MultipartFormDataSection("UserId", "1"),
+                new MultipartFormDataSection("photoUrl", imageBytes),
+                new MultipartFormDataSection("roomCode", "wwss"/*RunnerManager.Instance.Runner.SessionInfo.Name*/),
+                new MultipartFormDataSection("UploaderId", "1"),
                 //new MultipartFormDataSection("Letter", letterInfo)
             };
             // DataManager를 통해 POST 요청 보내기
@@ -83,6 +84,7 @@ public class PostLetterAndPhoto : MonoBehaviour
             var responseArray = JsonConvert.DeserializeObject<PhotoLetterResponse[]>(response);
             RecievedPhotoData.SetPhotoResponses(responseArray);
         }
+        
         catch (Exception e)
         {
             // 에러 처리
