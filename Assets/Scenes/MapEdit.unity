@@ -3671,8 +3671,9 @@ GameObject:
   - component: {fileID: 2131542324}
   - component: {fileID: 2131542325}
   - component: {fileID: 2131542326}
+  - component: {fileID: 2131542327}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ThumbnailCamManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3713,7 +3714,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131542322}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c4f96350d28426780086972ee728d88, type: 3}
   m_Name: 
@@ -3722,6 +3723,21 @@ MonoBehaviour:
   exitButton: {fileID: 983931978}
   capturer: {fileID: 2131542325}
   cam: {fileID: 1662441117}
+--- !u!114 &2131542327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131542322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b2b4b864ea34bec9799fc8deba22150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapEditorGUI: {fileID: 348634955}
+  exitButton: {fileID: 983931978}
+  capturer: {fileID: 2131542325}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

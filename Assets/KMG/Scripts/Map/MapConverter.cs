@@ -112,7 +112,7 @@ namespace Map
             mapInfoRaw.thumbnailUrl = mapInfo.thumbnail;
             mapInfoRaw.theme = mapInfo.data.themeId;
 
-            mapInfoRaw.mapObjectResDTO = new MapInfoRaw.MapObjectData[mapInfo.data.mapObjectList.Count];
+            mapInfoRaw.objects = new MapInfoRaw.MapObjectData[mapInfo.data.mapObjectList.Count];
             int i = 0;
             foreach (var data in mapInfo.data.mapObjectList)
             {
@@ -125,7 +125,7 @@ namespace Map
                 mapObject.rotationX = data.rotation.x;
                 mapObject.rotationY = data.rotation.y;
                 mapObject.rotationZ = data.rotation.z;
-                mapInfoRaw.mapObjectResDTO[i++] = mapObject;
+                mapInfoRaw.objects[i++] = mapObject;
             }
 
             return JsonConvert.SerializeObject(mapInfoRaw);
@@ -168,25 +168,31 @@ namespace Map
 
         public MapObjectData[] mapObjectResDTO = null;
         public MapObjectData[] customMapObjects = null;
+        public MapObjectData[] objects = null;
 
         public bool ShouldSerializeid()
         {
             return id != null;
         }
 
-        public bool ShouldSerializeuserid()
+        public bool ShouldSerializecreatorId()
         {
             return !String.IsNullOrEmpty(creatorId);
         }
 
-        public bool ShouldSerializeobjects()
+        public bool ShouldSerializemapObjectResDTO()
         {
             return mapObjectResDTO != null;
         }
 
-        public bool ShouldSerializemapObjectResDTO()
+        public bool ShouldSerializecustomMapObjects()
         {
             return customMapObjects != null;
+        }
+
+        public bool ShouldSerializeobjects()
+        {
+            return objects != null;
         }
     }
 }

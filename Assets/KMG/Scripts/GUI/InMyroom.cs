@@ -10,6 +10,8 @@ namespace GUI
 {
     public class InMyroom: MonoBehaviour
     {
+        public static long mapId;
+        
         [SerializeField] private Button returnToSquareButton;
         [SerializeField] private Button enterEditModeButton;
         [SerializeField] private InMyroomMapList maplist;
@@ -37,12 +39,6 @@ namespace GUI
         private void CloseSetting()
         {
             Utility.DisablePanel(mapListPanel);
-        }
-        
-        private async UniTaskVoid EnterEditMode()
-        {
-            await RunnerManager.Instance.Disconnect();
-            await SceneManager.Instance.MoveSceneProcess("MapEdit");
         }
     }
 }

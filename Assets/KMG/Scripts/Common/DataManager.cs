@@ -114,6 +114,27 @@ namespace Common
             }
         }
 
+        public static async UniTask<string> Delete(string api, int timeout = 5)
+        {
+            string url = baseURL + CheckSlash(api);
+            UnityWebRequest request = new UnityWebRequest(url, "DELETE");
+            if (token != null)
+                request.SetRequestHeader("Authorization", token);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.timeout = timeout;
+
+            await request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                return request.downloadHandler.text;
+            }
+            else
+            {
+                throw new Exception(request.error);
+            }
+        }
+
         public static async UniTask<byte[]> Read(string path)
         {
             return await System.IO.File.ReadAllBytesAsync(path);
