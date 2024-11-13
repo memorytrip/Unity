@@ -17,9 +17,8 @@ public class InteractButton : MonoBehaviour, IListener
         {
             case EventType.eRaycasting:
                 if (param is PlayerInteraction.RaycastInfo raycastInfo)
-                {
-                    UIManager.ShowUI(cg);
-                    //gameObject.SetActive(raycastInfo.isHit);
+                { 
+                    gameObject.SetActive(raycastInfo.isHit);
                 }
                 break;
         }
