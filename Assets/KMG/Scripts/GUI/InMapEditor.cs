@@ -1,3 +1,4 @@
+using System.IO;
 using Common;
 using Cysharp.Threading.Tasks;
 using Map;
@@ -34,6 +35,7 @@ namespace GUI
 
         private async UniTaskVoid Exit()
         {
+            await WriteMapToFile();
             string response = await UploadMap();
             CreateMapResponse res = JsonConvert.DeserializeObject<CreateMapResponse>(response);
             LoadMyroom.mapId = res.customMapId;
@@ -48,6 +50,23 @@ namespace GUI
             string data = MapConverter.ConvertMapInfoToJson(mapInfo);
             Debug.Log(data);
             return await DataManager.Post($"/api/custom-map/create/{originMapId}", data);
+        }
+
+        private async UniTask WriteMapToFile()
+        {
+            string path = Application.persistentDataPath + "/Maps/";
+            string filename = "asdf.json";
+            
+            MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete, capturer);
+            
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
+            if (!directoryInfo.Exists)
+            {
+                directoryInfo.Create();
+            }
+
+            await File.WriteAllTextAsync(path + filename, MapConverter.ConvertMapInfoToJson(mapInfo));
+            Debug.Log($"File save: {path + filename}");
         }
 
         class CreateMapResponse
