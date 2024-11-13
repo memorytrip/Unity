@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class InteractButton : MonoBehaviour, IListener
 {
+    private CanvasGroup cg;
+    
     private void Start()
     {
+        cg = GetComponent<CanvasGroup>();
         EventManager.Instance.AddListener(EventType.eRaycasting, this);
     }
 
@@ -15,7 +18,8 @@ public class InteractButton : MonoBehaviour, IListener
             case EventType.eRaycasting:
                 if (param is PlayerInteraction.RaycastInfo raycastInfo)
                 {
-                    gameObject.SetActive(raycastInfo.isHit);
+                    UIManager.ShowUI(cg);
+                    //gameObject.SetActive(raycastInfo.isHit);
                 }
                 break;
         }

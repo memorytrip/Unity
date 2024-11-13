@@ -56,11 +56,15 @@ public class PostLetterAndPhoto : MonoBehaviour
     
     private async void PostButtonClicked()
     {
-        if (startButton.gameObject.GetComponentInChildren<TMP_Text>().text == "Start")
+        if (startButton.gameObject.GetComponentInChildren<TMP_Text>().text == "시작하기")
         {
             await PostPhoto(photo1, "" /*letter.text*/);
             await PostPhoto(photo2, "");
             //await PostLetter(letter.text); 
+        }
+        else
+        {
+            Debug.Log("시작X");
         }
     }
     
@@ -85,10 +89,11 @@ public class PostLetterAndPhoto : MonoBehaviour
             
             // 성공적으로 응답을 받았을 때의 처리
             Debug.Log("Post성공");
-            getLetterAndPhoto.GetResponse().Forget();
+            /*getLetterAndPhoto.GetResponse().Forget();
             Debug.Log("겟도 성공");
             playReadyRoom.RpcGameStart();
-            Debug.Log("게임 시작했는데...?");
+            Debug.Log("게임 시작했는데...?");*/
+            
             /*var responseArray = JsonConvert.DeserializeObject<PhotoLetterResponse[]>(response);
             RecievedPhotoData.SetPhotoResponses(responseArray);*/
         }

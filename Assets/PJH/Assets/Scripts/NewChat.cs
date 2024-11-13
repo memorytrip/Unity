@@ -27,7 +27,7 @@ public class NewChat : MonoBehaviour
     
     public void ButtonClicked()
     {
-        Connection.StateAuthInstance.RpcNewChatMsg(chatInput.text);
+        Connection.StateAuthInstance.RpcNewChatMsg(SessionManager.Instance.currentUser.nickName + ": " + chatInput.text);
         chatInput.text = "";
     }
 

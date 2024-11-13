@@ -11,6 +11,7 @@ using Image = UnityEngine.UI.Image;
 public class UploadPhoto : MonoBehaviour
 {
     public RawImage img;
+    public RawImage letterImg;
     private float photoCapacity = 5000000000000f;
     //private string File = "Application.temporaryCachePath";
 
@@ -56,8 +57,10 @@ public class UploadPhoto : MonoBehaviour
         tex.LoadImage(temp);
 
         img.texture = tex;
+        letterImg.texture = tex;
         img.SetNativeSize();
         ImageSizeSetting(img, 432f, 288f);
+        StretchImageToFit(letterImg);
         StretchImageToFit(img);
     }
 

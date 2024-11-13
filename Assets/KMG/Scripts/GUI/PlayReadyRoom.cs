@@ -92,7 +92,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
         readyButton.GetComponentInChildren<TMP_Text>().text = "시작하기";
         // readyButton.onClick.RemoveListener(Ready);
         readyButton.onClick.RemoveAllListeners();
-        //readyButton.onClick.AddListener(RpcGameStart);
+        readyButton.onClick.AddListener(RpcGameStart);
     }
     
     private void DeactiveStart() {
