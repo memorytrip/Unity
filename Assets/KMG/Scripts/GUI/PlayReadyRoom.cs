@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -9,7 +8,6 @@ using Fusion;
 using GUI;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
@@ -18,6 +16,10 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     [SerializeField] private Button readyButton;
     [SerializeField] private Button exitButton;
     [SerializeField] public TMP_Text roomNameText;
+
+    [SerializeField] private Image[] readyIcons;
+    [SerializeField] private Sprite[] readyIconSprites;
+    
     private int readyCount = 0;
     private CancellationTokenSource cts;
     public override void Spawned()
@@ -45,10 +47,12 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
                 if (connection.currenctCharacter.GetComponent<PlayReadyState>().ready) {
                     ready = "O";
                     ++readyCount;
+                    readyIcons[i++].sprite = readyIconSprites[1];
                 } else {
                     ready = "X";
+                    readyIcons[i++].sprite = readyIconSprites[0];
                 }
-                playerNameTextList[i++].text = $"{sceneAuthPrefix}{playerName} [{ready}]";
+                playerNameTextList[i++].text = $"{sceneAuthPrefix}{playerName}";
             }
 
             for (; i < playerNameTextList.Count; i++) {
