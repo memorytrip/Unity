@@ -34,13 +34,13 @@ namespace Map
         #region init
         public void Init()
         {
-            LoadDownloadList().Forget();
+            LoadDownloadList();
         }
         
         /**
          * TODO: downloaded assets 로드 구현하기
          */
-        private async UniTaskVoid LoadDownloadList()
+        private void LoadDownloadList()
         {
             isLoaded = false;
             downloadModelList = new List<Model>();

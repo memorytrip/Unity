@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 9
   mesh: {fileID: 8036912203285757997, guid: 99e972b6fa4ef854db5fae92c4585b7c, type: 3}
   material: {fileID: 2100000, guid: e5c8ac6092e78214fb866cab5f020f2a, type: 2}
-  theme: 0
+  theme: camping

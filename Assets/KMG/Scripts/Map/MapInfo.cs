@@ -28,7 +28,7 @@ namespace Map
         }
 
         public MapType type;
-        public string id;
+        public long id;
         public string thumbnail;
         public MapData data;
     }

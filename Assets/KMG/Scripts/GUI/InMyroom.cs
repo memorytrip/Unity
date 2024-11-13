@@ -10,8 +10,6 @@ namespace GUI
 {
     public class InMyroom: MonoBehaviour
     {
-        public static long mapId;
-        
         [SerializeField] private Button returnToSquareButton;
         [SerializeField] private Button enterEditModeButton;
         [SerializeField] private InMyroomMapList maplist;

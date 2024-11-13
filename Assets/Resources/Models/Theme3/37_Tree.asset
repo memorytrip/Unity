@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 37
   mesh: {fileID: 292533365753112818, guid: f68dd7b08d6cf934a81c1778bd92f405, type: 3}
   material: {fileID: 2100000, guid: e5c8ac6092e78214fb866cab5f020f2a, type: 2}
-  theme: 3
+  theme: desert

@@ -1,8 +1,8 @@
-using System;
 using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
-using GUI;
+using Map;
+using Myroom;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +10,7 @@ namespace GUI
 {
     public class MapListDefaultItem : MonoBehaviour
     {
-        [HideInInspector] public string mapId;
+        [HideInInspector] public long mapId;
         [SerializeField] private Image thumbnail;
         [SerializeField] private Button editButton;
         [SerializeField] private Button setHomeButton;
@@ -33,14 +33,15 @@ namespace GUI
 
         private async UniTaskVoid EnterEditMode()
         {
-            InMapEditor.originMapId = long.Parse(mapId);
+            InMapEditor.originMapId = mapId;
             await RunnerManager.Instance.Disconnect();
             await SceneManager.Instance.MoveSceneProcess("MapEdit");
         }
 
         private void SetHome()
         {
-            // TODO: 마이룸 설정 과정
+            LoadMyroom.mapId = mapId;
+            LoadMyroom.mapType = MapInfo.MapType.Default;
             string playerId = SessionManager.Instance.currentUser.nickName;
             SceneManager.Instance.MoveRoom($"player_{playerId}").Forget();
         }

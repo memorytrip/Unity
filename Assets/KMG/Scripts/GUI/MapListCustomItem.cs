@@ -3,6 +3,8 @@ using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
 using GUI;
+using Map;
+using Myroom;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -11,7 +13,7 @@ namespace GUI
 {
     public class MapListCustomItem : MonoBehaviour
     {
-        [HideInInspector] public string mapId;
+        [HideInInspector] public long mapId;
         [HideInInspector] public InMyroomMapList mapList;
         [SerializeField] private Image thumbnail;
         [SerializeField] private Button deleteButton;
@@ -19,7 +21,7 @@ namespace GUI
 
         private void Awake()
         {
-            deleteButton.onClick.AddListener(Delete);
+            deleteButton.onClick.AddListener(DeletePopup);
             setHomeButton.onClick.AddListener(SetHome);
         }
 
@@ -28,8 +30,16 @@ namespace GUI
             thumbnail.sprite = sprite;
         }
 
+        private void DeletePopup()
+        {
+            mapList.confirmDeletePanel.SetActive(true);
+            mapList.confirmDeleteButton.onClick.RemoveAllListeners();
+            mapList.confirmDeleteButton.onClick.AddListener(Delete);
+        }
+
         private void Delete()
         {
+            mapList.confirmDeletePanel.SetActive(false);
             DeleteProcess().Forget();
         }
 
@@ -41,6 +51,8 @@ namespace GUI
 
         private void SetHome()
         {
+            LoadMyroom.mapId = mapId;
+            LoadMyroom.mapType = MapInfo.MapType.Custom;
             string playerId = SessionManager.Instance.currentUser.nickName;
             SceneManager.Instance.MoveRoom($"player_{playerId}").Forget();
         }

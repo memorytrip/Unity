@@ -1,18 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using Common;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Map;
-using Newtonsoft.Json;
 
 namespace Myroom
 {
     public class LoadMyroom: MonoBehaviour
     {
         public static MapInfo.MapType mapType = MapInfo.MapType.Default;
-        public static long mapId = 2;
+        public static long mapId = 8;
         private async UniTaskVoid Start()
         {
             // TODO: BE에서 mapInfo 불러와서 하기
@@ -46,9 +43,7 @@ namespace Myroom
 
         private async UniTask<MapInfo> LoadFromServer(long mapId)
         {
-            // string data = await DataManager.Get("/myroom");
-            // MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(data);
-            // return await MapManager.Instance.LoadMapInfoFromServer(mapId);
+            Debug.Log($"LoadMyroom:  MapType: {mapType}, mapId: {mapId}");
             MapInfo mapInfo;
             switch (mapType)
             {

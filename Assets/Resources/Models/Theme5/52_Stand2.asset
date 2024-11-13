@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 52
   mesh: {fileID: 4629125226164718158, guid: c079866beee96314b9ae2cf2d40c2389, type: 3}
   material: {fileID: 2100000, guid: e5c8ac6092e78214fb866cab5f020f2a, type: 2}
-  theme: 5
+  theme: soccer
