@@ -58,6 +58,7 @@ public class UploadPhoto : MonoBehaviour
         img.texture = tex;
         img.SetNativeSize();
         ImageSizeSetting(img, 432f, 288f);
+        StretchImageToFit(img);
     }
 
     void ImageSizeSetting(RawImage img, float x, float y)
@@ -97,5 +98,18 @@ public class UploadPhoto : MonoBehaviour
 
         img.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
         img.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+    }
+    
+    private void StretchImageToFit(RawImage image)
+    {
+        // Set anchors to stretch in both directions to fit the parent
+        img.rectTransform.anchorMin = Vector2.zero;
+        img.rectTransform.anchorMax = Vector2.one;
+        img.rectTransform.offsetMin = Vector2.zero;
+        img.rectTransform.offsetMax = Vector2.zero;
+
+        // Maintain aspect ratio by setting the scale mode
+        img.rectTransform.localScale = Vector3.one;
+        img.uvRect = new Rect(0, 0, 1, 1);
     }
 }

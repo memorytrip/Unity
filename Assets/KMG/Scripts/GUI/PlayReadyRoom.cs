@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -9,7 +8,6 @@ using Fusion;
 using GUI;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
@@ -18,6 +16,11 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     [SerializeField] private Button readyButton;
     [SerializeField] private Button exitButton;
     [SerializeField] public TMP_Text roomNameText;
+
+    private const string AuthSuffix = " <sprite name=\"Auth\">";
+    [SerializeField] private Image[] readyIcons;
+    [SerializeField] private Sprite[] readyIconSprites;
+    
     private int readyCount = 0;
     private CancellationTokenSource cts;
     public override void Spawned()
@@ -26,7 +29,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
         RefreshPlayerList(cts.Token).Forget();
         exitButton.onClick.AddListener(Exit);
         readyButton.onClick.AddListener(Ready);
-        roomNameText.text = $"Room: {Runner.SessionInfo.Name}";
+        roomNameText.text = $"방 코드: {Runner.SessionInfo.Name}";
     }
     
 
@@ -39,20 +42,20 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
             readyCount = 0;
             foreach (var connection in Connection.list) {
                 await UniTask.WaitUntil(() => (connection.currenctCharacter != null));
-                string sceneAuthPrefix = (connection.hasSceneAuthority ? "* " : "");
+                //authMarks[i].alpha = connection.hasSceneAuthority ? 1f : 0f;
                 string playerName = connection.playerName;
-                string ready;
-                if (connection.currenctCharacter.GetComponent<PlayReadyState>().ready) {
-                    ready = "O";
-                    ++readyCount;
-                } else {
-                    ready = "X";
-                }
-                playerNameTextList[i++].text = $"{sceneAuthPrefix}{playerName} [{ready}]";
+                playerNameTextList[i].text = connection.hasSceneAuthority ? playerName + AuthSuffix : playerName;
+                
+                bool isReady = connection.currenctCharacter.GetComponent<PlayReadyState>().ready;
+                readyIcons[i].sprite = isReady ? readyIconSprites[1] : readyIconSprites[0];
+                if (isReady) readyCount++;
+
+                i++;
             }
 
             for (; i < playerNameTextList.Count; i++) {
-                playerNameTextList[i].text = "-";
+                playerNameTextList[i].text = string.Empty;
+                readyIcons[i].sprite = readyIconSprites[0];
             }
 
             if (Runner.IsSceneAuthority && readyCount == Connection.list.Count) {
@@ -86,7 +89,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
 
     private void ActiveStart() {
         readyButton.interactable = true;
-        readyButton.GetComponentInChildren<TMP_Text>().text = "Start";
+        readyButton.GetComponentInChildren<TMP_Text>().text = "시작하기";
         // readyButton.onClick.RemoveListener(Ready);
         readyButton.onClick.RemoveAllListeners();
         //readyButton.onClick.AddListener(RpcGameStart);
@@ -94,7 +97,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     
     private void DeactiveStart() {
         readyButton.interactable = true;
-        readyButton.GetComponentInChildren<TMP_Text>().text = "Ready";
+        readyButton.GetComponentInChildren<TMP_Text>().text = "준비하기";
         // readyButton.onClick.RemoveListener(GameStart);
         readyButton.onClick.RemoveAllListeners();
         readyButton.onClick.AddListener(Ready);

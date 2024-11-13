@@ -2,6 +2,7 @@ using Common;
 using UnityEngine;
 using GUI;
 using Unity.Cinemachine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 
 public class ScreenshotCameraInput : MonoBehaviour
@@ -28,7 +29,17 @@ public class ScreenshotCameraInput : MonoBehaviour
         InputManager.Instance.OnFingerMove += OnTouchPerform;
         InputManager.Instance.OnFingerUp += OnTouchEnd;
     }
-    
+
+    private void FixedUpdate()
+    {
+        #if UNITY_STANDALONE || UNITY_EDITOR
+        if (Mouse.current.leftButton.isPressed || Mouse.current.rightButton.isPressed)
+        {
+            HandleMouseControl();
+        }
+#endif
+    }
+
     void OnTouchStart(Finger finger)
     {
         if (!Utility.IsPointOverGUI(finger.screenPosition))
@@ -59,6 +70,22 @@ public class ScreenshotCameraInput : MonoBehaviour
             lookFingerIndex = -1;
             previousScreenPosition = Vector2.zero;
         }
+    }
+    
+    private void HandleMouseControl()
+    {
+        Vector2 mouseDelta = Mouse.current.delta.ReadValue() / 10f;
+
+        // Disable recentering while controlling with mouse
+        _cinemachinePanTilt.PanAxis.Recentering.Enabled = false;
+        _cinemachinePanTilt.TiltAxis.Recentering.Enabled = false;
+
+        // Apply mouse delta to camera rotation
+        _cinemachinePanTilt.PanAxis.Value += mouseDelta.x;
+        _cinemachinePanTilt.TiltAxis.Value -= mouseDelta.y;
+
+        // Clamp the vertical axis as in the touch control
+        _cinemachinePanTilt.TiltAxis.Value = Mathf.Clamp(_cinemachinePanTilt.TiltAxis.Value, -10, 45);
     }
 
     private void OnDisable()

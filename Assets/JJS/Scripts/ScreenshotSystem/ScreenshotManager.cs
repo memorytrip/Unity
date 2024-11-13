@@ -295,16 +295,6 @@ public class ScreenshotManager : MonoBehaviour
 
     private void CaptureScreenshot()
     {
-        // Assign the RenderTexture temporarily to the active RenderTexture
-        RenderTexture currentRT = RenderTexture.active;
-        RenderTexture.active = screenshotRenderTexture;
-
-        // Create a new Texture2D with the RenderTexture's dimensions
-        Texture2D screenshot = new Texture2D(screenshotRenderTexture.width, screenshotRenderTexture.height,
-            TextureFormat.RGB24, false);
-        screenshot.ReadPixels(new Rect(0, 0, screenshotRenderTexture.width, screenshotRenderTexture.height), 0, 0);
-        screenshot.Apply();
-
         if (RaycastShooter.HitDetected)
         {
             Debug.Log("??? HitDetected");
@@ -326,14 +316,19 @@ public class ScreenshotManager : MonoBehaviour
             
             snapshotQuestCleared = true;
         }
+        
+        // Assign the RenderTexture temporarily to the active RenderTexture
+        RenderTexture currentRT = RenderTexture.active;
+        RenderTexture.active = screenshotRenderTexture;
 
-        if (RaycastShooter.FoundQRCode)
-        {
-            DecodeQRCode(screenshot);
-        }
-
+        // Create a new Texture2D with the RenderTexture's dimensions
+        Texture2D screenshot = new Texture2D(screenshotRenderTexture.width, screenshotRenderTexture.height,
+            TextureFormat.RGB24, false);
+        screenshot.ReadPixels(new Rect(0, 0, screenshotRenderTexture.width, screenshotRenderTexture.height), 0, 0);
+        screenshot.Apply();
+        DecodeQRCode(screenshot);
         SaveScreenshot(screenshot);
-
+        
         // Clean up
         RenderTexture.active = currentRT;
         Destroy(screenshot);
@@ -362,6 +357,7 @@ public class ScreenshotManager : MonoBehaviour
         Result result = barcodeReader.Decode(screenshot.GetPixels32(), screenshot.width, screenshot.height);
         if (result == null)
         {
+            Debug.Log("???: NO QR");
             return;
         }
 
