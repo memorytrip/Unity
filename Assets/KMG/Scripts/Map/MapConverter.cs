@@ -52,7 +52,7 @@ namespace Map
 
             //TODO: mapInfo.id, mapInfo.thmbnail 채우기
             MapInfo mapInfo = new MapInfo();
-            mapInfo.id = null;
+            mapInfo.id = 0;
             mapInfo.thumbnail = "file://" + Application.persistentDataPath + "/Maps/asdf.png";
             capture.CaptureToLocal().Forget();
             mapInfo.data = mapData;
@@ -150,7 +150,7 @@ namespace Map
     class MapInfoRaw
     {
         public string creatorId = null;
-        public string id = null;
+        public long id = 0;
         public string thumbnailUrl = null;
         public string theme = "";
 

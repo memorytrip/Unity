@@ -2,7 +2,8 @@ using Common;
 using Cysharp.Threading.Tasks;
 using Map;
 using Map.Editor;
-using Unity.Cinemachine;
+using Myroom;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +21,7 @@ namespace GUI
         private void Start()
         {
             DownloadMap().Forget();
-            exitButton.onClick.AddListener(Exit);
+            exitButton.onClick.AddListener(()=>Exit().Forget());
         }
 
         private async UniTaskVoid DownloadMap()
@@ -31,20 +32,28 @@ namespace GUI
             mapEditorGUI.target.mapConcrete = mapConcrete;
         }
 
-        private void Exit()
+        private async UniTaskVoid Exit()
         {
-            UploadMap().Forget();
+            string response = await UploadMap();
+            CreateMapResponse res = JsonConvert.DeserializeObject<CreateMapResponse>(response);
+            LoadMyroom.mapId = res.customMapId;
+            LoadMyroom.mapType = MapInfo.MapType.Custom;
             User user = Common.Network.SessionManager.Instance.currentSession.user;
             SceneManager.Instance.MoveRoom($"player_{user.nickName}").Forget();
         }
 
-        private async UniTaskVoid UploadMap()
+        private async UniTask<string> UploadMap()
         {
             MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete, capturer);
             string data = MapConverter.ConvertMapInfoToJson(mapInfo);
             Debug.Log(data);
-            string response = await DataManager.Post($"/api/custom-map/create/{originMapId}", data);
-            Debug.Log(response);
+            return await DataManager.Post($"/api/custom-map/create/{originMapId}", data);
+        }
+
+        class CreateMapResponse
+        {
+            public long customMapId;
+            public string response;
         }
     }
 }
