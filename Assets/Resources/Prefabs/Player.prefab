@@ -450,6 +450,7 @@ MonoBehaviour:
   - {fileID: 4706521619132637490}
   - {fileID: 4751748418977364367}
   - {fileID: 2049515914353393291}
+  - {fileID: 3500311524201220611}
   - {fileID: 1792731976329578246}
 --- !u!114 &5937431823926876730
 MonoBehaviour:
@@ -504,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0febf2955981294479247c35c52d9881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMoveSpeed: 35
+  playerMoveSpeed: 20
   playerDir: {x: 0, y: 0, z: 0}
   jumpForce: 15
   turnSpeed: 1000
@@ -792,6 +793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5109780273806055354}
+  - component: {fileID: 3500311524201220611}
   m_Layer: 3
   m_Name: Scale
   m_TagString: Untagged
@@ -815,6 +817,22 @@ Transform:
   - {fileID: 2363573292128683201}
   m_Father: {fileID: 4819387880945232801}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3500311524201220611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7021063393270116308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 1
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1001 &8446892284639408387
 PrefabInstance:
   m_ObjectHideFlags: 0

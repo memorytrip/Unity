@@ -1,7 +1,7 @@
 using System;
+using System.IO;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Windows;
 
 namespace Map.Editor
 {
@@ -21,7 +21,8 @@ namespace Map.Editor
         {
             var data = (await Capture()).EncodeToPNG();
             string filePath = Application.persistentDataPath + "/Maps/asdf.png";
-            File.WriteAllBytes(filePath, data);
+            // File.WriteAllBytes(filePath, data);
+            await File.WriteAllBytesAsync(filePath, data);
         }
 
         public async UniTask<Texture2D> Capture()

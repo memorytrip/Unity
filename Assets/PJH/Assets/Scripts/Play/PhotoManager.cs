@@ -59,7 +59,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
         {
             int photoName = i;
             photoDict[photoName] = GetRandomPosition();
-                await UniTask.Delay(TimeSpan.FromSeconds(3.5f));
+                // await UniTask.Delay(TimeSpan.FromSeconds(3.5f));
             var photoObject =
                 await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName], Quaternion.identity);
             
