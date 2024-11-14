@@ -35,7 +35,12 @@ namespace Common
             else Destroy(this);
             DontDestroyOnLoad(gameObject);
 
-            UnityEngine.SceneManagement.SceneManager.sceneLoaded += (s, m) => OnSceneLoaded?.Invoke();
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += (s, m) =>
+            {
+                if (s.name == "EmptyScene")
+                    return;
+                OnSceneLoaded?.Invoke();
+            };
             UnityEngine.SceneManagement.SceneManager.sceneUnloaded += (s) => OnSceneUnloaded?.Invoke();
             curScene = "Login";
         }
