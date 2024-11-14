@@ -1226,8 +1226,8 @@ MonoBehaviour:
     \uAE30\uC5B5\uD574? \uC11C\uC6B8 \uB3CC\uC544\uC624\uB294 \uAE30\uCC28 \uD0C0\uC57C\uD558\uB294\uB370
     \uBD80\uC0B0\uAC08\uBED4 \uD588\uC796\uC544 \u314B\u314B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5070e9fc41d54af48be3b93b488caad8, type: 2}
+  m_sharedMaterial: {fileID: -1508002482881991110, guid: a188450f0f4cf674481adb4ac850def8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3225,8 +3225,8 @@ MonoBehaviour:
     \uADF8\uB54C \uB108\uBB34 \uC7AC\uBC0C\uC5C8\uB294\uB370... \uB2E4\uC74C\uC5D0
     \uB610 \uAC00\uACE0\uC2F6\uC5B4"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5070e9fc41d54af48be3b93b488caad8, type: 2}
+  m_sharedMaterial: {fileID: -1508002482881991110, guid: a188450f0f4cf674481adb4ac850def8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3622,8 +3622,8 @@ MonoBehaviour:
     \uC2EB\uC5C8\uB294\uB370 \uBB54\uAC00 \uD2B9\uBCC4\uD55C \uACBD\uD5D8\uC744 \uD558\uB294
     \uAC83 \uAC19\uC544\uC11C \uC88B\uB354\uB77C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5070e9fc41d54af48be3b93b488caad8, type: 2}
+  m_sharedMaterial: {fileID: -1508002482881991110, guid: a188450f0f4cf674481adb4ac850def8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3759,8 +3759,8 @@ MonoBehaviour:
   m_text: "\uCD95\uAD6C\uC7A5 \uC0B0\uCC45 \uC790\uC8FC \uAC00\uC796\uC544 \uC0B0\uCC45\uB9D0\uACE0
     \uB2E4\uC74C\uC5D0\uB294 \uC9C1\uC811 \uBCF4\uB7EC\uAC00\uC790!!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5070e9fc41d54af48be3b93b488caad8, type: 2}
+  m_sharedMaterial: {fileID: -1508002482881991110, guid: a188450f0f4cf674481adb4ac850def8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
