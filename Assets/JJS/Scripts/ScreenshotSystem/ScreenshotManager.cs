@@ -345,10 +345,10 @@ public class ScreenshotManager : MonoBehaviour
 #if UNITY_EDITOR
         string path = Path.Combine(_directory + SubDirectory + formattedDate + FileType);
         File.WriteAllBytes(path, bytes);
+        Debug.Log($"Screenshot saved to {path}");
 #elif UNITY_ANDROID
         NativeGallery.SaveImageToGallery(bytes, FolderName, fileName);
 #endif
-        Debug.Log($"Screenshot saved to {path}");
     }
 
     private void DecodeQRCode(Texture2D screenshot)
