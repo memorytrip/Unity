@@ -24,7 +24,7 @@ public class MemoryGem : MonoBehaviour, IClickable3dObject
             DisplayDummyData();
         }*/
 
-        DisplayDummyData();
+        //DisplayDummyData();
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = canvasGroup.interactable = true;
     }
