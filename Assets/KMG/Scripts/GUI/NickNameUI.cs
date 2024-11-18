@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GUI
 {
-    public class NickName: NetworkBehaviour
+    public class NickNameUI: NetworkBehaviour
     {
         [SerializeField] private TMP_Text nicknameText;
         public override void Spawned()

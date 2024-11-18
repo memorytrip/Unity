@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CanvasGroup chat;
     [SerializeField] private CanvasGroup joystick;
     [SerializeField] private CanvasGroup newChat;
+    [SerializeField] private CanvasGroup credit;
+    [SerializeField] public GUI.CreditUI creditUI;
 
     private void Awake()
     {
@@ -43,6 +45,7 @@ public class UIManager : MonoBehaviour
         HideUI(chat);
         HideUI(newChat);
         HideUI(joystick);
+        HideUI(credit);
     }
     
     private void ToggleUI(Scene scene, LoadSceneMode mode)
@@ -55,6 +58,7 @@ public class UIManager : MonoBehaviour
                 HideUI(chat);
                 HideUI(joystick);
                 HideUI(newChat);
+                HideUI(credit);
                 break;
             case "Square":
                 HideUI(newChat);
@@ -67,12 +71,14 @@ public class UIManager : MonoBehaviour
                 ShowUI(chat);   
                 ShowUI(joystick);
                 HideUI(newChat);
+                HideUI(credit);
                 break;
             case "FindPhoto":
                 ShowUI(mainMenu);
                 ShowUI(sideMenu);
                 ShowUI(chat);
                 ShowUI(joystick);
+                ShowUI(credit);
                 break;
             case "MapEdit":
                 ShowUI(mainMenu);
@@ -80,6 +86,7 @@ public class UIManager : MonoBehaviour
                 HideUI(chat);
                 HideUI(joystick);   
                 HideUI(newChat);
+                HideUI(credit);
                 break;
             case "PlayReady":
                 HideUI(mainMenu);
@@ -87,6 +94,7 @@ public class UIManager : MonoBehaviour
                 HideUI(chat);
                 HideUI(joystick);
                 HideUI(newChat);
+                HideUI(credit);
                 break;
             case "SelectPhotoScene":
                 HideUI(mainMenu);
@@ -94,6 +102,7 @@ public class UIManager : MonoBehaviour
                 HideUI(chat);
                 HideUI(joystick);
                 ShowUI(newChat);
+                HideUI(credit);
                 break;  
             case "VideoLoadTest":
                 HideUI(mainMenu);
@@ -101,6 +110,7 @@ public class UIManager : MonoBehaviour
                 HideUI(chat);
                 HideUI(joystick);
                 ShowUI(newChat);
+                HideUI(credit);
                 break;
             case "LetterScene":
                 HideUI(mainMenu);
@@ -108,6 +118,7 @@ public class UIManager : MonoBehaviour
                 HideUI(chat);
                 HideUI(joystick);
                 ShowUI(newChat);
+                HideUI(credit);
                 break;
             default:
                 ShowUI(mainMenu);
@@ -115,6 +126,7 @@ public class UIManager : MonoBehaviour
                 ShowUI(chat);
                 ShowUI(joystick);
                 HideUI(newChat);
+                ShowUI(credit);
                 break;
         }
     }
@@ -142,11 +154,13 @@ public class UIManager : MonoBehaviour
         HideUI(sideMenu);
         HideUI(chat);
         HideUI(joystick);
+        HideUI(credit);
         yield return _wait;
         ShowUI(mainMenu);
         ShowUI(sideMenu);
         ShowUI(chat);
         ShowUI(joystick);
+        ShowUI(credit);
     }
     
     private void OnDestroy()
