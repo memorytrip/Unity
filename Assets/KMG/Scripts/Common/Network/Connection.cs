@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Fusion;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using TMPro;
 
 namespace Common.Network
 {
@@ -16,7 +17,7 @@ namespace Common.Network
         public static Connection StateAuthInstance;
 
         [Networked] public NetworkObject currenctCharacter { get; set; }
-        [Networked] public string playerName { get; set; }
+        [Networked, OnChangedRender("RefreshPlayerName")] public string playerName { get; set; }
         [Networked] public PlayerRef playerRef { get; set; }
         [Networked] public bool hasSceneAuthority { get; set; }
 
@@ -24,7 +25,8 @@ namespace Common.Network
 
         public override void Spawned()
         {
-            if (!HasStateAuthority) 
+            Debug.Log("Connection: Spawned");
+            if (!HasStateAuthority)
                 return;
             Init();
             DontDestroyOnLoad(gameObject);
@@ -59,7 +61,6 @@ namespace Common.Network
             await UniTask.WaitUntil(() => SceneManager.Instance.curScene != null);
             switch (SceneManager.Instance.curScene)
             {
-                
                 case "SpecialSquare":
                 case "Square":
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0f, 2f, -22f), Quaternion.identity);
@@ -74,15 +75,14 @@ namespace Common.Network
                     break;
                 case "FindPhoto":
                     SceneManager.Instance.OnSceneLoaded -= SpawnAvatar;
-                    await UniTask.Delay(TimeSpan.FromSeconds(1.0f));
+                    LoadFindPhotoMap loadmap = FindAnyObjectByType<LoadFindPhotoMap>();
+                    await UniTask.WaitWhile(() => loadmap.isLoading);
+                    
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
                     currenctCharacter.transform.Find("Scale").transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     break;
-                default:
-                    break;
             }
         }
-        
         
         public async UniTask<NetworkObject> SpawnProcess(string prefabName)
         {
