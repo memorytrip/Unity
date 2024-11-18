@@ -60,6 +60,7 @@ namespace Common.Network
             switch (SceneManager.Instance.curScene)
             {
                 
+                case "SpecialSquare":
                 case "Square":
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0f, 2f, -22f), Quaternion.identity);
                     break;

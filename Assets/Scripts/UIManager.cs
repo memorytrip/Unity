@@ -56,6 +56,7 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 HideUI(newChat);
                 break;
+            case "SpecialSquare":
             case "Square":
                 HideUI(newChat);
                 TemporarilyHideUI();
