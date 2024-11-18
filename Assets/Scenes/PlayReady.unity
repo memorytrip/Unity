@@ -2408,7 +2408,7 @@ MonoBehaviour:
   skyboxDay: {fileID: 2100000, guid: cc421da483ed06c49933077a621bff25, type: 2}
   skyboxNight: {fileID: 0}
   timeOfDay: 0
-  updateLighting: 1
+  updateLighting: 0
   styledSpace0: 0
 --- !u!4 &804040114
 Transform:
