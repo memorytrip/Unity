@@ -197,7 +197,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private IEnumerator WaitUntilTransitionEnd()
     {
-        if (SceneManager.GetActiveScene().name != "Square")
+        if (SceneManager.GetActiveScene().name != "SpecialSquare" || SceneManager.GetActiveScene().name != "Square")
         {
             yield break;
         }

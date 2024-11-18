@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using Fusion;
 using Unity.Cinemachine;
-using UnityEngine.Video;
 
 // 플레이어가 접근하면 기존에 나무에 달린 열매들의 비디오/사진이 사라지고 (열매 모델만 남음)
 // 열람 가능한 열매가 화면 상단에서 중앙으로 슬라이드
@@ -11,6 +10,7 @@ using UnityEngine.Video;
 // 영상일 경우 영상 전용 UI
 public class ToggleYggdrasil : MonoBehaviour
 {
+    private static readonly int Enter = Animator.StringToHash("Enter");
     private static readonly int Exit = Animator.StringToHash("Exit");
     private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
     private Yggdrasil _yggdrasil;
@@ -23,11 +23,9 @@ public class ToggleYggdrasil : MonoBehaviour
     private Color _memoryGemVideoColor;
     private const string MemoryGemDefaultColorHex = "#E5B34B";
     private const string MemoryGemVideoColorHex = "#FFFFFF";
-    [SerializeField] private VideoPlayer[] backgroundMemoryGemSetVideo = new VideoPlayer [10]; // 이거는 그냥 서버에서 이미지나 비디오만 가져올 것
     private const int MaxGems = 7; // TODO: 변동 가능. 일단은 길이를 7로 잡기
-    [SerializeField] private GameObject content;
-    private Animator _contentUiAnimator;
-    private readonly WaitForSeconds _exitClipLength = new(1.5f);
+    [SerializeField] private Animator contentUiAnimator;
+    private readonly WaitForSeconds _exitClipLength = new(1f);
     [SerializeField] private CinemachineCamera yggdrasilCamera;
     [SerializeField] private CinemachineCamera defaultCamera;
 
@@ -37,16 +35,8 @@ public class ToggleYggdrasil : MonoBehaviour
         _memoryGemSet = new MemoryGem[MaxGems];
         _memoryGemSet = FindObjectsByType<MemoryGem>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         ActivateButtons(_memoryGemSet);
-        _contentUiAnimator = content.GetComponentInChildren<Animator>(includeInactive:true);
-        if (_contentUiAnimator == null)
-        {
-            Debug.LogWarning("Animator is not initialized!");
-        }
-
         ColorUtility.TryParseHtmlString(MemoryGemDefaultColorHex, out _memoryGemDefaultColor);
         ColorUtility.TryParseHtmlString(MemoryGemVideoColorHex, out _memoryGemVideoColor);
-
-        content.SetActive(false);
     }
     
     private void Start()
@@ -69,19 +59,13 @@ public class ToggleYggdrasil : MonoBehaviour
         if (!other.GetComponent<NetworkObject>().HasStateAuthority)
             return;
 
+        contentUiAnimator.SetTrigger(Enter);
         StartCoroutine(ViewGems());
     }
 
     private IEnumerator ViewGems()
     {
-        foreach (var gem in backgroundMemoryGemSetVideo)
-        {
-            gem.Stop();
-        }
-
         memoryGemMaterial.SetColor(BaseColor, _memoryGemDefaultColor);
-        
-        content.SetActive(true);
         //yggdrasilCamera.Prioritize();
         //Debug.Log($"Yggdrasil camera is now {yggdrasilCamera.gameObject}, Priority: {yggdrasilCamera.Priority}");
         //yggdrasilCamera.SetActive(true);
@@ -123,16 +107,9 @@ public class ToggleYggdrasil : MonoBehaviour
         if (!other.GetComponent<NetworkObject>().HasStateAuthority)
             yield break;
 
-        _contentUiAnimator.SetTrigger(Exit);
+        contentUiAnimator.SetTrigger(Exit);
         yield return _exitClipLength;
-        
         memoryGemMaterial.SetColor(BaseColor, _memoryGemVideoColor);
-        
-        foreach (var gem in backgroundMemoryGemSetVideo)
-        {
-            gem.Play();
-        }
-        content.SetActive(false);
     }
 
     /*private void DeactivateButtons(MemoryGem[] memoryGemSet)
