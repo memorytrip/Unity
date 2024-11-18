@@ -24,6 +24,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     private int numberOfPhoto;
     private readonly WaitForSeconds _waitForAnimation = new WaitForSeconds(3f);
     [SerializeField] private LoadFindPhotoMap loadFindPhotoMap;
+    [SerializeField] private GameObject photoGround;
 
     void Start()
     {
@@ -44,11 +45,24 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
         numberOfPhoto += 2;
     }
     
-    private Vector3 GetRandomPosition()
+    private async UniTask<Vector3> GetRandomPosition()
     {
         Vector3 rayOrigin = new Vector3(Random.Range(-40, 40), yValue, Random.Range(-40, 40));
         RaycastHit hit;
-        Physics.Raycast(rayOrigin, Vector3.down, out hit, yValue);
+        bool ishit;
+        int testCount = 0;
+        do
+        {
+            rayOrigin = new Vector3(Random.Range(-40, 40), yValue, Random.Range(-40, 40));
+            ishit = Physics.Raycast(rayOrigin, Vector3.down, out hit, yValue);
+            await UniTask.Yield();
+            if (testCount++ > 5000)
+            {
+                Debug.LogWarning("GetRandomPosition: Failed to posit photo");
+                break;
+            }
+                
+        } while (ishit == false);
         return hit.point;
     }
 
@@ -58,7 +72,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
         for (var i = 1; i <= numberOfPhotos; i++)
         {
             int photoName = i;
-            photoDict[photoName] = GetRandomPosition();
+            photoDict[photoName] = await GetRandomPosition();
                 // await UniTask.Delay(TimeSpan.FromSeconds(3.5f));
             var photoObject =
                 await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName], Quaternion.identity);
@@ -66,6 +80,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
             var photoData = photoObject.GetComponent<PhotoData>();
             photoData?.SetPhotoName(photoName);
         }
+        Destroy(photoGround);
     }
     
     public void OnEvent(EventType eventType, Component sender, object param = null)

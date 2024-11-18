@@ -21,6 +21,12 @@ public class LoadFindPhotoMap : NetworkBehaviour
     private async UniTaskVoid LoadMaps()
     {
         await ConcreteMaps(await LoadMapInfos());
+        LoadCompleteRpc();
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void LoadCompleteRpc()
+    {
         isLoading = false;
     }
 

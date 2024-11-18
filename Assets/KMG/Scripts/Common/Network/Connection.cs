@@ -72,8 +72,10 @@ namespace Common.Network
                     SceneManager.Instance.OnSceneLoaded += SpawnAvatar;
                     break;
                 case "FindPhoto":
+                    LoadFindPhotoMap loadmap = FindAnyObjectByType<LoadFindPhotoMap>();
                     SceneManager.Instance.OnSceneLoaded -= SpawnAvatar;
-                    await UniTask.Delay(TimeSpan.FromSeconds(1.0f));
+                    // await UniTask.Delay(TimeSpan.FromSeconds(1.0f));
+                    await UniTask.WaitWhile(() => loadmap.isLoading);
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
                     currenctCharacter.transform.Find("Scale").transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     break;
