@@ -21,7 +21,7 @@ public class Chat : MonoBehaviour
 
     public void ChatButtonClicked()
     {
-        Connection.StateAuthInstance.RpcChatMsg("닉네임: " + chat.text); //닉네임 부분 실제 닉네임 받아서 써야함
+        Connection.StateAuthInstance.RpcChatMsg(SessionManager.Instance.currentUser.nickName + ": " + chat.text); //닉네임 부분 실제 닉네임 받아서 써야함
         chat.text = string.Empty;
     }
 
