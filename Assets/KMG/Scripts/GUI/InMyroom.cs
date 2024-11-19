@@ -1,9 +1,9 @@
-using System;
+using System.Collections;
 using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace GUI
@@ -12,15 +12,31 @@ namespace GUI
     {
         [SerializeField] private Button returnToSquareButton;
         [SerializeField] private Button enterEditModeButton;
+        
+        [Header("Map List")]
         [SerializeField] private InMyroomMapList maplist;
         [SerializeField] private CanvasGroup mapListPanel;
         [SerializeField] private Button closeMapListButton;
+
+        [Header("Visit Other Room")] 
+        [SerializeField] private CanvasGroup visitRoomPanel;
+        [SerializeField] private Button openVisitRoom;
+        [SerializeField] private Button closeVisitRoom;
+        [SerializeField] private TMP_InputField inputVisitRoom;
+        [SerializeField] private Button enterVisitRoom;
 
         private void Start()
         {
             returnToSquareButton.onClick.AddListener(ReturnToSquare);
             enterEditModeButton.onClick.AddListener(EnterSetting);
             closeMapListButton.onClick.AddListener(CloseSetting);
+            
+            openVisitRoom.onClick.AddListener(OpenVisitRoom);
+            closeVisitRoom.onClick.AddListener(CloseVisitRoom);
+            enterVisitRoom.onClick.AddListener(VisitRoom);
+
+            enterEditModeButton.interactable = false;
+            ActiveSetting().Forget();
         }
 
         private void ReturnToSquare()
@@ -37,6 +53,35 @@ namespace GUI
         private void CloseSetting()
         {
             Utility.DisablePanel(mapListPanel);
+        }
+
+        private void OpenVisitRoom()
+        {
+            Utility.EnablePanel(visitRoomPanel);
+        }
+
+        private void CloseVisitRoom()
+        {
+            Utility.DisablePanel(visitRoomPanel);
+        }
+
+        private void VisitRoom()
+        {
+            string roomName = $"player_{inputVisitRoom.text}";
+            SceneManager.Instance.MoveRoom(roomName).Forget();
+        }
+
+        private async UniTaskVoid ActiveSetting()
+        {
+            // await UniTask.WaitWhile(() => string.IsNullOrEmpty(SceneManager.Instance.curScene) );
+            await UniTask.WaitWhile(() => string.IsNullOrEmpty(RunnerManager.Instance.Runner?.SessionInfo.Name));
+            string sessionName = RunnerManager.Instance.Runner?.SessionInfo.Name;
+            string myName = SessionManager.Instance.currentUser.nickName;
+            Debug.Log($"InMyRoom.ActiveSetting: {RunnerManager.Instance.Runner?.SessionInfo.Name}");
+            if (sessionName == $"player_{myName}")
+            {
+                enterEditModeButton.interactable = true;
+            }
         }
     }
 }
