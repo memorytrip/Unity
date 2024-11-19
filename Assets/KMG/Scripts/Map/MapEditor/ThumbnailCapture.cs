@@ -37,5 +37,10 @@ namespace Map.Editor
 
             return tex;
         }
+
+        public async UniTask<byte[]> CaptureToBinary()
+        {
+            return (await Capture()).EncodeToPNG();
+        }
     }
 }

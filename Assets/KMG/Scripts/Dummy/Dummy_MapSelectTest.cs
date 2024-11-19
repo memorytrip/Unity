@@ -35,8 +35,8 @@ public class Dummy_MapSelectTest : MonoBehaviour
         GameObject imageObj = new GameObject("MapThumbnail");
         imageObj.transform.parent = mapListUI;
         imageObj.transform.localScale = Vector3.one;
-        
-        byte[] thumbnailData = Convert.FromBase64String(mapInfo.thumbnail);
+
+        byte[] thumbnailData = mapInfo.thumbnail;
         Texture2D texture = new Texture2D(2, 2);
         texture.LoadImage(thumbnailData);
         

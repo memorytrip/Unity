@@ -131,15 +131,13 @@ namespace Map
     #region load map thumbnail
         public async UniTask<Sprite> LoadMapThumbnail(MapInfo mapInfo)
         {
-            
-    
-            if (Uri.TryCreate(mapInfo.thumbnail, UriKind.Absolute, out Uri uri))
+            if (Uri.TryCreate(mapInfo.thumbnailUrl, UriKind.Absolute, out Uri uri))
             {
-                return await LoadMapThumbnailFromServer(mapInfo.thumbnail);
+                return await LoadMapThumbnailFromServer(mapInfo.thumbnailUrl);
             }
-            else if (File.Exists(mapInfo.thumbnail))
+            else if (File.Exists(mapInfo.thumbnailUrl))
             {
-                return await LoadMapThumbnailFromLocal(mapInfo.thumbnail);
+                return await LoadMapThumbnailFromLocal(mapInfo.thumbnailUrl);
             }
             else
             {
