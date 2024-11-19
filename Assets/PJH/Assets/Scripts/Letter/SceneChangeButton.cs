@@ -15,24 +15,12 @@ public class SceneChangeButton : NetworkBehaviour
 
     private void ActiveNextButton()
     {
-        /*if (!RequestVideo())
-            return;*/
-
-        //if (HasStateAuthority)
         {
-            Debug.Log("아 이");
             nextButton.gameObject.SetActive(true);
-            nextButton.onClick.AddListener(()=>RpcSceneChange("VideoLoadTest"));
+            nextButton.onClick.AddListener(()=>RpcSceneChange("Square"));
         }
     }
-
-    private bool RequestVideo()
-    {
-        //json 오는거 확인하는 로직
-        return true;
-    }
     
-    //[Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     void RpcSceneChange(string scenename)
     {
         SceneManager.Instance.MoveScene(scenename);

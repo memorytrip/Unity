@@ -144,5 +144,6 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     {
         findedPhotoCount.text = findedPhoto + " / " + runner.ActivePlayers.Count();
     }
+
 }
 

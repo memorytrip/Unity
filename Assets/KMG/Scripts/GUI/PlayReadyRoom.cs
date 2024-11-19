@@ -120,7 +120,6 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RpcGameStart()
     {
-        Debug.Log("start game");
         cts.Cancel();
         SceneManager.Instance.MoveScene("FindPhoto");
     }
