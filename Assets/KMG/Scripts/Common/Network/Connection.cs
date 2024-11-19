@@ -18,6 +18,7 @@ namespace Common.Network
 
         [Networked] public NetworkObject currenctCharacter { get; set; }
         [Networked, OnChangedRender("RefreshPlayerName")] public string playerName { get; set; }
+        [Networked] public string playerEmail { get; set; }
         [Networked] public PlayerRef playerRef { get; set; }
         [Networked] public bool hasSceneAuthority { get; set; }
 
@@ -47,6 +48,7 @@ namespace Common.Network
         private void Init()
         {
             playerName = SessionManager.Instance.currentSession?.user.nickName;
+            playerEmail = SessionManager.Instance.currentSession?.user.email;
             Debug.Log($"Connection Init PlayerName : {playerName}");
             
             StateAuthInstance = this;

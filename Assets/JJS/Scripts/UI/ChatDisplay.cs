@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
 using DG.Tweening;
-using GUI;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
 
 public class ChatDisplay : MonoBehaviour
@@ -15,13 +13,13 @@ public class ChatDisplay : MonoBehaviour
         Expand,
     }
     
-    public bool isTyping;
+    public bool IsTyping => _inputField != null && _inputField.isFocused;
     
-    public event Action<bool> StartTyping;
+    public event Action<bool> ChangeTypingState;
 
-    public void OnStartedTyping(bool typingStatus)
+    public void OnTypingStateChanged(bool typingStatus)
     {
-        StartTyping?.Invoke(typingStatus);
+        ChangeTypingState?.Invoke(typingStatus);
     }
     
     public event Action<bool> StopTyping;
@@ -31,11 +29,11 @@ public class ChatDisplay : MonoBehaviour
         StopTyping?.Invoke(typingStatus);
     }
     
-    public CanvasGroup _chatDisplay;
+    public CanvasGroup chatDisplay;
     public CanvasGroup chatScroll;
     private TMP_InputField _inputField;
     [SerializeField] private Button expandChatButton;
-    private ChatDisplayMode _chatDisplayMode;
+    private ChatDisplayMode _chatDisplayMode = ChatDisplayMode.Shrink;
     private const float MinHeight = 100f;
     private const float MaxHeight = 400f;
     
@@ -43,57 +41,44 @@ public class ChatDisplay : MonoBehaviour
     {
         //_chatDisplayArea = GetComponent<RectTransform>();
         //_chatDisplayArea.sizeDelta = new Vector2(_chatDisplayArea.sizeDelta.x, MinHeight);
-        _chatDisplayMode = ChatDisplayMode.Shrink;
-        
-        expandChatButton.onClick.AddListener(ToggleChat);
         
         _inputField = GetComponentInChildren<TMP_InputField>();
-        _inputField.restoreOriginalTextOnEscape = true;
         
-        _inputField.onSelect.AddListener(StartChat);
-        _inputField.onSubmit.AddListener(SubmitChat);
-        _inputField.onEndEdit.AddListener(StopChat);
-        _inputField.onDeselect.AddListener(StopChat);
-    }
+        expandChatButton.onClick.AddListener(ToggleChat);
 
-    private void StartChat(string text)
-    {
-        if (isTyping)
+        if (_inputField != null)
         {
-            return;
+            _inputField.restoreOriginalTextOnEscape = true;
+            _inputField.onSelect.AddListener(_ => StartChat());
+            _inputField.onDeselect.AddListener(_ => StopChat());
+            _inputField.onSubmit.AddListener(SubmitChat);
         }
-        _inputField.ActivateInputField();
-        Debug.Log($"StartChat: {text}");
-        isTyping = true;
-        OnStartedTyping(isTyping);
-        Debug.Log("얼음땡: 이게 안되냐");
-        Debug.Log($"얼음땡 IsTyping: {isTyping}");
     }
 
-    private void StopChat(string text)
+    private void StartChat()
     {
-        if (isTyping)
+        if (!IsTyping)
         {
-            Debug.Log($"StopChat: {text}");
-            _inputField.DeactivateInputField(true);
-            isTyping = false;
-            OnStoppedTyping(isTyping);
-            Debug.Log("얼음땡: 이게 안되냐");
-            Debug.Log($"얼음땡 IsTyping: {isTyping}");
+            OnTypingStateChanged(true);
+        }
+    }
+
+    private void StopChat()
+    {
+        if (IsTyping)
+        {
+            OnTypingStateChanged(false);
         }
     }
 
     private void SubmitChat(string text)
     {
-        if (isTyping)
+        if (string.IsNullOrWhiteSpace(text))
         {
-            Debug.Log($"SubmitChat: {text}");
-            _inputField.text = "";
-            //OnStoppedTyping(isTyping);
-            _inputField.DeactivateInputField(true);
-            isTyping = false;
-            Debug.Log($"얼음땡 IsTyping: {isTyping}");
+            return;
         }
+        _inputField.text = string.Empty;
+        StopChat();
     }
 
     private void ToggleChat()
@@ -101,22 +86,28 @@ public class ChatDisplay : MonoBehaviour
         switch (_chatDisplayMode)
         {
             case ChatDisplayMode.Shrink:
-                StartCoroutine(FadeIn(0.5f, chatScroll));
-                StartCoroutine(FadeOut(0.5f, _chatDisplay));
-                _inputField.enabled = true;
-                _inputField.interactable = true;
-                _chatDisplayMode = ChatDisplayMode.Expand;
-                Debug.Log("Expand chat");
+                ExpandChat();
                 break;
             case ChatDisplayMode.Expand:
-                StartCoroutine(FadeOut(0.5f, chatScroll));
-                StartCoroutine(FadeIn(0.5f, _chatDisplay));
-                _inputField.enabled = false;
-                _inputField.interactable = false;
-                _chatDisplayMode = ChatDisplayMode.Shrink;
-                Debug.Log("Shrink chat");
+                ShrinkChat();
                 break;
         }
+    }
+    
+    private void ExpandChat()
+    {
+        StartCoroutine(FadeIn(0.5f, chatScroll));
+        StartCoroutine(FadeOut(0.5f, chatDisplay));
+        _chatDisplayMode = ChatDisplayMode.Expand;
+        Debug.Log("Chat expanded.");
+    }
+
+    private void ShrinkChat()
+    {
+        StartCoroutine(FadeOut(0.5f, chatScroll));
+        StartCoroutine(FadeIn(0.5f, chatDisplay));
+        _chatDisplayMode = ChatDisplayMode.Shrink;
+        Debug.Log("Chat shrunk.");
     }
     
     public IEnumerator FadeIn(float seconds, CanvasGroup canvasGroup)
