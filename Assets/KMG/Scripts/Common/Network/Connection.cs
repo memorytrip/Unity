@@ -61,7 +61,7 @@ namespace Common.Network
             await UniTask.WaitUntil(() => SceneManager.Instance.curScene != null);
             switch (SceneManager.Instance.curScene)
             {
-                
+                case "SpecialSquare":
                 case "Square":
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0f, 2f, -22f), Quaternion.identity);
                     break;
@@ -81,8 +81,6 @@ namespace Common.Network
                     await UniTask.Delay(TimeSpan.FromSeconds(5.0f));
                     currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
                     currenctCharacter.transform.Find("Scale").transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                    break;
-                default:
                     break;
             }
         }

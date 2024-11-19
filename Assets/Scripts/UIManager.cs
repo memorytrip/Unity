@@ -60,6 +60,7 @@ public class UIManager : MonoBehaviour
                 HideUI(newChat);
                 HideUI(credit);
                 break;
+            case "SpecialSquare":
             case "Square":
                 HideUI(newChat);
                 TemporarilyHideUI();

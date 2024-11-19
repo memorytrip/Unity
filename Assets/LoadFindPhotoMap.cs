@@ -21,7 +21,8 @@ public class LoadFindPhotoMap : NetworkBehaviour
     private async UniTaskVoid LoadMaps()
     {
         await ConcreteMaps(await LoadMapInfos());
-        LoadCompleteRpc();
+        if (Runner.IsSceneAuthority)
+            LoadCompleteRpc();
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]

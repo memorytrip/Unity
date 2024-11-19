@@ -30,6 +30,8 @@ public class PlayerAnimationTrigger : NetworkBehaviour
 
     private void TriggerAnimation()
     {
+        if (!HasStateAuthority)
+            return;
         StartCoroutine(PlayerStop());
     }
 

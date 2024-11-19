@@ -39,6 +39,7 @@ public class BGM : MonoBehaviour
                 PlayBGM(EBgmList.Intro);
                 break;
             case "Square":
+            case "SpecialSquare":
                 PlayBGM(EBgmList.Lobby);
                 break;
             default:
