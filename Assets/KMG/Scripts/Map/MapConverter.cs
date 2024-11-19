@@ -36,7 +36,7 @@ namespace Map
         }
         
 
-        public static MapInfo ConvertMapConcreteToMapInfo(MapConcrete mapConcrete, ThumbnailCapture capture)
+        public static async UniTask<MapInfo> ConvertMapConcreteToMapInfo(MapConcrete mapConcrete, ThumbnailCapture capture)
         {
             MapData mapData = new MapData();
             mapData.themeId = mapConcrete.theme.id;
@@ -53,8 +53,7 @@ namespace Map
             //TODO: mapInfo.id, mapInfo.thmbnail 채우기
             MapInfo mapInfo = new MapInfo();
             mapInfo.id = 0;
-            mapInfo.thumbnail = "file://" + Application.persistentDataPath + "/Maps/asdf.png";
-            capture.CaptureToLocal().Forget();
+            mapInfo.thumbnail = await capture.CaptureToBinary();
             mapInfo.data = mapData;
             return mapInfo;
         }
@@ -71,7 +70,7 @@ namespace Map
             MapInfo mapInfo = new MapInfo();
             
             mapInfo.id = mapInfoRaw.id;
-            mapInfo.thumbnail = mapInfoRaw.thumbnailUrl;
+            mapInfo.thumbnailUrl = mapInfoRaw.thumbnailUrl;
 
             mapInfo.data = new MapData();
             mapInfo.data.themeId = mapInfoRaw.theme;
@@ -109,7 +108,7 @@ namespace Map
             MapInfoRaw mapInfoRaw = new MapInfoRaw();
 
             mapInfoRaw.id = mapInfo.id;
-            mapInfoRaw.thumbnailUrl = mapInfo.thumbnail;
+            mapInfoRaw.thumbnailUrl = mapInfo.thumbnailUrl;
             mapInfoRaw.theme = mapInfo.data.themeId;
 
             mapInfoRaw.objects = new MapInfoRaw.MapObjectData[mapInfo.data.mapObjectList.Count];

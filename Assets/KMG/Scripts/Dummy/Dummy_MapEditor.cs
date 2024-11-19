@@ -55,7 +55,7 @@ namespace GUI
 
         private async UniTaskVoid ConvertMapConcreteToFile(MapConcrete mapConcrete)
         {
-            MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete, capturer);
+            MapInfo mapInfo = await MapConverter.ConvertMapConcreteToMapInfo(mapConcrete, capturer);
             
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)
@@ -69,7 +69,7 @@ namespace GUI
 
         private async UniTaskVoid SendMapToServer(MapConcrete mapConcrete)
         {
-            MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete, capturer);
+            MapInfo mapInfo = await MapConverter.ConvertMapConcreteToMapInfo(mapConcrete, capturer);
             string data = MapConverter.ConvertMapInfoToJson(mapInfo);
             
             Debug.Log(data);

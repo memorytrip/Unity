@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
 using Common;
 using Cysharp.Threading.Tasks;
@@ -6,6 +8,7 @@ using Map.Editor;
 using Myroom;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 namespace GUI
@@ -46,18 +49,22 @@ namespace GUI
 
         private async UniTask<string> UploadMap()
         {
-            MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete, capturer);
+            MapInfo mapInfo = await MapConverter.ConvertMapConcreteToMapInfo(mapConcrete, capturer);
             string data = MapConverter.ConvertMapInfoToJson(mapInfo);
             Debug.Log(data);
-            return await DataManager.Post($"/api/custom-map/create/{originMapId}", data);
+            List<IMultipartFormSection> formdata = new List<IMultipartFormSection>();
+            formdata.Add(new MultipartFormDataSection("data", data, "application/json"));
+            formdata.Add(new MultipartFormFileSection("thumbnail", mapInfo.thumbnail, $"thumbnail{Guid.NewGuid().ToString()}", ""));
+            return await DataManager.Post($"/api/custom-map/create/{originMapId}", formdata);
         }
 
         private async UniTask WriteMapToFile()
         {
             string path = Application.persistentDataPath + "/Maps/";
             string filename = "asdf.json";
+            string thumbnailName = "asdf.png";
             
-            MapInfo mapInfo = MapConverter.ConvertMapConcreteToMapInfo(mapConcrete, capturer);
+            MapInfo mapInfo = await MapConverter.ConvertMapConcreteToMapInfo(mapConcrete, capturer);
             
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)
@@ -66,6 +73,7 @@ namespace GUI
             }
 
             await File.WriteAllTextAsync(path + filename, MapConverter.ConvertMapInfoToJson(mapInfo));
+            await File.WriteAllBytesAsync(path + thumbnailName, mapInfo.thumbnail);
             Debug.Log($"File save: {path + filename}");
         }
 
