@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5624978073934847938}
   - component: {fileID: 707262483346032506}
   - component: {fileID: 516680919721215787}
-  - component: {fileID: -5974127717638873739}
   m_Layer: 5
   m_Name: MapEditorThemeItem
   m_TagString: Untagged
@@ -90,23 +89,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theme: {fileID: 0}
---- !u!114 &-5974127717638873739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4296228244359438715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: 200
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
