@@ -9,7 +9,7 @@ namespace Myroom
     public class LoadMyroom: MonoBehaviour
     {
         public static MapInfo.MapType mapType = MapInfo.MapType.Default;
-        public static long mapId = 8;
+        public static long mapId = 1;
         private async UniTaskVoid Start()
         {
             // TODO: BE에서 mapInfo 불러와서 하기
