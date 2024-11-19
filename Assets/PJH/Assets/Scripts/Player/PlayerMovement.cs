@@ -66,7 +66,7 @@ public class PlayerMovement : NetworkBehaviour
         InputManager.Instance.jumpAction.started += PlayerJump;
         
         _chatDisplay = FindAnyObjectByType<ChatDisplay>();
-        _chatDisplay.StartTyping += ToggleMovement;
+        _chatDisplay.ChangeTypingState += ToggleMovement;
         _chatDisplay.StopTyping += ToggleMovement;
 
         StartCoroutine(WaitUntilTransitionEnd());
@@ -212,7 +212,7 @@ public class PlayerMovement : NetworkBehaviour
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
         InputManager.Instance.jumpAction.started -= PlayerJump;
-        _chatDisplay.StartTyping -= ToggleMovement;
+        _chatDisplay.ChangeTypingState -= ToggleMovement;
         _chatDisplay.StopTyping -= ToggleMovement;
     }
 }
