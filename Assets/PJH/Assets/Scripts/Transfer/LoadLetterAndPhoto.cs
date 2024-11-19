@@ -7,8 +7,29 @@ using UnityEngine.UI;
 
 public class LoadLetterAndPhoto : NetworkBehaviour
 {
-    public RawImage[] photoImages;
-    private Text[] letterTexts;  
+    public Button[] photoButtons;
+    private RawImage[] photoImages;
+    private Text[] letterTexts;
+
+    void Start()
+    {
+        photoImages = new RawImage[photoButtons.Length];
+        
+        for (int i = 0; i < photoButtons.Length; i++)
+        {
+            RawImage rawImage = photoButtons[i].GetComponentInChildren<RawImage>();
+
+            if (rawImage != null)
+            {
+                photoImages[i] = rawImage; 
+            }
+            else
+            {
+                Debug.LogWarning($"Button {i} has no RawImage component.");
+            }
+        }
+        
+    }
 
     public override void Spawned()
     {
@@ -91,7 +112,7 @@ public class LoadLetterAndPhoto : NetworkBehaviour
         }
     }
 
-    private void OnDestroy()
+    /*private void OnDestroy()
     {
         foreach (RawImage image in photoImages)
         {
@@ -100,5 +121,5 @@ public class LoadLetterAndPhoto : NetworkBehaviour
                 Destroy(image.texture);
             }
         }
-    }
+    }*/
 }
