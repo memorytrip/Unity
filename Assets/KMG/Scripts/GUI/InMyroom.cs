@@ -2,6 +2,7 @@ using System.Collections;
 using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
+using Myroom;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,8 +25,9 @@ namespace GUI
         [SerializeField] private Button closeVisitRoom;
         [SerializeField] private TMP_InputField inputVisitRoom;
         [SerializeField] private Button enterVisitRoom;
-        
-        [Header("Album")]
+
+        [Header("Album")] 
+        [SerializeField] private InMyRoomPhotoList album;
         [SerializeField] private CanvasGroup albumPanel;
         [SerializeField] private Button openAlbumPanel;
         [SerializeField] private Button closeAlbumPanel;
@@ -76,12 +78,14 @@ namespace GUI
         private void VisitRoom()
         {
             string roomName = $"player_{inputVisitRoom.text}";
+            LoadMyroom.mapOwnerName = inputVisitRoom.text;
             SceneManager.Instance.MoveRoom(roomName).Forget();
         }
 
         private void OpenAlbumPanel()
         {
             Utility.EnablePanel(albumPanel);
+            album.RefreshListProcess().Forget();
         }
 
         private void CloseAlbumPanel()
