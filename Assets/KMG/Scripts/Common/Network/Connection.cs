@@ -17,7 +17,7 @@ namespace Common.Network
         public static Connection StateAuthInstance;
 
         [Networked] public NetworkObject currenctCharacter { get; set; }
-        [Networked, OnChangedRender("RefreshPlayerName")] public string playerName { get; set; }
+        [Networked] public string playerName { get; set; }
         [Networked] public string playerEmail { get; set; }
         [Networked] public PlayerRef playerRef { get; set; }
         [Networked] public bool hasSceneAuthority { get; set; }
