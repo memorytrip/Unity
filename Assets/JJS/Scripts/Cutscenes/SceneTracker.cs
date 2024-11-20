@@ -22,7 +22,6 @@ public class SceneTracker : MonoBehaviour
     {
         if (scene.name == LoadingSceneName)
         {
-            Debug.Log("Skipping loading scene.");
             return;
         }
         
@@ -31,7 +30,6 @@ public class SceneTracker : MonoBehaviour
         {
             PreviousScene = _currentActiveScene;
             _currentActiveScene = activeScene.name;
-            Debug.Log($"PreviousScene has been set to {PreviousScene}");
         }
     }
 }
