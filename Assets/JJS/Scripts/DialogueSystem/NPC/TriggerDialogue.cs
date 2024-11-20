@@ -30,7 +30,7 @@ public class TriggerDialogue : MonoBehaviour, IClickable3dObject
         {
             director.playableAsset = cutscenes[(int)Cutscenes.Default];
         }
-        director.Play();
+        //director.Play(); TODO: 나중에
     }
 
     private void OnTriggerEnter(Collider other)

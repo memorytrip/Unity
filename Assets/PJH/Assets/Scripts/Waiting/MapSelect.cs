@@ -8,10 +8,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Map;
-using Unity.VisualScripting;
-using UnityEngine.Networking;
-using Common.Network;
-
 
 public class MapSelectionController : MonoBehaviour
 {

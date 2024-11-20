@@ -27,7 +27,7 @@ public class PlayerMovement : NetworkBehaviour
     private float gravityMultiplier = 3f;
 
     [Header("PlayerCamera")] 
-    private Camera camera;
+    private Camera playerCamera;
     
     [Header("Rotation")]
     public float turnSpeed = 1000f;
@@ -55,7 +55,7 @@ public class PlayerMovement : NetworkBehaviour
         cc = GetComponent<CharacterController>();
         cc.enabled = false;
         //networkanim = GetComponentInChildren<NetworkMecanimAnimator>();
-        camera = Camera.main;
+        playerCamera = Camera.main;
         boxSize = new Vector3(1f, 1f, 1f);
     }
     
@@ -154,7 +154,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!InputManager.Instance.moveAction.inProgress)
             return;
-        playerDir = Quaternion.Euler(0.0f, camera.transform.eulerAngles.y, 0.0f) * playerDir; //new Vector3(joystick.inputDirection.x, 0.0f, joystick.inputDirection.y);
+        playerDir = Quaternion.Euler(0.0f, playerCamera.transform.eulerAngles.y, 0.0f) * playerDir; //new Vector3(joystick.inputDirection.x, 0.0f, joystick.inputDirection.y);
         Quaternion targetRotation = Quaternion.LookRotation(playerDir, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
     }
