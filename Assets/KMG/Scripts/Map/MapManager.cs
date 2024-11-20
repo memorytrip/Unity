@@ -170,7 +170,7 @@ namespace Map
             }
             catch (UnityWebRequestException e)
             {
-                return null;
+                sprite = null;
             }
             finally
             {
@@ -181,6 +181,7 @@ namespace Map
                 }
                 else
                 {
+                    Debug.LogAssertion(request.error);
                     sprite = null;
                 }
             }

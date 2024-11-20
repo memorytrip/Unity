@@ -24,6 +24,11 @@ namespace GUI
         [SerializeField] private Button closeVisitRoom;
         [SerializeField] private TMP_InputField inputVisitRoom;
         [SerializeField] private Button enterVisitRoom;
+        
+        [Header("Album")]
+        [SerializeField] private CanvasGroup albumPanel;
+        [SerializeField] private Button openAlbumPanel;
+        [SerializeField] private Button closeAlbumPanel;
 
         private void Start()
         {
@@ -34,6 +39,9 @@ namespace GUI
             openVisitRoom.onClick.AddListener(OpenVisitRoom);
             closeVisitRoom.onClick.AddListener(CloseVisitRoom);
             enterVisitRoom.onClick.AddListener(VisitRoom);
+            
+            openAlbumPanel.onClick.AddListener(OpenAlbumPanel);
+            closeAlbumPanel.onClick.AddListener(CloseAlbumPanel);
 
             enterEditModeButton.interactable = false;
             ActiveSetting().Forget();
@@ -69,6 +77,16 @@ namespace GUI
         {
             string roomName = $"player_{inputVisitRoom.text}";
             SceneManager.Instance.MoveRoom(roomName).Forget();
+        }
+
+        private void OpenAlbumPanel()
+        {
+            Utility.EnablePanel(albumPanel);
+        }
+
+        private void CloseAlbumPanel()
+        {
+            Utility.DisablePanel(albumPanel);
         }
 
         private async UniTaskVoid ActiveSetting()
