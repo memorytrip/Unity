@@ -4,7 +4,6 @@ using UnityEngine.Playables;
 public class Standby : MonoBehaviour
 {
     private PlayableDirector _director;
-    private const string LoginSceneName = "Login";
 
     [SerializeField] private PlayableAsset introTransition;
     
@@ -15,7 +14,7 @@ public class Standby : MonoBehaviour
 
     private void Start()
     {
-        if (SceneTracker.PreviousScene == LoginSceneName)
+        if (SceneTracker.PreviousScene == SceneName.Login)
         {
             StartCutscene(introTransition);
         }

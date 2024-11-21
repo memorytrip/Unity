@@ -17,7 +17,7 @@ public class SceneChangeButton : NetworkBehaviour
     {
         {
             nextButton.gameObject.SetActive(true);
-            nextButton.onClick.AddListener(()=>RpcSceneChange("Square"));
+            nextButton.onClick.AddListener(()=>RpcSceneChange(SceneName.Square));
         }
     }
     
