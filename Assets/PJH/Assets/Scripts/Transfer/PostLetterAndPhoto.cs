@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Common.Network;
 using Cysharp.Threading.Tasks;
+using ExitGames.Client.Photon.StructWrapping;
 using Fusion;
 using Newtonsoft.Json;
 using TMPro;
@@ -11,6 +12,11 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using DataManager = Common.DataManager;
+
+class LetterData
+{
+    public string content;
+}
 
 public class PostLetterAndPhoto : MonoBehaviour
 {
@@ -33,26 +39,9 @@ public class PostLetterAndPhoto : MonoBehaviour
         PhotoResponse.PostResponseClear();
     }
 
-    private void Start()
+    public void CheckAndExecute()
     {
-        startButton.onClick.AddListener(CheckAndExecute);
-    }
-
-    private async void CheckAndExecute()
-    {
-        if (startButton.GetComponentInChildren<TMP_Text>().text =="준비완료")
-        {
-            await PostLetterProcess(letter.text);
-        }
-        else
-        {
-            Debug.Log("준비완료가 아님");
-        }
-    }
-
-    public void PostPhoto(RawImage photo)
-    {   
-        PostPhotoProcess(photo).Forget();
+        PostLetterProcess(letter.text).Forget();
     }
     
     /*public void Start()
@@ -75,24 +64,29 @@ public class PostLetterAndPhoto : MonoBehaviour
     }*/
     
     //formData로 Post
-    private async UniTask PostPhotoProcess(RawImage photo)
+    public async UniTask PostPhotoProcess(Texture2D texture)
     {
-        Texture2D texture = photo.texture as Texture2D;
+        //Texture2D texture = photo.texture as Texture2D;
 
         byte[] imageBytes = texture.EncodeToPNG();
+        
+        Debug.Log("이미지 배열:" + imageBytes);
         try
         {
             // multipart/form-data 형식으로 데이터 준비
             List<IMultipartFormSection> formData = new List<IMultipartFormSection>
             {
-                new MultipartFormDataSection("files", imageBytes),
+                new MultipartFormFileSection("files", imageBytes),
                 new MultipartFormDataSection("roomCode", RunnerManager.Instance.Runner.SessionInfo.Name),
             };
+            var formData2 = new WWWForm();
+            formData2.AddBinaryData("files", imageBytes);
+            formData2.AddField("roomCode", RunnerManager.Instance.Runner.SessionInfo.Name);
             
             // DataManager를 통해 POST 요청 보내기
-            string jsonData = await DataManager.Post(photoapi, formData);
-            var response = JsonConvert.DeserializeObject<PostPhotoResponse>(jsonData);
-            PhotoResponse.SetPostResponse(response);
+            string jsonData = await DataManager.Post2(photoapi, formData2);
+            var response = JsonConvert.DeserializeObject<PostPhotoResponse[]>(jsonData);
+            PhotoResponse.SetPostResponse(response[0]);
             Debug.Log("사진 Post성공");
 
         }
@@ -108,14 +102,15 @@ public class PostLetterAndPhoto : MonoBehaviour
         letterapi += "?photoId="+PhotoResponse.postResponse.photoId;
         try
         {
-            // multipart/form-data 형식으로 데이터 준비
-            List<IMultipartFormSection> formData = new List<IMultipartFormSection>
+            var data = new LetterData
             {
-                new MultipartFormDataSection("content", letterInfo),
+                content = letterInfo
             };
+            // multipart/form-data 형식으로 데이터 준비
+            var jsonData = JsonConvert.SerializeObject(data);
             
             // DataManager를 통해 POST 요청 보내기
-            await DataManager.Post(letterapi, formData);
+            await DataManager.Post(letterapi, jsonData);
             Debug.Log("편지 Post성공");
         }
         

@@ -59,9 +59,25 @@ namespace Common
                 throw new Exception(request.error);
             }
         }
-        
 
 
+        public static async UniTask<string> Post2(string api, WWWForm formdata, int timeout = 5)
+        {
+            string url = baseURL + CheckSlash(api);
+            var request = UnityWebRequest.Post(url, formdata);
+            if (token != null)
+                request.SetRequestHeader("Authorization", token);
+            await request.SendWebRequest();
+            
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                return request.downloadHandler.text;
+            }
+            else
+            {
+                throw new Exception(request.error);
+            }
+        }
         public static async UniTask<string> Post(string api, List<IMultipartFormSection> formdata, int timeout = 5)
         {
             string url = baseURL + CheckSlash(api);

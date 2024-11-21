@@ -16,6 +16,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     [SerializeField] private Button readyButton;
     [SerializeField] private Button exitButton;
     [SerializeField] public TMP_Text roomNameText;
+    [SerializeField] private GetLetterAndPhoto getLP;
 
     private const string AuthSuffix = " <sprite name=\"Auth\">";
     [SerializeField] private Image[] readyIcons;
@@ -23,6 +24,11 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     
     private int readyCount = 0;
     private CancellationTokenSource cts;
+
+    private void Awake()
+    {
+        getLP = GetComponent<GetLetterAndPhoto>();
+    }
     public override void Spawned()
     {
         cts = new CancellationTokenSource();
@@ -119,6 +125,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RpcGameStart()
     {
+        getLP.GetResponse();
         cts.Cancel();
         SceneManager.Instance.MoveScene("SelectPhotoScene");
     }

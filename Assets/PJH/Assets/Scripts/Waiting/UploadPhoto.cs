@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System.IO;
+using Cysharp.Threading.Tasks;
 using Fusion;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -37,16 +38,16 @@ public class UploadPhoto : MonoBehaviour
             //불러 오기
             if (!string.IsNullOrEmpty(file))
             {
-                StartCoroutine(LoadImage(file)); 
+                LoadImage(file).Forget(); 
             }
         });
     }
 
-    IEnumerator LoadImage(string path)
+    public async UniTask LoadImage(string path)
     {
-        yield return null;
+        await UniTask.Yield();
 
-        byte[] fileData = File.ReadAllBytes(path);
+        byte[] fileData = await File.ReadAllBytesAsync(path);
         string filename = Path.GetFileName(path).Split('.')[0];
         string savePath = Application.persistentDataPath + "/Image"; //안드로이드는 Application.temporaryCachePath이라고함 (팩트 체크 필요)
         Debug.Log("경로:" + savePath);
@@ -56,11 +57,11 @@ public class UploadPhoto : MonoBehaviour
             Directory.CreateDirectory(savePath);
         }
         
-        File.WriteAllBytes(savePath + filename + ".png", fileData);
-        var temp = File.ReadAllBytes(savePath + filename + ".png");
+        await File.WriteAllBytesAsync(savePath + filename + ".png", fileData);
+        var temp = File.ReadAllBytesAsync(savePath + filename + ".png");
 
         Texture2D tex = new Texture2D(2, 2);
-        tex.LoadImage(temp);
+        tex.LoadImage(await temp);
 
         img.texture = tex;
         letterImg.texture = tex;
@@ -69,9 +70,12 @@ public class UploadPhoto : MonoBehaviour
         StretchImageToFit(letterImg);
         StretchImageToFit(img);
 
-        if (photoId != 0)
+        if (photoId == 0)
         {
-            PostLetterAndPhoto.Instance.PostPhoto(img);
+            Debug.Log("인스턴스 있음:" + PostLetterAndPhoto.Instance);
+            Debug.Log("아아아아아아아앙:" + img);
+            await PostLetterAndPhoto.Instance.PostPhotoProcess(tex);
+            Debug.Log("아직 안넘어 와서 null인가?:" + PhotoResponse.postResponse.photoId);
         }
         else
         {
@@ -132,4 +136,5 @@ public class UploadPhoto : MonoBehaviour
         img.rectTransform.localScale = Vector3.one;
         img.uvRect = new Rect(0, 0, 1, 1);
     }
+    
 }

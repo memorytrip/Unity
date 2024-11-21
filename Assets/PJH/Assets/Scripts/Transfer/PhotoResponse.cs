@@ -4,7 +4,7 @@ public class PostPhotoResponse
 {
     public int photoId;
     public string photoUrl;
-    public long letterId;
+    public long? letterId;
     public string uploaderId;
     public string finderEmail;
     public bool isFound;
