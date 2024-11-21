@@ -5,28 +5,21 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class LoadLetterAndPhoto : MonoBehaviour
+public class LoadLetterAndPhoto : NetworkBehaviour
 {
     public Button[] photoButtons;
     private RawImage[] photoImages;
     private Text[] letterTexts;
 
-    void Start()
+    public override void Spawned()
     {
+        Debug.Log("왜 안돼");
         photoImages = new RawImage[photoButtons.Length];
         
         for (int i = 0; i < photoButtons.Length; i++)
         {
             RawImage rawImage = photoButtons[i].GetComponentInChildren<RawImage>();
-
-            if (rawImage == null)
-            {
-                photoImages[i] = rawImage; 
-            }
-            else
-            {
-                Debug.LogWarning($"Button {i} has no RawImage component.");
-            }
+            photoImages[i] = rawImage; 
         }
         LoadPhotosAndLetters().Forget();
     }
@@ -40,11 +33,7 @@ public class LoadLetterAndPhoto : MonoBehaviour
             // 각 이미지와 편지 처리
             for (int i = 0; i < data.Length && i < photoImages.Length; i++)
             {
-                if (data[i] == null)
-                {
-                    return;
-                }
-                else
+                if (data[i] != null)
                 {
                     await LoadSingleImage(data[i], i);
                 }

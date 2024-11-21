@@ -23,17 +23,9 @@ public class GetLetterAndPhoto : MonoBehaviour
         endPoint += roomCode;
     }
 
-    private void Start()
-    {
-        readyButton.onClick.AddListener(GetResponse);
-    }
-
     public void GetResponse()
     {
-        if (readyButton.GetComponentInChildren<TMP_Text>().text == "준비완료")
-        {
-            GetPhotosAndLetters(endPoint).Forget();
-        }
+        GetPhotosAndLetters(endPoint).Forget();
     }
 
     private async UniTask GetPhotosAndLetters(string endpoint)

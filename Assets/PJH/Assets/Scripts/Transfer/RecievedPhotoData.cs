@@ -5,7 +5,7 @@ public class PhotoLetterResponse
 {
     public long photoId;
     public string photoUrl;
-    public long letterId;
+    public long? letterId;
     public string uploaderEmail;
     public string finderEmail;
     public bool isFound;

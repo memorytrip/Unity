@@ -4053,6 +4053,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 1971088425}
+  - {fileID: 1971088427}
   - {fileID: 377839367}
 --- !u!114 &1971088427
 MonoBehaviour:
