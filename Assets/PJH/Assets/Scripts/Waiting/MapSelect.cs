@@ -8,10 +8,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Map;
-using Unity.VisualScripting;
-using UnityEngine.Networking;
-using Common.Network;
-
 
 public class MapSelectionController : MonoBehaviour
 {
@@ -26,10 +22,8 @@ public class MapSelectionController : MonoBehaviour
     private float initialPosition;
     private int currentPage = 0;
 
-    private async UniTask Start()
+    private void Start()
     {
-        List<MapInfo> mapList = await MapManager.Instance.LoadMapList(new User()); //user정보에서 맵갯수 다운받아야 함
-        totalPages = mapList.Count;
         initialPosition = scrollRect.content.anchoredPosition.x;
         UpdateArrowButtons();
         //scrollRect.content.sizeDelta = new Vector2(800 * totalPages, 700f);

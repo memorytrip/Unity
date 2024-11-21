@@ -1,6 +1,3 @@
-using System;
-using Common.Network;
-using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Common
@@ -27,6 +24,8 @@ namespace Common
 #if !UNITY_EDITOR
             Debug.unityLogger.logEnabled = false;
 #endif
+
+            Application.targetFrameRate = 30;
         }
     }
 }

@@ -15,7 +15,6 @@ namespace Common
     public class SceneManager: MonoBehaviour
     {
         public static readonly string SquareScene = "0";
-        private static readonly string EmptyScene = "EmptyScene";
         
         public static SceneManager Instance = null;
         [HideInInspector] public string curScene;
@@ -37,12 +36,12 @@ namespace Common
 
             UnityEngine.SceneManagement.SceneManager.sceneLoaded += (s, m) =>
             {
-                if (s.name == "EmptyScene")
+                if (s.name == SceneName.EmptyScene)
                     return;
                 OnSceneLoaded?.Invoke();
             };
             UnityEngine.SceneManagement.SceneManager.sceneUnloaded += (s) => OnSceneUnloaded?.Invoke();
-            curScene = "Login";
+            curScene = SceneName.Login;
         }
 
         
@@ -77,11 +76,11 @@ namespace Common
 
         private string RoutingScene(string roomName)
         {
-            // return "MultiPlayTest";
-            if (roomName == SquareScene) return "Square";
-            if (roomName.Length == 4) return "PlayReady";
-            if (roomName.Contains("player_")) return "MyRoom";
-            if (roomName == "1") return "MultiPlayTest";
+            // return SceneName.MultiPlayTest;
+            if (roomName == SquareScene) return SceneName.Square;
+            if (roomName.Length == 4) return SceneName.PlayReady;
+            if (roomName.Contains("player_")) return SceneName.MyRoom;
+            if (roomName == "1") return SceneName.MultiPlayTest;
             throw new ArgumentException("try to connect invalid room name");
         }
 #endregion
@@ -113,16 +112,16 @@ namespace Common
                 var Runner = RunnerManager.Instance.Runner;
                 if (Runner.IsSceneAuthority)
                 {
-                    yield return Runner.LoadScene(EmptyScene);
+                    yield return Runner.LoadScene(SceneName.EmptyScene);
                     yield return Runner.LoadScene(sceneName);
                 }
             }
             else
             {
-                yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(EmptyScene, LoadSceneMode.Additive);
+                yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(SceneName.EmptyScene, LoadSceneMode.Additive);
                 yield return UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(prevScene);
                 yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-                yield return UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(EmptyScene);
+                yield return UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(SceneName.EmptyScene);
             }
             curScene = sceneName;
         }

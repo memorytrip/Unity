@@ -30,7 +30,7 @@ namespace Map
         {
             List<MapInfo> mapInfos = new List<MapInfo>(4);
             mapInfos.AddRange(await LoadDefaultsMapListFromServer());
-            mapInfos.AddRange(await LoadCustomMapListFromServer());
+            mapInfos.AddRange(await LoadCustomMapListFromServer(user.nickName));
             return mapInfos;
         }
     #region LoadDefaultsMapList
@@ -81,15 +81,27 @@ namespace Map
             return mapInfos;
         }
         
-        private async UniTask<List<MapInfo>> LoadCustomMapListFromServer()
+        private async UniTask<List<MapInfo>> LoadCustomMapListFromServer(string userName)
         {
-            string data = await DataManager.Get("/api/custom-map");
-            List<MapInfo> mapInfos = MapConverter.ConvertJsonToMapList(data);
-            foreach (var mapInfo in mapInfos)
+            try
             {
-                mapInfo.type = MapInfo.MapType.Custom;
+                string data = await DataManager.Get($"/api/custom-map/all/{userName}");
+                List<MapInfo> mapInfos = MapConverter.ConvertJsonToMapList(data);
+                foreach (var mapInfo in mapInfos)
+                {
+                    mapInfo.type = MapInfo.MapType.Custom;
+                }
+
+                return mapInfos;
             }
-            return mapInfos;
+            catch (UnityWebRequestException e)
+            {
+                ErrorMessage message = JsonConvert.DeserializeObject<ErrorMessage>(e.Text);
+                if (e.ResponseCode == 500 && message.errorCode == "I001")
+                    return new List<MapInfo>();
+                throw e;
+            }
+            
         }
     #endregion
 
@@ -190,5 +202,12 @@ namespace Map
         }
         #endregion
 
+
+        class ErrorMessage
+        {
+            public string errorCode;
+            public string message;
+            public string detailMessage;
+        }
     }
 }
