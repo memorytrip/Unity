@@ -12,9 +12,15 @@ public class UploadPhoto : MonoBehaviour
 {
     public RawImage img;
     public RawImage letterImg;
+    private int photoId; //임시 : 원래는 response의 photoId
     private float photoCapacity = 5000000000000f;
     //private string File = "Application.temporaryCachePath";
 
+    private void Awake()
+    {
+        photoId = 0;
+    }
+    
     public void OnClickImageLoad()
     {
         NativeGallery.GetImageFromGallery((file) => //갤러리를 열었음
@@ -62,6 +68,17 @@ public class UploadPhoto : MonoBehaviour
         ImageSizeSetting(img, 432f, 288f);
         StretchImageToFit(letterImg);
         StretchImageToFit(img);
+
+        if (photoId != 0)
+        {
+            PostLetterAndPhoto.Instance.PostPhoto(img);
+        }
+        else
+        {
+            Debug.Log("수정 해야함");
+        }
+
+        photoId = PhotoResponse.postResponse.photoId;
     }
 
     void ImageSizeSetting(RawImage img, float x, float y)

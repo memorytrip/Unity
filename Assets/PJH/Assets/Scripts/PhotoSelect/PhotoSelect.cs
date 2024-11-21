@@ -49,7 +49,6 @@ public class PhotoSelect : NetworkBehaviour
         {
             for (int i = 0; i < maxIndex; i++)
             {
-                Debug.Log($"{i}번째 사진이 추가되었습니다.");
                 selectedPhotoArray[i].texture = PhotoList[i].texture;
             }
 

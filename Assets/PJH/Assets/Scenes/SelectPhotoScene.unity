@@ -4053,7 +4053,6 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 1971088425}
-  - {fileID: 1971088427}
   - {fileID: 377839367}
 --- !u!114 &1971088427
 MonoBehaviour:
@@ -4067,7 +4066,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da43c51d2c574940bb8d7d3f45c5bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photoButtons: []
+  photoButtons:
+  - {fileID: 1016228686}
+  - {fileID: 992292671}
+  - {fileID: 330215223}
+  - {fileID: 415725794}
+  - {fileID: 41438441}
+  - {fileID: 862364325}
+  - {fileID: 1346218178}
+  - {fileID: 1728028962}
 --- !u!1 &1982486120
 GameObject:
   m_ObjectHideFlags: 0

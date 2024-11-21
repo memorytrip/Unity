@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class LoadLetterAndPhoto : NetworkBehaviour
+public class LoadLetterAndPhoto : MonoBehaviour
 {
     public Button[] photoButtons;
     private RawImage[] photoImages;
@@ -19,7 +19,7 @@ public class LoadLetterAndPhoto : NetworkBehaviour
         {
             RawImage rawImage = photoButtons[i].GetComponentInChildren<RawImage>();
 
-            if (rawImage != null)
+            if (rawImage == null)
             {
                 photoImages[i] = rawImage; 
             }
@@ -28,12 +28,7 @@ public class LoadLetterAndPhoto : NetworkBehaviour
                 Debug.LogWarning($"Button {i} has no RawImage component.");
             }
         }
-        
-    }
-
-    public override void Spawned()
-    {
-        //LoadPhotosAndLetters().Forget();
+        LoadPhotosAndLetters().Forget();
     }
     
     private async UniTask LoadPhotosAndLetters()
@@ -45,7 +40,14 @@ public class LoadLetterAndPhoto : NetworkBehaviour
             // 각 이미지와 편지 처리
             for (int i = 0; i < data.Length && i < photoImages.Length; i++)
             {
-                await LoadSingleImage(data[i], i);
+                if (data[i] == null)
+                {
+                    return;
+                }
+                else
+                {
+                    await LoadSingleImage(data[i], i);
+                }
             }
         }
         catch (Exception e)
@@ -60,6 +62,12 @@ public class LoadLetterAndPhoto : NetworkBehaviour
         {
             // 이미지 로드
             string url = item.photoUrl;
+
+            if (url == null)
+            {
+                return;
+            }
+            
             UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
 
             await request.SendWebRequest();
@@ -72,12 +80,6 @@ public class LoadLetterAndPhoto : NetworkBehaviour
 
                 // 이미지 비율 맞추기
                 await AdjustImageAspectRatio(photoImages[index], texture);
-
-                // 편지 텍스트 표시
-                if (letterTexts[index] != null)
-                {
-                    letterTexts[index].text = item.letterId;
-                }
             }
             else
             {

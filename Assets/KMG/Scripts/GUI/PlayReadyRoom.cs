@@ -112,7 +112,6 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
 
     public void StateAuthorityChanged()
     {
-        Debug.Log($"sachanged");
         exitButton.onClick.AddListener(Exit);
         readyButton.onClick.AddListener(Ready);
     }
@@ -121,6 +120,6 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     public void RpcGameStart()
     {
         cts.Cancel();
-        SceneManager.Instance.MoveScene("FindPhoto");
+        SceneManager.Instance.MoveScene("SelectPhotoScene");
     }
 }
