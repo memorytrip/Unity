@@ -5,6 +5,7 @@ using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ using Debug = UnityEngine.Debug;
 
 public class GetLetterAndPhoto : MonoBehaviour
 {
+    public Button readyButton;
     private string endPoint = "api/photos/room/";
     private string roomCode;
 
@@ -21,9 +23,17 @@ public class GetLetterAndPhoto : MonoBehaviour
         endPoint += roomCode;
     }
 
-    public async UniTaskVoid GetResponse()
+    private void Start()
     {
-        await GetPhotosAndLetters(endPoint);
+        readyButton.onClick.AddListener(GetResponse);
+    }
+
+    public void GetResponse()
+    {
+        if (readyButton.GetComponentInChildren<TMP_Text>().text == "준비완료")
+        {
+            GetPhotosAndLetters(endPoint).Forget();
+        }
     }
 
     private async UniTask GetPhotosAndLetters(string endpoint)

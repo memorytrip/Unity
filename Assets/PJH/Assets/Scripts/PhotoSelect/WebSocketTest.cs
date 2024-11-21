@@ -11,8 +11,8 @@ using Object = UnityEngine.Object;
 public class SelectedPhotoRequest
 {
     public string roomCode;
-    public string userId;
-    public List<string> photoIds;
+    public string text;
+    public List<string> photoUrl;
 }
 
 public class VideoData
@@ -27,7 +27,7 @@ public class VideoData
 public class WebSocketTest : MonoBehaviour
 {
     private WebSocket ws;
-    public string uri = "";
+    public string uri = "http://memorytrip-env.eba-73mrisxy.ap-northeast-2.elasticbeanstalk.com/api/videos/request-video";
     public List<string> photoIdList = new List<string>();
     public LoadLetterAndPhoto loadLP;
     private Texture2D videoTexture;
@@ -57,8 +57,8 @@ public class WebSocketTest : MonoBehaviour
         SelectedPhotoRequest req = new SelectedPhotoRequest
         {
             roomCode = RunnerManager.Instance.Runner.SessionInfo.Name,
-            userId = SessionManager.Instance.currentUser.email,
-            photoIds = photoIdList
+            //photoUrl = SessionManager.Instance.currentUser.email,
+            //photoIds = photoIdList
         };
 
         string jsonReq = JsonConvert.ToString(req);
