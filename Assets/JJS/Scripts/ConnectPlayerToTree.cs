@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class ConnectPlayerToTree : NetworkBehaviour
 {
     private SkinnedMeshRenderer[] _characterMeshes;
+    private const string Yggdrasil = "Yggdrasil";
     
     public override void Spawned()
     {
@@ -13,7 +14,7 @@ public class ConnectPlayerToTree : NetworkBehaviour
     
     private void ConnectCharacterMeshToTree()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("SpecialSquare") || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Square"))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(SceneName.Square))
         {
             _characterMeshes = GetComponentsInChildren<SkinnedMeshRenderer>();
         }
@@ -21,7 +22,7 @@ public class ConnectPlayerToTree : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Yggdrasil"))
+        if (!other.CompareTag(Yggdrasil))
         {
             return;
         }
@@ -30,7 +31,7 @@ public class ConnectPlayerToTree : NetworkBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("Yggdrasil"))
+        if (!other.CompareTag(Yggdrasil))
         {
             return;
         }

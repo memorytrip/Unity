@@ -63,25 +63,24 @@ namespace Common.Network
             await UniTask.WaitUntil(() => SceneManager.Instance.curScene != null);
             switch (SceneManager.Instance.curScene)
             {
-                case "SpecialSquare":
-                case "Square":
-                    currenctCharacter = await SpawnProcess("Player", new Vector3(0f, 2f, -22f), Quaternion.identity);
+                case SceneName.Square:
+                    currenctCharacter = await SpawnProcess(PrefabName.Player, new Vector3(0f, 2f, -22f), Quaternion.identity);
                     break;
-                case "MyRoom":
-                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
+                case SceneName.MyRoom:
+                    currenctCharacter = await SpawnProcess(PrefabName.Player, new Vector3(0, 5, 0), Quaternion.identity);
                     currenctCharacter.transform.Find("Scale").transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     break;
-                case "PlayReady":
-                    currenctCharacter = await SpawnProcess("PlayReadyState");
+                case SceneName.PlayReady:
+                    currenctCharacter = await SpawnProcess(PrefabName.PlayReadyState);
                     SceneManager.Instance.OnSceneLoaded += SpawnAvatar;
                     break;
-                case "FindPhoto":
+                case SceneName.FindPhoto:
                     SceneManager.Instance.OnSceneLoaded -= SpawnAvatar;
                     LoadFindPhotoMap loadmap = FindAnyObjectByType<LoadFindPhotoMap>();
                     await UniTask.WaitWhile(() => loadmap.isLoading);
                     
                     await UniTask.Delay(TimeSpan.FromSeconds(5.0f));
-                    currenctCharacter = await SpawnProcess("Player", new Vector3(0, 5, 0), Quaternion.identity);
+                    currenctCharacter = await SpawnProcess(PrefabName.Player, new Vector3(0, 5, 0), Quaternion.identity);
                     currenctCharacter.transform.Find("Scale").transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     break;
             }

@@ -20,7 +20,7 @@ public class AvatarChange : NetworkBehaviour
 
     public override void Spawned()
     {
-        if (SceneManager.GetActiveScene().name == "SpecialSquare" || SceneManager.GetActiveScene().name == "Square")
+        if (SceneManager.GetActiveScene().name == SceneName.Square)
         {
             _avatarManager = FindAnyObjectByType<AvatarManager>();
         }

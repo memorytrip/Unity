@@ -35,11 +35,10 @@ public class BGM : MonoBehaviour
         _loadedScene = scene;
         switch (scene.name)
         {
-            case "Login":
+            case SceneName.Login:
                 PlayBGM(EBgmList.Intro);
                 break;
-            case "Square":
-            case "SpecialSquare":
+            case SceneName.Square:
                 PlayBGM(EBgmList.Lobby);
                 break;
             default:

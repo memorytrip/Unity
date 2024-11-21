@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Threading.Tasks;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -52,7 +49,7 @@ public class UIManager : MonoBehaviour
     {
         switch (scene.name)
         {
-            case "Login":
+            case SceneName.Login:
                 ShowUI(mainMenu);
                 HideUI(sideMenu);
                 HideUI(chat);
@@ -60,12 +57,11 @@ public class UIManager : MonoBehaviour
                 HideUI(newChat);
                 HideUI(credit);
                 break;
-            case "SpecialSquare":
-            case "Square":
+            case SceneName.Square:
                 HideUI(newChat);
                 TemporarilyHideUI();
                 break;
-            case "MyRoom":
+            case SceneName.MyRoom:
                 ShowUI(mainMenu);
                 ShowUI(sideMenu);
                 screenshotButton.interactable = false;
@@ -74,14 +70,14 @@ public class UIManager : MonoBehaviour
                 HideUI(newChat);
                 HideUI(credit);
                 break;
-            case "FindPhoto":
+            case SceneName.FindPhoto:
                 ShowUI(mainMenu);
                 ShowUI(sideMenu);
                 ShowUI(chat);
                 ShowUI(joystick);
                 ShowUI(credit);
                 break;
-            case "MapEdit":
+            case SceneName.MapEdit:
                 ShowUI(mainMenu);
                 HideUI(sideMenu);
                 HideUI(chat);
@@ -89,7 +85,7 @@ public class UIManager : MonoBehaviour
                 HideUI(newChat);
                 HideUI(credit);
                 break;
-            case "PlayReady":
+            case SceneName.PlayReady:
                 HideUI(mainMenu);
                 HideUI(sideMenu);
                 HideUI(chat);
@@ -97,7 +93,7 @@ public class UIManager : MonoBehaviour
                 HideUI(newChat);
                 HideUI(credit);
                 break;
-            case "SelectPhotoScene":
+            case SceneName.SelectPhotoScene:
                 HideUI(mainMenu);
                 HideUI(sideMenu);
                 HideUI(chat);
@@ -105,7 +101,7 @@ public class UIManager : MonoBehaviour
                 ShowUI(newChat);
                 HideUI(credit);
                 break;  
-            case "VideoLoadTest":
+            case SceneName.VideoLoadTest:
                 HideUI(mainMenu);
                 HideUI(sideMenu);
                 HideUI(chat);
@@ -113,7 +109,7 @@ public class UIManager : MonoBehaviour
                 ShowUI(newChat);
                 HideUI(credit);
                 break;
-            case "LetterScene":
+            case SceneName.LetterScene:
                 HideUI(mainMenu);
                 HideUI(sideMenu);
                 HideUI(chat);
@@ -144,9 +140,12 @@ public class UIManager : MonoBehaviour
         canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
     }
 
-    public void TemporarilyHideUI()
+    private void TemporarilyHideUI()
     {
-        StartCoroutine(ProcessTemporaryToggle());
+        if (SceneTracker.PreviousScene == SceneName.Login)
+        {
+            StartCoroutine(ProcessTemporaryToggle());
+        }
     }
 
     private IEnumerator ProcessTemporaryToggle()
