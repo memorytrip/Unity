@@ -25,6 +25,11 @@ namespace GUI
 
         [Header("Fade Controller")] 
         [SerializeField] private FadeController fader;
+        
+        [Header("Error Popup")]
+        [SerializeField] private CanvasGroup errorPopup;
+        [SerializeField] private TMP_Text errorText;
+        [SerializeField] private Button cancelErrorButton;
 
         private static readonly char[] RoomNameCharacter = new[]
         {
@@ -40,6 +45,7 @@ namespace GUI
             createRoomButton.onClick.AddListener(CreateRoom);
             inputRoomButton.onClick.AddListener(SwitchPanel);
             joinRoomButton.onClick.AddListener(JoinRoom);
+            cancelErrorButton.onClick.AddListener(()=>Utility.DisablePanel(errorPopup));
         }
 
         private void InitPanel()
@@ -75,7 +81,12 @@ namespace GUI
         {
             string roomName = roomNameField.text;
             if (!IsRoomNameValid(roomName))
-                throw new ArgumentException("Invalid RoomName");
+            {
+                Utility.EnablePanel(errorPopup);
+                errorText.text = "허용되지 않은 방 코드입니다.";
+                throw new ArgumentException("Invalid room name");
+            }
+                
             SceneManager.Instance.MoveRoom(roomName).Forget();
         }
 
