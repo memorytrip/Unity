@@ -8,16 +8,16 @@ using UnityEngine.UI;
 public class LoadLetterAndPhoto : NetworkBehaviour
 {
     public Button[] photoButtons;
+    public GameObject[] lockImage;
     private RawImage[] photoImages;
     private Text[] letterTexts;
-
+    
     public override void Spawned()
     {
-        Debug.Log("왜 안돼");
         photoImages = new RawImage[photoButtons.Length];
-        
         for (int i = 0; i < photoButtons.Length; i++)
         {
+            lockImage[i].SetActive(true);
             RawImage rawImage = photoButtons[i].GetComponentInChildren<RawImage>();
             photoImages[i] = rawImage; 
         }
@@ -26,6 +26,7 @@ public class LoadLetterAndPhoto : NetworkBehaviour
     
     private async UniTask LoadPhotosAndLetters()
     {
+        
         try
         {
             var data = RecievedPhotoData.PhotoResponses;
@@ -33,8 +34,12 @@ public class LoadLetterAndPhoto : NetworkBehaviour
             // 각 이미지와 편지 처리
             for (int i = 0; i < data.Length && i < photoImages.Length; i++)
             {
+                Debug.Log("데이터:" + data[i]);
                 if (data[i] != null)
                 {
+                    photoButtons[i].GetComponent<CanvasGroup>().interactable = true;
+                    photoButtons[i].GetComponent<CanvasGroup>().blocksRaycasts = true;
+                    lockImage[i].SetActive(false);
                     await LoadSingleImage(data[i], i);
                 }
             }
@@ -68,7 +73,7 @@ public class LoadLetterAndPhoto : NetworkBehaviour
                 photoImages[index].texture = texture;
 
                 // 이미지 비율 맞추기
-                await AdjustImageAspectRatio(photoImages[index], texture);
+                //await AdjustImageAspectRatio(photoImages[index], texture);
             }
             else
             {

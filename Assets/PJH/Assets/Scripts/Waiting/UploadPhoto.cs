@@ -13,14 +13,9 @@ public class UploadPhoto : MonoBehaviour
 {
     public RawImage img;
     public RawImage letterImg;
-    private int photoId; //임시 : 원래는 response의 photoId
+    public int photoId; //임시 : 원래는 response의 photoId
     private float photoCapacity = 5000000000000f;
     //private string File = "Application.temporaryCachePath";
-
-    private void Awake()
-    {
-        photoId = 0;
-    }
     
     public void OnClickImageLoad()
     {
@@ -72,14 +67,11 @@ public class UploadPhoto : MonoBehaviour
 
         if (photoId == 0)
         {
-            Debug.Log("인스턴스 있음:" + PostLetterAndPhoto.Instance);
-            Debug.Log("아아아아아아아앙:" + img);
             await PostLetterAndPhoto.Instance.PostPhotoProcess(tex);
-            Debug.Log("아직 안넘어 와서 null인가?:" + PhotoResponse.postResponse.photoId);
         }
         else
         {
-            Debug.Log("수정 해야함");
+            await ModifyLetterAndPhoto.Instance.ModifyPhotoProcess(tex, photoId);
         }
 
         photoId = PhotoResponse.postResponse.photoId;

@@ -3329,6 +3329,7 @@ GameObject:
   - component: {fileID: 1971088420}
   - component: {fileID: 1971088425}
   - component: {fileID: 1971088424}
+  - component: {fileID: 1971088426}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3440,6 +3441,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 1971088425}
+  - {fileID: 1971088426}
 --- !u!114 &1971088425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3453,6 +3455,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextButton: {fileID: 2051227744}
+--- !u!114 &1971088426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971088419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 654fc82e72dc9734ab6264efcf593c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  letterPhotoImages:
+  - {fileID: 1584551482}
+  - {fileID: 743408467}
+  - {fileID: 1813711816}
+  - {fileID: 1669624822}
+  letters:
+  - {fileID: 1858901640}
+  - {fileID: 659997216}
+  - {fileID: 2025327963}
+  - {fileID: 2034735279}
 --- !u!1 &2025327961
 GameObject:
   m_ObjectHideFlags: 0
