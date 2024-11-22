@@ -2,6 +2,7 @@ using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
 using Fusion;
+using Myroom;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,9 +22,10 @@ namespace GUI
         {
             User user = SessionManager.Instance.currentSession?.user;
             if (user != null)
+            {
+                LoadMyroom.mapOwnerName = user.nickName;
                 SceneManager.Instance.MoveRoom($"player_{user.nickName}").Forget();
-            // else
-            //     SceneManager.Instance.MoveRoom($"player_").Forget();
+            }
         }
 
         private void OnTriggerEnter(Collider other)

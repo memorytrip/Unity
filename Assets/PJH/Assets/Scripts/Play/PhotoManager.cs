@@ -9,6 +9,7 @@ using Fusion;
 using Fusion.Sockets;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using SceneManager = Common.SceneManager;
 
@@ -25,11 +26,13 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     private readonly WaitForSeconds _waitForAnimation = new WaitForSeconds(3f);
     [SerializeField] private LoadFindPhotoMap loadFindPhotoMap;
     [SerializeField] private GameObject photoGround;
+    [SerializeField] private Button skipButton;
 
     void Start()
     {
         EventManager.Instance.AddListener(EventType.eRaycasting, this);
         photoPositions = new Dictionary<int, Vector3>();
+        skipButton.onClick.AddListener(() => StartCoroutine(FindLastPhoto()) );
     }
     
     public override void Spawned()
@@ -37,6 +40,8 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
         RpcTotalPhoto();
         Debug.Log(numberOfPhoto);
         HidePhoto(photoPositions, numberOfPhoto).Forget();
+        skipButton.gameObject.SetActive(true);
+        skipButton.interactable = true;
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]

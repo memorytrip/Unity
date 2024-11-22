@@ -1,4 +1,5 @@
 using Common;
+using Cysharp.Threading.Tasks;
 using Fusion;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,12 +18,18 @@ public class SceneChangeButton : NetworkBehaviour
     {
         {
             nextButton.gameObject.SetActive(true);
-            nextButton.onClick.AddListener(()=>RpcSceneChange(SceneName.Square));
+            // nextButton.onClick.AddListener(()=>RpcSceneChange(SceneName.Square));
+            nextButton.onClick.AddListener(ReturnToSquare);
         }
     }
-    
-    void RpcSceneChange(string scenename)
+
+    void ReturnToSquare()
     {
-        SceneManager.Instance.MoveScene(scenename);
+        SceneManager.Instance.MoveRoom(SceneManager.SquareScene).Forget();
     }
+    
+    // void RpcSceneChange(string scenename)
+    // {
+    //     SceneManager.Instance.MoveScene(scenename);
+    // }
 }

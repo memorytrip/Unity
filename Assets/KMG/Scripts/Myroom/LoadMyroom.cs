@@ -8,6 +8,7 @@ namespace Myroom
 {
     public class LoadMyroom: MonoBehaviour
     {
+        public static string mapOwnerName = null;
         public static MapInfo.MapType mapType = MapInfo.MapType.Default;
         public static long mapId = 1;
         private async UniTaskVoid Start()

@@ -159,32 +159,7 @@ namespace Map
     
         private async UniTask<Sprite> LoadMapThumbnailFromServer(string uri)
         {
-            UnityWebRequest request = new UnityWebRequest(uri, "GET");
-            request.downloadHandler = new DownloadHandlerTexture();
-            
-            Sprite sprite;
-            
-            try
-            {
-                await request.SendWebRequest();
-            }
-            catch (UnityWebRequestException e)
-            {
-                return null;
-            }
-            finally
-            {
-                if (request.result == UnityWebRequest.Result.Success)
-                {
-                    Texture2D texture = DownloadHandlerTexture.GetContent(request);
-                    sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                }
-                else
-                {
-                    sprite = null;
-                }
-            }
-            return sprite;
+            return await DataManager.GetSprite(uri);
         }
     
         private async UniTask<Sprite> LoadMapThumbnailFromLocal(string path)

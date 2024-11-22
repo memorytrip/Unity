@@ -35,6 +35,37 @@ namespace Common
             }
         }
 
+        public static async UniTask<Sprite> GetSprite(string uri)
+        {
+            UnityWebRequest request = new UnityWebRequest(uri, "GET");
+            request.downloadHandler = new DownloadHandlerTexture();
+            
+            Sprite sprite;
+            
+            try
+            {
+                await request.SendWebRequest();
+            }
+            catch (UnityWebRequestException e)
+            {
+                sprite = null;
+            }
+            finally
+            {
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    Texture2D texture = DownloadHandlerTexture.GetContent(request);
+                    sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                }
+                else
+                {
+                    Debug.LogAssertion(request.error);
+                    sprite = null;
+                }
+            }
+            return sprite;
+        }
+
         public static async UniTask<string> Post(string api, string jsonData, int timeout = 5)
         {
             string url = baseURL + CheckSlash(api);
