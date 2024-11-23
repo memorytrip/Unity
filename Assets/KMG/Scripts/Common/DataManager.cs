@@ -182,6 +182,31 @@ namespace Common
             }
         }
 
+        public static async UniTask<string> Put(string api, string jsonData, int timeout = 5)
+        {
+            string url = baseURL + CheckSlash(api);
+            Debug.Log($"Post to {url}");
+            UnityWebRequest request = new UnityWebRequest(url, "PUT");
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            if (token != null)
+                request.SetRequestHeader("Authorization", token);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.timeout = timeout;
+            request.SetRequestHeader("Content-Type", "application/json");
+            
+            await request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                return request.downloadHandler.text;
+            }
+            else
+            {
+                throw new Exception(request.error);
+            }
+        }
+        
         public static async UniTask<byte[]> Read(string path)
         {
             return await System.IO.File.ReadAllBytesAsync(path);

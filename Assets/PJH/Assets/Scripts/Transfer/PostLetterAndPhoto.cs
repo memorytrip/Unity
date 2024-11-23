@@ -15,18 +15,22 @@ class LetterData
     public string content;
 }
 
+class LetterResponseData
+{
+    public string content;
+    public int? letterId;
+}
+
 public class PostLetterAndPhoto : MonoBehaviour
 {
     public static PostLetterAndPhoto Instance;
 
     public TMP_InputField letter;
-    public PlayReadyRoom playReadyRoom;
-    public GetLetterAndPhoto getLetterAndPhoto;
-    public Button startButton;
-    public RawImage photo1;
-    public RawImage photo2;
+    public GameObject photo1;
     private string letterapi = "api/letters";
     private string photoapi = "/api/photos/upload";
+    private UploadPhoto up;
+    private int? letterId;
     
     
     private void Awake()
@@ -34,25 +38,32 @@ public class PostLetterAndPhoto : MonoBehaviour
         Instance = this;
         RecievedPhotoData.Clear();
         PhotoResponse.PostResponseClear();
+        up = photo1.GetComponent<UploadPhoto>();
     }
 
     public void CheckAndExecute()
     {
-        PostLetterProcess(letter.text).Forget();
+        if (letterId == null)
+        {
+            PostLetterProcess(letter.text).Forget();
+        }
+        else
+        {
+            PutLetterProcess(letter.text).Forget();
+        }
     }
-    
     /*public void Start()
     {
         startButton.onClick.AddListener(PostButtonClicked);
     }
-    
+
     private async void PostButtonClicked()
     {
         if (startButton.gameObject.GetComponentInChildren<TMP_Text>().text == "시작하기")
         {
             await PostPhoto(photo1);
             await PostPhoto(photo2);
-            //await PostLetter(letter.text); 
+            //await PostLetter(letter.text);
         }
         else
         {
@@ -96,7 +107,7 @@ public class PostLetterAndPhoto : MonoBehaviour
 
     private async UniTask PostLetterProcess(string letterInfo)
     {
-        letterapi += "?photoId="+PhotoResponse.postResponse.photoId;
+        var realapi = letterapi +"?photoId="+ up.photoId;
         try
         {
             var data = new LetterData
@@ -107,7 +118,37 @@ public class PostLetterAndPhoto : MonoBehaviour
             var jsonData = JsonConvert.SerializeObject(data);
             
             // DataManager를 통해 POST 요청 보내기
-            await DataManager.Post(letterapi, jsonData);
+            string jsonResponse = await DataManager.Post(realapi, jsonData);
+            Debug.Log("편지 Post성공");
+
+            var response= JsonConvert.DeserializeObject<LetterResponseData>(jsonResponse);
+            if (response.letterId != null)
+            {
+                letterId = response.letterId;
+            }
+            
+        }
+        
+        catch (Exception e)
+        {
+            Debug.LogError("Error sending letter info: " + e.Message);
+        }
+    }
+    
+    private async UniTask PutLetterProcess(string letterInfo)
+    {
+        var realapi = letterapi + "/" + letterId;
+        try
+        {
+            var data = new LetterData
+            {
+                content = letterInfo
+            };
+            // multipart/form-data 형식으로 데이터 준비
+            var jsonData = JsonConvert.SerializeObject(data);
+            
+            // DataManager를 통해 POST 요청 보내기
+            await DataManager.Put(realapi, jsonData);
             Debug.Log("편지 Post성공");
         }
         
@@ -116,4 +157,5 @@ public class PostLetterAndPhoto : MonoBehaviour
             Debug.LogError("Error sending letter info: " + e.Message);
         }
     }
+    
 }

@@ -1340,11 +1340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   letter: {fileID: 604583924}
-  playReadyRoom: {fileID: 342640183}
-  getLetterAndPhoto: {fileID: 342640185}
-  startButton: {fileID: 122946297}
-  photo1: {fileID: 54655599}
-  photo2: {fileID: 1563690089}
+  photo1: {fileID: 438615991}
 --- !u!114 &342640187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1357,7 +1353,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52366748e50b16f44a99646c632af02e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  up: {fileID: 438615992}
 --- !u!1 &438615991
 GameObject:
   m_ObjectHideFlags: 0
