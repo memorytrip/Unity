@@ -1421,6 +1421,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1089803804}
+        m_TargetAssemblyTypeName: PostVideoData, Assembly-CSharp
+        m_MethodName: PostVideo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &657136693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2759,6 +2771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1089803802}
   - component: {fileID: 1089803803}
+  - component: {fileID: 1089803804}
   m_Layer: 0
   m_Name: WebSocket
   m_TagString: Untagged
@@ -2793,6 +2806,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cb538f5c69c09b428f3de2f2402c258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1089803804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089803801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b38d47cbd0d02442b0e32e69d65264b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emotionText: {fileID: 1020152442}
+  loadLP: {fileID: 1971088427}
 --- !u!1 &1170078609
 GameObject:
   m_ObjectHideFlags: 0
@@ -4629,6 +4656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da43c51d2c574940bb8d7d3f45c5bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedPhotoUrl: []
   photoButtons:
   - {fileID: 1016228686}
   - {fileID: 992292671}

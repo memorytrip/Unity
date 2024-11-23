@@ -97,7 +97,7 @@ public class PostLetterAndPhoto : MonoBehaviour
             PhotoResponse.SetPostResponse(response[0]);
             Debug.Log("사진 Post성공");
 
-        }
+        }   
         
         catch (Exception e)
         {

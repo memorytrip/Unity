@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Fusion;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine.UI;
 
 public class LoadLetterAndPhoto : NetworkBehaviour
 {
+    public List<string> selectedPhotoUrl;
     public Button[] photoButtons;
     public GameObject[] lockImage;
     private RawImage[] photoImages;
@@ -41,6 +43,7 @@ public class LoadLetterAndPhoto : NetworkBehaviour
                     photoButtons[i].GetComponent<CanvasGroup>().blocksRaycasts = true;
                     lockImage[i].SetActive(false);
                     await LoadSingleImage(data[i], i);
+                    photoButtons[i].onClick.AddListener(() => SetPhotoUrlToButton(data[i].photoUrl));
                 }
             }
         }
@@ -50,6 +53,18 @@ public class LoadLetterAndPhoto : NetworkBehaviour
         }
     }
 
+    private void SetPhotoUrlToButton(string photoUrl)
+    {
+        if (!selectedPhotoUrl.Contains(photoUrl))
+        {
+            selectedPhotoUrl.Add(photoUrl);
+        }
+        else
+        {
+            selectedPhotoUrl.Remove(photoUrl);
+        }
+    }
+    
     private async UniTask LoadSingleImage(PhotoLetterResponse item, int index)
     {
         try
