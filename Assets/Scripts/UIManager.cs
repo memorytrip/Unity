@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;
-    private readonly WaitForSeconds _wait = new WaitForSeconds(7f);
+    private readonly WaitForSeconds _wait = new WaitForSeconds(5f);
 
     public static UIManager Instance
     {

@@ -29,11 +29,10 @@ public class LetterInPhoto : NetworkBehaviour
         {
             var data = RecievedPhotoData.PhotoResponses;
             Debug.Log("사진에 대해 받은 사진 GET한거:" + data);
-
+            int j = 0;
             // 각 이미지와 편지 처리
             for (int i = 0; i < data.Length; i++)
             {
-                int j = 0;
                 if (data[i] != null && data[i].letterId != null)
                 {
                     var realapi = endPoint +"/"+ data[i].letterId + "/details";
