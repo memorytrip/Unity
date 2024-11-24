@@ -65,4 +65,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currenctCharacter: {fileID: 0}
   _playerName: 
+  _playerEmail: 
   _hasSceneAuthority: 0
