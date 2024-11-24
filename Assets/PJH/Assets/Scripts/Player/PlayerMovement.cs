@@ -48,6 +48,8 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Animator animator;
 
     private bool isRestricted = false;
+
+    private CustomFmodPlayerSfxManager _customFmodPlayerSfxManager;
     
     private void Awake()
     {

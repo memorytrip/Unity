@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour
@@ -86,5 +87,47 @@ public class EventManager : MonoBehaviour
     {
         LoadCompleteMap?.Invoke();
         Debug.Log("Map has finished loading");
+    }
+
+    public event Action<int> FindPhoto;
+
+    public void OnPhotoFound(int count)
+    {
+        FindPhoto?.Invoke(count);
+        Debug.Log("Photo found");
+    }
+
+    public event Action TriggerYggdrasil;
+
+    public void OnYggdrasilTriggered()
+    {
+        TriggerYggdrasil?.Invoke();
+    }
+
+    public event Action ClosePopup;
+
+    public void OnPopupClosed()
+    {
+        ClosePopup?.Invoke();
+    }
+    
+    public event Action OpenPopup;
+    public void OnPopupOpened()
+    {
+        OpenPopup?.Invoke();
+    }
+
+    public event Action StartWalking;
+
+    public void OnStartedWalking()
+    {
+        StartWalking?.Invoke();
+    }
+    
+    public event Action StopWalking;
+
+    public void OnStoppedWalking()
+    {
+        StopWalking?.Invoke();
     }
 }

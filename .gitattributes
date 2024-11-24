@@ -55,6 +55,10 @@
 # Note: Unity navmesh assets must have "-NavMesh" suffix.
 *-[Nn]av[Mm]esh.asset -unityyaml lfs
 
+# FMOD
+*.bundle text eol=lf
+*.plist text eol=lf
+
 # Image
 *.jpg lfs
 *.jpeg lfs

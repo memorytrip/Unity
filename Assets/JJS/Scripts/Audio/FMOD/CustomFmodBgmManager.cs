@@ -30,6 +30,10 @@ public class CustomFmodBgmManager : StudioEventEmitter
         }
 
         SceneManager.sceneLoaded += ChangeBgm;
+    }
+
+    private new void Start()
+    {
         EventManager.Instance.LoadCompleteMap += ProcessCountdown;
     }
 
@@ -38,22 +42,33 @@ public class CustomFmodBgmManager : StudioEventEmitter
         switch (scene.name)
         {
             case SceneName.EmptyScene:
-                _eventInstance.release();
                 _eventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+                _eventInstance.release();
+                Debug.Log("1");
                 return;
             // TODO: 보완 필요
             case SceneName.Login:
                 _eventInstance = RuntimeManager.CreateInstance(loginEvent);
+                Debug.Log("2");
                 break;
             case SceneName.Square:
+                if (SceneTracker.PreviousScene == SceneName.Login)
+                {
+                    _eventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+                    _eventInstance.release();
+                    Debug.Log("3");
+                }
                 _eventInstance = RuntimeManager.CreateInstance(mainEvent);
+                Debug.Log("4");
                 break;
             case SceneName.MyRoom:
             case SceneName.PlayReady:
                 _eventInstance = RuntimeManager.CreateInstance(myRoomEvent);
+                Debug.Log("5");
                 break;
             case SceneName.FindPhoto:
                 InitializePlay();
+                Debug.Log("6");
                 return;
         }
 

@@ -126,6 +126,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     public void RpcUpdateFindedPhoto()
     {
         findedPhoto++;
+        EventManager.Instance.OnPhotoFound(findedPhoto);
         findedPhotoCount.text = findedPhoto + " / " + numberOfPhoto;
     }
     

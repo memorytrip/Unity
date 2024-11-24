@@ -1159,6 +1159,13 @@ MonoBehaviour:
   readyIconSprites:
   - {fileID: 21300000, guid: 6c6075215e21ab040882a40a9c485778, type: 3}
   - {fileID: 21300000, guid: 9f4112df82caaaa42abc2382b919cb6c, type: 3}
+  playReadyConfirmEvent:
+    Guid:
+      Data1: 1609368329
+      Data2: 1083611084
+      Data3: 789567637
+      Data4: 1313843917
+    Path: event:/UI_ReadyConfirm
 --- !u!4 &342640184
 Transform:
   m_ObjectHideFlags: 0

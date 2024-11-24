@@ -6,13 +6,8 @@ using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class CustomFmodAmbienceManager : StudioEventEmitter
 {
-    private EventInstance _eventInstance;
-    [SerializeField] private EventReference loginEvent;
+    private EventInstance _ambienceEvent;
     [SerializeField] private EventReference mainEvent;
-    [SerializeField] private EventReference myRoomEvent;
-    [SerializeField] private EventReference playReadyEvent;
-    [SerializeField] private EventReference playEvent;
-    [SerializeField] private EventReference yggdrasilEvent;
     private static CustomFmodAmbienceManager _instance;
 
     private void Awake()
@@ -27,32 +22,40 @@ public class CustomFmodAmbienceManager : StudioEventEmitter
             DontDestroyOnLoad(this);
         }
 
-        SceneManager.sceneLoaded += ChangeBgm;
+        SceneManager.sceneLoaded += SwitchAmbience;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
-    private void ChangeBgm(Scene scene, LoadSceneMode mode)
+    private void OnSceneUnloaded(Scene scene)
+    {
+        if (scene.name == SceneName.EmptyScene)
+        {
+            return;
+        }
+        _ambienceEvent.stop(STOP_MODE.ALLOWFADEOUT);
+        _ambienceEvent.release();
+        Debug.Log("WHAT");
+    }
+
+    private void SwitchAmbience(Scene scene, LoadSceneMode mode)
     {
         switch (scene.name)
         {
             case SceneName.EmptyScene:
-                _eventInstance.release();
-                _eventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+                RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.HasPaused, 1);
+                _ambienceEvent = RuntimeManager.CreateInstance(mainEvent);
+                _ambienceEvent.start();
+                Debug.Log("Helloooo 2");
                 return;
-            // TODO: 보완 필요
-            case SceneName.Login:
-                _eventInstance = RuntimeManager.CreateInstance(loginEvent);
-                break;
             case SceneName.Square:
-                _eventInstance = RuntimeManager.CreateInstance(mainEvent);
+                RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.HasPaused, 0);
+                Debug.Log("Helloooo 3");
                 break;
-            case SceneName.MyRoom:
-            case SceneName.PlayReady:
-                _eventInstance = RuntimeManager.CreateInstance(myRoomEvent);
+            default:
+                RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.HasPaused, 0);
+                _ambienceEvent.stop(STOP_MODE.ALLOWFADEOUT);
+                _ambienceEvent.release();
                 break;
-            case SceneName.FindPhoto:
-                _eventInstance = RuntimeManager.CreateInstance(playEvent);
-                return;
         }
-        _eventInstance.start();
     }
 }
