@@ -1,10 +1,13 @@
 using UnityEngine;
 using WebSocketSharp;
 using System;
+using System.IO;
 using Common.Network;
+using UnityEngine.Video;
 
 public class WebSocketManager : MonoBehaviour
 {
+    public VideoPlayer videoPlayer;
     private static WebSocketManager _instance;
     public static WebSocketManager Instance => _instance;
 
@@ -59,8 +62,16 @@ public class WebSocketManager : MonoBehaviour
         //서버에서 메시지를 받았을 때 호출
         _webSocket.OnMessage += (sender, e) =>
         {
-            Debug.LogWarning($"Message received: {e.Data}");
-            HandleMessage(e.Data); // 메시지 처리
+            if (e.IsBinary) // 바이너리 데이터 확인
+            {
+                byte[] videoData = e.RawData; // 영상 데이터
+                Debug.Log($"Received video data of length: {videoData.Length}");
+                SaveAndPlayVideo(videoData);
+            }
+            else
+            {
+                Debug.Log($"Received text data: {e.Data}");
+            }
         };
 
         //오류가 발생하면 호출
@@ -83,7 +94,7 @@ public class WebSocketManager : MonoBehaviour
         _webSocket?.Close();
     }
 
-    //내가 서버로 메시지를 보냄 이거는 포스트가 아닌가? 뭐지? 
+    /*//내가 서버로 메시지를 보냄 이거는 포스트가 아닌가? 뭐지? 
     public void SendMessage(string message)
     {
         if (IsConnected)
@@ -94,8 +105,29 @@ public class WebSocketManager : MonoBehaviour
         {
             Debug.LogError("WebSocket is not connected.");
         }
+    }*/
+    
+    private void SaveAndPlayVideo(byte[] videoData)
+    {
+        // 1. 임시 파일 경로 지정
+        string filePath = Path.Combine(Application.persistentDataPath, "temp_video.mp4");
+
+        // 2. 영상 데이터를 파일로 저장
+        File.WriteAllBytes(filePath, videoData);
+        Debug.Log($"Video saved at: {filePath}");
+
+        // 3. VideoPlayer에 파일 경로 연결
+        PlayVideo(filePath);
     }
 
+    private void PlayVideo(string videoPath)
+    {
+        // VideoPlayer 설정
+        videoPlayer.source = VideoSource.Url;
+        videoPlayer.url = videoPath;
+        videoPlayer.Prepare();
+    }
+    
     //받은 메시지를 처리
     private void HandleMessage(string data)
     {
