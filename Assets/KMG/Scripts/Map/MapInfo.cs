@@ -33,4 +33,15 @@ namespace Map
         public string thumbnailUrl;
         public MapData data;
     }
+    
+    public struct MapId
+    {
+        public MapId(MapInfo.MapType mapType, long mapId)
+        {
+            this.mapId = mapId;
+            this.mapType = mapType;
+        }
+        public MapInfo.MapType mapType;
+        public long mapId;
+    }
 }

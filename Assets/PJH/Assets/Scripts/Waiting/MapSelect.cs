@@ -58,9 +58,9 @@ public class MapSelectionController : MonoBehaviour
             image.sprite = EmptySprite; 
     }
 
-    public long GetSelectedMapId()
+    public MapId GetSelectedMapId()
     {
-        return mapList[currentPage].id;
+        return new MapId(mapList[currentPage].type, mapList[currentPage].id);
     }
 
     void NextPage()
@@ -96,6 +96,6 @@ public class MapSelectionController : MonoBehaviour
     {
         leftArrowButton.interactable = currentPage > 0;
         rightArrowButton.interactable = currentPage < totalPages - 1;
-        Debug.Log($"MapSelect.UpdateArrowButtons selectedMapId: GetSelectedMapId()");
+        Debug.Log($"MapSelect.UpdateArrowButtons selectedMapId: {GetSelectedMapId().mapId}");
     }
 }   
