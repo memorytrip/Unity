@@ -2,6 +2,7 @@ using System.Collections;
 using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
+using Myroom;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +26,12 @@ namespace GUI
         [SerializeField] private TMP_InputField inputVisitRoom;
         [SerializeField] private Button enterVisitRoom;
 
+        [Header("Album")] 
+        [SerializeField] private InMyRoomPhotoList album;
+        [SerializeField] private CanvasGroup albumPanel;
+        [SerializeField] private Button openAlbumPanel;
+        [SerializeField] private Button closeAlbumPanel;
+
         private void Start()
         {
             returnToSquareButton.onClick.AddListener(ReturnToSquare);
@@ -34,6 +41,9 @@ namespace GUI
             openVisitRoom.onClick.AddListener(OpenVisitRoom);
             closeVisitRoom.onClick.AddListener(CloseVisitRoom);
             enterVisitRoom.onClick.AddListener(VisitRoom);
+            
+            openAlbumPanel.onClick.AddListener(OpenAlbumPanel);
+            closeAlbumPanel.onClick.AddListener(CloseAlbumPanel);
 
             enterEditModeButton.interactable = false;
             ActiveSetting().Forget();
@@ -68,7 +78,19 @@ namespace GUI
         private void VisitRoom()
         {
             string roomName = $"player_{inputVisitRoom.text}";
+            LoadMyroom.mapOwnerName = inputVisitRoom.text;
             SceneManager.Instance.MoveRoom(roomName).Forget();
+        }
+
+        private void OpenAlbumPanel()
+        {
+            Utility.EnablePanel(albumPanel);
+            album.RefreshListProcess().Forget();
+        }
+
+        private void CloseAlbumPanel()
+        {
+            Utility.DisablePanel(albumPanel);
         }
 
         private async UniTaskVoid ActiveSetting()

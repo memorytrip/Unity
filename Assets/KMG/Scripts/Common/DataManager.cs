@@ -35,6 +35,37 @@ namespace Common
             }
         }
 
+        public static async UniTask<Sprite> GetSprite(string uri)
+        {
+            UnityWebRequest request = new UnityWebRequest(uri, "GET");
+            request.downloadHandler = new DownloadHandlerTexture();
+            
+            Sprite sprite;
+            
+            try
+            {
+                await request.SendWebRequest();
+            }
+            catch (UnityWebRequestException e)
+            {
+                sprite = null;
+            }
+            finally
+            {
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    Texture2D texture = DownloadHandlerTexture.GetContent(request);
+                    sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                }
+                else
+                {
+                    Debug.LogAssertion(request.error);
+                    sprite = null;
+                }
+            }
+            return sprite;
+        }
+
         public static async UniTask<string> Post(string api, string jsonData, int timeout = 5)
         {
             string url = baseURL + CheckSlash(api);
@@ -59,9 +90,25 @@ namespace Common
                 throw new Exception(request.error);
             }
         }
-        
 
 
+        public static async UniTask<string> Post2(string api, WWWForm formdata, int timeout = 5)
+        {
+            string url = baseURL + CheckSlash(api);
+            var request = UnityWebRequest.Post(url, formdata);
+            if (token != null)
+                request.SetRequestHeader("Authorization", token);
+            await request.SendWebRequest();
+            
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                return request.downloadHandler.text;
+            }
+            else
+            {
+                throw new Exception(request.error);
+            }
+        }
         public static async UniTask<string> Post(string api, List<IMultipartFormSection> formdata, int timeout = 5)
         {
             string url = baseURL + CheckSlash(api);
@@ -135,6 +182,31 @@ namespace Common
             }
         }
 
+        public static async UniTask<string> Put(string api, string jsonData, int timeout = 5)
+        {
+            string url = baseURL + CheckSlash(api);
+            Debug.Log($"Post to {url}");
+            UnityWebRequest request = new UnityWebRequest(url, "PUT");
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            if (token != null)
+                request.SetRequestHeader("Authorization", token);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.timeout = timeout;
+            request.SetRequestHeader("Content-Type", "application/json");
+            
+            await request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                return request.downloadHandler.text;
+            }
+            else
+            {
+                throw new Exception(request.error);
+            }
+        }
+        
         public static async UniTask<byte[]> Read(string path)
         {
             return await System.IO.File.ReadAllBytesAsync(path);

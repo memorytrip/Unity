@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System.IO;
+using Cysharp.Threading.Tasks;
 using Fusion;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -12,9 +13,10 @@ public class UploadPhoto : MonoBehaviour
 {
     public RawImage img;
     public RawImage letterImg;
+    public int photoId; //임시 : 원래는 response의 photoId
     private float photoCapacity = 5000000000000f;
     //private string File = "Application.temporaryCachePath";
-
+    
     public void OnClickImageLoad()
     {
         NativeGallery.GetImageFromGallery((file) => //갤러리를 열었음
@@ -31,16 +33,16 @@ public class UploadPhoto : MonoBehaviour
             //불러 오기
             if (!string.IsNullOrEmpty(file))
             {
-                StartCoroutine(LoadImage(file)); 
+                LoadImage(file).Forget(); 
             }
         });
     }
 
-    IEnumerator LoadImage(string path)
+    public async UniTask LoadImage(string path)
     {
-        yield return null;
+        await UniTask.Yield();
 
-        byte[] fileData = File.ReadAllBytes(path);
+        byte[] fileData = await File.ReadAllBytesAsync(path);
         string filename = Path.GetFileName(path).Split('.')[0];
         string savePath = Application.persistentDataPath + "/Image"; //안드로이드는 Application.temporaryCachePath이라고함 (팩트 체크 필요)
         Debug.Log("경로:" + savePath);
@@ -50,11 +52,11 @@ public class UploadPhoto : MonoBehaviour
             Directory.CreateDirectory(savePath);
         }
         
-        File.WriteAllBytes(savePath + filename + ".png", fileData);
-        var temp = File.ReadAllBytes(savePath + filename + ".png");
+        await File.WriteAllBytesAsync(savePath + filename + ".png", fileData);
+        var temp = File.ReadAllBytesAsync(savePath + filename + ".png");
 
         Texture2D tex = new Texture2D(2, 2);
-        tex.LoadImage(temp);
+        tex.LoadImage(await temp);
 
         img.texture = tex;
         letterImg.texture = tex;
@@ -62,6 +64,17 @@ public class UploadPhoto : MonoBehaviour
         ImageSizeSetting(img, 432f, 288f);
         StretchImageToFit(letterImg);
         StretchImageToFit(img);
+
+        if (photoId == 0)
+        {
+            await PostLetterAndPhoto.Instance.PostPhotoProcess(tex);
+        }
+        else
+        {
+            await ModifyLetterAndPhoto.Instance.ModifyPhotoProcess(tex, photoId);
+        }
+
+        photoId = PhotoResponse.postResponse.photoId;
     }
 
     void ImageSizeSetting(RawImage img, float x, float y)
@@ -115,4 +128,5 @@ public class UploadPhoto : MonoBehaviour
         img.rectTransform.localScale = Vector3.one;
         img.uvRect = new Rect(0, 0, 1, 1);
     }
+    
 }

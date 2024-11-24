@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        ShowUI(mainMenu);
+        HideUI(mainMenu);
         HideUI(sideMenu);
         HideUI(chat);
         HideUI(newChat);
@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
         switch (scene.name)
         {
             case SceneName.Login:
-                ShowUI(mainMenu);
+                HideUI(mainMenu);
                 HideUI(sideMenu);
                 HideUI(chat);
                 HideUI(joystick);

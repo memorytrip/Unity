@@ -1,4 +1,5 @@
 using System;
+using Fusion;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,5 +45,4 @@ public class VideoProgressBar : MonoBehaviour
             UIManager.ShowUI(doneCanvasGroup);
         }
     }
-    
 }

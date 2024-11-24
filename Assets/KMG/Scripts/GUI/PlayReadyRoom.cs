@@ -17,6 +17,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     [SerializeField] private Button readyButton;
     [SerializeField] private Button exitButton;
     [SerializeField] public TMP_Text roomNameText;
+    [SerializeField] private GetLetterAndPhoto getLP;
 
     private const string AuthSuffix = " <sprite name=\"Auth\">";
     [SerializeField] private Image[] readyIcons;
@@ -28,6 +29,11 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     private FmodTriggerOneshotManager _fmodTriggerOneshotManager;
     [SerializeField] private EventReference playReadyConfirmEvent;
 
+
+    private void Awake()
+    {
+        getLP = GetComponent<GetLetterAndPhoto>();
+    }
     public override void Spawned()
     {
         _fmodTriggerOneshotManager = FindAnyObjectByType<FmodTriggerOneshotManager>();
@@ -118,7 +124,6 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
 
     public void StateAuthorityChanged()
     {
-        Debug.Log($"sachanged");
         exitButton.onClick.AddListener(Exit);
         readyButton.onClick.AddListener(Ready);
     }
@@ -127,6 +132,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     public void RpcGameStart()
     {
         _fmodTriggerOneshotManager.TriggerOneshot(playReadyConfirmEvent);
+        getLP.GetResponse();
         cts.Cancel();
         SceneManager.Instance.MoveScene("FindPhoto");
     }

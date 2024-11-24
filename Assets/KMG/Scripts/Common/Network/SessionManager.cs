@@ -57,6 +57,7 @@ namespace Common.Network
                 currentSession.user.email = result.email;
                 currentSession.user.nickName = result.nickname;
 
+                WebSocketManager.Instance.StartSocketConnect();
                 Debug.Log($"nickname: {currentUser.nickName}");
                 Debug.Log($"JWT: {currentSession.token}");
             }

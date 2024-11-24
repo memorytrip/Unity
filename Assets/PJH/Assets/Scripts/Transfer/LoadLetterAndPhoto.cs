@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Fusion;
 using UnityEngine;
@@ -7,37 +8,27 @@ using UnityEngine.UI;
 
 public class LoadLetterAndPhoto : NetworkBehaviour
 {
+    public List<string> selectedPhotoUrl;
     public Button[] photoButtons;
+    public GameObject[] lockImage;
     private RawImage[] photoImages;
     private Text[] letterTexts;
-
-    void Start()
-    {
-        photoImages = new RawImage[photoButtons.Length];
-        
-        for (int i = 0; i < photoButtons.Length; i++)
-        {
-            RawImage rawImage = photoButtons[i].GetComponentInChildren<RawImage>();
-
-            if (rawImage != null)
-            {
-                photoImages[i] = rawImage; 
-            }
-            else
-            {
-                Debug.LogWarning($"Button {i} has no RawImage component.");
-            }
-        }
-        
-    }
-
+    
     public override void Spawned()
     {
-        //LoadPhotosAndLetters().Forget();
+        photoImages = new RawImage[photoButtons.Length];
+        for (int i = 0; i < photoButtons.Length; i++)
+        {
+            lockImage[i].SetActive(true);
+            RawImage rawImage = photoButtons[i].GetComponentInChildren<RawImage>();
+            photoImages[i] = rawImage; 
+        }
+        LoadPhotosAndLetters().Forget();
     }
     
     private async UniTask LoadPhotosAndLetters()
     {
+        
         try
         {
             var data = RecievedPhotoData.PhotoResponses;
@@ -45,7 +36,17 @@ public class LoadLetterAndPhoto : NetworkBehaviour
             // 각 이미지와 편지 처리
             for (int i = 0; i < data.Length && i < photoImages.Length; i++)
             {
-                await LoadSingleImage(data[i], i);
+                Debug.Log("데이터:" + data[i]);
+                if (data[i] != null)
+                {
+                    photoButtons[i].GetComponent<CanvasGroup>().interactable = true;
+                    photoButtons[i].GetComponent<CanvasGroup>().blocksRaycasts = true;
+                    lockImage[i].SetActive(false);
+                    await LoadSingleImage(data[i], i);
+                    int index = i;
+                    //photoButtons[index].onClick.RemoveAllListeners();
+                    photoButtons[index].onClick.AddListener(() => SetPhotoUrlToButton(data[index].photoUrl));
+                }
             }
         }
         catch (Exception e)
@@ -54,12 +55,32 @@ public class LoadLetterAndPhoto : NetworkBehaviour
         }
     }
 
+    private void SetPhotoUrlToButton(string photoUrl)
+    {
+        if (!selectedPhotoUrl.Contains(photoUrl))
+        {
+            selectedPhotoUrl.Add(photoUrl);
+            Debug.Log($"URL 추가됨: {photoUrl}");
+        }
+        else
+        {
+            selectedPhotoUrl.Remove(photoUrl);
+            Debug.Log($"URL 제거됨: {photoUrl}");
+        }
+    }
+    
     private async UniTask LoadSingleImage(PhotoLetterResponse item, int index)
     {
         try
         {
             // 이미지 로드
             string url = item.photoUrl;
+
+            if (url == null)
+            {
+                return;
+            }
+            
             UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
 
             await request.SendWebRequest();
@@ -71,13 +92,7 @@ public class LoadLetterAndPhoto : NetworkBehaviour
                 photoImages[index].texture = texture;
 
                 // 이미지 비율 맞추기
-                await AdjustImageAspectRatio(photoImages[index], texture);
-
-                // 편지 텍스트 표시
-                if (letterTexts[index] != null)
-                {
-                    letterTexts[index].text = item.letterId;
-                }
+                //await AdjustImageAspectRatio(photoImages[index], texture);
             }
             else
             {

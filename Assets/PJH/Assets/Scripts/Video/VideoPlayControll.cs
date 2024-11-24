@@ -1,6 +1,10 @@
+using System;
+using Common;
+using Cysharp.Threading.Tasks;
 using GUI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Video;
 
 public class VideoPlay : MonoBehaviour
@@ -9,7 +13,7 @@ public class VideoPlay : MonoBehaviour
     public CanvasGroup playButton;
     public CanvasGroup resumeButton;
     private bool isPlaying = false;
-    
+
     public void VideoPlayControll()
     {
         if (!isPlaying)
