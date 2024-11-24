@@ -138,7 +138,7 @@ namespace GUI
 
             try
             {
-                await SceneManager.Instance.MoveRoom(SceneManager.SquareScene); 
+                await SceneManager.Instance.MoveRoom(SceneName.Square); 
             }
             catch (Exception e)
             { 
@@ -146,7 +146,6 @@ namespace GUI
                 Debug.LogAssertion(e);
                 loginButton.interactable = true;
                 closeLoginPanelButton.interactable = true;
-                return;
             }
         }
 

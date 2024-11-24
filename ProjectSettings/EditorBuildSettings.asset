@@ -16,7 +16,7 @@ EditorBuildSettings:
     guid: 07c47557e8d96dd499d7af916d232840
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
-    guid: 1581c49179ccdac4d9ef8a1516b90ef6
+    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
     path: Assets/JJS/Scenes/testSquare.unity
     guid: 45ad38d5a2f1d54428cfe14a7248f941
