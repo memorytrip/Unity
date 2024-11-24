@@ -127,6 +127,6 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     {
         getLP.GetResponse();
         cts.Cancel();
-        SceneManager.Instance.MoveScene("SelectPhotoScene");
+        SceneManager.Instance.MoveScene("FindPhoto");
     }
 }

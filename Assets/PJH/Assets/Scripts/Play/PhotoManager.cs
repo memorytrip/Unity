@@ -27,6 +27,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     [SerializeField] private LoadFindPhotoMap loadFindPhotoMap;
     [SerializeField] private GameObject photoGround;
     [SerializeField] private Button skipButton;
+    [SerializeField] private GameObject creditParticle;
 
     void Start()
     {
@@ -113,6 +114,8 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
             var photo = hitNetworkObject.GetComponent<Photo>();
             photo.RpcDespawn();
             RpcUpdateFindedPhoto();
+            Instantiate(creditParticle, hitNetworkObject.transform.position, Quaternion.identity);
+            SessionManager.Instance.currentUser.credit++;
             if (findedPhoto >= numberOfPhoto)
             {
                 StartCoroutine(FindLastPhoto());
