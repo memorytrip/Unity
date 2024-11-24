@@ -13,14 +13,6 @@ public class VideoPlay : MonoBehaviour
     public CanvasGroup playButton;
     public CanvasGroup resumeButton;
     private bool isPlaying = false;
-    [SerializeField] private Button returnButton;
-
-    private void Awake()
-    {
-        returnButton.onClick.AddListener(ReturnToSquare);
-    }
-
-    private void ReturnToSquare() => SceneManager.Instance.MoveRoom(SceneManager.SquareScene).Forget();
 
     public void VideoPlayControll()
     {
