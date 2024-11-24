@@ -3,7 +3,6 @@ using Common;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace KMG.Scripts.Dummy
@@ -26,7 +25,7 @@ namespace KMG.Scripts.Dummy
             {
                 connectButton.interactable = false;
                 PlayerPrefs.SetString("NickName", inputField.text);
-                await SceneManager.Instance.MoveRoom(SceneManager.SquareScene);
+                await SceneManager.Instance.MoveRoom(SceneName.Square);
             }
             catch (Exception e)
             {

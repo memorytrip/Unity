@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Common;
 using Cysharp.Threading.Tasks;
@@ -28,7 +29,6 @@ public class LoadFindPhotoMap : NetworkBehaviour
     private void LoadCompleteRpc()
     {
         isLoading = false;
-        EventManager.Instance.OnMapLoadedComplete();
     }
 
     private async UniTask<List<MapInfo>> LoadMapInfos()

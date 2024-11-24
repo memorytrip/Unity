@@ -119,7 +119,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     private void Exit()
     {
         cts.Cancel();
-        SceneManager.Instance.MoveRoom(SceneManager.SquareScene).Forget();
+        SceneManager.Instance.MoveRoom(SceneName.Square).Forget();
     }
 
     public void StateAuthorityChanged()

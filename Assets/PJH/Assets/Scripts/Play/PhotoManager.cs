@@ -1,14 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Common.Network;
 using Cysharp.Threading.Tasks;
+using FMODUnity;
 using UnityEngine;
 using Fusion;
-using Fusion.Sockets;
 using TMPro;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using SceneManager = Common.SceneManager;
@@ -28,11 +26,18 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     [SerializeField] private GameObject photoGround;
     [SerializeField] private Button skipButton;
     [SerializeField] private GameObject creditParticle;
+    [SerializeField] private CanvasGroup helpPopup;
+
+    private const string PhotoCountText = "내가 찾은 사진: ";
 
     void Start()
     {
+        EventManager.Instance.LoadCompleteMap += ShowScreen;
+        helpPopup.alpha = 1f;
         EventManager.Instance.AddListener(EventType.eRaycasting, this);
         photoPositions = new Dictionary<int, Vector3>();
+        skipButton.onClick.AddListener(() =>
+            RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.LetterFoundCount, 8));
         skipButton.onClick.AddListener(() => StartCoroutine(FindLastPhoto()) );
     }
     
@@ -79,7 +84,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
         {
             int photoName = i;
             photoDict[photoName] = await GetRandomPosition();
-                // await UniTask.Delay(TimeSpan.FromSeconds(3.5f));
+            // await UniTask.Delay(TimeSpan.FromSeconds(3.5f));
             var photoObject =
                 await RunnerManager.Instance.Runner.SpawnAsync(photoPrefab, photoDict[photoName], Quaternion.identity);
             
@@ -111,6 +116,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     {
         if (hitNetworkObject != null)
         {
+            RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.LetterFoundCount, findedPhoto);
             var photo = hitNetworkObject.GetComponent<Photo>();
             photo.RpcDespawn();
             RpcUpdateFindedPhoto();
@@ -135,7 +141,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     {
         findedPhoto++;
         EventManager.Instance.OnPhotoFound(findedPhoto);
-        findedPhotoCount.text = findedPhoto + " / " + numberOfPhoto;
+        findedPhotoCount.text = PhotoCountText + findedPhoto + " / " + numberOfPhoto;
     }
     
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
@@ -151,8 +157,11 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     }*/
     public override void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        findedPhotoCount.text = findedPhoto + " / " + runner.ActivePlayers.Count();
+        findedPhotoCount.text = PhotoCountText + findedPhoto + " / " + runner.ActivePlayers.Count();
     }
 
+    private void ShowScreen()
+    {
+        helpPopup.alpha = 0f;
+    }
 }
-

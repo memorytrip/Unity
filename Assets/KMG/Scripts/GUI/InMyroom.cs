@@ -1,4 +1,3 @@
-using System.Collections;
 using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
@@ -51,7 +50,7 @@ namespace GUI
 
         private void ReturnToSquare()
         {
-            SceneManager.Instance.MoveRoom(SceneManager.SquareScene).Forget();
+            SceneManager.Instance.MoveRoom(SceneName.Square).Forget();
         }
 
         private void EnterSetting()

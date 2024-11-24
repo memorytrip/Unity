@@ -1,3 +1,4 @@
+using System.Collections;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
@@ -7,9 +8,12 @@ public class CustomFmodSfxManager : StudioEventEmitter
 {
     private EventInstance _sfxEvent;
     private EventInstance _oneshotEvent;
+    private EventInstance _oneshotEvent1;
     [SerializeField] private EventReference playEvent;
     [SerializeField] private EventReference findPhotoEvent;
+    [SerializeField] private EventReference tadaEvent;
     private static CustomFmodSfxManager _instance;
+    private readonly WaitForSeconds _wait = new(1f);
     
     private void Awake()
     {
@@ -38,6 +42,7 @@ public class CustomFmodSfxManager : StudioEventEmitter
             case SceneName.FindPhoto:
                 _sfxEvent = RuntimeManager.CreateInstance(playEvent);
                 _oneshotEvent = RuntimeManager.CreateInstance(findPhotoEvent);
+                _oneshotEvent1 = RuntimeManager.CreateInstance(tadaEvent);
                 SubscribeToEvents();
                 break;
         }
@@ -52,8 +57,15 @@ public class CustomFmodSfxManager : StudioEventEmitter
 
     private void FindPhoto(int count)
     {
+        StartCoroutine(ProcessFindPhoto(count));
+    }
+
+    private IEnumerator ProcessFindPhoto(int count)
+    {
         _oneshotEvent.start();
-        RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.LetterFoundCount, count);
+        //RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.LetterFoundCount, count);
+        yield return _wait;
+        _oneshotEvent1.start();
     }
 
     private void SubscribeToEvents()
