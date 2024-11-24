@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;
     private readonly WaitForSeconds _wait = new WaitForSeconds(7f);
-
+    
     public static UIManager Instance
     {
         get
@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CanvasGroup newChat;
     [SerializeField] private CanvasGroup credit;
     [SerializeField] public GUI.CreditUI creditUI;
+    [SerializeField] private Button storeButton;
 
     private void Awake()
     {
@@ -56,10 +57,12 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 HideUI(newChat);
                 HideUI(credit);
+                storeButton.interactable = false;
                 break;
             case SceneName.Square:
                 HideUI(newChat);
                 TemporarilyHideUI();
+                storeButton.interactable = true;
                 break;
             case SceneName.MyRoom:
                 ShowUI(mainMenu);
@@ -69,6 +72,7 @@ public class UIManager : MonoBehaviour
                 ShowUI(joystick);
                 HideUI(newChat);
                 HideUI(credit);
+                storeButton.interactable = true;
                 break;
             case SceneName.FindPhoto:
                 ShowUI(mainMenu);
@@ -76,6 +80,7 @@ public class UIManager : MonoBehaviour
                 ShowUI(chat);
                 ShowUI(joystick);
                 ShowUI(credit);
+                storeButton.interactable = false;
                 break;
             case SceneName.MapEdit:
                 ShowUI(mainMenu);
@@ -92,6 +97,7 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 HideUI(newChat);
                 HideUI(credit);
+                storeButton.interactable = false;
                 break;
             case SceneName.SelectPhotoScene:
                 HideUI(mainMenu);
@@ -100,6 +106,7 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 ShowUI(newChat);
                 HideUI(credit);
+                storeButton.interactable = false;
                 break;  
             case SceneName.VideoLoadTest:
                 HideUI(mainMenu);
@@ -108,6 +115,7 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 ShowUI(newChat);
                 HideUI(credit);
+                storeButton.interactable = false;
                 break;
             case SceneName.LetterScene:
                 HideUI(mainMenu);
@@ -116,6 +124,7 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 ShowUI(newChat);
                 HideUI(credit);
+                storeButton.interactable = false;
                 break;
             default:
                 ShowUI(mainMenu);

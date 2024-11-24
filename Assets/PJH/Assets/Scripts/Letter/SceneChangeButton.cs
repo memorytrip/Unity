@@ -1,7 +1,6 @@
 using Common;
 using Cysharp.Threading.Tasks;
 using Fusion;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class SceneChangeButton : NetworkBehaviour
@@ -25,7 +24,7 @@ public class SceneChangeButton : NetworkBehaviour
 
     void ReturnToSquare()
     {
-        SceneManager.Instance.MoveRoom(SceneManager.SquareScene).Forget();
+        SceneManager.Instance.MoveRoom(SceneName.Square).Forget();
     }
     
     // void RpcSceneChange(string scenename)

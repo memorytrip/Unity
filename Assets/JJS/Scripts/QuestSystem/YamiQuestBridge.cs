@@ -37,6 +37,8 @@ public class YamiQuestBridge : MonoBehaviour
     
     private IEnumerator ProcessShowUi(bool stayOpen)
     {
+        EventManager.Instance.OnPopupOpened();
+
         _fadeController.StartFadeIn(0.1f);
         if (stayOpen)
         {

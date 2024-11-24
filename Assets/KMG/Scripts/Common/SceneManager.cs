@@ -14,8 +14,6 @@ namespace Common
      */
     public class SceneManager: MonoBehaviour
     {
-        public static readonly string SquareScene = "0";
-        
         public static SceneManager Instance = null;
         [HideInInspector] public string curScene;
         public event Action OnSceneLoaded;
@@ -48,7 +46,6 @@ namespace Common
 #region MoveRoom
         public async UniTask MoveRoom(string roomName)
         {
-            OnSceneEnded(); // 이벤트 -> BGM 페이드아웃
             await UniTask.WhenAll(FadeOut().ToUniTask(), MoveRoomProcess(roomName));
             await ChangeSceneWithCheckNetworkRunner(RoutingScene(roomName)).ToUniTask();
             await FadeIn().ToUniTask();
@@ -62,7 +59,7 @@ namespace Common
                 
                 if (RunnerManager.Instance.isRunnerExist)
                     await RunnerManager.Instance.Disconnect();
-                if (roomName == SquareScene)
+                if (roomName == SceneName.Square)
                     playerCount = 20;
                 await RunnerManager.Instance.Connect(roomName, playerCount);
                 Debug.Log($"Move to Room ({roomName})");
@@ -77,7 +74,7 @@ namespace Common
         private string RoutingScene(string roomName)
         {
             // return SceneName.MultiPlayTest;
-            if (roomName == SquareScene) return SceneName.Square;
+            if (roomName == SceneName.Square) return SceneName.Square;
             if (roomName.Length == 4) return SceneName.PlayReady;
             if (roomName.Contains("player_")) return SceneName.MyRoom;
             if (roomName == "1") return SceneName.MultiPlayTest;

@@ -4,6 +4,7 @@ using System.Threading;
 using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
+using FMODUnity;
 using Fusion;
 using GUI;
 using TMPro;
@@ -25,12 +26,17 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     private int readyCount = 0;
     private CancellationTokenSource cts;
 
+    private FmodTriggerOneshotManager _fmodTriggerOneshotManager;
+    [SerializeField] private EventReference playReadyConfirmEvent;
+
+
     private void Awake()
     {
         getLP = GetComponent<GetLetterAndPhoto>();
     }
     public override void Spawned()
     {
+        _fmodTriggerOneshotManager = FindAnyObjectByType<FmodTriggerOneshotManager>();
         cts = new CancellationTokenSource();
         RefreshPlayerList(cts.Token).Forget();
         exitButton.onClick.AddListener(Exit);
@@ -113,7 +119,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     private void Exit()
     {
         cts.Cancel();
-        SceneManager.Instance.MoveRoom(SceneManager.SquareScene).Forget();
+        SceneManager.Instance.MoveRoom(SceneName.Square).Forget();
     }
 
     public void StateAuthorityChanged()
@@ -125,6 +131,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RpcGameStart()
     {
+        _fmodTriggerOneshotManager.TriggerOneshot(playReadyConfirmEvent);
         getLP.GetResponse();
         cts.Cancel();
         SceneManager.Instance.MoveScene("FindPhoto");

@@ -11,11 +11,13 @@ public class StoreUI : MonoBehaviour
 
     public void StoreOpen()
     {
+        EventManager.Instance.OnPopupOpened();
         UIManager.ShowUI(storeUI);
     }
 
     public void StoreClose()
     {
+        EventManager.Instance.OnPopupClosed();
         UIManager.HideUI(storeUI);
     }
 }
