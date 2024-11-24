@@ -19,7 +19,7 @@ public class PlayerAnimationTrigger : NetworkBehaviour
     
     private void ConnectToButton()
     {
-        if (SceneManager.GetActiveScene().name == "FindPhoto")
+        if (SceneManager.GetActiveScene().name == SceneName.FindPhoto)
         {
             var target = FindAnyObjectByType<FindPhotoButton>(FindObjectsInactive.Include);
             var button = target.gameObject.GetComponent<Button>();

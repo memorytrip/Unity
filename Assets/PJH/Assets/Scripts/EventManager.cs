@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ public class EventManager : MonoBehaviour
             return;
         }
 
-        DestroyImmediate(gameObject);
+        Destroy(gameObject);
     }
 
     public void AddListener(EventType eventType, IListener listener)
@@ -77,5 +78,13 @@ public class EventManager : MonoBehaviour
     void OnLevelWasLoaded()
     {
         RemoveRedundancies();
+    }
+
+    public event Action LoadCompleteMap;
+
+    public void OnMapLoadedComplete()
+    {
+        LoadCompleteMap?.Invoke();
+        Debug.Log("Map has finished loading");
     }
 }

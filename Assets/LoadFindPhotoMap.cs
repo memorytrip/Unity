@@ -28,6 +28,7 @@ public class LoadFindPhotoMap : NetworkBehaviour
     private void LoadCompleteRpc()
     {
         isLoading = false;
+        EventManager.Instance.OnMapLoadedComplete();
     }
 
     private async UniTask<List<MapInfo>> LoadMapInfos()
