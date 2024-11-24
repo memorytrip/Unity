@@ -1,3 +1,4 @@
+using Fusion;
 using UnityEngine;
 
 public class VideoLoadStart : MonoBehaviour
@@ -8,8 +9,9 @@ public class VideoLoadStart : MonoBehaviour
     {
         videoProgressBar = FindAnyObjectByType<VideoProgressBar>();
     }
-
-    public void VideoLoadButtonClicked()
+    
+    [Rpc(RpcSources.All,RpcTargets.All)]
+    public void RpcVideoLoadButtonClicked()
     {
         Debug.Log("버튼이 눌렸습니다");
         videoProgressBar.isLoading = true;

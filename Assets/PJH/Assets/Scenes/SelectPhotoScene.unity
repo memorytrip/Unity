@@ -1411,7 +1411,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1089803803}
         m_TargetAssemblyTypeName: VideoLoadStart, Assembly-CSharp
-        m_MethodName: VideoLoadButtonClicked
+        m_MethodName: RpcVideoLoadButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
