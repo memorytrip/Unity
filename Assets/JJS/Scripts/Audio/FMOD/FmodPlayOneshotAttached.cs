@@ -11,11 +11,13 @@ public class FmodPlayOneshotAttached : MonoBehaviour
     
     private void Awake()
     {
-        _button = GetComponent<Button>();
-        _button.onClick.AddListener(PlayOneshot);
+        if (TryGetComponent(out _button))
+        {
+            _button.onClick.AddListener(PlayOneshot);
+        }
     }
     
-    private void PlayOneshot()
+    public void PlayOneshot()
     {
         RuntimeManager.PlayOneShotAttached(eventReference, gameObject);
     }
