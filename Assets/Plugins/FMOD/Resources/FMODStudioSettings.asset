@@ -622,13 +622,13 @@ MonoBehaviour:
   RealChannelSettings: []
   Plugins: []
   MasterBanks:
-  - Mobile/Master
+  - Master
   Banks:
-  - Mobile/Ambience
-  - Mobile/BGM
-  - Mobile/SFX
-  - Mobile/SFX_Player
-  - Mobile/UI
+  - Ambience
+  - BGM
+  - SFX
+  - SFX_Player
+  - UI
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
