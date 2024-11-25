@@ -16,6 +16,13 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
 {
     [SerializeField] private List<TMP_Text> playerNameTextList;
     [SerializeField] private Button readyButton;
+    private TextMeshProUGUI readyButtonText;
+    private Image readyButtonImage;
+    private readonly Color _readyButtonColor = new(0.718f, 0.945f, 0.788f, 1f);
+    private readonly Color _readyTextColor = new(0.183f, 0.18f, 0.887f, 1f);
+    private readonly Color _startButtonColor = new(1f, 1f, 1f, 1f);
+    private readonly Color _startTextColor = new(0.11f, 0.045f, 0.283f, 1f);
+
     [SerializeField] private Button exitButton;
     [SerializeField] public TMP_Text roomNameText;
     private GetLetterAndPhoto getLP;
@@ -33,10 +40,11 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     private FmodTriggerOneshotManager _fmodTriggerOneshotManager;
     [SerializeField] private EventReference playReadyConfirmEvent;
 
-
     private void Awake()
     {
         getLP = GetComponent<GetLetterAndPhoto>();
+        readyButtonText = readyButton.GetComponentInChildren<TextMeshProUGUI>();
+        readyButtonImage = readyButton.GetComponent<Image>();
     }
     public override void Spawned()
     {
@@ -117,16 +125,18 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     }
 
     private void ActiveStart() {
-        readyButton.interactable = true;
-        readyButton.GetComponentInChildren<TMP_Text>().text = "시작하기";
+        readyButtonImage.color = _startButtonColor; 
+        readyButtonText.color = _startTextColor;
+        readyButtonText.text = "시작하기";
         // readyButton.onClick.RemoveListener(Ready);
         readyButton.onClick.RemoveAllListeners();
         readyButton.onClick.AddListener(RpcGameStart);
     }
     
     private void DeactiveStart() {
-        readyButton.interactable = true;
-        readyButton.GetComponentInChildren<TMP_Text>().text = "준비하기";
+        readyButtonImage.color = _readyButtonColor;
+        readyButtonText.color = _readyTextColor;
+        readyButtonText.text = "준비하기";
         // readyButton.onClick.RemoveListener(GameStart);
         readyButton.onClick.RemoveAllListeners();
         readyButton.onClick.AddListener(Ready);
