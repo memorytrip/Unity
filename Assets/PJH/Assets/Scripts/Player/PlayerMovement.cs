@@ -42,12 +42,14 @@ public class PlayerMovement : NetworkBehaviour
     [Header("ScreenshotCam LookAt Target")]
     [SerializeField] private Transform screenshotCamPosition;
     
-    private readonly WaitForSeconds _wait = new WaitForSeconds(4f);
+    private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
     
     [Header("Animation")]
     [SerializeField] private Animator animator;
 
     private bool isRestricted = false;
+
+    private CustomFmodPlayerSfxManager _customFmodPlayerSfxManager;
     
     private void Awake()
     {
@@ -68,7 +70,10 @@ public class PlayerMovement : NetworkBehaviour
         _chatDisplay = FindAnyObjectByType<ChatDisplay>();
         _chatDisplay.ChangeTypingState += ToggleMovement;
         _chatDisplay.StopTyping += ToggleMovement;
-
+        if (SceneManager.GetActiveScene().name == SceneName.FindPhoto)
+        {
+            EventManager.Instance.OnMapLoadedComplete();
+        }
         StartCoroutine(WaitUntilTransitionEnd());
     }
 

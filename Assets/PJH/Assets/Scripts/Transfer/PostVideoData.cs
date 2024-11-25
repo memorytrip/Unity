@@ -16,6 +16,7 @@ public class VideoInfo
     public string[] photoUrl;
     public string text;
 }
+
 public class PostVideoData : MonoBehaviour
 {
     //public RawImage[] selectedImages;
@@ -45,7 +46,7 @@ public class PostVideoData : MonoBehaviour
             };
             string jsonData = JsonConvert.SerializeObject(data);
 
-            //await DataManager.Post(endPoint, jsonData);
+            await DataManager.Post(endPoint, jsonData);
             Debug.Log("비디오 정보 Post 성공");
 
         }

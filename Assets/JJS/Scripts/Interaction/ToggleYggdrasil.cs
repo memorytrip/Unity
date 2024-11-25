@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using FMODUnity;
 using Fusion;
 using Unity.Cinemachine;
 
@@ -59,6 +60,8 @@ public class ToggleYggdrasil : MonoBehaviour
         if (!other.GetComponent<NetworkObject>().HasStateAuthority)
             return;
 
+        RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.IsNearYggdrasil, 1);
+        EventManager.Instance.OnYggdrasilTriggered();
         contentUiAnimator.SetTrigger(Enter);
         StartCoroutine(ViewGems());
     }
@@ -107,6 +110,7 @@ public class ToggleYggdrasil : MonoBehaviour
         if (!other.GetComponent<NetworkObject>().HasStateAuthority)
             yield break;
 
+        RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.IsNearYggdrasil, 0);
         contentUiAnimator.SetTrigger(Exit);
         yield return _exitClipLength;
         memoryGemMaterial.SetColor(BaseColor, _memoryGemVideoColor);

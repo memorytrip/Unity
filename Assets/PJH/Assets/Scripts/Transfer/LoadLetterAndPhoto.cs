@@ -43,7 +43,9 @@ public class LoadLetterAndPhoto : NetworkBehaviour
                     photoButtons[i].GetComponent<CanvasGroup>().blocksRaycasts = true;
                     lockImage[i].SetActive(false);
                     await LoadSingleImage(data[i], i);
-                    photoButtons[i].onClick.AddListener(() => SetPhotoUrlToButton(data[i].photoUrl));
+                    int index = i;
+                    //photoButtons[index].onClick.RemoveAllListeners();
+                    photoButtons[index].onClick.AddListener(() => SetPhotoUrlToButton(data[index].photoUrl));
                 }
             }
         }
@@ -58,10 +60,12 @@ public class LoadLetterAndPhoto : NetworkBehaviour
         if (!selectedPhotoUrl.Contains(photoUrl))
         {
             selectedPhotoUrl.Add(photoUrl);
+            Debug.Log($"URL 추가됨: {photoUrl}");
         }
         else
         {
             selectedPhotoUrl.Remove(photoUrl);
+            Debug.Log($"URL 제거됨: {photoUrl}");
         }
     }
     
