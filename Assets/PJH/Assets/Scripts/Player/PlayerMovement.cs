@@ -45,7 +45,8 @@ public class PlayerMovement : NetworkBehaviour
     private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
     
     [Header("Animation")]
-    [SerializeField] private Animator animator;
+    // [SerializeField] private Animator animator;
+    [SerializeField] private PlayerAnimationTrigger animationTrigger;
 
     private bool isRestricted = false;
 
@@ -130,12 +131,14 @@ public class PlayerMovement : NetworkBehaviour
         // if (joystick.isInput)
         if (InputManager.Instance.moveAction.ReadValue<Vector2>().magnitude <= 0f)
         {
-            animator.SetBool(IsMoving, false);
+            // animator.SetBool(IsMoving, false);
+            animationTrigger.RpcAnimSetBool(IsMoving, false);
             _playerMoveSpeed = 0f;
         }
         else
         {
-            animator.SetBool(IsMoving, true);
+            // animator.SetBool(IsMoving, true);
+            animationTrigger.RpcAnimSetBool(IsMoving, true);
             _playerMoveSpeed = playerMoveSpeed;
         }
         cc.Move(new Vector3(playerDir.x * _playerMoveSpeed, velocity, playerDir.z * _playerMoveSpeed) * Time.fixedDeltaTime);
@@ -177,7 +180,8 @@ public class PlayerMovement : NetworkBehaviour
         if (cc.isGrounded)
         {
             velocity = jumpForce;
-            animator.SetTrigger(Jump);
+            // animator.SetTrigger(Jump);
+            animationTrigger.RpcAnimSetTrigger(Jump);
         }
     }
 

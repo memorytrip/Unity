@@ -330,7 +330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe9b330665606b41ace48dfa8a0e0bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
 --- !u!1 &3418006254168786049
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +628,7 @@ MonoBehaviour:
   boxSize: {x: 0, y: 0, z: 0}
   maxDistance: 1
   screenshotCamPosition: {fileID: 6470807958865917543}
-  animator: {fileID: 6409026399683123850}
+  animationTrigger: {fileID: 1792731976329578246}
 --- !u!114 &4751748418977364367
 MonoBehaviour:
   m_ObjectHideFlags: 0
