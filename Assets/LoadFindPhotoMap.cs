@@ -32,6 +32,12 @@ public class LoadFindPhotoMap : NetworkBehaviour
     private void LoadCompleteRpc()
     {
         isLoading = false;
+        StartCoroutine(DelayGameStart());
+    }
+
+    private IEnumerator DelayGameStart()
+    {
+        yield return new WaitForSeconds(4f);
         EventManager.Instance.OnMapLoadedComplete();
     }
 

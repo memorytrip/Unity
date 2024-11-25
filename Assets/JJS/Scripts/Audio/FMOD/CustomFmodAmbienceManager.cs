@@ -14,7 +14,7 @@ public class CustomFmodAmbienceManager : StudioEventEmitter
     {
         if (_instance != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {
@@ -23,38 +23,44 @@ public class CustomFmodAmbienceManager : StudioEventEmitter
         }
 
         SceneManager.sceneLoaded += SwitchAmbience;
-        SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
-    private void OnSceneUnloaded(Scene scene)
+    private new void OnDestroy()
     {
-        if (scene.name == SceneName.EmptyScene)
+        SceneManager.sceneLoaded -= SwitchAmbience;
+        if (_ambienceEvent.isValid())
         {
-            return;
+            _ambienceEvent.stop(STOP_MODE.ALLOWFADEOUT);
+            _ambienceEvent.release();
         }
-        _ambienceEvent.stop(STOP_MODE.ALLOWFADEOUT);
-        _ambienceEvent.release();
-        Debug.Log("WHAT");
     }
 
     private void SwitchAmbience(Scene scene, LoadSceneMode mode)
     {
+        if (_ambienceEvent.isValid())
+        {
+            _ambienceEvent.stop(STOP_MODE.ALLOWFADEOUT);
+            _ambienceEvent.release();
+        }
+        
         switch (scene.name)
         {
             case SceneName.EmptyScene:
-                RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.HasPaused, 1);
                 _ambienceEvent = RuntimeManager.CreateInstance(mainEvent);
-                _ambienceEvent.start();
-                Debug.Log("Helloooo 2");
+                if (_ambienceEvent.isValid())
+                {
+                    _ambienceEvent.start();
+                    Debug.Log("Helloooo 2");
+                }
                 return;
             case SceneName.Square:
-                RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.HasPaused, 0);
-                Debug.Log("Helloooo 3");
                 break;
             default:
-                RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.HasPaused, 0);
-                _ambienceEvent.stop(STOP_MODE.ALLOWFADEOUT);
-                _ambienceEvent.release();
+                if (_ambienceEvent.isValid())
+                {
+                    _ambienceEvent.stop(STOP_MODE.ALLOWFADEOUT);
+                    _ambienceEvent.release();
+                }
                 break;
         }
     }

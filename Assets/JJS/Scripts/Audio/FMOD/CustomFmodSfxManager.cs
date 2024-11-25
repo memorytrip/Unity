@@ -3,6 +3,7 @@ using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class CustomFmodSfxManager : StudioEventEmitter
 {
@@ -28,26 +29,43 @@ public class CustomFmodSfxManager : StudioEventEmitter
         }
 
         SceneManager.sceneLoaded += InitializeSfxManager;
-        SceneManager.sceneUnloaded += UnsubscribeFromEvents;
+    }
+
+    private new void Start()
+    {
+        SubscribeToEvents();
+    }
+
+    private new void OnDestroy()
+    {
+        if (_instance == this)
+        {
+            UnsubscribeFromEvents();
+        }
     }
 
     private void InitializeSfxManager(Scene scene, LoadSceneMode mode)
     {
+        if (_sfxEvent.isValid())
+        {
+            _sfxEvent.stop(STOP_MODE.IMMEDIATE);
+            _sfxEvent.release();
+        }
+        
         switch (scene.name)
         {
-            case SceneName.EmptyScene:
-                _sfxEvent.release();
-                break;
             // TODO: 보완 필요
             case SceneName.FindPhoto:
                 _sfxEvent = RuntimeManager.CreateInstance(playEvent);
                 _oneshotEvent = RuntimeManager.CreateInstance(findPhotoEvent);
                 _oneshotEvent1 = RuntimeManager.CreateInstance(tadaEvent);
-                SubscribeToEvents();
                 break;
         }
-        
-        _sfxEvent.start();
+
+        if (_sfxEvent.isValid())
+        {
+            _sfxEvent.start();
+        }
     }
 
     private void StartGame()
@@ -62,10 +80,15 @@ public class CustomFmodSfxManager : StudioEventEmitter
 
     private IEnumerator ProcessFindPhoto(int count)
     {
-        _oneshotEvent.start();
-        //RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.LetterFoundCount, count);
+        if (_oneshotEvent.isValid())
+        {
+            _oneshotEvent.start();
+        }
         yield return _wait;
-        _oneshotEvent1.start();
+        if (_oneshotEvent1.isValid())
+        {
+            _oneshotEvent1.start();
+        }
     }
 
     private void SubscribeToEvents()
@@ -74,11 +97,24 @@ public class CustomFmodSfxManager : StudioEventEmitter
         EventManager.Instance.FindPhoto += FindPhoto;
     }
 
-    private void UnsubscribeFromEvents(Scene scene)
+    private void UnsubscribeFromEvents()
     {
-        _sfxEvent.release();
-        _oneshotEvent.release();
         EventManager.Instance.LoadCompleteMap -= StartGame;
         EventManager.Instance.FindPhoto -= FindPhoto;
+
+        if (_sfxEvent.isValid())
+        {
+            _sfxEvent.release();
+        }
+
+        if (_oneshotEvent.isValid())
+        {
+            _oneshotEvent.release();
+        }
+
+        if (_oneshotEvent1.isValid())
+        {
+            _oneshotEvent1.release();
+        }
     }
 }
