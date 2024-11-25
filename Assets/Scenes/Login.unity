@@ -2519,6 +2519,7 @@ MonoBehaviour:
       Data3: 1714837659
       Data4: 1397549855
     Path: event:/UI_Cancel
+  hasTriggerCollider: 0
 --- !u!114 &303303799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3611,6 +3612,7 @@ MonoBehaviour:
       Data3: 1714837659
       Data4: 1397549855
     Path: event:/UI_Cancel
+  hasTriggerCollider: 0
 --- !u!1 &462011708
 GameObject:
   m_ObjectHideFlags: 0
@@ -4136,11 +4138,11 @@ MonoBehaviour:
     Path: event:/BGM_MyRoom
   playReadyEvent:
     Guid:
-      Data1: -1861942117
-      Data2: 1098538711
-      Data3: 950642876
-      Data4: -886239250
-    Path: event:/BGM_Play
+      Data1: 1024799568
+      Data2: 1090726238
+      Data3: 36519821
+      Data4: -1691635824
+    Path: event:/BGM_PlayReady
   playEvent:
     Guid:
       Data1: -1861942117
@@ -5679,6 +5681,7 @@ MonoBehaviour:
       Data3: 1615723684
       Data4: 1285734542
     Path: event:/UI_Confirm
+  hasTriggerCollider: 0
 --- !u!1 &702765477
 GameObject:
   m_ObjectHideFlags: 0
@@ -7797,6 +7800,7 @@ MonoBehaviour:
       Data3: 1714837659
       Data4: 1397549855
     Path: event:/UI_Cancel
+  hasTriggerCollider: 0
 --- !u!1 &911612167
 GameObject:
   m_ObjectHideFlags: 0
@@ -7938,6 +7942,7 @@ MonoBehaviour:
       Data3: 1615723684
       Data4: 1285734542
     Path: event:/UI_Confirm
+  hasTriggerCollider: 0
 --- !u!1 &924439042
 GameObject:
   m_ObjectHideFlags: 0
@@ -8806,6 +8811,7 @@ MonoBehaviour:
       Data3: 789567637
       Data4: 1313843917
     Path: event:/UI_ReadyConfirm
+  hasTriggerCollider: 0
 --- !u!1 &1081776857
 GameObject:
   m_ObjectHideFlags: 0
@@ -9909,6 +9915,7 @@ MonoBehaviour:
       Data3: 1615723684
       Data4: 1285734542
     Path: event:/UI_Confirm
+  hasTriggerCollider: 0
 --- !u!1 &1290744129
 GameObject:
   m_ObjectHideFlags: 0
@@ -12536,6 +12543,7 @@ MonoBehaviour:
       Data3: 1714837659
       Data4: 1397549855
     Path: event:/UI_Cancel
+  hasTriggerCollider: 0
 --- !u!1 &1666100246
 GameObject:
   m_ObjectHideFlags: 0
@@ -16160,6 +16168,7 @@ MonoBehaviour:
       Data3: 1714837659
       Data4: 1397549855
     Path: event:/UI_Cancel
+  hasTriggerCollider: 0
 --- !u!1 &2115148674
 GameObject:
   m_ObjectHideFlags: 0
@@ -40494,6 +40503,7 @@ MonoBehaviour:
       Data3: 2101939616
       Data4: -1526285057
     Path: event:/UI_Hover
+  hasTriggerCollider: 0
 --- !u!23 &6834754881570062140
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -42939,7 +42949,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6457838681639334125}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.14921936
+  m_Size: 0.14921999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -43770,6 +43780,7 @@ MonoBehaviour:
       Data3: 2101939616
       Data4: -1526285057
     Path: event:/UI_Hover
+  hasTriggerCollider: 0
 --- !u!1 &7818618250488789138
 GameObject:
   m_ObjectHideFlags: 0
@@ -47178,6 +47189,7 @@ MonoBehaviour:
       Data3: 444309654
       Data4: 1633499984
     Path: event:/UI_PlacePhoto
+  hasTriggerCollider: 0
 --- !u!23 &8643091003325057161
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -47606,6 +47618,7 @@ MonoBehaviour:
       Data3: 2101939616
       Data4: -1526285057
     Path: event:/UI_Hover
+  hasTriggerCollider: 0
 --- !u!23 &8740878105147825117
 MeshRenderer:
   m_ObjectHideFlags: 0
