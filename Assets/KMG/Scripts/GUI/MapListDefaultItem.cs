@@ -38,10 +38,10 @@ namespace GUI
             await SceneManager.Instance.MoveSceneProcess("MapEdit");
         }
 
-        private void SetHome()
+        private void SetHome() => SetHomeProcess().Forget();
+        private async UniTaskVoid SetHomeProcess()
         {
-            LoadMyroom.mapId = mapId;
-            LoadMyroom.mapType = MapInfo.MapType.Default;
+            await DataManager.Post($"/api/main-map/map/{mapId}");
             string playerId = SessionManager.Instance.currentUser.nickName;
             SceneManager.Instance.MoveRoom($"player_{playerId}").Forget();
         }

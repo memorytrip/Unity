@@ -48,11 +48,12 @@ namespace GUI
             await DataManager.Delete($"/api/custom-map/{mapId}");
             mapList.RefreshListProcess().Forget();
         }
+        
+        private void SetHome() => SetHomeProcess().Forget();
 
-        private void SetHome()
+        private async UniTaskVoid SetHomeProcess()
         {
-            LoadMyroom.mapId = mapId;
-            LoadMyroom.mapType = MapInfo.MapType.Custom;
+            await DataManager.Post($"/api/main-map/custom-map/{mapId}");
             string playerId = SessionManager.Instance.currentUser.nickName;
             SceneManager.Instance.MoveRoom($"player_{playerId}").Forget();
         }

@@ -9,14 +9,11 @@ namespace Myroom
     public class LoadMyroom: MonoBehaviour
     {
         public static string mapOwnerName = null;
-        public static MapInfo.MapType mapType = MapInfo.MapType.Default;
-        public static long mapId = 1;
         private async UniTaskVoid Start()
         {
             // TODO: BE에서 mapInfo 불러와서 하기
 
-            MapInfo mapInfo = await LoadFromServer(mapId);
-            
+            MapInfo mapInfo = await LoadFromServer();
             LoadMap(mapInfo).Forget();
         }
 
@@ -42,21 +39,21 @@ namespace Myroom
             return mapInfo;
         }
 
-        private async UniTask<MapInfo> LoadFromServer(long mapId)
+        private async UniTask<MapInfo> LoadFromServer()
         {
-            Debug.Log($"LoadMyroom:  MapType: {mapType}, mapId: {mapId}");
-            MapInfo mapInfo;
-            switch (mapType)
-            {
-                case MapInfo.MapType.Custom:
-                    mapInfo = await MapManager.Instance.LoadCustomMapInfoFromServer(mapId);
-                    break;
-                case MapInfo.MapType.Default:
-                    mapInfo = await MapManager.Instance.LoadDefaultMapInfoFromServer(mapId);
-                    break;
-                default:
-                    throw new Exception();
-            }
+            // Debug.Log($"LoadMyroom:  MapType: {mapType}, mapId: {mapId}");
+            MapInfo mapInfo = await MapManager.Instance.LoadMyroomMapInfoFromServer(mapOwnerName);
+            // switch (mapType)
+            // {
+            //     case MapInfo.MapType.Custom:
+            //         mapInfo = await MapManager.Instance.LoadCustomMapInfoFromServer(mapId);
+            //         break;
+            //     case MapInfo.MapType.Default:
+            //         mapInfo = await MapManager.Instance.LoadDefaultMapInfoFromServer(mapId);
+            //         break;
+            //     default:
+            //         throw new Exception();
+            // }
 
             return mapInfo;
         }
