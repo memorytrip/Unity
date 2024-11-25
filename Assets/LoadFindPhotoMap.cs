@@ -13,6 +13,7 @@ public class LoadFindPhotoMap : NetworkBehaviour
     [SerializeField] private Transform mapsObject;
 
     [HideInInspector] public bool isLoading;
+    public static List<string> playerIds;
     public static Dictionary<string, MapId> maps;
     public override void Spawned()
     {
@@ -36,31 +37,25 @@ public class LoadFindPhotoMap : NetworkBehaviour
 
     private async UniTask<List<MapInfo>> LoadMapInfos()
     {
-        List<string> userIds = new List<string>();
-        foreach (var connection  in Connection.list)
-        {
-            userIds.Add(connection.playerEmail);
-            Debug.Log($"LoadFindPhotoMap: userIds : {connection.playerEmail}");
-        }
-
         List<UniTask> tasks = new List<UniTask>();
         List<MapInfo> mapInfos = new List<MapInfo>();
         foreach (var key in maps.Keys)
         {
-            Debug.Log($"LoadFindPhotoMap: maps.key : {key}");
-            if (!userIds.Contains(key))
+            if (!playerIds.Contains(key))
                 continue;
             if (maps[key].mapType == MapInfo.MapType.Default)
                 tasks.Add(LoadDefaultMapInfo(mapInfos, maps[key].mapId));
             else
                 tasks.Add(LoadCustomMapInfo(mapInfos, maps[key].mapId));
+            Debug.Log($"LoadFindPhotoMap: load map {maps[key].mapId} ({maps[key].mapType})");
         }
 
         if (tasks.Count < 4)
         {
-            for (int i = tasks.Count; i <= 4; i++)
+            for (int i = tasks.Count; i < 4; i++)
             {
                 tasks.Add(LoadDefaultMapInfo(mapInfos, i));
+                Debug.Log($"LoadFindPhotoMap: load map {i} (default)");
             }
         }
         

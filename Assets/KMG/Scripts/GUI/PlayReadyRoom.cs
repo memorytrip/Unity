@@ -161,7 +161,15 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
         _fmodTriggerOneshotManager.TriggerOneshot(playReadyConfirmEvent);
         getLP.GetResponse();
         cts.Cancel();
+        
+        List<string> playerIds = new List<string>();
+        foreach (var connection in Connection.list)
+        {
+            playerIds.Add(connection.playerEmail);
+        }
+        LoadFindPhotoMap.playerIds = playerIds;
         LoadFindPhotoMap.maps = seletedMaps;
+        
         foreach (var map in seletedMaps)
         {
             Debug.Log($"PlayReadyRoom.RpcGameStart: {map.Key} - {map.Value.mapId} {map.Value.mapType}");
