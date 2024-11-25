@@ -63,8 +63,6 @@ namespace GUI
         private async UniTaskVoid SetHomeProcess(long mapId)
         {
             await DataManager.Post($"/api/main-map/custom-map/{mapId}");
-            string playerId = SessionManager.Instance.currentUser.nickName;
-            SceneManager.Instance.MoveRoom($"player_{playerId}").Forget();
         }
 
         private async UniTask WriteMapToFile()

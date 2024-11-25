@@ -27,14 +27,14 @@ namespace Map.Editor
             FocusOff();
 
             _focusObject = mapObject;
-            focusObject.GetComponent<Outline>().enabled = true;
+            // focusObject.GetComponent<Outline>().enabled = true;
         }
 
         public void FocusOff()
         {
             if (focusObject == null) return;
             
-            focusObject.GetComponent<Outline>().enabled = false;
+            // focusObject.GetComponent<Outline>().enabled = false;
             _focusObject = null;
         }
 
