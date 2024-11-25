@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[DefaultExecutionOrder(-1)]
 public class SceneTracker : MonoBehaviour
 {
     public static string PreviousScene { get; private set; } = string.Empty;
@@ -10,6 +11,7 @@ public class SceneTracker : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        _currentActiveScene = SceneManager.GetActiveScene().name;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 

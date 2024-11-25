@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;
@@ -48,8 +49,11 @@ public class UIManager : MonoBehaviour
     
     private void ToggleUI(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log($"UIManager.ToggleUI: {scene.name}");
         switch (scene.name)
         {
+            case SceneName.EmptyScene:
+                return;
             case SceneName.Login:
                 HideUI(mainMenu);
                 HideUI(sideMenu);
@@ -151,9 +155,18 @@ public class UIManager : MonoBehaviour
 
     private void TemporarilyHideUI()
     {
+        Debug.Log($"UIManager.TemporarilyHideUI: {SceneTracker.PreviousScene}");
         if (SceneTracker.PreviousScene == SceneName.Login)
         {
             StartCoroutine(ProcessTemporaryToggle());
+        }
+        else
+        {
+            ShowUI(mainMenu);
+            ShowUI(sideMenu);
+            ShowUI(chat);
+            ShowUI(joystick);
+            ShowUI(credit);
         }
     }
 

@@ -1298,7 +1298,6 @@ MonoBehaviour:
   readyButton: {fileID: 122946297}
   exitButton: {fileID: 1261252128}
   roomNameText: {fileID: 1722962010}
-  getLP: {fileID: 0}
   readyIcons:
   - {fileID: 1973669582}
   - {fileID: 19386016}
@@ -1307,6 +1306,7 @@ MonoBehaviour:
   readyIconSprites:
   - {fileID: 21300000, guid: 6c6075215e21ab040882a40a9c485778, type: 3}
   - {fileID: 21300000, guid: 9f4112df82caaaa42abc2382b919cb6c, type: 3}
+  mapSelectionController: {fileID: 165096943}
   playReadyConfirmEvent:
     Guid:
       Data1: 1609368329
@@ -3427,7 +3427,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1072547527}
   m_OnClick:
     m_PersistentCalls:
@@ -5058,7 +5058,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1603426035}
   m_OnClick:
     m_PersistentCalls:

@@ -7,6 +7,7 @@ using Cysharp.Threading.Tasks;
 using FMODUnity;
 using Fusion;
 using GUI;
+using Map;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,14 +18,17 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     [SerializeField] private Button readyButton;
     [SerializeField] private Button exitButton;
     [SerializeField] public TMP_Text roomNameText;
-    [SerializeField] private GetLetterAndPhoto getLP;
+    private GetLetterAndPhoto getLP;
 
     private const string AuthSuffix = " <sprite name=\"Auth\">";
     [SerializeField] private Image[] readyIcons;
     [SerializeField] private Sprite[] readyIconSprites;
+    [SerializeField] private MapSelectionController mapSelectionController;
     
     private int readyCount = 0;
     private CancellationTokenSource cts;
+    
+    Dictionary<string, MapId> seletedMaps = new Dictionary<string, MapId>();
 
     private FmodTriggerOneshotManager _fmodTriggerOneshotManager;
     [SerializeField] private EventReference playReadyConfirmEvent;
@@ -90,13 +94,26 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
         {
             connection.currenctCharacter.GetComponent<PlayReadyState>().Ready();
         }
-        
+        string userId = SessionManager.Instance.currentUser.email;
+        MapId mapId = mapSelectionController.GetSelectedMapId();
+        RpcSendSelectedMap(userId, mapId.mapType == MapInfo.MapType.Custom, mapId.mapId);
         DeactiveByReady();
     }
 
     private void DeactiveByReady()
     {
         // readyButton.interactable = false;
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    private void RpcSendSelectedMap(string name, bool isCustom, long mapId)
+    {
+        MapId map = new MapId(isCustom ? MapInfo.MapType.Custom : MapInfo.MapType.Default, mapId);
+        if (!seletedMaps.ContainsKey(name))
+            seletedMaps.Add(name, map);
+        else
+            seletedMaps[name] = map;
+        Debug.Log($"PlayReadRoom.RpcSendSelectedMap: {name} - {map.mapId} ({map.mapType})");
     }
 
     private void ActiveStart() {
@@ -134,6 +151,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
         _fmodTriggerOneshotManager.TriggerOneshot(playReadyConfirmEvent);
         getLP.GetResponse();
         cts.Cancel();
+        LoadFindPhotoMap.maps = seletedMaps;
         SceneManager.Instance.MoveScene("FindPhoto");
     }
 }

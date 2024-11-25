@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Common;
+using Common.Network;
 using Cysharp.Threading.Tasks;
 using Fusion;
 using Map;
@@ -11,7 +13,7 @@ public class LoadFindPhotoMap : NetworkBehaviour
     [SerializeField] private Transform mapsObject;
 
     [HideInInspector] public bool isLoading;
-
+    public static Dictionary<string, MapId> maps;
     public override void Spawned()
     {
         isLoading = true;
@@ -33,7 +35,56 @@ public class LoadFindPhotoMap : NetworkBehaviour
 
     private async UniTask<List<MapInfo>> LoadMapInfos()
     {
-        return await MapManager.Instance.LoadMapList(new User());
+        List<string> userIds = new List<string>();
+        foreach (var connection  in Connection.list)
+        {
+            userIds.Add(connection.playerEmail);
+        }
+
+        List<UniTask> tasks = new List<UniTask>();
+        List<MapInfo> mapInfos = new List<MapInfo>();
+        foreach (var key in maps.Keys)
+        {
+            if (!userIds.Contains(key))
+                continue;
+            if (maps[key].mapType == MapInfo.MapType.Default)
+                tasks.Add(LoadDefaultMapInfo(mapInfos, maps[key].mapId));
+            else
+                tasks.Add(LoadCustomMapInfo(mapInfos, maps[key].mapId));
+        }
+
+        if (tasks.Count < 4)
+        {
+            for (int i = tasks.Count; i <= 4; i++)
+            {
+                tasks.Add(LoadDefaultMapInfo(mapInfos, i));
+            }
+        }
+        
+        await UniTask.WhenAll(tasks);
+        mapInfos.Sort((a, b) =>
+        {
+            if (a.id == b.id)
+            {
+                return a.type == MapInfo.MapType.Default ? -1 : 1;
+            }
+            else
+            {
+                return a.id.CompareTo(b.id);
+            }
+            
+        });
+        
+        return mapInfos;
+    }
+
+    private async UniTask LoadDefaultMapInfo(List<MapInfo> mapInfos, long mapId)
+    {
+        mapInfos.Add(await MapManager.Instance.LoadDefaultMapInfoFromServer(mapId));
+    }
+    private async UniTask LoadCustomMapInfo(List<MapInfo> mapInfos, long mapId)
+    {
+        mapInfos.Add(await MapManager.Instance.LoadCustomMapInfoFromServer(mapId));
     }
 
     private async UniTask ConcreteMaps(List<MapInfo> mapInfos)

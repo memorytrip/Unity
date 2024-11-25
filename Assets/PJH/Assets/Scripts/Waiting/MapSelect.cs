@@ -21,11 +21,12 @@ public class MapSelectionController : MonoBehaviour
     private int totalPages;
     private float initialPosition;
     private int currentPage = 0;
+    private List<MapInfo> mapList;
 
     private void Start()
     {
         initialPosition = scrollRect.content.anchoredPosition.x;
-        UpdateArrowButtons();
+        // UpdateArrowButtons();
         //scrollRect.content.sizeDelta = new Vector2(800 * totalPages, 700f);
         leftArrowButton.onClick.AddListener(PreviousPage);
         rightArrowButton.onClick.AddListener(NextPage);
@@ -36,7 +37,7 @@ public class MapSelectionController : MonoBehaviour
     private async UniTaskVoid InitMapList()
     {
         User user = SessionManager.Instance.currentUser;
-        List<MapInfo> mapList = await MapManager.Instance.LoadMapList(user);
+        mapList = await MapManager.Instance.LoadMapList(user);
 
         List<UniTask> tasks = new List<UniTask>(mapList.Count);
         foreach (var mapInfo in mapList)
@@ -55,6 +56,11 @@ public class MapSelectionController : MonoBehaviour
         image.sprite = await MapManager.Instance.LoadMapThumbnail(mapInfo);
         if (image.sprite == null)
             image.sprite = EmptySprite; 
+    }
+
+    public MapId GetSelectedMapId()
+    {
+        return new MapId(mapList[currentPage].type, mapList[currentPage].id);
     }
 
     void NextPage()
@@ -90,5 +96,6 @@ public class MapSelectionController : MonoBehaviour
     {
         leftArrowButton.interactable = currentPage > 0;
         rightArrowButton.interactable = currentPage < totalPages - 1;
+        Debug.Log($"MapSelect.UpdateArrowButtons selectedMapId: {GetSelectedMapId().mapId}");
     }
 }   
