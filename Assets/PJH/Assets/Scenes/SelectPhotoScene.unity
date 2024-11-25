@@ -749,8 +749,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1020152441}
+  m_Children: []
   m_Father: {fileID: 1512250368}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7, y: 0.7}
@@ -1360,10 +1359,10 @@ RectTransform:
   - {fileID: 1361575651}
   m_Father: {fileID: 1048071193}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.7, y: 0.3}
+  m_AnchorMax: {x: 0.9, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 480, y: 120}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &657136692
 MonoBehaviour:
@@ -1409,7 +1408,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1089803803}
+      - m_Target: {fileID: 1971088428}
         m_TargetAssemblyTypeName: VideoLoadStart, Assembly-CSharp
         m_MethodName: RpcVideoLoadButtonClicked
         m_Mode: 1
@@ -2234,12 +2233,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1665169774}
-  m_Father: {fileID: 377839364}
+  m_Father: {fileID: 1048071193}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -463, y: -200}
-  m_SizeDelta: {x: 720, y: 240}
+  m_AnchorMin: {x: 0.2, y: 0.4}
+  m_AnchorMax: {x: 0.5, y: 0.8}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 360, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1020152442
 MonoBehaviour:
@@ -2338,7 +2337,7 @@ MonoBehaviour:
   m_KeepTextSelectionVisible: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
-  m_LineLimit: 0
+  m_LineLimit: 10
   isAlert: 0
   m_InputValidator: {fileID: 0}
   m_ShouldActivateOnSelect: 1
@@ -2565,9 +2564,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 657136691}
+  - {fileID: 1020152441}
   m_Father: {fileID: 1512250368}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.7, y: 0}
+  m_AnchorMin: {x: 0.62, y: 0}
   m_AnchorMax: {x: 1, y: 0.2}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -2770,7 +2770,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1089803802}
-  - component: {fileID: 1089803803}
   - component: {fileID: 1089803804}
   m_Layer: 0
   m_Name: WebSocket
@@ -2794,18 +2793,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1089803803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089803801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cb538f5c69c09b428f3de2f2402c258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1089803804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4512,6 +4499,7 @@ GameObject:
   - component: {fileID: 1971088425}
   - component: {fileID: 1971088426}
   - component: {fileID: 1971088427}
+  - component: {fileID: 1971088428}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4649,6 +4637,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 1971088425}
   - {fileID: 1971088427}
+  - {fileID: 1971088428}
   - {fileID: 377839367}
 --- !u!114 &1971088427
 MonoBehaviour:
@@ -4681,6 +4670,18 @@ MonoBehaviour:
   - {fileID: 2041811395}
   - {fileID: 1038316128}
   - {fileID: 1563233175}
+--- !u!114 &1971088428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971088419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb538f5c69c09b428f3de2f2402c258, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1982486120
 GameObject:
   m_ObjectHideFlags: 0

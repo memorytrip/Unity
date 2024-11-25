@@ -44,7 +44,7 @@ public class UploadPhoto : MonoBehaviour
 
         byte[] fileData = await File.ReadAllBytesAsync(path);
         string filename = Path.GetFileName(path).Split('.')[0];
-        string savePath = Application.persistentDataPath + "/Image"; //안드로이드는 Application.temporaryCachePath이라고함 (팩트 체크 필요)
+        string savePath = Application.persistentDataPath + "/Image";
         Debug.Log("경로:" + savePath);
 
         if (!Directory.Exists(savePath))

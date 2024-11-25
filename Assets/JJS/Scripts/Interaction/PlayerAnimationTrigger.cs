@@ -38,8 +38,21 @@ public class PlayerAnimationTrigger : NetworkBehaviour
     private IEnumerator PlayerStop()
     {
         _playerMovement.enabled = false;
-        _animator.SetTrigger(Pickup);
+        // _animator.SetTrigger(Pickup);
+        RpcAnimSetTrigger(Pickup);
         yield return new WaitForSeconds(3.5f);
         _playerMovement.enabled = true;
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RpcAnimSetTrigger(int triggerId)
+    {
+        _animator.SetTrigger(triggerId);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RpcAnimSetBool(int booleanId, bool value)
+    {
+        _animator.SetBool(booleanId, value);
     }
 }

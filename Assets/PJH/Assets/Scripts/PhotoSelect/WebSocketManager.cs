@@ -12,7 +12,7 @@ public class WebSocketManager : MonoBehaviour
     public static WebSocketManager Instance => _instance;
 
     private WebSocket _webSocket;
-    private string _url = "ws://memorytrip-env.eba-73mrisxy.ap-northeast-2.elasticbeanstalk.com/ws?token=";// 서버 URL
+    private string _url = "ws://125.132.216.190:17778/ws?token=";// "ws://memorytrip-env.eba-73mrisxy.ap-northeast-2.elasticbeanstalk.com/ws?token=";// 서버 URL
     public bool IsConnected => _webSocket != null && _webSocket.ReadyState == WebSocketState.Open;
 
     private void Awake()
@@ -62,16 +62,8 @@ public class WebSocketManager : MonoBehaviour
         //서버에서 메시지를 받았을 때 호출
         _webSocket.OnMessage += (sender, e) =>
         {
-            if (e.IsBinary) // 바이너리 데이터 확인
-            {
-                byte[] videoData = e.RawData; // 영상 데이터
-                Debug.Log($"Received video data of length: {videoData.Length}");
-                SaveAndPlayVideo(videoData);
-            }
-            else
-            {
-                Debug.Log($"Received text data: {e.Data}");
-            }
+            Debug.Log("소켓 정보가 넘어옴:" + e.Data);
+            //SaveAndPlayVideo(e.Data);
         };
 
         //오류가 발생하면 호출
