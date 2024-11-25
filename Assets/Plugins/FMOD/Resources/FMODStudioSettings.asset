@@ -600,7 +600,7 @@ MonoBehaviour:
   HasSourceProject: 0
   HasPlatforms: 0
   sourceProjectPath: 
-  sourceBankPath: ../../Documents/FMOD Studio/MTVS3_MemoryTrip/Build/Mobile
+  sourceBankPath: FmodBuild/Mobile
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -622,13 +622,13 @@ MonoBehaviour:
   RealChannelSettings: []
   Plugins: []
   MasterBanks:
-  - Master
+  - Mobile/Master
   Banks:
-  - Ambience
-  - BGM
-  - SFX
-  - SFX_Player
-  - UI
+  - Mobile/Ambience
+  - Mobile/BGM
+  - Mobile/SFX
+  - Mobile/SFX_Player
+  - Mobile/UI
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
