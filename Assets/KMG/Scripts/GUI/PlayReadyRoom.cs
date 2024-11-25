@@ -152,6 +152,10 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
         getLP.GetResponse();
         cts.Cancel();
         LoadFindPhotoMap.maps = seletedMaps;
+        foreach (var map in seletedMaps)
+        {
+            Debug.Log($"PlayReadyRoom.RpcGameStart: {map.Key} - {map.Value.mapId} {map.Value.mapType}");
+        }
         SceneManager.Instance.MoveScene("FindPhoto");
     }
 }

@@ -163,5 +163,6 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     private void ShowScreen()
     {
         helpPopup.alpha = 0f;
+        EventManager.Instance.LoadCompleteMap -= ShowScreen;
     }
 }

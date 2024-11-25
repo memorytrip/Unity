@@ -70,10 +70,10 @@ public class PlayerMovement : NetworkBehaviour
         _chatDisplay = FindAnyObjectByType<ChatDisplay>();
         _chatDisplay.ChangeTypingState += ToggleMovement;
         _chatDisplay.StopTyping += ToggleMovement;
-        if (SceneManager.GetActiveScene().name == SceneName.FindPhoto)
-        {
-            EventManager.Instance.OnMapLoadedComplete();
-        }
+        // if (SceneManager.GetActiveScene().name == SceneName.FindPhoto)
+        // {
+        //     EventManager.Instance.OnMapLoadedComplete();
+        // }
         StartCoroutine(WaitUntilTransitionEnd());
     }
 

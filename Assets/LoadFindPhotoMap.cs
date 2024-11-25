@@ -31,6 +31,7 @@ public class LoadFindPhotoMap : NetworkBehaviour
     private void LoadCompleteRpc()
     {
         isLoading = false;
+        EventManager.Instance.OnMapLoadedComplete();
     }
 
     private async UniTask<List<MapInfo>> LoadMapInfos()
@@ -39,12 +40,14 @@ public class LoadFindPhotoMap : NetworkBehaviour
         foreach (var connection  in Connection.list)
         {
             userIds.Add(connection.playerEmail);
+            Debug.Log($"LoadFindPhotoMap: userIds : {connection.playerEmail}");
         }
 
         List<UniTask> tasks = new List<UniTask>();
         List<MapInfo> mapInfos = new List<MapInfo>();
         foreach (var key in maps.Keys)
         {
+            Debug.Log($"LoadFindPhotoMap: maps.key : {key}");
             if (!userIds.Contains(key))
                 continue;
             if (maps[key].mapType == MapInfo.MapType.Default)
