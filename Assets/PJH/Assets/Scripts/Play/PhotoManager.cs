@@ -6,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using FMODUnity;
 using UnityEngine;
 using Fusion;
+using GUI;
 using TMPro;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -26,14 +27,15 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     [SerializeField] private GameObject photoGround;
     [SerializeField] private Button skipButton;
     [SerializeField] private GameObject creditParticle;
-    [SerializeField] private CanvasGroup helpPopup;
+    // [SerializeField] private CanvasGroup helpPopup;
+    [SerializeField] private FadeController helpPopup;
 
     private const string PhotoCountText = "내가 찾은 사진: ";
 
     void Start()
     {
         EventManager.Instance.LoadCompleteMap += ShowScreen;
-        helpPopup.alpha = 1f;
+        StartCoroutine(helpPopup.FadeIn(0f));
         EventManager.Instance.AddListener(EventType.eRaycasting, this);
         photoPositions = new Dictionary<int, Vector3>();
         skipButton.onClick.AddListener(() =>
@@ -162,7 +164,8 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
 
     private void ShowScreen()
     {
-        helpPopup.alpha = 0f;
+        // helpPopup.alpha = 0f;
+        StartCoroutine(helpPopup.FadeOut(1f));
         EventManager.Instance.LoadCompleteMap -= ShowScreen;
     }
 }
