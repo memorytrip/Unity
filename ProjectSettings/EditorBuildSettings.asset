@@ -18,9 +18,6 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
-    path: Assets/JJS/Scenes/testSquare.unity
-    guid: 45ad38d5a2f1d54428cfe14a7248f941
-  - enabled: 0
     path: Assets/PJH/Assets/Scenes/UserNickNameTest.unity
     guid: 60b1374ea152270418df4762e3535b66
   - enabled: 0
