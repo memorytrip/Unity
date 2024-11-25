@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class PlayerAnimationTrigger : NetworkBehaviour
 {
     private static readonly int Pickup = Animator.StringToHash("Pickup");
-    private Animator _animator;
+    private NetworkMecanimAnimator _animator;
     private PlayerMovement _playerMovement;
 
     public override void Spawned()
     {
-        _animator = GetComponent<Animator>();
+        _animator = GetComponent<NetworkMecanimAnimator>();
         _playerMovement = GetComponentInParent<PlayerMovement>();
         ConnectToButton();
     }

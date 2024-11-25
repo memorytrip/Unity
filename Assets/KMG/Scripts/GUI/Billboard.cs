@@ -6,8 +6,7 @@ public class Billboard : MonoBehaviour
     private Canvas canvas;
     
     void Start()
-    {
-        mainCam = Camera.main.transform;
+    { mainCam = Camera.main.transform;
         canvas = GetComponent<Canvas>();
         canvas.worldCamera = Camera.main;
     }

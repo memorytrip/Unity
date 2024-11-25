@@ -18,7 +18,7 @@ public class VideoLoadStart : NetworkBehaviour
         }
     }
     
-    [Rpc(RpcSources.StateAuthority,RpcTargets.All)]
+    [Rpc(RpcSources.All,RpcTargets.All)]
     public void RpcVideoLoadButtonClicked()
     {
         Debug.Log("버튼이 눌렸습니다");

@@ -45,7 +45,7 @@ public class PlayerMovement : NetworkBehaviour
     private readonly WaitForSeconds _wait = new WaitForSeconds(2f);
     
     [Header("Animation")]
-    [SerializeField] private Animator animator;
+    [SerializeField] private NetworkMecanimAnimator animator;
 
     private bool isRestricted = false;
 
@@ -56,7 +56,7 @@ public class PlayerMovement : NetworkBehaviour
         //_playerInput = GetComponent<PlayerInput>();
         cc = GetComponent<CharacterController>();
         cc.enabled = false;
-        //networkanim = GetComponentInChildren<NetworkMecanimAnimator>();
+        animator = GetComponentInChildren<NetworkMecanimAnimator>();
         playerCamera = Camera.main;
         boxSize = new Vector3(1f, 1f, 1f);
     }
@@ -130,12 +130,12 @@ public class PlayerMovement : NetworkBehaviour
         // if (joystick.isInput)
         if (InputManager.Instance.moveAction.ReadValue<Vector2>().magnitude <= 0f)
         {
-            animator.SetBool(IsMoving, false);
+            animator.Animator.SetBool(IsMoving, false);
             _playerMoveSpeed = 0f;
         }
         else
         {
-            animator.SetBool(IsMoving, true);
+            animator.Animator.SetBool(IsMoving, true);
             _playerMoveSpeed = playerMoveSpeed;
         }
         cc.Move(new Vector3(playerDir.x * _playerMoveSpeed, velocity, playerDir.z * _playerMoveSpeed) * Time.fixedDeltaTime);
