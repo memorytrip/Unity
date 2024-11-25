@@ -1167,7 +1167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e9ddc06a2c20f4fbce77d409aed621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  readyButton: {fileID: 122946297}
 --- !u!114 &342640186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3697,7 +3696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.71785647, g: 0.94609153, b: 0.78683573, a: 1}
+  m_Color: {r: 0.94509804, g: 0.7176471, b: 0.86790144, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
