@@ -8,7 +8,6 @@ using Debug = UnityEngine.Debug;
 
 public class GetLetterAndPhoto : MonoBehaviour
 {
-    public Button readyButton;
     private string endPoint = "api/photos/room/";
     private string roomCode;
 
