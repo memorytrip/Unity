@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Common;
+using Common.Network;
 using Cysharp.Threading.Tasks;
 using Map;
 using Map.Editor;
@@ -41,8 +42,7 @@ namespace GUI
             await WriteMapToFile();
             string response = await UploadMap();
             CreateMapResponse res = JsonConvert.DeserializeObject<CreateMapResponse>(response);
-            LoadMyroom.mapId = res.customMapId;
-            LoadMyroom.mapType = MapInfo.MapType.Custom;
+            SetHome(res.customMapId);
             User user = Common.Network.SessionManager.Instance.currentSession.user;
             SceneManager.Instance.MoveRoom($"player_{user.nickName}").Forget();
         }
@@ -56,6 +56,13 @@ namespace GUI
             formdata.Add(new MultipartFormDataSection("data", data, "application/json"));
             formdata.Add(new MultipartFormFileSection("thumbnail", mapInfo.thumbnail, $"thumbnail{Guid.NewGuid().ToString()}", ""));
             return await DataManager.Post($"/api/custom-map/create/{originMapId}", formdata);
+        }
+        
+        private void SetHome(long mapId) => SetHomeProcess(mapId).Forget();
+
+        private async UniTaskVoid SetHomeProcess(long mapId)
+        {
+            await DataManager.Post($"/api/main-map/custom-map/{mapId}");
         }
 
         private async UniTask WriteMapToFile()

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Common;
+using Common.Network;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -119,18 +120,23 @@ namespace Map
             return await LoadCustomMapInfoFromServer(mapId);
         }
         
-    #region LoadDefaultMapInfo
+    #region LoadMapInfo
         public async UniTask<MapInfo> LoadDefaultMapInfoFromServer(long mapId)
         {
             string rawData = await DataManager.Get($"/api/map/{mapId}");
             MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(rawData);
             return mapInfo;
         }
-    #endregion
-    #region LoadCustomMapInfo
         public async UniTask<MapInfo> LoadCustomMapInfoFromServer(long mapId)
         {
             string rawData = await DataManager.Get($"/api/custom-map/{mapId}");
+            MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(rawData);
+            return mapInfo;
+        }
+
+        public async UniTask<MapInfo> LoadMyroomMapInfoFromServer(string nickName)
+        {
+            string rawData = await DataManager.Get($"/api/main-map/{nickName}");
             MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(rawData);
             return mapInfo;
         }

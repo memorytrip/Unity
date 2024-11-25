@@ -79,7 +79,7 @@ namespace Common.Network
                     LoadFindPhotoMap loadmap = FindAnyObjectByType<LoadFindPhotoMap>();
                     await UniTask.WaitWhile(() => loadmap.isLoading);
                     
-                    await UniTask.Delay(TimeSpan.FromSeconds(5.0f));
+                    await UniTask.Delay(TimeSpan.FromSeconds(2.0f));
                     currenctCharacter = await SpawnProcess(PrefabName.Player, new Vector3(0, 5, 0), Quaternion.identity);
                     currenctCharacter.transform.Find("Scale").transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     break;

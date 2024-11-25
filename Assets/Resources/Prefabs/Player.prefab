@@ -629,7 +629,7 @@ MonoBehaviour:
   boxSize: {x: 0, y: 0, z: 0}
   maxDistance: 1
   screenshotCamPosition: {fileID: 6470807958865917543}
-  animator: {fileID: 6409026399683123850}
+  animationTrigger: {fileID: 1792731976329578246}
 --- !u!114 &4751748418977364367
 MonoBehaviour:
   m_ObjectHideFlags: 0

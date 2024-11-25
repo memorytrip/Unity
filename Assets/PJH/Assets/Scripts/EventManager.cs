@@ -85,16 +85,16 @@ public class EventManager : MonoBehaviour
 
     public void OnMapLoadedComplete()
     {
-        LoadCompleteMap?.Invoke();
         Debug.Log("Map has finished loading");
+        LoadCompleteMap?.Invoke();
     }
 
     public event Action<int> FindPhoto;
 
     public void OnPhotoFound(int count)
     {
-        FindPhoto?.Invoke(count);
         Debug.Log("Photo found");
+        FindPhoto?.Invoke(count);
     }
 
     public event Action TriggerYggdrasil;
