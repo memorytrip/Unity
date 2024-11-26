@@ -9,6 +9,7 @@ using STOP_MODE = FMOD.Studio.STOP_MODE;
 public class CustomFmodBgmManager : StudioEventEmitter
 {
     private EventInstance _eventInstance;
+
     // TODO: 흐어아아아아 정확하게 어디에다 뭐 쓸지 정리하기
     [SerializeField] private EventReference loginEvent;
     [SerializeField] private EventReference mainEvent;
@@ -17,17 +18,24 @@ public class CustomFmodBgmManager : StudioEventEmitter
     [SerializeField] private EventReference playEvent;
     [SerializeField] private EventReference yggdrasilEvent;
     [SerializeField] private EventReference postPlayEvent;
-    private static CustomFmodBgmManager _instance;
-    
+    public static CustomFmodBgmManager Instance;
+
+    /*private bool _isPlaying(EventInstance eventInstance)
+    {
+        PLAYBACK_STATE state;
+        eventInstance.getPlaybackState(out state);
+        return state != PLAYBACK_STATE.STOPPED;
+    }*/
+
     private void Awake()
     {
-        if (_instance != null)
+        if (Instance != null)
         {
             Destroy(this);
         }
         else
         {
-            _instance = this;
+            Instance = this;
             DontDestroyOnLoad(this);
         }
 
@@ -46,7 +54,7 @@ public class CustomFmodBgmManager : StudioEventEmitter
             _eventInstance.stop(STOP_MODE.ALLOWFADEOUT);
             _eventInstance.release();
         }
-        
+
         switch (scene.name)
         {
             case SceneName.EmptyScene:
@@ -102,7 +110,7 @@ public class CustomFmodBgmManager : StudioEventEmitter
     {
         StartCoroutine(StartCountdown());
     }
-    
+
     private IEnumerator StartCountdown()
     {
         yield return ParameterNameCache.WaitLonger; // TODO: 로딩 완료됐을 때
@@ -111,5 +119,25 @@ public class CustomFmodBgmManager : StudioEventEmitter
         RuntimeManager.StudioSystem.getParameterByName(ParameterNameCache.PlayStarted, out float value3);
         float data3 = value3;
         Debug.Log($"EventInstance: {data3}");
+    }
+
+    public void ResumePlayback()
+    {
+        if (!_eventInstance.isValid())
+        {
+            return;
+        }
+
+        _eventInstance.start();
+    }
+    
+    public void StopPlayback()
+    {
+        if (!_eventInstance.isValid())
+        {
+            return;
+        }
+
+        _eventInstance.stop(STOP_MODE.ALLOWFADEOUT);
     }
 }
