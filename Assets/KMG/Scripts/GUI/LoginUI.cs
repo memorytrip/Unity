@@ -122,6 +122,7 @@ namespace GUI
             }
             catch (UnityWebRequestException e)
             {
+                
                 Debug.LogAssertion(e.Message);
                 if (e.ResponseHeaders != null && e.ResponseHeaders["Content-Type"] == "application/json")
                 {
@@ -143,8 +144,8 @@ namespace GUI
             }
             catch (Exception e)
             { 
-                OpenPopupPanel(e.Message);
                 Debug.LogAssertion(e);
+                OpenPopupPanel(e.Message);
                 loginButton.interactable = true;
                 closeLoginPanelButton.interactable = true;
             }
@@ -167,11 +168,15 @@ namespace GUI
             catch (UnityWebRequestException e)
             {
                 Debug.LogAssertion(e.Message);
-                ErrorResult error = JsonConvert.DeserializeObject<ErrorResult>(e.Text);
-                if (error != null)
+                if (e.ResponseHeaders != null && e.ResponseHeaders["Content-Type"] == "application/json")
+                {
+                    ErrorResult error = JsonConvert.DeserializeObject<ErrorResult>(e.Text);
                     OpenPopupPanel(error.response);
-                else 
-                    OpenPopupPanel(e.Message);
+                }
+                else
+                {
+                    OpenPopupPanel(e.Error);   
+                }
                 signUpButton.interactable = true;
                 closeSignupPanelButton.interactable = true;
                 return;
