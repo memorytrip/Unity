@@ -190,7 +190,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         this.enabled = !isTyping;
         Debug.Log("이건 타이핑중인지 확인하는 것이여: " + isTyping);
-        /*if (isTyping)
+        if (isTyping)
         {
             // _playerInput.DeactivateInput();
             isRestricted = true;
@@ -198,10 +198,10 @@ public class PlayerMovement : NetworkBehaviour
         }
         else
         {
-            _playerInput.ActivateInput();
+            //_playerInput.ActivateInput();
             isRestricted = false;
             Debug.Log("얼음 -> 땡");
-        }*/
+        }
     }
 
     private IEnumerator WaitUntilTransitionEnd()
