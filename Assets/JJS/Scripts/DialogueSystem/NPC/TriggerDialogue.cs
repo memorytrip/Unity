@@ -38,6 +38,7 @@ public class TriggerDialogue : MonoBehaviour, IClickable3dObject
         if (other.gameObject.CompareTag("Player"))
         {
             CanTalk = true;
+            Debug.Log("CanTalk: " + CanTalk);
         }
     }
 
@@ -46,6 +47,7 @@ public class TriggerDialogue : MonoBehaviour, IClickable3dObject
         if (other.gameObject.CompareTag("Player"))
         {
             CanTalk = false;
+            Debug.Log("CanTalk: " + CanTalk);
         }
     }
 }

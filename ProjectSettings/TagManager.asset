@@ -8,6 +8,7 @@ TagManager:
   - FusionConnector
   - Yggdrasil
   - MapEditRotationButton
+  - Touchable
   layers:
   - Default
   - TransparentFX
