@@ -70,7 +70,7 @@ public class PlayerMovement : NetworkBehaviour
         
         _chatDisplay = FindAnyObjectByType<ChatDisplay>();
         _chatDisplay.ChangeTypingState += ToggleMovement;
-        _chatDisplay.StopTyping += ToggleMovement;
+        // _chatDisplay.StopTyping += ToggleMovement;
         // if (SceneManager.GetActiveScene().name == SceneName.FindPhoto)
         // {
         //     EventManager.Instance.OnMapLoadedComplete();
@@ -186,11 +186,12 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     // 텍스트창 입력 시 움직임 금지
+    // 모바일에선 사실 필요없지 않나..?
     private void ToggleMovement(bool isTyping)
     {
-        this.enabled = !isTyping;
-        Debug.Log("이건 타이핑중인지 확인하는 것이여: " + isTyping);
-        if (isTyping)
+        // this.enabled = !isTyping;
+        // Debug.Log("이건 타이핑중인지 확인하는 것이여: " + isTyping);
+        /*if (isTyping)
         {
             // _playerInput.DeactivateInput();
             isRestricted = true;
@@ -198,10 +199,10 @@ public class PlayerMovement : NetworkBehaviour
         }
         else
         {
-            //_playerInput.ActivateInput();
+            _playerInput.ActivateInput();
             isRestricted = false;
             Debug.Log("얼음 -> 땡");
-        }
+        }*/
     }
 
     private IEnumerator WaitUntilTransitionEnd()
@@ -222,6 +223,6 @@ public class PlayerMovement : NetworkBehaviour
     {
         InputManager.Instance.jumpAction.started -= PlayerJump;
         _chatDisplay.ChangeTypingState -= ToggleMovement;
-        _chatDisplay.StopTyping -= ToggleMovement;
+        // _chatDisplay.StopTyping -= ToggleMovement;
     }
 }
