@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 1197652579}
+  m_SkyboxMaterial: {fileID: 2131871928}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -93,7 +93,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 106d1ca7c14e2a9448b78b58645c5c21, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -129,6 +129,10 @@ PrefabInstance:
     - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_01_Atlased (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7289984923189017737, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_LocalScale.x
@@ -208,6 +212,10 @@ PrefabInstance:
     - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_Name
       value: autumn tree 5 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
@@ -343,6 +351,10 @@ PrefabInstance:
     - target: {fileID: 2713783254671742911, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_04_Atlased (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2713783254671742911, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1103523243451429473, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
@@ -661,6 +673,10 @@ PrefabInstance:
     - target: {fileID: 6120144308357302858, guid: 4447bb5f54a0b9241b89d74a01769471, type: 3}
       propertyPath: m_Name
       value: Yggdrasil_Star_L
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399500637841493416, guid: 4447bb5f54a0b9241b89d74a01769471, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1017,6 +1033,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 5 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -1095,6 +1115,10 @@ PrefabInstance:
     - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_Name
       value: autumn bush plant (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2913012183363083462, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_LocalScale.x
@@ -1527,6 +1551,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 4 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -1605,6 +1633,10 @@ PrefabInstance:
     - target: {fileID: 1514677486967239194, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_05_Atlased (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514677486967239194, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9214796416979054365, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
       propertyPath: m_LocalScale.x
@@ -1748,6 +1780,10 @@ PrefabInstance:
     - target: {fileID: 4679599283527892706, guid: 356ed9f30e6829645a5a6083b2b3eb10, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679599283527892706, guid: 356ed9f30e6829645a5a6083b2b3eb10, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7468128333364004168, guid: 356ed9f30e6829645a5a6083b2b3eb10, type: 3}
@@ -1921,6 +1957,10 @@ PrefabInstance:
     - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_Name
       value: autumn tree 2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5570307998540118203, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_LocalScale.x
@@ -2172,6 +2212,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 5 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -2367,7 +2411,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &158143744
 BoxCollider:
@@ -2482,8 +2526,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158933381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -171}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1243.9}
+  m_LocalScale: {x: 1.641977, y: 1.641977, z: 1.641977}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1273621584}
@@ -2497,7 +2541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -60, y: 298}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &162602266
@@ -2511,6 +2555,10 @@ PrefabInstance:
     - target: {fileID: 1210702596419934239, guid: 03e6ed1627ff4b244bfad3c50e71c147, type: 3}
       propertyPath: m_Name
       value: Vegetation_New_Flower_Blue_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210702596419934239, guid: 03e6ed1627ff4b244bfad3c50e71c147, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1210702596420355135, guid: 03e6ed1627ff4b244bfad3c50e71c147, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2606,6 +2654,10 @@ PrefabInstance:
     - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_Name
       value: fence_wood_half1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1087631447887063790, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2814,6 +2866,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_02_Atlased (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 630031024921447018, guid: 11b53cf0213acff489bf853544af2908, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4328760114007771333, guid: 11b53cf0213acff489bf853544af2908, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -2924,6 +2980,10 @@ PrefabInstance:
     - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_Name
       value: autumn tree 5 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
@@ -3055,6 +3115,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_03_Atlased (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4491171972651745013, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
     m_RemovedGameObjects: []
@@ -3117,8 +3181,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 0.39340377, g: 0.39659905, b: 0.51482475, a: 1}
-  m_Intensity: 1.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3180,13 +3244,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203844586}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.35726574, y: 0.3310888, z: -0.13714148, w: 0.86251587}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_Father: {fileID: 407738086}
+  m_LocalEulerAnglesHint: {x: 45, y: 42, z: 0}
 --- !u!1001 &218403614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3198,6 +3262,10 @@ PrefabInstance:
     - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_Name
       value: autumn tree (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
@@ -3277,6 +3345,10 @@ PrefabInstance:
     - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_Name
       value: autumn bush plant (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2913012183363083462, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_LocalScale.x
@@ -3395,6 +3467,10 @@ PrefabInstance:
     - target: {fileID: 4982305070342288386, guid: 7cf39d5fb04f44b46a826050dc82e4f5, type: 3}
       propertyPath: m_Name
       value: Mascot
+      objectReference: {fileID: 0}
+    - target: {fileID: 5689292852202286357, guid: 7cf39d5fb04f44b46a826050dc82e4f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3613,6 +3689,10 @@ PrefabInstance:
     - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_03_Atlased (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4491171972651745013, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
@@ -3863,6 +3943,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 4 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -4058,6 +4142,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 5 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -4192,6 +4280,10 @@ PrefabInstance:
     - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_03_Atlased (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4491171972651745013, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
@@ -4571,6 +4663,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_04_Atlased
       objectReference: {fileID: 0}
+    - target: {fileID: 2713783254671742911, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1103523243451429473, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
     m_RemovedGameObjects: []
@@ -4593,6 +4689,10 @@ PrefabInstance:
     - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_Name
       value: autumn tree 5 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
@@ -4729,6 +4829,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_04_Atlased (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2713783254671742911, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1103523243451429473, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
     m_RemovedGameObjects: []
@@ -4751,6 +4855,10 @@ PrefabInstance:
     - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_Name
       value: autumn tree 5 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
@@ -4830,6 +4938,10 @@ PrefabInstance:
     - target: {fileID: 8986602848566553094, guid: 8da0822cf7d7c06478b4b9256587880c, type: 3}
       propertyPath: m_Name
       value: Vegetation_New_Flower_Yellow_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986602848566553094, guid: 8da0822cf7d7c06478b4b9256587880c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8986602848566720038, guid: 8da0822cf7d7c06478b4b9256587880c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4981,6 +5093,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_04_Atlased (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2713783254671742911, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1103523243451429473, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
     m_RemovedGameObjects: []
@@ -5003,6 +5119,10 @@ PrefabInstance:
     - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_Name
       value: autumn bush plant 3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4292897080028621672, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_LocalScale.x
@@ -5137,6 +5257,10 @@ PrefabInstance:
     - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_03_Atlased (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4491171972651745013, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
@@ -5296,8 +5420,8 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 562785973}
-  m_PlaneDistance: 1
+  m_Camera: {fileID: 1791822497}
+  m_PlaneDistance: 24
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -5359,7 +5483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 2
-  size: {x: 159.07986, y: 46.476982, z: 157.19907}
+  size: {x: 420.81516, y: 147.26529, z: 417.01825}
   overrideRendererFilters: 0
   minRendererVolumeSize: 0.1
   objectLayerMask:
@@ -5368,25 +5492,25 @@ MonoBehaviour:
   lowestSubdivLevelOverride: 0
   highestSubdivLevelOverride: 5
   overridesSubdivLevels: 0
-  mightNeedRebaking: 1
+  mightNeedRebaking: 0
   cachedTransform:
-    e00: 0
+    e00: 1
     e01: 0
     e02: 0
-    e03: 0
+    e03: 2.9081573
     e10: 0
-    e11: 0
+    e11: 1
     e12: 0
-    e13: 0
+    e13: -50.394157
     e20: 0
     e21: 0
-    e22: 0
-    e23: 0
+    e22: 1
+    e23: -83.379
     e30: 0
     e31: 0
     e32: 0
-    e33: 0
-  cachedHashCode: 0
+    e33: 1
+  cachedHashCode: 337531648
   fillEmptySpaces: 1
   version: 2
   globalVolume: 0
@@ -5399,11 +5523,11 @@ Transform:
   m_GameObject: {fileID: 301987749}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.39648438, y: 18.238491, z: 22.40535}
+  m_LocalPosition: {x: -2.9081573, y: 50.394157, z: 83.379}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 407738086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &309231216
 GameObject:
@@ -5588,6 +5712,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 5 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -5754,6 +5882,10 @@ PrefabInstance:
     - target: {fileID: 6120144308357302858, guid: 4447bb5f54a0b9241b89d74a01769471, type: 3}
       propertyPath: m_Name
       value: Yggdrasil_Star_M
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399500637841493416, guid: 4447bb5f54a0b9241b89d74a01769471, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5922,6 +6054,10 @@ PrefabInstance:
     - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
       propertyPath: m_Name
       value: autumn tree 3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1399514182290534054, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
@@ -6129,6 +6265,10 @@ PrefabInstance:
     - target: {fileID: 7900532664266555034, guid: 1be2434408306a64192d0550f22e5053, type: 3}
       propertyPath: m_Name
       value: Vegetation_New_Flower_Blue_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7900532664266555034, guid: 1be2434408306a64192d0550f22e5053, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7900532664266777274, guid: 1be2434408306a64192d0550f22e5053, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6699,6 +6839,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 4 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -6777,6 +6921,10 @@ PrefabInstance:
     - target: {fileID: 630031024921447018, guid: 11b53cf0213acff489bf853544af2908, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_02_Atlased (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 630031024921447018, guid: 11b53cf0213acff489bf853544af2908, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4328760114007771333, guid: 11b53cf0213acff489bf853544af2908, type: 3}
       propertyPath: m_LocalScale.x
@@ -6857,6 +7005,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn bush plant 3 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4292897080028621672, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_LocalScale.x
       value: 24.747086
@@ -6935,6 +7087,10 @@ PrefabInstance:
     - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_Name
       value: autumn tree (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
@@ -7187,6 +7343,40 @@ Transform:
   m_Children:
   - {fileID: 422696635}
   m_Father: {fileID: 669486325}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &407738085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 407738086}
+  m_Layer: 0
+  m_Name: Lighting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &407738086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407738085}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 203844589}
+  - {fileID: 1160234427}
+  - {fileID: 301987751}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &413403788
 PrefabInstance:
@@ -8034,6 +8224,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_01_Atlased
       objectReference: {fileID: 0}
+    - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7289984923189017737, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -8152,6 +8346,10 @@ PrefabInstance:
     - target: {fileID: 8086221498586364182, guid: 5e2a44f177e9ba341bd373dfbcf4e063, type: 3}
       propertyPath: m_Name
       value: Vegetation_New_Flower_Pink_02_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 8086221498586364182, guid: 5e2a44f177e9ba341bd373dfbcf4e063, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6180495245288203213, guid: 5e2a44f177e9ba341bd373dfbcf4e063, type: 3}
@@ -8491,6 +8689,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 5 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -8569,6 +8771,10 @@ PrefabInstance:
     - target: {fileID: 308350464633655162, guid: 10167d5021f546242bd46535b62a1d08, type: 3}
       propertyPath: m_Name
       value: Vegetation_New_Flower_Pink_01_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 308350464633655162, guid: 10167d5021f546242bd46535b62a1d08, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1471741599587011884, guid: 10167d5021f546242bd46535b62a1d08, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8689,6 +8895,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 3 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1399514182290534054, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
     m_RemovedGameObjects: []
@@ -8711,6 +8921,10 @@ PrefabInstance:
     - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_Name
       value: autumn tree (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
@@ -8850,6 +9064,10 @@ PrefabInstance:
     - target: {fileID: 9181760741592722761, guid: e2c12a34c9ce75e45baa259093decaa9, type: 3}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9181760741592722761, guid: e2c12a34c9ce75e45baa259093decaa9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6210234424105258941, guid: e2c12a34c9ce75e45baa259093decaa9, type: 3}
@@ -9296,6 +9514,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_04_Atlased (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2713783254671742911, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1103523243451429473, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
     m_RemovedGameObjects: []
@@ -9600,6 +9822,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4253255849507083863, guid: 046a6b701d787934c9e82b7c42fcbc72, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -3102420794406621585, guid: 046a6b701d787934c9e82b7c42fcbc72, type: 3}
     m_RemovedGameObjects: []
@@ -9778,6 +10004,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fence_wood_half1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1087631447887063790, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.94
@@ -9906,6 +10136,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 2 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5570307998540118203, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -9979,6 +10213,10 @@ PrefabInstance:
     - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_Name
       value: fence_wood_half1 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1087631447887063790, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10100,6 +10338,10 @@ PrefabInstance:
     - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_03_Atlased (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4491171972651745013, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
@@ -10277,6 +10519,7 @@ MonoBehaviour:
   m_CameraType: 0
   m_Cameras:
   - {fileID: 1460367539}
+  - {fileID: 1791822497}
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -10367,7 +10610,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 15.7, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1791822494}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -5.442, y: 180, z: 0}
 --- !u!114 &562785975
@@ -10884,6 +11128,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4679599283527892706, guid: 356ed9f30e6829645a5a6083b2b3eb10, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7468128333364004168, guid: 356ed9f30e6829645a5a6083b2b3eb10, type: 3}
     m_RemovedGameObjects: []
@@ -10982,6 +11230,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yggdrasil_Star_S
       objectReference: {fileID: 0}
+    - target: {fileID: 6399500637841493416, guid: 4447bb5f54a0b9241b89d74a01769471, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11003,6 +11255,10 @@ PrefabInstance:
     - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_Name
       value: autumn tree 2 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5570307998540118203, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_LocalScale.x
@@ -11419,6 +11675,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 5 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -11497,6 +11757,10 @@ PrefabInstance:
     - target: {fileID: 4438109927028738315, guid: 8ceb1a11d04af0a45a38aa7e31e48f8a, type: 3}
       propertyPath: m_Name
       value: Vegetation_New_Flower_Yellow_02_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438109927028738315, guid: 8ceb1a11d04af0a45a38aa7e31e48f8a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6440922239905915470, guid: 8ceb1a11d04af0a45a38aa7e31e48f8a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11863,6 +12127,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 5 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -11936,6 +12204,10 @@ PrefabInstance:
     - target: {fileID: 189549257801999922, guid: af15186e771f33e44a10a34c953119db, type: 3}
       propertyPath: m_Name
       value: Vegetation_New_Flower_Yellow_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 189549257801999922, guid: af15186e771f33e44a10a34c953119db, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 189549257802234386, guid: af15186e771f33e44a10a34c953119db, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12376,6 +12648,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 2 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5570307998540118203, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -12608,6 +12884,10 @@ PrefabInstance:
     - target: {fileID: 1514677486967239194, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_05_Atlased (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514677486967239194, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9214796416979054365, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
       propertyPath: m_LocalScale.x
@@ -13088,6 +13368,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 2539925132295704237, guid: af292212e3b6bbb44b11ff88faad779e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 3460518907117115707, guid: af292212e3b6bbb44b11ff88faad779e, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -13255,6 +13539,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_03_Atlased (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4491171972651745013, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
     m_RemovedGameObjects: []
@@ -13285,7 +13573,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &769083986
 Transform:
@@ -13713,6 +14001,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 5 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -13848,6 +14140,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 3 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1399514182290534054, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
     m_RemovedGameObjects: []
@@ -13926,6 +14222,10 @@ PrefabInstance:
     - target: {fileID: 2713783254671742911, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_04_Atlased (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2713783254671742911, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1103523243451429473, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
@@ -14025,6 +14325,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -14098,6 +14402,10 @@ PrefabInstance:
     - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_Name
       value: autumn tree 4 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
@@ -14185,7 +14493,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &811606566
 Transform:
@@ -14477,6 +14785,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -14624,6 +14936,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yggdrasil_Star_L
       objectReference: {fileID: 0}
+    - target: {fileID: 6399500637841493416, guid: 4447bb5f54a0b9241b89d74a01769471, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14645,6 +14961,10 @@ PrefabInstance:
     - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_Name
       value: autumn bush plant 3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4292897080028621672, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_LocalScale.x
@@ -14841,6 +15161,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SDDWSJ
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 023001260be1efc428ad2a2ad0320105, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14949,6 +15273,10 @@ PrefabInstance:
     - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_Name
       value: autumn tree 2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5570307998540118203, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_LocalScale.x
@@ -15214,6 +15542,10 @@ PrefabInstance:
     - target: {fileID: 5482995108263362770, guid: 6b7bb86b1dda65a459d648c2889c2ff9, type: 3}
       propertyPath: m_Name
       value: Isl_1_Chicken_1 Variant (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482995108263362770, guid: 6b7bb86b1dda65a459d648c2889c2ff9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9190278828681851818, guid: 6b7bb86b1dda65a459d648c2889c2ff9, type: 3}
@@ -15718,6 +16050,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_04_Atlased (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2713783254671742911, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1103523243451429473, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
     m_RemovedGameObjects: []
@@ -15797,6 +16133,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_03_Atlased
       objectReference: {fileID: 0}
+    - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4491171972651745013, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
     m_RemovedGameObjects: []
@@ -15819,6 +16159,10 @@ PrefabInstance:
     - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_Name
       value: autumn tree 2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5570307998540118203, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_LocalScale.x
@@ -15943,6 +16287,10 @@ PrefabInstance:
     - target: {fileID: 4926602693158012265, guid: 92d204cfc7218854fb4ce1f92003650c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926602693158012265, guid: 92d204cfc7218854fb4ce1f92003650c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6454964351847452212, guid: 92d204cfc7218854fb4ce1f92003650c, type: 3}
       propertyPath: m_LocalScale.x
@@ -16353,6 +16701,10 @@ PrefabInstance:
     - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_03_Atlased (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4491171972651745013, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
@@ -16906,6 +17258,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_02_Atlased
       objectReference: {fileID: 0}
+    - target: {fileID: 630031024921447018, guid: 11b53cf0213acff489bf853544af2908, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4328760114007771333, guid: 11b53cf0213acff489bf853544af2908, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -17205,6 +17561,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fence_wood_post1_mm (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 937265137496305920, guid: d0c4d3ca239f9c14e941f697c40ac207, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6832947648649745926, guid: d0c4d3ca239f9c14e941f697c40ac207, type: 3}
     m_RemovedGameObjects: []
@@ -17283,6 +17643,10 @@ PrefabInstance:
     - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
       propertyPath: m_Name
       value: autumn tree 3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1399514182290534054, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
@@ -17495,6 +17859,10 @@ PrefabInstance:
     - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_Name
       value: fence_wood_half1 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1087631447887063790, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17775,6 +18143,7 @@ GameObject:
   - component: {fileID: 1069242894}
   - component: {fileID: 1069242893}
   - component: {fileID: 1069242892}
+  - component: {fileID: 1069242899}
   m_Layer: 0
   m_Name: Video (1)
   m_TagString: Untagged
@@ -17832,14 +18201,14 @@ VideoPlayer:
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
+  m_AudioOutputMode: 3
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
   m_Url: 
   m_EnabledAudioTracks: 
   m_DirectAudioMutes: 
   m_ControlledAudioTrackCount: 0
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 1
   m_WaitForFirstFrame: 1
@@ -17934,6 +18303,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -86.455, z: 0}
+--- !u!114 &1069242899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069242891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71385f425d0af17488ba50ae21d11b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1070347357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17997,6 +18378,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1f5af6cec8cad64498872338b93bd172, type: 3}
       propertyPath: m_Name
       value: InformationPostEdit
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1f5af6cec8cad64498872338b93bd172, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18075,6 +18460,10 @@ PrefabInstance:
     - target: {fileID: 5482995108263362770, guid: 6b7bb86b1dda65a459d648c2889c2ff9, type: 3}
       propertyPath: m_Name
       value: Isl_1_Chicken_1 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482995108263362770, guid: 6b7bb86b1dda65a459d648c2889c2ff9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9190278828681851818, guid: 6b7bb86b1dda65a459d648c2889c2ff9, type: 3}
@@ -18296,6 +18685,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 5 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -18374,6 +18767,10 @@ PrefabInstance:
     - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_Name
       value: autumn tree 2 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5570307998540118203, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_LocalScale.x
@@ -18641,6 +19038,10 @@ PrefabInstance:
     - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_Name
       value: autumn tree 5 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
@@ -18939,6 +19340,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Isl_1_Chicken_1 Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5482995108263362770, guid: 6b7bb86b1dda65a459d648c2889c2ff9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9190278828681851818, guid: 6b7bb86b1dda65a459d648c2889c2ff9, type: 3}
     m_RemovedGameObjects: []
@@ -19183,6 +19588,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_04_Atlased (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2713783254671742911, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1103523243451429473, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
     m_RemovedGameObjects: []
@@ -19250,7 +19659,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1142718139
 Transform:
@@ -19402,6 +19811,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 4 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
       value: 8
@@ -19480,6 +19893,10 @@ PrefabInstance:
     - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_Name
       value: autumn tree (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
@@ -19655,7 +20072,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 407738086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1164416378
 PrefabInstance:
@@ -19724,6 +20141,10 @@ PrefabInstance:
     - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
       propertyPath: m_Name
       value: autumn tree 3 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1399514182290534054, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
@@ -19852,6 +20273,10 @@ PrefabInstance:
     - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_Name
       value: fence_wood_half1 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1087631447887063790, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20006,6 +20431,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yggdrasil_Star_M
       objectReference: {fileID: 0}
+    - target: {fileID: 6399500637841493416, guid: 4447bb5f54a0b9241b89d74a01769471, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20106,317 +20535,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!21 &1197652579
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Sky 03
-  m_Shader: {fileID: 4800000, guid: 6fc9318f5193c094c98c0d450cd61e3b, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _BACKGROUNDMODE_COLORS
-  - _ENABLECLOUDSROTATION_ON
-  - _ENABLECLOUDS_ON
-  - _ENABLESTARSTWINKLING_ON
-  - _ENABLESTARS_ON
-  - _ENABLESUN_ON
-  m_InvalidKeywords:
-  - _DISABLEDIRECTIONLIGHT_ON
-  - _ENABLESUNMOONMASK_ON
-  - _ENABLESUNMOON_ON
-  - _USECUBEMAP_ON
-  - _USEENVIRONMENTGRADIENT_ON
-  - _USETEXTURE_ON
-  m_LightmapFlags: 0
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BackgroundCubemap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _CloudsColormap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _CloudsCubemap:
-        m_Texture: {fileID: 8900000, guid: e3373d7062a4a5044ac0f0745de6c934, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Cubemap:
-        m_Texture: {fileID: 8900000, guid: ae71550a4c81f73409f14f4d6eca2c0f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _CubemapBG:
-        m_Texture: {fileID: 8900000, guid: b8d891a789549494aaa157c0edc53a12, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MoonTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Normal:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _PatternCubemap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _PatternOverlay:
-        m_Texture: {fileID: 8900000, guid: c69467702d0928e46b7ef8101df5353f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SkyPatternOverlay:
-        m_Texture: {fileID: 8900000, guid: b8d891a789549494aaa157c0edc53a12, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Spherical:
-        m_Texture: {fileID: 2800000, guid: 61c0b9c0523734e0e91bc6043c72a490, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _StarsCubemap:
-        m_Texture: {fileID: 8900000, guid: ef37dd05448664543ab7eeb444cec2bf, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Sun:
-        m_Texture: {fileID: 2800000, guid: 19982f8bf5fa2ed42b65ac271d4f0279, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SunTexture:
-        m_Texture: {fileID: 2800000, guid: 4d70420f1a4758e469e0ac65b6df86cb, type: 3}
-        m_Scale: {x: 0, y: 0}
-        m_Offset: {x: 1, y: 1}
-    - _Tex:
-        m_Texture: {fileID: 2800000, guid: 623f215c9cf5dc04aa628d4dd7b6bd73, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture:
-        m_Texture: {fileID: 2800000, guid: 12726e6bff222df4cbbe3ebde547c297, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TextureSample0:
-        m_Texture: {fileID: 2800000, guid: 84508b93f15f2b64386ec07486afc7a3, type: 3}
-        m_Scale: {x: 4.46, y: 5.19}
-        m_Offset: {x: 0, y: 0}
-    - _TextureSample1:
-        m_Texture: {fileID: 2800000, guid: 84508b93f15f2b64386ec07486afc7a3, type: 3}
-        m_Scale: {x: 1.46, y: -1.61}
-        m_Offset: {x: 1.05, y: 3.12}
-    - _TextureSample2:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TopTexture0:
-        m_Texture: {fileID: 2800000, guid: 84508b93f15f2b64386ec07486afc7a3, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TwinklingTexture:
-        m_Texture: {fileID: 2800000, guid: 4962b985402794749902f8b024ee1934, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _scaledTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _tex:
-        m_Texture: {fileID: 2800000, guid: 12726e6bff222df4cbbe3ebde547c297, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _texcoord:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _texture:
-        m_Texture: {fileID: 2800000, guid: 64e7766099ad46747a07014e44d0aea1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BackgroundCat: 1
-    - _BackgroundExposure: 1
-    - _BackgroundMode: 0
-    - _Banner: 1
-    - _BumpScale: 1
-    - _CloudHeight: 0
-    - _CloudsAlpha: 0
-    - _CloudsCat: 1
-    - _CloudsHeight: 0.2
-    - _CloudsIntensity: 1
-    - _CloudsLitbySun: 0
-    - _CloudsRotation: 0
-    - _CloudsRotationSpeed: 1
-    - _Contrast: 0.477
-    - _Contrsat: 1
-    - _Cutoff: 0
-    - _DetailNormalMapScale: 1
-    - _DisableCloudsRotation: 0
-    - _DisableDirectionLight: 1
-    - _DisableRotation: 0
-    - _DstBlend: 0
-    - _Enable1Twinkling: 0
-    - _EnableBuiltinFog: 0
-    - _EnableClouds: 1
-    - _EnableCloudsColormap: 0
-    - _EnableCloudsRotation: 1
-    - _EnableDirectionLight: 0
-    - _EnableFogMessage: 0
-    - _EnableMoon: 0
-    - _EnablePatternOverlay: 0
-    - _EnableSkyPatternOverlay: 0
-    - _EnableStars: 1
-    - _EnableStarsRotation: 0
-    - _EnableStarsTwinkling: 1
-    - _EnableSun: 1
-    - _EnableSunMask: 0
-    - _EnableSunMoon: 1
-    - _EnableSunMoonMask: 1
-    - _EnableTwinkling: 0
-    - _EqHeight: 0.419
-    - _EquatorHeight: 0.6
-    - _EquatorSmoothness: 0.6
-    - _Exposure: 0
-    - _Fade: 0.463
-    - _Float0: 2.7
-    - _Float1: 0
-    - _Float2: 0
-    - _Float3: 8.91
-    - _Float4: -1
-    - _Float5: -0.2
-    - _Float6: 1
-    - _FogCat: 1
-    - _FogFill: 0
-    - _FogHeight: 0
-    - _FogIntensity: 0
-    - _FogSmoothness: 0.01
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _Keyword0: 0
-    - _Metallic: 0
-    - _Mode: 0
-    - _MoonCat: 1
-    - _MoonIntensity: 1
-    - _MoonSize: 0.5
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _PatternCat: 1
-    - _PatternContrast: 1
-    - _RoatationSpeed: 0.4
-    - _Rotation: 0
-    - _RotationSpeed: 0.5
-    - _SkyPatternContrast: 0.477
-    - _SkyPatternOverlay: 0
-    - _SkyboxCat: 1
-    - _SkyboxOffset: 0
-    - _SkyboxRotation: 0
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _StarsAmount: 3
-    - _StarsBottomMask: 1
-    - _StarsCat: 1
-    - _StarsHeightMask: 0.093
-    - _StarsIntensity: 2
-    - _StarsLayer: 2
-    - _StarsRotation: 360
-    - _StarsRotationSpeed: 0.5
-    - _StarsSize: 0.6
-    - _StarsSunMask: 0
-    - _SunCat: 1
-    - _SunIntensity: 1.5
-    - _SunRadiusB: 0
-    - _SunRadoisA: 0.463
-    - _SunSize: 0.5
-    - _ToggleSwitch0: 0
-    - _TwinklingContrast: 1
-    - _TwinklingSpeed: 0.05
-    - _UVSec: 0
-    - _UseCUBEMAP: 1
-    - _UseEnvironmentGradient: 1
-    - _UseSkyPatternOverlay: 0
-    - _UseTexture: 1
-    - _WaveScale: 0
-    - _WaveSpeed: 0
-    - _ZWrite: 1
-    - __dirty: 0
-    - _adf: 0
-    - _angle: 145
-    - _fresnell: 0
-    - _mip: 0
-    m_Colors:
-    - _CloudLightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _CloudShadowColor: {r: 0.33239606, g: 0.46899295, b: 0.85294116, a: 1}
-    - _CloudsLightColor: {r: 0.8602941, g: 0.8602941, b: 0.8602941, a: 1}
-    - _CloudsRotationAxis: {r: 0, g: 1, b: 0, a: 0}
-    - _CloudsShadowColor: {r: 0.48500237, g: 0.41608998, b: 0.7647059, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color0: {r: 0, g: 0.5054344, b: 1, a: 0}
-    - _Color1: {r: 1, g: 1, b: 1, a: 0}
-    - _Color2: {r: 0.059472326, g: 0.25068596, b: 0.8088235, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Eq: {r: 1, g: 0.6769777, b: 0.330882, a: 0}
-    - _EquatorColor: {r: 1, g: 0.5659999, b: 0, a: 0}
-    - _Ground: {r: 0.4779411, g: 0.43111518, b: 0.23545504, a: 0}
-    - _GroundColor: {r: 0.63235295, g: 0.72616625, b: 1, a: 0}
-    - _MoonColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Sky: {r: 0.6691177, g: 0.29519898, b: 0.29519898, a: 0}
-    - _SkyColor: {r: 0.101643614, g: 0.25647038, b: 0.6911765, a: 0}
-    - _SkyboxRotationAxis: {r: 0, g: 1, b: 0, a: 0}
-    - _Skycol: {r: 0.27941146, g: 0.64219046, b: 1, a: 0}
-    - _StarsRotationAxis: {r: 0, g: 1, b: 0, a: 0}
-    - _SunColor: {r: 1, g: 0.78676474, b: 0.91757673, a: 1}
-    - _Tint: {r: 1, g: 1, b: 1, a: 0}
-    - _Vector1: {r: 0, g: 1, b: 0, a: 0}
-    - _water: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1001 &1198316623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20428,6 +20546,10 @@ PrefabInstance:
     - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_Name
       value: autumn tree 4 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
@@ -20585,6 +20707,10 @@ PrefabInstance:
     - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_Name
       value: autumn tree 5 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
@@ -20982,7 +21108,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1209387781
 Transform:
@@ -21265,6 +21391,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_03_Atlased (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4491171972651745013, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
     m_RemovedGameObjects: []
@@ -21287,6 +21417,10 @@ PrefabInstance:
     - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_Name
       value: fence_wood_half1 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1087631447887063790, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21518,6 +21652,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_01_Atlased (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7289984923189017737, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -21652,6 +21790,10 @@ PrefabInstance:
     - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
       propertyPath: m_Name
       value: autumn tree 3 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1399514182290534054, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
@@ -21891,6 +22033,10 @@ PrefabInstance:
     - target: {fileID: 4191961970925872688, guid: 218cd3f735319bb45afe87375b68c4cf, type: 3}
       propertyPath: m_Name
       value: Prop_Barrel_Grain_01_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191961970925872688, guid: 218cd3f735319bb45afe87375b68c4cf, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4647328122012298823, guid: 218cd3f735319bb45afe87375b68c4cf, type: 3}
       propertyPath: m_LocalScale.x
@@ -22994,6 +23140,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_05_Atlased
       objectReference: {fileID: 0}
+    - target: {fileID: 1514677486967239194, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9214796416979054365, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -23080,7 +23230,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1297184715
 Transform:
@@ -23290,6 +23440,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 3 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1399514182290534054, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
     m_RemovedGameObjects: []
@@ -23384,6 +23538,10 @@ PrefabInstance:
     - target: {fileID: 6120144308357302858, guid: 4447bb5f54a0b9241b89d74a01769471, type: 3}
       propertyPath: m_Name
       value: Yggdrasil_Star_S
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399500637841493416, guid: 4447bb5f54a0b9241b89d74a01769471, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23481,6 +23639,10 @@ PrefabInstance:
     - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_Name
       value: autumn tree 2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5570307998540118203, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_LocalScale.x
@@ -23827,6 +23989,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dabotab
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5eef4384d12509e4493b8c14f8a5a023, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23885,6 +24051,10 @@ PrefabInstance:
     - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_Name
       value: autumn tree 5 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
@@ -24340,6 +24510,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -24502,6 +24676,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yggdrasil_Star_L
       objectReference: {fileID: 0}
+    - target: {fileID: 6399500637841493416, guid: 4447bb5f54a0b9241b89d74a01769471, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24523,6 +24701,10 @@ PrefabInstance:
     - target: {fileID: 630031024921447018, guid: 11b53cf0213acff489bf853544af2908, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_02_Atlased (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 630031024921447018, guid: 11b53cf0213acff489bf853544af2908, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4328760114007771333, guid: 11b53cf0213acff489bf853544af2908, type: 3}
       propertyPath: m_LocalScale.x
@@ -24602,6 +24784,10 @@ PrefabInstance:
     - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_01_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7289984923189017737, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_LocalScale.x
@@ -24734,6 +24920,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yggdrasil_Star_S
       objectReference: {fileID: 0}
+    - target: {fileID: 6399500637841493416, guid: 4447bb5f54a0b9241b89d74a01769471, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24807,6 +24997,10 @@ PrefabInstance:
     - target: {fileID: 935495185058535105, guid: c13a16858101dda41ba0da82c0d0a679, type: 3}
       propertyPath: m_Name
       value: Vegetation_New_Flower_Blue_02_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 935495185058535105, guid: c13a16858101dda41ba0da82c0d0a679, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5883863842582895716, guid: c13a16858101dda41ba0da82c0d0a679, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24927,6 +25121,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_04_Atlased
       objectReference: {fileID: 0}
+    - target: {fileID: 2713783254671742911, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1103523243451429473, guid: a8c29ebf0ad202241b4631f8e7ba7550, type: 3}
     m_RemovedGameObjects: []
@@ -24985,6 +25183,10 @@ PrefabInstance:
     - target: {fileID: 630031024921447018, guid: 11b53cf0213acff489bf853544af2908, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_02_Atlased (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 630031024921447018, guid: 11b53cf0213acff489bf853544af2908, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4328760114007771333, guid: 11b53cf0213acff489bf853544af2908, type: 3}
       propertyPath: m_LocalScale.x
@@ -25065,6 +25267,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 4 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -25143,6 +25349,10 @@ PrefabInstance:
     - target: {fileID: 470239116296084779, guid: 03127072e11189f4d961d343f7c086de, type: 3}
       propertyPath: m_Name
       value: Vegetation_New_Flower_Pink_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 470239116296084779, guid: 03127072e11189f4d961d343f7c086de, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 470239116296306955, guid: 03127072e11189f4d961d343f7c086de, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25412,6 +25622,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_03_Atlased (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4491171972651745013, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
     m_RemovedGameObjects: []
@@ -25440,7 +25654,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &1427985000
 BoxCollider:
@@ -25725,6 +25939,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_05_Atlased (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1514677486967239194, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9214796416979054365, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -25997,6 +26215,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Isl_1_House_1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 39f0827af90fb2344ad43748c6c011a4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26022,6 +26244,10 @@ PrefabInstance:
     - target: {fileID: 2539925132295704237, guid: af292212e3b6bbb44b11ff88faad779e, type: 3}
       propertyPath: m_Layer
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539925132295704237, guid: af292212e3b6bbb44b11ff88faad779e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3460518907117115707, guid: af292212e3b6bbb44b11ff88faad779e, type: 3}
       propertyPath: m_LocalScale.x
@@ -26177,6 +26403,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 4 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -26258,7 +26488,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1460120418
 Transform:
@@ -26774,6 +27004,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -26916,6 +27150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yggdrasil_Star_L
       objectReference: {fileID: 0}
+    - target: {fileID: 6399500637841493416, guid: 4447bb5f54a0b9241b89d74a01769471, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26937,6 +27175,10 @@ PrefabInstance:
     - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_01_Atlased (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7289984923189017737, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_LocalScale.x
@@ -27189,6 +27431,10 @@ PrefabInstance:
     - target: {fileID: 630031024921447018, guid: 11b53cf0213acff489bf853544af2908, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_02_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 630031024921447018, guid: 11b53cf0213acff489bf853544af2908, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4328760114007771333, guid: 11b53cf0213acff489bf853544af2908, type: 3}
       propertyPath: m_LocalScale.x
@@ -27836,6 +28082,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_01_Atlased
       objectReference: {fileID: 0}
+    - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7289984923189017737, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -28122,6 +28372,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 5 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -28200,6 +28454,10 @@ PrefabInstance:
     - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_Name
       value: autumn tree 4 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
@@ -28335,6 +28593,10 @@ PrefabInstance:
     - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_03_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4491171972651745013, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
@@ -28855,6 +29117,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_New_Flower_Blue_01_Atlased
       objectReference: {fileID: 0}
+    - target: {fileID: 447073328654351691, guid: 44147196f71780a429d3d8b9448e56d1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4581405735073130903, guid: 44147196f71780a429d3d8b9448e56d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.757
@@ -29053,6 +29319,10 @@ PrefabInstance:
     - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_Name
       value: fence_wood_half1 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1087631447887063790, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -29509,6 +29779,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fence_wood_half1
       objectReference: {fileID: 0}
+    - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1087631447887063790, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.31
@@ -29831,6 +30105,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_05_Atlased (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1514677486967239194, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9214796416979054365, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -29945,6 +30223,10 @@ PrefabInstance:
     - target: {fileID: 548258282641250911, guid: 74bbfd44243194647be9b7d532171f9a, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 548258282641250911, guid: 74bbfd44243194647be9b7d532171f9a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2554959394260970262, guid: 74bbfd44243194647be9b7d532171f9a, type: 3}
       propertyPath: m_Convex
@@ -30080,6 +30362,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 3 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1399514182290534054, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
     m_RemovedGameObjects: []
@@ -30195,6 +30481,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_03_Atlased (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6569497222021332400, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4491171972651745013, guid: 8d44cb3846dee774a93490bf692cafc3, type: 3}
     m_RemovedGameObjects: []
@@ -30293,6 +30583,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_02_Atlased (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 630031024921447018, guid: 11b53cf0213acff489bf853544af2908, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4328760114007771333, guid: 11b53cf0213acff489bf853544af2908, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -30371,6 +30665,10 @@ PrefabInstance:
     - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_01_Atlased (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7289984923189017737, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_LocalScale.x
@@ -30582,6 +30880,10 @@ PrefabInstance:
     - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_Name
       value: autumn tree 4 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
@@ -30800,6 +31102,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_05_Atlased (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1514677486967239194, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9214796416979054365, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -30896,7 +31202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a83d2f7ae04ab6f4f99b0d85377be998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializedBakingSet: {fileID: 0}
+  serializedBakingSet: {fileID: 11400000, guid: 9cbe442e93fd4754b8bad5bac41505e5, type: 2}
   sceneGUID: 07c47557e8d96dd499d7af916d232840
   obsoleteAsset: {fileID: 0}
   obsoleteCellSharedDataAsset: {fileID: 0}
@@ -30953,7 +31259,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 925}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1703789621
@@ -31213,6 +31519,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_05_Atlased (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1514677486967239194, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9214796416979054365, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -31291,6 +31601,10 @@ PrefabInstance:
     - target: {fileID: 1748350430816728597, guid: 39a2cdd6a7fef8a4a8630e5e24c52eb9, type: 3}
       propertyPath: m_Name
       value: Vegetation_New_Flower_Pink_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1748350430816728597, guid: 39a2cdd6a7fef8a4a8630e5e24c52eb9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1748350430816823861, guid: 39a2cdd6a7fef8a4a8630e5e24c52eb9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -31430,6 +31744,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_05_Atlased (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1514677486967239194, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9214796416979054365, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -31547,7 +31865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.36862746}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -31887,6 +32205,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_01_Atlased (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7289984923189017737, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -31970,7 +32292,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1758889143
 Transform:
@@ -32112,6 +32434,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 9181760741592722761, guid: e2c12a34c9ce75e45baa259093decaa9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6210234424105258941, guid: e2c12a34c9ce75e45baa259093decaa9, type: 3}
     m_RemovedGameObjects: []
@@ -32134,6 +32460,10 @@ PrefabInstance:
     - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_01_Atlased (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7289984923189017737, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_LocalScale.x
@@ -32339,6 +32669,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn bush plant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2913012183363083462, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_LocalScale.x
       value: 28.121748
@@ -32417,6 +32751,10 @@ PrefabInstance:
     - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_Name
       value: autumn tree (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
@@ -32548,6 +32886,10 @@ PrefabInstance:
     - target: {fileID: 2728706874354805344, guid: 82423bcbd88da7443929f2cf208d75e3, type: 3}
       propertyPath: m_Name
       value: Prop_Barrel_Fruit_Water_01_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 2728706874354805344, guid: 82423bcbd88da7443929f2cf208d75e3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4506462315930457677, guid: 82423bcbd88da7443929f2cf208d75e3, type: 3}
@@ -32696,6 +33038,134 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1788222549}
   m_CullTransparentMesh: 1
+--- !u!1 &1791822493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1791822494}
+  - component: {fileID: 1791822497}
+  - component: {fileID: 1791822495}
+  m_Layer: 0
+  m_Name: UI_Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1791822494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791822493}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 562785974}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1791822495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791822493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 1
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+--- !u!20 &1791822497
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791822493}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 4
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.01
+  far clip plane: 30000
+  field of view: 24
+  orthographic: 0
+  orthographic size: 0.5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 32
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1001 &1799545727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32707,6 +33177,10 @@ PrefabInstance:
     - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_Name
       value: autumn tree 5 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
@@ -32980,6 +33454,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 5 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -33211,6 +33689,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 2 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5570307998540118203, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -33378,6 +33860,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 3 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1399514182290534054, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
     m_RemovedGameObjects: []
@@ -33509,6 +33995,10 @@ PrefabInstance:
     - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_Name
       value: autumn tree 5 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
@@ -33664,6 +34154,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 4 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -33782,6 +34276,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 5 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -33860,6 +34358,10 @@ PrefabInstance:
     - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_Name
       value: autumn tree 5 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
@@ -34126,7 +34628,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &1893335480
 BoxCollider:
@@ -34228,6 +34730,10 @@ PrefabInstance:
     - target: {fileID: 630031024921447018, guid: 11b53cf0213acff489bf853544af2908, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_02_Atlased (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 630031024921447018, guid: 11b53cf0213acff489bf853544af2908, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4328760114007771333, guid: 11b53cf0213acff489bf853544af2908, type: 3}
       propertyPath: m_LocalScale.x
@@ -34430,6 +34936,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 3 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1399514182290534054, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
     m_RemovedGameObjects: []
@@ -34608,6 +35118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yggdrasil_Star_M
       objectReference: {fileID: 0}
+    - target: {fileID: 6399500637841493416, guid: 4447bb5f54a0b9241b89d74a01769471, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34629,6 +35143,10 @@ PrefabInstance:
     - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_Name
       value: autumn tree (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
@@ -34711,7 +35229,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1944942962
 Transform:
@@ -34864,6 +35382,10 @@ PrefabInstance:
     - target: {fileID: 5184995893458447407, guid: 398dc08ad66ce62418c4d87455570e83, type: 3}
       propertyPath: m_Name
       value: Post Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184995893458447407, guid: 398dc08ad66ce62418c4d87455570e83, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5530172847835805333, guid: 398dc08ad66ce62418c4d87455570e83, type: 3}
       propertyPath: m_LocalScale.x
@@ -35562,6 +36084,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 2 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5570307998540118203, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -35667,6 +36193,10 @@ PrefabInstance:
     - target: {fileID: 1514677486967239194, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_05_Atlased (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514677486967239194, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9214796416979054365, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
       propertyPath: m_LocalScale.x
@@ -35915,6 +36445,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn bush plant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2913012183363083462, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_LocalScale.x
       value: 41.24633
@@ -36134,6 +36668,10 @@ PrefabInstance:
     - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_Name
       value: autumn tree 2 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5570307998540118203, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_LocalScale.x
@@ -36600,6 +37138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 4 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -36866,6 +37408,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fence_wood_half1 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1087631447887063790, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -22.95504
@@ -36930,6 +37476,10 @@ PrefabInstance:
     - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_01_Atlased (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6442860647734923315, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7289984923189017737, guid: 203a0d5b804f7fc4da23df5dc58081ea, type: 3}
       propertyPath: m_LocalScale.x
@@ -37009,6 +37559,10 @@ PrefabInstance:
     - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_Name
       value: autumn tree (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
@@ -37267,6 +37821,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Bamboo_05_Atlased
       objectReference: {fileID: 0}
+    - target: {fileID: 1514677486967239194, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9214796416979054365, guid: a25d99ba1cf082546a7475089bf6a591, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -37397,6 +37955,10 @@ PrefabInstance:
     - target: {fileID: 4305448442810123691, guid: 819a076650c1ad842b2d5cc52998a845, type: 3}
       propertyPath: m_Name
       value: Prop_Barrel_Empty_01_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305448442810123691, guid: 819a076650c1ad842b2d5cc52998a845, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -8506236346426432496, guid: 819a076650c1ad842b2d5cc52998a845, type: 3}
@@ -37529,6 +38091,10 @@ PrefabInstance:
     - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_Name
       value: autumn bush plant 3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4292897080028621672, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_LocalScale.x
@@ -37766,6 +38332,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_New_Flower_Yellow_01_Atlased
       objectReference: {fileID: 0}
+    - target: {fileID: 1375897976896620607, guid: dc102e0e77fe9c04c9a303d6cba77201, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5717946192623619928, guid: dc102e0e77fe9c04c9a303d6cba77201, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.035
@@ -37828,6 +38398,10 @@ PrefabInstance:
     - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_Name
       value: autumn tree 4 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
@@ -38005,6 +38579,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CheomSeongDae
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f326f227328f2404d9dc67405fdaf6a6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38067,6 +38645,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GiltBronzeSeatedAmitabhaBuddha
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: da318d925c4b73a42b8942e9ae1fc2f2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38096,6 +38678,10 @@ PrefabInstance:
     - target: {fileID: 4075691172841871705, guid: ca988a1ea1199a640b3b855024cd8179, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4075691172841871705, guid: ca988a1ea1199a640b3b855024cd8179, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5161790125796669271, guid: ca988a1ea1199a640b3b855024cd8179, type: 3}
       propertyPath: m_LocalScale.x
@@ -38164,6 +38750,317 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5161790125796669271, guid: ca988a1ea1199a640b3b855024cd8179, type: 3}
   m_PrefabInstance: {fileID: 2128745412}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &2131871928
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sky 03
+  m_Shader: {fileID: 4800000, guid: 6fc9318f5193c094c98c0d450cd61e3b, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _BACKGROUNDMODE_COLORS
+  - _ENABLECLOUDSROTATION_ON
+  - _ENABLECLOUDS_ON
+  - _ENABLESTARSTWINKLING_ON
+  - _ENABLESTARS_ON
+  - _ENABLESUN_ON
+  m_InvalidKeywords:
+  - _DISABLEDIRECTIONLIGHT_ON
+  - _ENABLESUNMOONMASK_ON
+  - _ENABLESUNMOON_ON
+  - _USECUBEMAP_ON
+  - _USEENVIRONMENTGRADIENT_ON
+  - _USETEXTURE_ON
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BackgroundCubemap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CloudsColormap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CloudsCubemap:
+        m_Texture: {fileID: 8900000, guid: e3373d7062a4a5044ac0f0745de6c934, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cubemap:
+        m_Texture: {fileID: 8900000, guid: ae71550a4c81f73409f14f4d6eca2c0f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CubemapBG:
+        m_Texture: {fileID: 8900000, guid: b8d891a789549494aaa157c0edc53a12, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MoonTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PatternCubemap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PatternOverlay:
+        m_Texture: {fileID: 8900000, guid: c69467702d0928e46b7ef8101df5353f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SkyPatternOverlay:
+        m_Texture: {fileID: 8900000, guid: b8d891a789549494aaa157c0edc53a12, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Spherical:
+        m_Texture: {fileID: 2800000, guid: 61c0b9c0523734e0e91bc6043c72a490, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarsCubemap:
+        m_Texture: {fileID: 8900000, guid: ef37dd05448664543ab7eeb444cec2bf, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Sun:
+        m_Texture: {fileID: 2800000, guid: 19982f8bf5fa2ed42b65ac271d4f0279, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SunTexture:
+        m_Texture: {fileID: 2800000, guid: 4d70420f1a4758e469e0ac65b6df86cb, type: 3}
+        m_Scale: {x: 0, y: 0}
+        m_Offset: {x: 1, y: 1}
+    - _Tex:
+        m_Texture: {fileID: 2800000, guid: 623f215c9cf5dc04aa628d4dd7b6bd73, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture:
+        m_Texture: {fileID: 2800000, guid: 12726e6bff222df4cbbe3ebde547c297, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: 84508b93f15f2b64386ec07486afc7a3, type: 3}
+        m_Scale: {x: 4.46, y: 5.19}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 2800000, guid: 84508b93f15f2b64386ec07486afc7a3, type: 3}
+        m_Scale: {x: 1.46, y: -1.61}
+        m_Offset: {x: 1.05, y: 3.12}
+    - _TextureSample2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TopTexture0:
+        m_Texture: {fileID: 2800000, guid: 84508b93f15f2b64386ec07486afc7a3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TwinklingTexture:
+        m_Texture: {fileID: 2800000, guid: 4962b985402794749902f8b024ee1934, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _scaledTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex:
+        m_Texture: {fileID: 2800000, guid: 12726e6bff222df4cbbe3ebde547c297, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texture:
+        m_Texture: {fileID: 2800000, guid: 64e7766099ad46747a07014e44d0aea1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BackgroundCat: 1
+    - _BackgroundExposure: 1
+    - _BackgroundMode: 0
+    - _Banner: 1
+    - _BumpScale: 1
+    - _CloudHeight: 0
+    - _CloudsAlpha: 0
+    - _CloudsCat: 1
+    - _CloudsHeight: 0.2
+    - _CloudsIntensity: 1
+    - _CloudsLitbySun: 0
+    - _CloudsRotation: 0
+    - _CloudsRotationSpeed: 1
+    - _Contrast: 0.477
+    - _Contrsat: 1
+    - _Cutoff: 0
+    - _DetailNormalMapScale: 1
+    - _DisableCloudsRotation: 0
+    - _DisableDirectionLight: 1
+    - _DisableRotation: 0
+    - _DstBlend: 0
+    - _Enable1Twinkling: 0
+    - _EnableBuiltinFog: 0
+    - _EnableClouds: 1
+    - _EnableCloudsColormap: 0
+    - _EnableCloudsRotation: 1
+    - _EnableDirectionLight: 0
+    - _EnableFogMessage: 0
+    - _EnableMoon: 0
+    - _EnablePatternOverlay: 0
+    - _EnableSkyPatternOverlay: 0
+    - _EnableStars: 1
+    - _EnableStarsRotation: 0
+    - _EnableStarsTwinkling: 1
+    - _EnableSun: 1
+    - _EnableSunMask: 0
+    - _EnableSunMoon: 1
+    - _EnableSunMoonMask: 1
+    - _EnableTwinkling: 0
+    - _EqHeight: 0.419
+    - _EquatorHeight: 0.6
+    - _EquatorSmoothness: 0.6
+    - _Exposure: 0
+    - _Fade: 0.463
+    - _Float0: 2.7
+    - _Float1: 0
+    - _Float2: 0
+    - _Float3: 8.91
+    - _Float4: -1
+    - _Float5: -0.2
+    - _Float6: 1
+    - _FogCat: 1
+    - _FogFill: 0
+    - _FogHeight: 0
+    - _FogIntensity: 0
+    - _FogSmoothness: 0.01
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Keyword0: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _MoonCat: 1
+    - _MoonIntensity: 1
+    - _MoonSize: 0.5
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _PatternCat: 1
+    - _PatternContrast: 1
+    - _RoatationSpeed: 0.4
+    - _Rotation: 0
+    - _RotationSpeed: 0.5
+    - _SkyPatternContrast: 0.477
+    - _SkyPatternOverlay: 0
+    - _SkyboxCat: 1
+    - _SkyboxOffset: 0
+    - _SkyboxRotation: 0
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _StarsAmount: 3
+    - _StarsBottomMask: 1
+    - _StarsCat: 1
+    - _StarsHeightMask: 0.093
+    - _StarsIntensity: 2
+    - _StarsLayer: 2
+    - _StarsRotation: 360
+    - _StarsRotationSpeed: 0.5
+    - _StarsSize: 0.6
+    - _StarsSunMask: 0
+    - _SunCat: 1
+    - _SunIntensity: 1.5
+    - _SunRadiusB: 0
+    - _SunRadoisA: 0.463
+    - _SunSize: 0.5
+    - _ToggleSwitch0: 0
+    - _TwinklingContrast: 1
+    - _TwinklingSpeed: 0.05
+    - _UVSec: 0
+    - _UseCUBEMAP: 1
+    - _UseEnvironmentGradient: 1
+    - _UseSkyPatternOverlay: 0
+    - _UseTexture: 1
+    - _WaveScale: 0
+    - _WaveSpeed: 0
+    - _ZWrite: 1
+    - __dirty: 0
+    - _adf: 0
+    - _angle: 145
+    - _fresnell: 0
+    - _mip: 0
+    m_Colors:
+    - _CloudLightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _CloudShadowColor: {r: 0.33239606, g: 0.46899295, b: 0.85294116, a: 1}
+    - _CloudsLightColor: {r: 0.8602941, g: 0.8602941, b: 0.8602941, a: 1}
+    - _CloudsRotationAxis: {r: 0, g: 1, b: 0, a: 0}
+    - _CloudsShadowColor: {r: 0.48500237, g: 0.41608998, b: 0.7647059, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color0: {r: 0, g: 0.5054344, b: 1, a: 0}
+    - _Color1: {r: 1, g: 1, b: 1, a: 0}
+    - _Color2: {r: 0.059472326, g: 0.25068596, b: 0.8088235, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Eq: {r: 1, g: 0.6769777, b: 0.330882, a: 0}
+    - _EquatorColor: {r: 1, g: 0.5659999, b: 0, a: 0}
+    - _Ground: {r: 0.4779411, g: 0.43111518, b: 0.23545504, a: 0}
+    - _GroundColor: {r: 0.63235295, g: 0.72616625, b: 1, a: 0}
+    - _MoonColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Sky: {r: 0.6691177, g: 0.29519898, b: 0.29519898, a: 0}
+    - _SkyColor: {r: 0.101643614, g: 0.25647038, b: 0.6911765, a: 0}
+    - _SkyboxRotationAxis: {r: 0, g: 1, b: 0, a: 0}
+    - _Skycol: {r: 0.27941146, g: 0.64219046, b: 1, a: 0}
+    - _StarsRotationAxis: {r: 0, g: 1, b: 0, a: 0}
+    - _SunColor: {r: 1, g: 0.78676474, b: 0.91757673, a: 1}
+    - _Tint: {r: 1, g: 1, b: 1, a: 0}
+    - _Vector1: {r: 0, g: 1, b: 0, a: 0}
+    - _water: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &2133486634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38175,6 +39072,10 @@ PrefabInstance:
     - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_Name
       value: autumn tree (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
@@ -38441,6 +39342,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 3 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1399514182290534054, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
     m_RemovedGameObjects: []
@@ -38458,6 +39363,10 @@ PrefabInstance:
     - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_Name
       value: fence_wood_half1 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 311834307568758868, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1087631447887063790, guid: 58d40f24fb4ad464999e2ade23a53f4a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -38660,6 +39569,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn bush plant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2913012183363083462, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -38758,6 +39671,10 @@ PrefabInstance:
     - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_Name
       value: autumn bush plant (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2913012183363083462, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_LocalScale.x
@@ -38893,6 +39810,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Common_Autumn_03_Atlased
       objectReference: {fileID: 0}
+    - target: {fileID: 5415606950009593477, guid: ad55027c5a842f04aa5e56b7d6d7795c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -6683730968029156283, guid: ad55027c5a842f04aa5e56b7d6d7795c, type: 3}
     m_RemovedGameObjects: []
@@ -38915,6 +39836,10 @@ PrefabInstance:
     - target: {fileID: 7027696234900108678, guid: bda83ea14eec3c3499c610c20069d833, type: 3}
       propertyPath: m_Name
       value: Autumn_Birch_Tree_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027696234900108678, guid: bda83ea14eec3c3499c610c20069d833, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7695724674556260156, guid: bda83ea14eec3c3499c610c20069d833, type: 3}
       propertyPath: m_LocalScale.x
@@ -38995,6 +39920,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Autumn_Birch_Tree_6 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7027696234900108678, guid: bda83ea14eec3c3499c610c20069d833, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7695724674556260156, guid: bda83ea14eec3c3499c610c20069d833, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -39073,6 +40002,10 @@ PrefabInstance:
     - target: {fileID: 8535281736103433265, guid: ed10dcc6e5c1c0e49b2a8cecff40e0b5, type: 3}
       propertyPath: m_Name
       value: autumn shrub 2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8535281736103433265, guid: ed10dcc6e5c1c0e49b2a8cecff40e0b5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9023165439062265483, guid: ed10dcc6e5c1c0e49b2a8cecff40e0b5, type: 3}
       propertyPath: m_LocalScale.x
@@ -39209,6 +40142,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1399514182290534054, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
     m_RemovedGameObjects: []
@@ -39287,6 +40224,10 @@ PrefabInstance:
     - target: {fileID: 8407488256679928678, guid: 9fd75104e0d91e1449a1971d3e915b28, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Common_Autumn_02_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 8407488256679928678, guid: 9fd75104e0d91e1449a1971d3e915b28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2527917709957312116, guid: 9fd75104e0d91e1449a1971d3e915b28, type: 3}
@@ -39367,6 +40308,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Autumn_Red_Birch_Tree_3 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1036140608722387739, guid: 1d5aa5e53a1bffa4a98b16fbae973e48, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5222735516613503568, guid: 1d5aa5e53a1bffa4a98b16fbae973e48, type: 3}
     m_RemovedGameObjects: []
@@ -39394,7 +40339,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1001 &1201011180681174537
 PrefabInstance:
@@ -39407,6 +40352,10 @@ PrefabInstance:
     - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_Name
       value: autumn bush plant (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2913012183363083462, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_LocalScale.x
@@ -39485,6 +40434,10 @@ PrefabInstance:
     - target: {fileID: 3745802603929389189, guid: e6b76d781756aa14aa2c1d4ba72df7ae, type: 3}
       propertyPath: m_Name
       value: Autumn_Red_Birch_Tree_7 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3745802603929389189, guid: e6b76d781756aa14aa2c1d4ba72df7ae, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4084785975534916159, guid: e6b76d781756aa14aa2c1d4ba72df7ae, type: 3}
       propertyPath: m_LocalScale.x
@@ -39621,6 +40574,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn bush plant 2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3383028332793373141, guid: 9d89d4fe48c13d741bb05190b05cc1cd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -39642,6 +40599,10 @@ PrefabInstance:
     - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_Name
       value: autumn bush plant (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2913012183363083462, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_LocalScale.x
@@ -39733,6 +40694,10 @@ PrefabInstance:
     - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_Name
       value: autumn bush plant 3 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4292897080028621672, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_LocalScale.x
@@ -39868,6 +40833,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn bush plant 2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3383028332793373141, guid: 9d89d4fe48c13d741bb05190b05cc1cd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -39889,6 +40858,10 @@ PrefabInstance:
     - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_Name
       value: autumn bush plant 3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4292897080028621672, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_LocalScale.x
@@ -39967,6 +40940,10 @@ PrefabInstance:
     - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_Name
       value: autumn tree 5 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
@@ -40054,6 +41031,10 @@ PrefabInstance:
     - target: {fileID: 3837483484103396571, guid: ca8c2917bad2a2c439ef343b25c8b1fb, type: 3}
       propertyPath: m_Name
       value: Autumn_Birch_Tree_1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3837483484103396571, guid: ca8c2917bad2a2c439ef343b25c8b1fb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4470572810759640673, guid: ca8c2917bad2a2c439ef343b25c8b1fb, type: 3}
       propertyPath: m_LocalScale.x
@@ -40154,6 +41135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5570307998540118203, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -40232,6 +41217,10 @@ PrefabInstance:
     - target: {fileID: 977157612808757265, guid: c70f79ff1d4322c4ca4f6025ea2c8d66, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Common_Autumn_01_Atlased (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 977157612808757265, guid: c70f79ff1d4322c4ca4f6025ea2c8d66, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4988334517248418863, guid: c70f79ff1d4322c4ca4f6025ea2c8d66, type: 3}
       propertyPath: m_LocalScale.x
@@ -40368,6 +41357,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Autumn_Birch_Tree_5
       objectReference: {fileID: 0}
+    - target: {fileID: 760572433269713786, guid: ec2f1031b18299344a2997f53beb8596, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5292039699179147512, guid: ec2f1031b18299344a2997f53beb8596, type: 3}
     m_RemovedGameObjects: []
@@ -40447,6 +41440,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn bush plant 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3383028332793373141, guid: 9d89d4fe48c13d741bb05190b05cc1cd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40478,14 +41475,14 @@ VideoPlayer:
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
+  m_AudioOutputMode: 3
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
   m_Url: 
   m_EnabledAudioTracks: 
   m_DirectAudioMutes: 
   m_ControlledAudioTrackCount: 0
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 1
   m_WaitForFirstFrame: 1
@@ -40559,6 +41556,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Common_Autumn_03_Atlased (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5415606950009593477, guid: ad55027c5a842f04aa5e56b7d6d7795c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -6683730968029156283, guid: ad55027c5a842f04aa5e56b7d6d7795c, type: 3}
     m_RemovedGameObjects: []
@@ -40576,6 +41577,10 @@ PrefabInstance:
     - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_Name
       value: autumn bush plant 3 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4292897080028621672, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_LocalScale.x
@@ -40711,6 +41716,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Autumn_Red_Birch_Tree_2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3384881778390739085, guid: d38365ddf3a372847aed8997d981bfde, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6547522114629658951, guid: d38365ddf3a372847aed8997d981bfde, type: 3}
     m_RemovedGameObjects: []
@@ -40733,6 +41742,10 @@ PrefabInstance:
     - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_Name
       value: autumn bush plant 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4292897080028621672, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_LocalScale.x
@@ -40811,6 +41824,10 @@ PrefabInstance:
     - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_Name
       value: autumn tree 2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045831690357858817, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5570307998540118203, guid: 63fe4f67afa3c494cad1e9dbd36b359b, type: 3}
       propertyPath: m_LocalScale.x
@@ -40947,6 +41964,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Common_Autumn_02_Atlased (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8407488256679928678, guid: 9fd75104e0d91e1449a1971d3e915b28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2527917709957312116, guid: 9fd75104e0d91e1449a1971d3e915b28, type: 3}
     m_RemovedGameObjects: []
@@ -40981,6 +42002,10 @@ PrefabInstance:
     - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_Name
       value: autumn bush plant (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2913012183363083462, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_LocalScale.x
@@ -41116,6 +42141,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Autumn_Birch_Tree_7
       objectReference: {fileID: 0}
+    - target: {fileID: 3025066003931141726, guid: 6b03bae76bf34ce4e8118d013f3b4673, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6151325697845797499, guid: 6b03bae76bf34ce4e8118d013f3b4673, type: 3}
     m_RemovedGameObjects: []
@@ -41153,6 +42182,10 @@ PrefabInstance:
     - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_Name
       value: autumn bush plant 3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4292897080028621672, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_LocalScale.x
@@ -41231,6 +42264,10 @@ PrefabInstance:
     - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_Name
       value: autumn bush plant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2913012183363083462, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_LocalScale.x
@@ -41408,6 +42445,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn bush plant (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2913012183363083462, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -41506,6 +42547,10 @@ PrefabInstance:
     - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_Name
       value: autumn tree 4 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
@@ -41642,6 +42687,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn bush plant 2 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3383028332793373141, guid: 9d89d4fe48c13d741bb05190b05cc1cd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -41663,6 +42712,10 @@ PrefabInstance:
     - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_Name
       value: autumn tree (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
@@ -41751,6 +42804,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Autumn_Birch_Tree_1
       objectReference: {fileID: 0}
+    - target: {fileID: 3837483484103396571, guid: ca8c2917bad2a2c439ef343b25c8b1fb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4470572810759640673, guid: ca8c2917bad2a2c439ef343b25c8b1fb, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -41830,6 +42887,10 @@ PrefabInstance:
       propertyPath: audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 18a76d2d13d08fb48b184606c89cbb56, type: 3}
+    - target: {fileID: 1352836736382378933, guid: b0732625fa65e50489d48efd9055e914, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1841388907512199439, guid: b0732625fa65e50489d48efd9055e914, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -41962,6 +43023,7 @@ GameObject:
   - component: {fileID: 3088051929840856499}
   - component: {fileID: 6945062087884364272}
   - component: {fileID: 6291027021556396728}
+  - component: {fileID: 8338806141813006408}
   m_Layer: 0
   m_Name: Video
   m_TagString: Untagged
@@ -41980,6 +43042,10 @@ PrefabInstance:
     - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_Name
       value: autumn tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841388253324248956, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4468849489652768198, guid: 3258a18ee6f3e2b4d87f3f8894192741, type: 3}
       propertyPath: m_LocalScale.x
@@ -42060,6 +43126,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn bush plant 3 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4292897080028621672, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -42137,6 +43207,10 @@ PrefabInstance:
     - target: {fileID: 2421877793458875013, guid: 9588c63fafac8e447b666dc1e3eed370, type: 3}
       propertyPath: m_Name
       value: Autumn_Red_Birch_Tree_8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421877793458875013, guid: 9588c63fafac8e447b666dc1e3eed370, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3087197380130746431, guid: 9588c63fafac8e447b666dc1e3eed370, type: 3}
       propertyPath: m_LocalScale.x
@@ -42231,6 +43305,10 @@ PrefabInstance:
     - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_Name
       value: autumn bush plant 3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4292897080028621672, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_LocalScale.x
@@ -42349,6 +43427,10 @@ PrefabInstance:
     - target: {fileID: 575055485608333787, guid: 9d626b40601300c45b446e3442d05a22, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 687709064910950003, guid: 9d626b40601300c45b446e3442d05a22, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4677043042892725373, guid: 9d626b40601300c45b446e3442d05a22, type: 3}
       propertyPath: m_LocalScale.x
@@ -42487,6 +43569,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Common_Autumn_02_Atlased (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8407488256679928678, guid: 9fd75104e0d91e1449a1971d3e915b28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2527917709957312116, guid: 9fd75104e0d91e1449a1971d3e915b28, type: 3}
     m_RemovedGameObjects: []
@@ -42606,6 +43692,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Common_Autumn_02_Atlased (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8407488256679928678, guid: 9fd75104e0d91e1449a1971d3e915b28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2527917709957312116, guid: 9fd75104e0d91e1449a1971d3e915b28, type: 3}
     m_RemovedGameObjects: []
@@ -42695,6 +43785,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Autumn_Red_Birch_Tree_2
       objectReference: {fileID: 0}
+    - target: {fileID: 3384881778390739085, guid: d38365ddf3a372847aed8997d981bfde, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6547522114629658951, guid: d38365ddf3a372847aed8997d981bfde, type: 3}
     m_RemovedGameObjects: []
@@ -42717,6 +43811,10 @@ PrefabInstance:
     - target: {fileID: 977157612808757265, guid: c70f79ff1d4322c4ca4f6025ea2c8d66, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Common_Autumn_01_Atlased (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 977157612808757265, guid: c70f79ff1d4322c4ca4f6025ea2c8d66, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4988334517248418863, guid: c70f79ff1d4322c4ca4f6025ea2c8d66, type: 3}
       propertyPath: m_LocalScale.x
@@ -42797,7 +43895,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1001 &6709523777893042744
 PrefabInstance:
@@ -42810,6 +43908,10 @@ PrefabInstance:
     - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_Name
       value: autumn bush plant (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2913012183363083462, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_LocalScale.x
@@ -42902,6 +44004,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn bush plant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2532933430774957692, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2913012183363083462, guid: 9da7a5a1609e4774a96af78de1fb1b4a, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -42988,6 +44094,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6951083895644441743, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7727303214321833525, guid: 771f05a17941f8f4eaefd2f026aba470, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -43066,6 +44176,10 @@ PrefabInstance:
     - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_Name
       value: autumn bush plant 3 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519773711753982418, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4292897080028621672, guid: 35ebf35a79a41bf43b867247f6a67119, type: 3}
       propertyPath: m_LocalScale.x
@@ -43201,6 +44315,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vegetation_Tree_Common_Autumn_03_Atlased (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5415606950009593477, guid: ad55027c5a842f04aa5e56b7d6d7795c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -6683730968029156283, guid: ad55027c5a842f04aa5e56b7d6d7795c, type: 3}
     m_RemovedGameObjects: []
@@ -43218,6 +44336,10 @@ PrefabInstance:
     - target: {fileID: 8535281736103433265, guid: ed10dcc6e5c1c0e49b2a8cecff40e0b5, type: 3}
       propertyPath: m_Name
       value: autumn shrub 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8535281736103433265, guid: ed10dcc6e5c1c0e49b2a8cecff40e0b5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9023165439062265483, guid: ed10dcc6e5c1c0e49b2a8cecff40e0b5, type: 3}
       propertyPath: m_LocalScale.x
@@ -43297,6 +44419,10 @@ PrefabInstance:
     - target: {fileID: 7268364691791659841, guid: 9d157cd616a60c54db5bf25e3b2886a6, type: 3}
       propertyPath: m_Name
       value: autumn shrub
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268364691791659841, guid: 9d157cd616a60c54db5bf25e3b2886a6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8040538872910420475, guid: 9d157cd616a60c54db5bf25e3b2886a6, type: 3}
       propertyPath: m_LocalScale.x
@@ -43421,6 +44547,10 @@ PrefabInstance:
     - target: {fileID: 977157612808757265, guid: c70f79ff1d4322c4ca4f6025ea2c8d66, type: 3}
       propertyPath: m_Name
       value: Vegetation_Tree_Common_Autumn_01_Atlased
+      objectReference: {fileID: 0}
+    - target: {fileID: 977157612808757265, guid: c70f79ff1d4322c4ca4f6025ea2c8d66, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4988334517248418863, guid: c70f79ff1d4322c4ca4f6025ea2c8d66, type: 3}
       propertyPath: m_LocalScale.x
@@ -43557,6 +44687,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn bush plant 2 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3383028332793373141, guid: 9d89d4fe48c13d741bb05190b05cc1cd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -43612,6 +44746,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8338806141813006408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488979390992999805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71385f425d0af17488ba50ae21d11b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8634831586968043696
 GameObject:
   m_ObjectHideFlags: 0
@@ -43628,7 +44774,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1001 &8737267391243864510
 PrefabInstance:
@@ -43638,6 +44784,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 71732926113064459, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 539991282375466976, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 846576460606917414, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315986222934748545, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369231450376319562, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415347573370238969, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1824294396229728941, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316719494253409485, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2637256982401825767, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673667342510335326, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233846226089714709, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 3284408926346513086, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
       propertyPath: rotateSpeed
       value: 0.6
@@ -43686,9 +44876,37 @@ PrefabInstance:
       propertyPath: rotateSpeed
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 4319381498280620279, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4461185468870963137, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566441459521961926, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4996222576839810205, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
       propertyPath: rotateSpeed
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294303124278172753, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5380584908091617807, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479932142312686450, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684656900627734573, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6343281598888667333, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
       propertyPath: rotateSpeed
@@ -43697,6 +44915,10 @@ PrefabInstance:
     - target: {fileID: 6882860379627318927, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
       propertyPath: m_Name
       value: FoodBooth
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531781627481905027, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5040949370784320400, guid: 386777e37342d354c9cedda2a70eb9d6, type: 3}
@@ -43810,6 +45032,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Autumn_Red_Birch_Tree_4
       objectReference: {fileID: 0}
+    - target: {fileID: 6771346885901939522, guid: c249ec22039406a4cb9f4580932c9277, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3213136191010653976, guid: c249ec22039406a4cb9f4580932c9277, type: 3}
     m_RemovedGameObjects: []
@@ -43889,6 +45115,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 3 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5697488166459177741, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1399514182290534054, guid: 4a8365cf1ca1e6740af25f627597c43e, type: 3}
     m_RemovedGameObjects: []
@@ -43967,6 +45197,10 @@ PrefabInstance:
     - target: {fileID: 2193830337293253240, guid: 6d59b09c371442542b5d7cf9af0d434e, type: 3}
       propertyPath: m_Name
       value: Autumn_Birch_Tree_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2193830337293253240, guid: 6d59b09c371442542b5d7cf9af0d434e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5582135353876654022, guid: 6d59b09c371442542b5d7cf9af0d434e, type: 3}
@@ -44113,6 +45347,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Autumn_Red_Birch_Tree_5
       objectReference: {fileID: 0}
+    - target: {fileID: 4022766643011522223, guid: 7b0ce957fa5bfcc4da58695429dba617, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4366358991199949845, guid: 7b0ce957fa5bfcc4da58695429dba617, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -44192,6 +45430,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: autumn tree 5
       objectReference: {fileID: 0}
+    - target: {fileID: 181651713256216468, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 706656027806403886, guid: fdd6d4ae17ed9cc4a81fbf1ed0d07384, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -44264,8 +45506,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 774402205}
-  - {fileID: 203844589}
-  - {fileID: 1160234427}
+  - {fileID: 407738086}
   - {fileID: 299853614}
   - {fileID: 562785974}
   - {fileID: 645212170}
@@ -44278,7 +45519,6 @@ SceneRoots:
   - {fileID: 1429726899}
   - {fileID: 1427985003}
   - {fileID: 1886949320}
-  - {fileID: 301987751}
   - {fileID: 291816539}
   - {fileID: 975908906}
   - {fileID: 2039544549}
