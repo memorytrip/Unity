@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using Common;
 using Cysharp.Threading.Tasks;
 using Myroom;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GUI
 {
@@ -12,7 +14,20 @@ namespace GUI
         [SerializeField] private GameObject photoItemPrefab;
         [SerializeField] private Transform content;
         [SerializeField] private Sprite emptySprite;
+        [SerializeField] private CanvasGroup imagePanel;
+        [SerializeField] private RawImage rawImage;
+        [SerializeField] private Button closeImagePanel;
 
+        [Header("베타 시연용")]
+        [SerializeField] private PhotoListItem videoItem;
+        
+        private void Awake()
+        {
+            closeImagePanel.onClick.AddListener(CloseImagePanel);
+        }
+
+        private void CloseImagePanel() => Utility.DisablePanel(imagePanel);
+        
         public async UniTask RefreshListProcess()
         {
             foreach (Transform child in content)
@@ -29,6 +44,11 @@ namespace GUI
                 tasks.Add(InitItem(photo));
             }
             await UniTask.WhenAll(tasks);
+            
+            // 베타 시연용
+            var obj = Instantiate(videoItem, content).GetComponent<PhotoListItem>();
+            obj.imagePanel = imagePanel;
+            obj.rawImage = rawImage;
         }
 
         private async UniTask<PhotoData[]> GetPhotoList(string name)
@@ -42,6 +62,8 @@ namespace GUI
         {
             var obj = Instantiate(photoItemPrefab, content).GetComponent<PhotoListItem>();
             Sprite thumbnail = await LoadPhoto(photo.photoUrl);
+            obj.imagePanel = imagePanel;
+            obj.rawImage = rawImage;
             if (thumbnail == null)
                 thumbnail = emptySprite;
             obj.SetThumbnail(thumbnail);
