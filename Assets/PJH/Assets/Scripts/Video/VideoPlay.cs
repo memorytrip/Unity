@@ -14,6 +14,11 @@ public class VideoPlay : MonoBehaviour
     public CanvasGroup resumeButton;
     [SerializeField] private bool isPlaying = false;
 
+    private void Awake()
+    {
+        isPlaying = false;
+    }
+
     public void VideoPlayControll()
     {
         if (!isPlaying)
