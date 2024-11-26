@@ -23,15 +23,11 @@ public class VideoPlay : MonoBehaviour
     {
         if (!isPlaying)
         {
-            UIManager.HideUI(playButton);
-            UIManager.ShowUI(resumeButton);
             player.Play();
             isPlaying = true;
         }
         else
         {
-            UIManager.ShowUI(playButton);
-            UIManager.HideUI(resumeButton);
             player.Pause();
             isPlaying = false;
         }
