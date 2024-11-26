@@ -1,5 +1,5 @@
 using System.Collections;
-using Common;
+using Fusion;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -7,6 +7,7 @@ using UnityEngine.Video;
 public class ToggleVideo : MonoBehaviour
 {
     private VideoPlayer _videoPlayer;
+    private ScriptUsageVideoPlayback _scriptUsageVideoPlayback;
     private Material _material;
     [SerializeField] private Material[] materials;
     [SerializeField] private VideoClip videoClip;
@@ -15,6 +16,7 @@ public class ToggleVideo : MonoBehaviour
     {
         _material = GetComponent<Renderer>().material;
         _videoPlayer = GetComponent<VideoPlayer>();
+        _scriptUsageVideoPlayback = GetComponent<ScriptUsageVideoPlayback>();
         if (videoClip == null)
         {
             Debug.LogWarning($"{gameObject}: Video clip is missing!");
@@ -24,20 +26,26 @@ public class ToggleVideo : MonoBehaviour
     private void Start()
     {
         InitializeVideoPlayer();
-        _videoPlayer.started += RequestFadeIn;
     }
 
-    private void OnDestroy()
-    {
-        _videoPlayer.started -= RequestFadeIn;
-    }
-
-    private void RequestFadeIn(VideoPlayer videoPlayer)
+    /*private void RequestFadeIn(VideoPlayer videoPlayer)
     {
         // AudioManager.Instance.OnVideoPlayed();
+    }*/
+
+    private void RequestBgmStop()
+    {
+        CustomFmodAmbienceManager.Instance.StopPlayback();
+        CustomFmodBgmManager.Instance.StopPlayback();
     }
 
-private void InitializeVideoPlayer()
+    private void RequestBgm()
+    {
+        CustomFmodAmbienceManager.Instance.ResumePlayback();
+        CustomFmodBgmManager.Instance.ResumePlayback();
+    }
+    
+    private void InitializeVideoPlayer()
     {
         _videoPlayer.playOnAwake = false;
         _videoPlayer.isLooping = true;
@@ -51,7 +59,13 @@ private void InitializeVideoPlayer()
         {
             return;
         }
-        
+
+        if (!other.GetComponent<NetworkObject>().HasStateAuthority)
+        {
+            return;
+        }
+
+        RequestBgmStop();
         _material = materials[1];
         StartCoroutine(StartVideoPlayback());
         Debug.Log($"Player entered {gameObject}");
@@ -63,6 +77,7 @@ private void InitializeVideoPlayer()
         _videoPlayer.Prepare();
         yield return _videoPlayer.isPrepared; // TODO: 이게 맞나
         _videoPlayer.Play();
+        _scriptUsageVideoPlayback.StartPlayback();
     }
 
     private void OnTriggerExit(Collider other)
@@ -72,6 +87,12 @@ private void InitializeVideoPlayer()
             return;
         }
 
+        if (!other.GetComponent<NetworkObject>().HasStateAuthority)
+        {
+            return;
+        }
+
+        RequestBgm();
         _material = materials[0];
         StopVideoPlayback();
         // AudioManager.Instance.OnVideoStopped();
@@ -81,5 +102,6 @@ private void InitializeVideoPlayer()
     private void StopVideoPlayback()
     {
         _videoPlayer.Stop();
+        _scriptUsageVideoPlayback.StopPlayback();
     }
 }

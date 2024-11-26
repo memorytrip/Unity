@@ -8,17 +8,24 @@ public class CustomFmodAmbienceManager : StudioEventEmitter
 {
     private EventInstance _ambienceEvent;
     [SerializeField] private EventReference mainEvent;
-    private static CustomFmodAmbienceManager _instance;
+    public static CustomFmodAmbienceManager Instance;
 
+    /*private bool _isPlaying(EventInstance eventInstance)
+    {
+        PLAYBACK_STATE state;
+        eventInstance.getPlaybackState(out state);
+        return state != PLAYBACK_STATE.STOPPED;
+    }*/
+    
     private void Awake()
     {
-        if (_instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
         }
         else
         {
-            _instance = this;
+            Instance = this;
             DontDestroyOnLoad(this);
         }
 
@@ -33,6 +40,26 @@ public class CustomFmodAmbienceManager : StudioEventEmitter
             _ambienceEvent.stop(STOP_MODE.ALLOWFADEOUT);
             _ambienceEvent.release();
         }
+    }
+
+    public void ResumePlayback()
+    {
+        if (!_ambienceEvent.isValid())
+        {
+            return;
+        }
+
+        _ambienceEvent.start();
+    }
+    
+    public void StopPlayback()
+    {
+        if (!_ambienceEvent.isValid())
+        {
+            return;
+        }
+
+        _ambienceEvent.stop(STOP_MODE.ALLOWFADEOUT);
     }
 
     private void SwitchAmbience(Scene scene, LoadSceneMode mode)
