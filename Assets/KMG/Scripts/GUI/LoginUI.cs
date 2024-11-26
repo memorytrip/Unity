@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using Exception = System.Exception;
 
@@ -122,7 +123,7 @@ namespace GUI
             catch (UnityWebRequestException e)
             {
                 Debug.LogAssertion(e.Message);
-                if (e.ResponseHeaders["Content-Type"] == "application/json")
+                if (e.ResponseHeaders != null && e.ResponseHeaders["Content-Type"] == "application/json")
                 {
                     ErrorResult error = JsonConvert.DeserializeObject<ErrorResult>(e.Text);
                     OpenPopupPanel(error.response);    
@@ -167,7 +168,10 @@ namespace GUI
             {
                 Debug.LogAssertion(e.Message);
                 ErrorResult error = JsonConvert.DeserializeObject<ErrorResult>(e.Text);
-                OpenPopupPanel(error.response);
+                if (error != null)
+                    OpenPopupPanel(error.response);
+                else 
+                    OpenPopupPanel(e.Message);
                 signUpButton.interactable = true;
                 closeSignupPanelButton.interactable = true;
                 return;
