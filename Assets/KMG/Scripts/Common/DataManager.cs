@@ -10,7 +10,8 @@ namespace Common
 {
     public static class DataManager
     {
-        private const string baseURL = "http://125.132.216.190:17778"; //"http://memorytrip-env.eba-73mrisxy.ap-northeast-2.elasticbeanstalk.com";
+        private const string baseURL = "http://memorytrip-env.eba-73mrisxy.ap-northeast-2.elasticbeanstalk.com";
+        // private const string baseURL = "http://125.132.216.190:17778";
 
         private static string token => SessionManager.Instance.currentSession?.token;
         
