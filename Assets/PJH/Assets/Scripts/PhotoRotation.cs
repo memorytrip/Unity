@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using DG.Tweening;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class PhotoRotation : MonoBehaviour

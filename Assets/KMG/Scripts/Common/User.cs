@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Common
 {
     public class User
@@ -8,10 +10,15 @@ namespace Common
         private int _credit;
         public int credit
         {
-            get => _credit;
+            get
+            {
+                _credit = PlayerPrefs.GetInt("Credit", 0);
+                return _credit;
+            }
             set
             {
                 _credit = value;
+                PlayerPrefs.SetInt("Credit", _credit);
                 UIManager.Instance.creditUI.SetText(_credit.ToString());
             }
         }
