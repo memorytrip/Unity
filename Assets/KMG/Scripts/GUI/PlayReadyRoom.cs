@@ -158,6 +158,12 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RpcGameStart()
     {
+        if (Runner.IsSceneAuthority)
+        {
+            var playerCount = Runner.ActivePlayers.Count();
+            PhotoManager.TotalHiddenPhotoCount = 2 * playerCount;
+        }
+        
         _fmodTriggerOneshotManager.TriggerOneshot(playReadyConfirmEvent);
         getLP.GetResponse();
         cts.Cancel();

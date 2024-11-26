@@ -67,8 +67,7 @@ namespace Common.Network
                     currenctCharacter = await SpawnProcess(PrefabName.Player, new Vector3(0f, 2f, -22f), Quaternion.identity);
                     break;
                 case SceneName.MyRoom:
-                    currenctCharacter = await SpawnProcess(PrefabName.Player, new Vector3(0, 5, 0), Quaternion.identity);
-                    currenctCharacter.transform.Find("Scale").transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    currenctCharacter = await SpawnProcess(PrefabName.PlayerSmall, new Vector3(0, 5, 0), Quaternion.identity);
                     break;
                 case SceneName.PlayReady:
                     currenctCharacter = await SpawnProcess(PrefabName.PlayReadyState);
@@ -80,8 +79,7 @@ namespace Common.Network
                     await UniTask.WaitWhile(() => loadmap.isLoading);
                     
                     await UniTask.Delay(TimeSpan.FromSeconds(2.0f));
-                    currenctCharacter = await SpawnProcess(PrefabName.Player, new Vector3(0, 5, 0), Quaternion.identity);
-                    currenctCharacter.transform.Find("Scale").transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    currenctCharacter = await SpawnProcess(PrefabName.PlayerSmall, new Vector3(0, 5, 0), Quaternion.identity);
                     break;
             }
         }

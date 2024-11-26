@@ -34,7 +34,7 @@ public class ToggleVideo : MonoBehaviour
 
     private void RequestFadeIn(VideoPlayer videoPlayer)
     {
-        AudioManager.Instance.OnVideoPlayed();
+        // AudioManager.Instance.OnVideoPlayed();
     }
 
 private void InitializeVideoPlayer()
@@ -73,8 +73,8 @@ private void InitializeVideoPlayer()
         }
 
         _material = materials[0];
-        AudioManager.Instance.OnVideoStopped();
         StopVideoPlayback();
+        // AudioManager.Instance.OnVideoStopped();
         Debug.Log($"Player exited {gameObject}");
     }
 

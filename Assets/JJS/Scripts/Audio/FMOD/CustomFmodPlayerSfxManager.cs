@@ -1,6 +1,7 @@
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class CustomFmodPlayerSfxManager : MonoBehaviour
@@ -23,6 +24,8 @@ public class CustomFmodPlayerSfxManager : MonoBehaviour
         
         _eventInstance = RuntimeManager.CreateInstance(footstepEvent);
         _eventInstance.start();
+
+        SceneManager.sceneLoaded += StopWalkingEvent;
     }
 
     private void Start()
@@ -31,10 +34,12 @@ public class CustomFmodPlayerSfxManager : MonoBehaviour
         EventManager.Instance.StopWalking += StopWalking;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
+        SceneManager.sceneLoaded -= StopWalkingEvent;
         EventManager.Instance.StartWalking -= StartWalking;
         EventManager.Instance.StopWalking -= StopWalking;
+        _eventInstance.setParameterByName(ParameterNameCache.IsWalking, 0);
         _eventInstance.stop(STOP_MODE.IMMEDIATE);
     }
 
@@ -42,6 +47,11 @@ public class CustomFmodPlayerSfxManager : MonoBehaviour
     {
         _eventInstance.setParameterByName(ParameterNameCache.IsWalking, 1);
         Debug.Log("Yaaaay");
+    }
+
+    private void StopWalkingEvent(Scene scene, LoadSceneMode mode)
+    {
+        StopWalking();
     }
 
     private void StopWalking()

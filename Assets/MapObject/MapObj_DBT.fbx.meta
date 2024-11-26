@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: da318d925c4b73a42b8942e9ae1fc2f2
+guid: 2620534d65fcd0248b4c240f08c692f3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: GiltBronzeSeatedAmitabhaBuddha
-    second: {fileID: 2100000, guid: a5849f63e9ad1df4a8d2c6f38344a45b, type: 2}
+      name: Dabotab
+    second: {fileID: 2100000, guid: eb49027b049849c44b4b8fbb172ff87b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -35,7 +35,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1

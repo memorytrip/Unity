@@ -31,7 +31,8 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     [SerializeField] private FadeController helpPopup;
 
     private const string PhotoCountText = "내가 찾은 사진: ";
-
+    public static int TotalHiddenPhotoCount;
+    
     void Start()
     {
         EventManager.Instance.LoadCompleteMap += ShowScreen;
@@ -40,7 +41,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
         photoPositions = new Dictionary<int, Vector3>();
         skipButton.onClick.AddListener(() =>
             RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.LetterFoundCount, 8));
-        skipButton.onClick.AddListener(() => StartCoroutine(FindLastPhoto()) );
+        skipButton.onClick.AddListener(() => StartCoroutine(FindLastPhoto()));
     }
     
     public override void Spawned()
@@ -50,6 +51,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
         HidePhoto(photoPositions, numberOfPhoto).Forget();
         skipButton.gameObject.SetActive(true);
         skipButton.interactable = true;
+        findedPhotoCount.text = PhotoCountText + findedPhoto + " / " + TotalHiddenPhotoCount;
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
@@ -133,6 +135,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
 
     private IEnumerator FindLastPhoto()
     {
+        findedPhotoCount.text = PhotoCountText + numberOfPhoto + " / " + numberOfPhoto;
         yield return _waitForAnimation;
         RpcSceneChange();
         findedPhoto = 0;
@@ -149,7 +152,14 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void RpcSceneChange()
     {
-        SceneManager.Instance.MoveScene("SelectPhotoScene");
+        InitializeFmodGlobalParameters();
+        SceneManager.Instance.MoveScene(SceneName.SelectPhotoScene);
+    }
+
+    private void InitializeFmodGlobalParameters()
+    {
+        RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.LetterFoundCount, 0);
+        RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.PlayStarted, 0);
     }
 
     /*private IEnumerator EndGame()
@@ -159,7 +169,9 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     }*/
     public override void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        findedPhotoCount.text = PhotoCountText + findedPhoto + " / " + runner.ActivePlayers.Count();
+        /*var currentPlayers = 2 * runner.ActivePlayers.Count();
+        findedPhotoCount.text = PhotoCountText + findedPhoto + " / " + currentPlayers;
+        Debug.Log($"WHAT IS GOING ON: {findedPhotoCount.text} ... {currentPlayers}");*/
     }
 
     private void ShowScreen()
