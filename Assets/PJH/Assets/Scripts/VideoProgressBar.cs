@@ -5,16 +5,14 @@ using UnityEngine.UI;
 
 public class VideoProgressBar : MonoBehaviour
 {
-    private Slider bar;
     private CanvasGroup canvasGroup;
-    [SerializeField] private float maxTime = 300f;
+    [SerializeField] private float maxTime = 30f;
     [SerializeField] private float currentTime = 0f;
     public CanvasGroup doneCanvasGroup;
     public bool isLoading;
 
     private void Awake()
     {
-        bar = GetComponent<Slider>();
         canvasGroup = GetComponent<CanvasGroup>();
         UIManager.HideUI(canvasGroup);
         UIManager.HideUI(doneCanvasGroup);
@@ -37,7 +35,6 @@ public class VideoProgressBar : MonoBehaviour
         if (currentTime <= maxTime)
         {
             currentTime += Time.unscaledDeltaTime;
-            bar.value = currentTime / maxTime;
         }
         else
         {
