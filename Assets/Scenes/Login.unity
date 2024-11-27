@@ -24153,7 +24153,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5418990628320410888}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: ShowUI
         m_Mode: 2
@@ -34778,9 +34778,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5418990628320410888}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: HideUI
+        m_MethodName: ShowUI
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 7394437661012654756}
@@ -38765,6 +38765,7 @@ GameObject:
   - component: {fileID: 7350162818721258703}
   - component: {fileID: 345889529869347119}
   - component: {fileID: 8525318551964037468}
+  - component: {fileID: 8525318551964037469}
   m_Layer: 5
   m_Name: Button - LoadVideoDone
   m_TagString: Untagged
@@ -44191,7 +44192,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000005023266, y: -795.5999}
+  m_AnchoredPosition: {x: 0.000005023266, y: -795.6}
   m_SizeDelta: {x: 0, y: 5000}
   m_Pivot: {x: 0, y: 0}
 --- !u!23 &6285195480415856115
@@ -48394,8 +48395,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 731807325920517678}
   m_HandleRect: {fileID: 6457838681639334125}
   m_Direction: 2
-  m_Value: -0.000000014516972
-  m_Size: 0.15911807
+  m_Value: 0.000000014516972
+  m_Size: 0.15912001
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -50897,7 +50898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f859c660017fe42afe31d87765f259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 300
+  maxTime: 60
   currentTime: 0
   doneCanvasGroup: {fileID: 8525318551964037468}
   isLoading: 0
@@ -52057,6 +52058,28 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!95 &8525318551964037469
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4552507452402027874}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7208e9ee44a98cb4d8f9301824bfe12c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &8525918283507219426
 Transform:
   m_ObjectHideFlags: 0
