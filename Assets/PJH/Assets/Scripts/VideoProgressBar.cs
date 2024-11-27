@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class VideoProgressBar : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
-    [SerializeField] private float maxTime = 30f;
+    [SerializeField] private float maxTime = 60f;
     [SerializeField] private float currentTime = 0f;
     public CanvasGroup doneCanvasGroup;
     public bool isLoading;
