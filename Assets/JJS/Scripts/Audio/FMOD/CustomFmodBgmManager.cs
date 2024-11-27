@@ -20,23 +20,15 @@ public class CustomFmodBgmManager : StudioEventEmitter
     [SerializeField] private EventReference postPlayEvent;
     public static CustomFmodBgmManager Instance;
 
-    /*private bool _isPlaying(EventInstance eventInstance)
-    {
-        PLAYBACK_STATE state;
-        eventInstance.getPlaybackState(out state);
-        return state != PLAYBACK_STATE.STOPPED;
-    }*/
-
     private void Awake()
     {
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
             Destroy(this);
         }
         else
         {
             Instance = this;
-            DontDestroyOnLoad(this);
         }
 
         SceneManager.sceneLoaded += ChangeBgm;
@@ -51,6 +43,15 @@ public class CustomFmodBgmManager : StudioEventEmitter
     {
         if (_eventInstance.isValid())
         {
+            /*if (SceneTracker.PreviousScene == SceneName.MyRoom)
+            {
+                RuntimeManager.StudioSystem.getParameterByName(ParameterNameCache.IsInMyRoom, out float value);
+                if (Mathf.Approximately(value, 1))
+                {
+                    Debug.Log("WHAT");
+                    return;
+                }
+            }*/
             _eventInstance.stop(STOP_MODE.ALLOWFADEOUT);
             _eventInstance.release();
         }
@@ -59,7 +60,6 @@ public class CustomFmodBgmManager : StudioEventEmitter
         {
             case SceneName.EmptyScene:
                 return;
-            // TODO: 보완 필요
             case SceneName.Login:
                 _eventInstance = RuntimeManager.CreateInstance(loginEvent);
                 break;
@@ -67,14 +67,15 @@ public class CustomFmodBgmManager : StudioEventEmitter
                 _eventInstance = RuntimeManager.CreateInstance(mainEvent);
                 break;
             case SceneName.MyRoom:
-            case SceneName.PlayReady:
+                RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.IsInMyRoom, 1);
                 _eventInstance = RuntimeManager.CreateInstance(myRoomEvent);
+                break;
+            case SceneName.PlayReady:
+                _eventInstance = RuntimeManager.CreateInstance(playReadyEvent);
                 break;
             case SceneName.FindPhoto:
                 InitializePlay();
-                return;
-            default:
-                return;
+                break;
         }
 
         if (_eventInstance.isValid())

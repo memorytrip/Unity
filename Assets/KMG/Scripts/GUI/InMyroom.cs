@@ -1,6 +1,7 @@
 using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
+using FMODUnity;
 using Myroom;
 using TMPro;
 using UnityEngine;
@@ -50,6 +51,7 @@ namespace GUI
 
         private void ReturnToSquare()
         {
+            RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.IsInMyRoom, 0);
             SceneManager.Instance.MoveRoom(SceneName.Square).Forget();
         }
 
