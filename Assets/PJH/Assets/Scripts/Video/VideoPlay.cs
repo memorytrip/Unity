@@ -1,10 +1,4 @@
-using System;
-using Common;
-using Cysharp.Threading.Tasks;
-using GUI;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Video;
 
 public class VideoPlay : MonoBehaviour
@@ -23,11 +17,13 @@ public class VideoPlay : MonoBehaviour
     {
         if (!isPlaying)
         {
+            CustomFmodBgmManager.Instance.Stop();
             player.Play();
             isPlaying = true;
         }
         else
         {
+            CustomFmodBgmManager.Instance.Play();
             player.Pause();
             isPlaying = false;
         }

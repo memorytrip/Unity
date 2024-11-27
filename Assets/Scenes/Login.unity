@@ -4343,11 +4343,11 @@ MonoBehaviour:
     Path: event:/BGM_MyRoom
   postPlayEvent:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -288354362
+      Data2: 1321307508
+      Data3: -1577546836
+      Data4: -55176010
+    Path: event:/BGM_SelectPhoto
 --- !u!1 &578580475
 GameObject:
   m_ObjectHideFlags: 0
@@ -35119,7 +35119,7 @@ VideoPlayer:
   m_EnabledAudioTracks: 
   m_DirectAudioMutes: 
   m_ControlledAudioTrackCount: 0
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 1
   m_WaitForFirstFrame: 1

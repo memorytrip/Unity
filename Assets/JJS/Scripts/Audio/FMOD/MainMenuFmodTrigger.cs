@@ -6,18 +6,18 @@ public class MainMenuFmodTrigger : MonoBehaviour
     private Button _mainMenuButton;
     [SerializeField] private Button cancelMainMenuButton;
     
-    private FmodParameterSetter _fmodParameterSetter;
+    private FmodGlobalParameterSetter fmodGlobalParameterSetter;
 
     private void Awake()
     {
         _mainMenuButton = GetComponent<Button>();
-        _fmodParameterSetter = FindAnyObjectByType<FmodParameterSetter>();
+        fmodGlobalParameterSetter = FindAnyObjectByType<FmodGlobalParameterSetter>();
     }
 
     private void Start()
     {
-        _mainMenuButton.onClick.AddListener(_fmodParameterSetter.TogglePause);
-        cancelMainMenuButton.onClick.AddListener(_fmodParameterSetter.TogglePause);
+        _mainMenuButton.onClick.AddListener(fmodGlobalParameterSetter.TogglePause);
+        cancelMainMenuButton.onClick.AddListener(fmodGlobalParameterSetter.TogglePause);
         cancelMainMenuButton.onClick.AddListener(What);
     }
 
