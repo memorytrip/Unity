@@ -685,7 +685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0febf2955981294479247c35c52d9881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footsteps: {fileID: 0}
+  footsteps: {fileID: 999044397474867134}
   playerMoveSpeed: 15
   playerDir: {x: 0, y: 0, z: 0}
   jumpForce: 15

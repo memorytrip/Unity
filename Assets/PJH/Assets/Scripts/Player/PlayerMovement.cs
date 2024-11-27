@@ -134,7 +134,7 @@ public class PlayerMovement : NetworkBehaviour
         {
             // animator.SetBool(IsMoving, false);
             animationTrigger.RpcAnimSetBool(IsMoving, false);
-            footsteps.SetActive(true);
+            footsteps.SetActive(false);
             _playerMoveSpeed = 0f;
         }
         else
@@ -142,7 +142,7 @@ public class PlayerMovement : NetworkBehaviour
             // animator.SetBool(IsMoving, true);
             animationTrigger.RpcAnimSetBool(IsMoving, true);
             _playerMoveSpeed = playerMoveSpeed;
-            footsteps.SetActive(false);
+            footsteps.SetActive(true);
         }
         cc.Move(new Vector3(playerDir.x * _playerMoveSpeed, velocity, playerDir.z * _playerMoveSpeed) * Time.fixedDeltaTime);
     }
