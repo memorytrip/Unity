@@ -32,7 +32,7 @@ public class PostVideoData : MonoBehaviour
 
     public async UniTask PostVideoProcess()
     {
-        string realapi = "request-video";
+        string realapi = endPoint + "request-video";
         try
         {
             for (int i = 0; i < loadLP.selectedPhotoUrl.Count; i++)

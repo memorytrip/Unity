@@ -7,7 +7,6 @@ public class EmotionInput : NetworkBehaviour
 {
     public TMP_InputField emotionInput;
     
-    [Networked]
     public string EmotionText { get; set; }
     
     public void OnInputChanged()
