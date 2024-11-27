@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Common;
 using Cysharp.Threading.Tasks;
@@ -6,6 +5,7 @@ using Myroom;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 namespace GUI
 {
@@ -24,6 +24,11 @@ namespace GUI
         private void Awake()
         {
             closeImagePanel.onClick.AddListener(CloseImagePanel);
+        }
+
+        private void Start()
+        {
+            closeImagePanel.onClick.AddListener(CustomFmodBgmManager.Instance.ResumePlayback);
         }
 
         private void CloseImagePanel() => Utility.DisablePanel(imagePanel);
@@ -47,6 +52,12 @@ namespace GUI
             
             // 베타 시연용
             var obj = Instantiate(videoItem, content).GetComponent<PhotoListItem>();
+            var videoPlayer = obj.GetComponentInChildren<VideoPlayer>();
+            if (videoPlayer != null)
+            {
+                videoPlayer.playOnAwake = false;
+                videoPlayer.Stop();
+            }
             obj.imagePanel = imagePanel;
             obj.rawImage = rawImage;
         }

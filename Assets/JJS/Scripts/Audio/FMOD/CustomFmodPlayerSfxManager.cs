@@ -23,6 +23,7 @@ public class CustomFmodPlayerSfxManager : MonoBehaviour
         }
         
         _eventInstance = RuntimeManager.CreateInstance(footstepEvent);
+        _eventInstance.setParameterByName(ParameterNameCache.IsWalking, 0);
         _eventInstance.start();
 
         SceneManager.sceneLoaded += StopWalkingEvent;

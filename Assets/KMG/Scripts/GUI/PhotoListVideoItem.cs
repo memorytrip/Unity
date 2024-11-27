@@ -13,6 +13,7 @@ namespace GUI
         {
             Utility.EnablePanel(imagePanel);
             rawImage.texture = videoPlayer.texture;
+            videoPlayer.Play();
         }
     }
 }

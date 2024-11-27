@@ -17,13 +17,13 @@ public class VideoPlay : MonoBehaviour
     {
         if (!isPlaying)
         {
-            CustomFmodBgmManager.Instance.Stop();
+            CustomFmodBgmManager.Instance.StopPlayback();
             player.Play();
             isPlaying = true;
         }
         else
         {
-            CustomFmodBgmManager.Instance.Play();
+            CustomFmodBgmManager.Instance.ResumePlayback();
             player.Pause();
             isPlaying = false;
         }
