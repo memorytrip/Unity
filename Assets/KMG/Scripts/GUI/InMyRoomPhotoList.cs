@@ -70,6 +70,7 @@ namespace GUI
             }
             obj.imagePanel = imagePanel;
             obj.rawImage = rawImage;
+            obj.closeButton = closeImagePanel;
         }
 
         private async UniTask<PhotoData[]> GetPhotoList(string name)

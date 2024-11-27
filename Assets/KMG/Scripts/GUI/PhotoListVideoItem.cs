@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -13,8 +14,22 @@ namespace GUI
         {
             CustomFmodBgmManager.Instance.StopPlayback();
             Utility.EnablePanel(imagePanel);
-            rawImage.texture = videoPlayer.texture;
+            rawImage.texture = videoPlayer.targetTexture;
+            StartCoroutine(PlayVideoProcess());
+            closeButton.onClick.AddListener(CloseImage);
+        }
+
+        private IEnumerator PlayVideoProcess()
+        {
+            videoPlayer.Prepare();
+            yield return new WaitUntil( () => videoPlayer.isPrepared );
             videoPlayer.Play();
+        }
+
+        private void CloseImage()
+        {
+            videoPlayer.Stop();
+            closeButton.onClick.RemoveListener(CloseImage);
         }
     }
 }
