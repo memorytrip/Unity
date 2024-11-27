@@ -11,6 +11,7 @@ namespace GUI
 
         protected override void ShowImage()
         {
+            CustomFmodBgmManager.Instance.StopPlayback();
             Utility.EnablePanel(imagePanel);
             rawImage.texture = videoPlayer.texture;
             videoPlayer.Play();

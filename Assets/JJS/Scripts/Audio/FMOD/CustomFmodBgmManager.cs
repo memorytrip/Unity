@@ -133,7 +133,8 @@ public class CustomFmodBgmManager : StudioEventEmitter
             return;
         }
 
-        _eventInstance.setPaused(false);
+        //_eventInstance.setPaused(false);
+        _eventInstance.start();
         Debug.Log("Resume...");
     }
     
@@ -143,8 +144,8 @@ public class CustomFmodBgmManager : StudioEventEmitter
         {
             return;
         }
-        _eventInstance.setPaused(true);
+        //_eventInstance.setPaused(true);
         Debug.Log("Pausing...");
-        //_eventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+        _eventInstance.stop(STOP_MODE.ALLOWFADEOUT);
     }
 }

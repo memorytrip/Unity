@@ -3,6 +3,7 @@ using Common;
 using Cysharp.Threading.Tasks;
 using Myroom;
 using Newtonsoft.Json;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -55,8 +56,11 @@ namespace GUI
             var videoPlayer = obj.GetComponentInChildren<VideoPlayer>();
             if (videoPlayer != null)
             {
+                var audioSource = obj.AddComponent<AudioSource>();
+                audioSource.playOnAwake = false;
                 videoPlayer.playOnAwake = false;
-                videoPlayer.Stop();
+                videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
+                videoPlayer.SetTargetAudioSource(0, audioSource);
             }
             obj.imagePanel = imagePanel;
             obj.rawImage = rawImage;
