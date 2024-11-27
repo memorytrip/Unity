@@ -56,11 +56,15 @@ namespace GUI
             var videoPlayer = obj.GetComponentInChildren<VideoPlayer>();
             if (videoPlayer != null)
             {
-                var audioSource = obj.AddComponent<AudioSource>();
-                audioSource.playOnAwake = false;
-                videoPlayer.playOnAwake = false;
+                var audioSource = videoPlayer.gameObject.GetComponent<AudioSource>();
+                if (audioSource == null)
+                {
+                    audioSource = videoPlayer.gameObject.AddComponent<AudioSource>();
+                }
                 videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
                 videoPlayer.SetTargetAudioSource(0, audioSource);
+                audioSource.playOnAwake = false;
+                videoPlayer.playOnAwake = false;
             }
             obj.imagePanel = imagePanel;
             obj.rawImage = rawImage;

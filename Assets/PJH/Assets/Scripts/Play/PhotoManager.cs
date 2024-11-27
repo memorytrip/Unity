@@ -30,7 +30,7 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
     // [SerializeField] private CanvasGroup helpPopup;
     [SerializeField] private FadeController helpPopup;
 
-    private const string PhotoCountText = "내가 찾은 사진: ";
+    private const string PhotoCountText = "우리가 찾은 사진: ";
     public static int TotalHiddenPhotoCount;
     
     void Start()

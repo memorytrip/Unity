@@ -47,8 +47,18 @@ public class VcaVolumeController : MonoBehaviour
         volumeSliders[3].onValueChanged.AddListener(_ => SetVolume(_systemVca, volumeSliders[3].value));
 
         volumeSettingsButton.onClick.AddListener(GetVolume);
+        //InitializeVolume();
     }
 
+    private void InitializeVolume()
+    {
+        SetVolume(_mainVca, 100f);
+        SetVolume(_ambientVca, 80f);
+        SetVolume(_musicVca, 40f);
+        SetVolume(_sfxVca, volumeSliders[2].value);
+        SetVolume(_systemVca, volumeSliders[3].value);
+    }
+    
     private void GetVolume()
     {
         _mainVca.getVolume(out float mainVolume);

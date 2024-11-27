@@ -7,6 +7,7 @@ using UnityEngine.Video;
 public class ToggleVideo : MonoBehaviour
 {
     private VideoPlayer _videoPlayer;
+    private AudioSource _audioSource;
     // private ScriptUsageVideoPlayback _scriptUsageVideoPlayback;
     private Material _material;
     [SerializeField] private Material[] materials;
@@ -16,6 +17,7 @@ public class ToggleVideo : MonoBehaviour
     {
         _material = GetComponent<Renderer>().material;
         _videoPlayer = GetComponent<VideoPlayer>();
+        _audioSource = GetComponent<AudioSource>();
         // _scriptUsageVideoPlayback = GetComponent<ScriptUsageVideoPlayback>();
         if (videoClip == null)
         {
@@ -50,6 +52,8 @@ public class ToggleVideo : MonoBehaviour
         _videoPlayer.playOnAwake = false;
         _videoPlayer.isLooping = true;
         _videoPlayer.clip = videoClip;
+        _videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
+        _videoPlayer.SetTargetAudioSource(0, _audioSource);
         _material = materials[0];
     }
     

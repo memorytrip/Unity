@@ -26,7 +26,6 @@ public class CustomFmodAmbienceManager : StudioEventEmitter
         else
         {
             Instance = this;
-            DontDestroyOnLoad(this);
         }
 
         SceneManager.sceneLoaded += SwitchAmbience;
@@ -72,15 +71,12 @@ public class CustomFmodAmbienceManager : StudioEventEmitter
         
         switch (scene.name)
         {
-            case SceneName.EmptyScene:
+            case SceneName.Square:
                 _ambienceEvent = RuntimeManager.CreateInstance(mainEvent);
                 if (_ambienceEvent.isValid())
                 {
                     _ambienceEvent.start();
-                    Debug.Log("Helloooo 2");
                 }
-                return;
-            case SceneName.Square:
                 break;
             default:
                 if (_ambienceEvent.isValid())
