@@ -12481,7 +12481,7 @@ GameObject:
   - component: {fileID: 734312020}
   m_Layer: 13
   m_Name: Scale
-  m_TagString: Untagged
+  m_TagString: Touchable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17459,7 +17459,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.7
+  m_Radius: 1.2
   m_Center: {x: -0.00000059604645, y: -0.95, z: -0.0000076293945}
 --- !u!23 &1069242896
 MeshRenderer:
@@ -18218,7 +18218,7 @@ GameObject:
   - component: {fileID: 1111703054}
   m_Layer: 13
   m_Name: NPC
-  m_TagString: Touchable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37845,7 +37845,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.7
+  m_Radius: 1.2
   m_Center: {x: -0.00000059604645, y: -0.95, z: -0.0000076293945}
 --- !u!1001 &388571647620755411
 PrefabInstance:

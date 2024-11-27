@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 public class SceneTracker : MonoBehaviour
 {
     public static string PreviousScene { get; private set; } = string.Empty;
+    private const string LoadingSceneName = "EmptyScene";
     private string _currentActiveScene = string.Empty;
     
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
         _currentActiveScene = SceneManager.GetActiveScene().name;
-        PreviousScene = _currentActiveScene;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -22,7 +22,7 @@ public class SceneTracker : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == SceneName.EmptyScene)
+        if (scene.name == LoadingSceneName)
         {
             return;
         }
@@ -32,12 +32,6 @@ public class SceneTracker : MonoBehaviour
         {
             PreviousScene = _currentActiveScene;
             _currentActiveScene = activeScene.name;
-            Debug.Log("Previous scene name: " + PreviousScene);
-        }
-        else if (_currentActiveScene == SceneName.MyRoom && activeScene.name == SceneName.MyRoom)
-        {
-            PreviousScene = _currentActiveScene;
-            Debug.Log("Moving between the same scene names: " + PreviousScene);
         }
     }
 }

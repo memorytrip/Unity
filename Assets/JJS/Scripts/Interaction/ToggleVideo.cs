@@ -7,7 +7,7 @@ using UnityEngine.Video;
 public class ToggleVideo : MonoBehaviour
 {
     private VideoPlayer _videoPlayer;
-    private ScriptUsageVideoPlayback _scriptUsageVideoPlayback;
+    // private ScriptUsageVideoPlayback _scriptUsageVideoPlayback;
     private Material _material;
     [SerializeField] private Material[] materials;
     [SerializeField] private VideoClip videoClip;
@@ -16,7 +16,7 @@ public class ToggleVideo : MonoBehaviour
     {
         _material = GetComponent<Renderer>().material;
         _videoPlayer = GetComponent<VideoPlayer>();
-        _scriptUsageVideoPlayback = GetComponent<ScriptUsageVideoPlayback>();
+        // _scriptUsageVideoPlayback = GetComponent<ScriptUsageVideoPlayback>();
         if (videoClip == null)
         {
             Debug.LogWarning($"{gameObject}: Video clip is missing!");
@@ -77,7 +77,7 @@ public class ToggleVideo : MonoBehaviour
         _videoPlayer.Prepare();
         yield return _videoPlayer.isPrepared; // TODO: 이게 맞나
         _videoPlayer.Play();
-        _scriptUsageVideoPlayback.StartPlayback();
+        // _scriptUsageVideoPlayback.StartPlayback();
     }
 
     private void OnTriggerExit(Collider other)
@@ -102,6 +102,6 @@ public class ToggleVideo : MonoBehaviour
     private void StopVideoPlayback()
     {
         _videoPlayer.Stop();
-        _scriptUsageVideoPlayback.StopPlayback();
+        // _scriptUsageVideoPlayback.StopPlayback();
     }
 }

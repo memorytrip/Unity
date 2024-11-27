@@ -2,13 +2,23 @@ using UnityEngine;
 using FMODUnity;
 using UnityEngine.UI;
 
-public class FmodGlobalParameterSetter : MonoBehaviour
+public class FmodParameterSetter : MonoBehaviour
 {
+    private StudioEventEmitter _emitter;
     private Button _mainMenuButton;
     private bool _hasPaused;
 
     private float value;
     private float finalValue;
+
+    private void Awake()
+    {
+        _emitter = GetComponent<StudioEventEmitter>();
+        if (_emitter == null)
+        {
+            Debug.LogError("FMOD parameter setter is missing!");
+        }
+    }
 
     public void TogglePause()
     {
@@ -66,5 +76,6 @@ public class FmodGlobalParameterSetter : MonoBehaviour
 
     private void OnDestroy()
     {
+        _emitter.Stop();
     }
 }
