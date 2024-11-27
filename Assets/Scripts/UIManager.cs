@@ -51,14 +51,12 @@ public class UIManager : MonoBehaviour
     {
         HideUI(sideMenu);
         HideUI(chat);
-        HideUI(newChat);
     }
 
     public void ShowMenu()
     {
         ShowUI(sideMenu);
         ShowUI(chat);
-        ShowUI(newChat);
     }
     
     private void ToggleUI(Scene scene, LoadSceneMode mode)

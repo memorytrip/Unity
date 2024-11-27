@@ -116,18 +116,4 @@ public class EventManager : MonoBehaviour
     {
         OpenPopup?.Invoke();
     }
-
-    public event Action StartWalking;
-
-    public void OnStartedWalking()
-    {
-        StartWalking?.Invoke();
-    }
-    
-    public event Action StopWalking;
-
-    public void OnStoppedWalking()
-    {
-        StopWalking?.Invoke();
-    }
 }
