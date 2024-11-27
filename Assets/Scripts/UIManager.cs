@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        HideUI(mainMenu);
+        ShowUI(mainMenu);
         HideUI(sideMenu);
         HideUI(chat);
         HideUI(newChat);
