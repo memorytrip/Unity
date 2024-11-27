@@ -25,7 +25,6 @@ public class CustomFmodSfxManager : StudioEventEmitter
         else
         {
             _instance = this;
-            DontDestroyOnLoad(this);
         }
 
         SceneManager.sceneLoaded += InitializeSfxManager;

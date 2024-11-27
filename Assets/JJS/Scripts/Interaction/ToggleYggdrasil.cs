@@ -60,6 +60,7 @@ public class ToggleYggdrasil : MonoBehaviour
         if (!other.GetComponent<NetworkObject>().HasStateAuthority)
             return;
 
+        UIManager.Instance.HideMenu();
         RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.IsNearYggdrasil, 1);
         Debug.Log(
             $"Yggdrasil trigger?: {RuntimeManager.StudioSystem.getParameterByName(ParameterNameCache.IsNearYggdrasil, out var value)}");
@@ -112,6 +113,7 @@ public class ToggleYggdrasil : MonoBehaviour
         if (!other.GetComponent<NetworkObject>().HasStateAuthority)
             yield break;
 
+        UIManager.Instance.ShowMenu();
         RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.IsNearYggdrasil, 0);
         contentUiAnimator.SetTrigger(Exit);
         yield return _exitClipLength;
