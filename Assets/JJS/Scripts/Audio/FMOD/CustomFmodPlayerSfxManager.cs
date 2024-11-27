@@ -19,11 +19,10 @@ public class CustomFmodPlayerSfxManager : MonoBehaviour
         else
         {
             _instance = this;
-            DontDestroyOnLoad(this);
         }
         
         _eventInstance = RuntimeManager.CreateInstance(footstepEvent);
-        _eventInstance.setParameterByName(ParameterNameCache.IsWalking, 0);
+        RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.IsWalking, 0);
         _eventInstance.start();
 
         SceneManager.sceneLoaded += StopWalkingEvent;
@@ -40,13 +39,13 @@ public class CustomFmodPlayerSfxManager : MonoBehaviour
         SceneManager.sceneLoaded -= StopWalkingEvent;
         EventManager.Instance.StartWalking -= StartWalking;
         EventManager.Instance.StopWalking -= StopWalking;
-        _eventInstance.setParameterByName(ParameterNameCache.IsWalking, 0);
+        RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.IsWalking, 0);
         _eventInstance.stop(STOP_MODE.IMMEDIATE);
     }
 
     private void StartWalking()
     {
-        _eventInstance.setParameterByName(ParameterNameCache.IsWalking, 1);
+        RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.IsWalking, 1);
         Debug.Log("Yaaaay");
     }
 
@@ -57,7 +56,7 @@ public class CustomFmodPlayerSfxManager : MonoBehaviour
 
     private void StopWalking()
     {
-        _eventInstance.setParameterByName(ParameterNameCache.IsWalking, 0);
+        RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.IsWalking, 0);
         Debug.Log("Stop!");
     }
 }

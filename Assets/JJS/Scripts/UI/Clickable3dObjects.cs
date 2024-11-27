@@ -35,6 +35,7 @@ public class Clickable3dObjects : MonoBehaviour
                 if (clickable != null)
                 {
                     clickable.OnClick();
+                    Debug.Log("?????");
                 }
                 else
                 {

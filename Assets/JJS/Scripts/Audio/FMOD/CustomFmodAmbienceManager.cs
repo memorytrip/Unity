@@ -26,7 +26,6 @@ public class CustomFmodAmbienceManager : StudioEventEmitter
         else
         {
             Instance = this;
-            DontDestroyOnLoad(this);
         }
 
         SceneManager.sceneLoaded += SwitchAmbience;
