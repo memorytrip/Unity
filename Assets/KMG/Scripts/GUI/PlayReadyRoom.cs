@@ -19,9 +19,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     private TextMeshProUGUI readyButtonText;
     private Image readyButtonImage;
     private readonly Color _readyButtonColor = new(0.718f, 0.945f, 0.788f, 1f);
-    private readonly Color _readyTextColor = new(0.183f, 0.18f, 0.887f, 1f);
     private readonly Color _startButtonColor = new(1f, 1f, 1f, 1f);
-    private readonly Color _startTextColor = new(0.11f, 0.045f, 0.283f, 1f);
 
     [SerializeField] private Button exitButton;
     [SerializeField] public TMP_Text roomNameText;
@@ -126,7 +124,6 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
 
     private void ActiveStart() {
         readyButtonImage.color = _startButtonColor; 
-        readyButtonText.color = _startTextColor;
         readyButtonText.text = "시작하기";
         // readyButton.onClick.RemoveListener(Ready);
         readyButton.onClick.RemoveAllListeners();
@@ -135,7 +132,6 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     
     private void DeactiveStart() {
         readyButtonImage.color = _readyButtonColor;
-        readyButtonText.color = _readyTextColor;
         readyButtonText.text = "준비하기";
         // readyButton.onClick.RemoveListener(GameStart);
         readyButton.onClick.RemoveAllListeners();
