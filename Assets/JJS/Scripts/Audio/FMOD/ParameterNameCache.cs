@@ -8,7 +8,6 @@ public static class ParameterNameCache
     public const string PlayStarted = "PlayStarted";
     public const string ResultReady = "ResultReady";
     public const string IsWalking = "isWalking";
-    public const string IsInMyRoom = "isInMyRoom";
 
     public static readonly WaitForSeconds Wait = new(3f);
     public static readonly WaitForSeconds WaitLonger = new(8f); // 임시
