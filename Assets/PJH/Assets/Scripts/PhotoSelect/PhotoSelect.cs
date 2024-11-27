@@ -50,11 +50,13 @@ public class PhotoSelect : NetworkBehaviour
             for (int i = 0; i < maxIndex; i++)
             {
                 selectedPhotoArray[i].texture = PhotoList[i].texture;
+                selectedPhotoArray[i].color = new Color(1, 1, 1, 1);
             }
 
             for (int i = maxIndex; i < selectedPhotoArray.Length; i++)
             {
                 selectedPhotoArray[i].texture = null;
+                selectedPhotoArray[i].color = new Color(0.165f, 0.149f, 0.149f, 1);
             }
         }
     }
