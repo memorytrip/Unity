@@ -1196,57 +1196,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 159813981}
   m_CullTransparentMesh: 1
---- !u!1 &172057795
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 172057796}
-  - component: {fileID: 172057797}
-  m_Layer: 0
-  m_Name: PlayerSfx
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &172057796
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172057795}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 598689960}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &172057797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172057795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0898032bada84254a81c6a9b183f9509, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  footstepEvent:
-    Guid:
-      Data1: -636103018
-      Data2: 1207648681
-      Data3: 1825829772
-      Data4: -236971852
-    Path: event:/SFX.Player_Footstep
 --- !u!1 &187291573
 GameObject:
   m_ObjectHideFlags: 0
@@ -4894,7 +4843,6 @@ Transform:
   m_Children:
   - {fileID: 569466777}
   - {fileID: 864650521}
-  - {fileID: 172057796}
   - {fileID: 933148907}
   - {fileID: 924439043}
   m_Father: {fileID: 0}
@@ -47744,7 +47692,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6457838681639334125}
   m_Direction: 2
   m_Value: -0.000000014516972
-  m_Size: 0.1585459
+  m_Size: 0.15911789
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

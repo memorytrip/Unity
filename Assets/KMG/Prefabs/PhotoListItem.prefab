@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7306459684111484881}
   - component: {fileID: 6424195621211407266}
   - component: {fileID: 4202211373074828142}
-  - component: {fileID: 2369087689946908446}
   - component: {fileID: 3871273414263778193}
+  - component: {fileID: 9160461225860406433}
   m_Layer: 5
   m_Name: PhotoListItem
   m_TagString: Untagged
@@ -67,8 +67,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 92e105fcd1ff9844294192f4c8689417, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -76,23 +76,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &2369087689946908446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8756888858335660510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b777bc47c0884e8aba638ad7869f7cba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 4202211373074828142}
-  button: {fileID: 3871273414263778193}
-  imagePanel: {fileID: 0}
-  rawImage: {fileID: 0}
+  m_PixelsPerUnitMultiplier: 9
 --- !u!114 &3871273414263778193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,3 +121,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9160461225860406433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8756888858335660510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b777bc47c0884e8aba638ad7869f7cba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 4202211373074828142}
+  button: {fileID: 3871273414263778193}
+  imagePanel: {fileID: 0}
+  rawImage: {fileID: 0}

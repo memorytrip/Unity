@@ -63,8 +63,10 @@ namespace GUI
                 }
                 videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
                 videoPlayer.SetTargetAudioSource(0, audioSource);
+                audioSource.outputAudioMixerGroup = null;
                 audioSource.playOnAwake = false;
                 videoPlayer.playOnAwake = false;
+                videoPlayer.Stop();
             }
             obj.imagePanel = imagePanel;
             obj.rawImage = rawImage;
