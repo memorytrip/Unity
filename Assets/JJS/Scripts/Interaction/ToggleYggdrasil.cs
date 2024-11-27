@@ -61,6 +61,8 @@ public class ToggleYggdrasil : MonoBehaviour
             return;
 
         RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.IsNearYggdrasil, 1);
+        Debug.Log(
+            $"Yggdrasil trigger?: {RuntimeManager.StudioSystem.getParameterByName(ParameterNameCache.IsNearYggdrasil, out var value)}");
         EventManager.Instance.OnYggdrasilTriggered();
         contentUiAnimator.SetTrigger(Enter);
         StartCoroutine(ViewGems());
