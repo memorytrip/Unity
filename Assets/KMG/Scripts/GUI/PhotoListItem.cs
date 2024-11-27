@@ -8,7 +8,8 @@ namespace GUI
     {
         [SerializeField] protected Image image;
         [SerializeField] protected Button button;
-
+        
+        [HideInInspector] public Button closeButton;
         [HideInInspector] public CanvasGroup imagePanel;
         [HideInInspector] public RawImage rawImage;
 
