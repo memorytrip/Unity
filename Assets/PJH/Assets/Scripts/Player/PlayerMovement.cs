@@ -10,7 +10,8 @@ public class PlayerMovement : NetworkBehaviour
 {
     private static readonly int IsMoving = Animator.StringToHash("IsMoving");
     private static readonly int Jump = Animator.StringToHash("Jump");
-
+    [SerializeField] private GameObject footsteps;
+    
     [Header("References")]
     private CharacterController cc;
     //private NetworkMecanimAnimator networkanim;
@@ -133,6 +134,7 @@ public class PlayerMovement : NetworkBehaviour
         {
             // animator.SetBool(IsMoving, false);
             animationTrigger.RpcAnimSetBool(IsMoving, false);
+            footsteps.SetActive(true);
             _playerMoveSpeed = 0f;
         }
         else
@@ -140,6 +142,7 @@ public class PlayerMovement : NetworkBehaviour
             // animator.SetBool(IsMoving, true);
             animationTrigger.RpcAnimSetBool(IsMoving, true);
             _playerMoveSpeed = playerMoveSpeed;
+            footsteps.SetActive(false);
         }
         cc.Move(new Vector3(playerDir.x * _playerMoveSpeed, velocity, playerDir.z * _playerMoveSpeed) * Time.fixedDeltaTime);
     }

@@ -28,17 +28,9 @@ public class CustomFmodPlayerSfxManager : MonoBehaviour
         SceneManager.sceneLoaded += StopWalkingEvent;
     }
 
-    private void Start()
-    {
-        EventManager.Instance.StartWalking += StartWalking;
-        EventManager.Instance.StopWalking += StopWalking;
-    }
-
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= StopWalkingEvent;
-        EventManager.Instance.StartWalking -= StartWalking;
-        EventManager.Instance.StopWalking -= StopWalking;
         RuntimeManager.StudioSystem.setParameterByName(ParameterNameCache.IsWalking, 0);
         _eventInstance.stop(STOP_MODE.IMMEDIATE);
     }
