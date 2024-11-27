@@ -3,6 +3,7 @@ using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
@@ -17,7 +18,7 @@ public class CustomFmodBgmManager : StudioEventEmitter
     [SerializeField] private EventReference playReadyEvent;
     [SerializeField] private EventReference playEvent;
     [SerializeField] private EventReference yggdrasilEvent;
-    [SerializeField] private EventReference postPlayEvent;
+    [FormerlySerializedAs("postPlayEvent")] [SerializeField] private EventReference selectPhotoEvent;
     public static CustomFmodBgmManager Instance;
 
     private void Awake()
@@ -75,6 +76,9 @@ public class CustomFmodBgmManager : StudioEventEmitter
                 break;
             case SceneName.FindPhoto:
                 InitializePlay();
+                break;
+            case SceneName.SelectPhotoScene:
+                _eventInstance = RuntimeManager.CreateInstance(selectPhotoEvent);
                 break;
         }
 
