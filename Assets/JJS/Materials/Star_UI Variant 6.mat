@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Star_UI Variant 6
+  m_Shader: {fileID: 4800000, guid: a2a06e22c08354d9699356710b69ca9c, type: 3}
+  m_Parent: {fileID: 2100000, guid: 8e6e2b1feda83c540ab9aa3a337485a4, type: 2}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - AMBIENT
+  - ANIME_SOFT
+  - DIFFUSE
+  - FOG
+  - MATCAP_PERSPECTIVE
+  - OUTLINE_PASS_DISABLED
+  - RIM
+  - SHADOWS_ENABLED
+  - SPECULAR
+  - _DETAILBLEND_MULTIPLY
+  - _DETAILUV_UV1
+  - _HEIGHTCOLORSBLEND_ALPHA_BLEND
+  - _LAYER1BLEND_ALPHA_BLEND
+  - _LAYER2BLEND_ALPHA_BLEND
+  - _LAYER3BLEND_ALPHA_BLEND
+  - _LIGHTMAPUV_UV1
+  - _MATCAPBLEND_MULTIPLY
+  - _NORMALUV_UV1
+  - _PLANTTYPE_PLANT
+  - _RIMBLEND_ADDITIVE
+  - _SHADOWOVERLAYANIMATION_SCROLL
+  - _SPECULARUV_UV1
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - SRPDEFAULTUNLIT
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats: []
+    m_Colors:
+    - _Color: {r: 0.52545094, g: 0.27697045, b: 0.68733144, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

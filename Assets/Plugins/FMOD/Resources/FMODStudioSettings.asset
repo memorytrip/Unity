@@ -629,6 +629,7 @@ MonoBehaviour:
   - SFX
   - SFX_Player
   - UI
+  - VideoPlayer
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
