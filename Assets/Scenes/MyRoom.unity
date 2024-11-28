@@ -4309,7 +4309,7 @@ MonoBehaviour:
   customMapItemPrefab: {fileID: 8021109592637449980, guid: bef91c09a5e1f6248bff616f7e4aef8e, type: 3}
   content: {fileID: 19655416}
   emptySprite: {fileID: 21300000, guid: a183c7ba63a6fd84095da9de3454705c, type: 3}
-  confirmDeletePanel: {fileID: 1920568900}
+  confirmDeletePanel: {fileID: 1920568904}
   confirmDeleteButton: {fileID: 1730613350}
 --- !u!1 &1504298182
 GameObject:

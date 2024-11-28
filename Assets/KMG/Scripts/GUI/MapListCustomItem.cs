@@ -32,14 +32,16 @@ namespace GUI
 
         private void DeletePopup()
         {
-            mapList.confirmDeletePanel.SetActive(true);
+            Utility.EnablePanel(mapList.confirmDeletePanel);
+            // mapList.confirmDeletePanel.SetActive(true);
             mapList.confirmDeleteButton.onClick.RemoveAllListeners();
             mapList.confirmDeleteButton.onClick.AddListener(Delete);
         }
 
         private void Delete()
         {
-            mapList.confirmDeletePanel.SetActive(false);
+            Utility.DisablePanel(mapList.confirmDeletePanel);
+            // mapList.confirmDeletePanel.SetActive(false);
             DeleteProcess().Forget();
         }
 

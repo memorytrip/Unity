@@ -15,7 +15,7 @@ namespace GUI
         [SerializeField] private GameObject customMapItemPrefab;
         [SerializeField] private Transform content;
         [SerializeField] private Sprite emptySprite;
-        [SerializeField] public GameObject confirmDeletePanel;
+        [SerializeField] public CanvasGroup confirmDeletePanel;
         [SerializeField] public Button confirmDeleteButton;
 
         public async UniTask RefreshListProcess()
