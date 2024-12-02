@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CanvasGroup credit;
     [SerializeField] public GUI.CreditUI creditUI;
     [SerializeField] private Button storeButton;
+    [SerializeField] private Button myRoomButton;
 
     private void Awake()
     {
@@ -79,6 +80,7 @@ public class UIManager : MonoBehaviour
                 HideUI(newChat);
                 TemporarilyHideUI();
                 storeButton.interactable = true;
+                myRoomButton.interactable = true;
                 break;
             case SceneName.MyRoom:
                 ShowUI(mainMenu);
@@ -89,6 +91,7 @@ public class UIManager : MonoBehaviour
                 HideUI(newChat);
                 HideUI(credit);
                 storeButton.interactable = true;
+                myRoomButton.interactable = false;
                 break;
             case SceneName.FindPhoto:
                 ShowUI(mainMenu);
@@ -97,6 +100,8 @@ public class UIManager : MonoBehaviour
                 ShowUI(joystick);
                 ShowUI(credit);
                 storeButton.interactable = false;
+                myRoomButton.interactable = false;
+                screenshotButton.interactable = false;
                 break;
             case SceneName.MapEdit:
                 ShowUI(mainMenu);
