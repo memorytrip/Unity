@@ -14,7 +14,10 @@ public class TeleportButton : MonoBehaviour
 	}
 
 	private void Teleport() {
-		NetworkTransform networkTransform = Connection.StateAuthInstance.currenctCharacter.GetComponent<NetworkTransform>();
-		networkTransform.Teleport(destination.position);
+		//NetworkTransform networkTransform = Connection.StateAuthInstance.currenctCharacter.GetComponent<NetworkTransform>();
+		//networkTransform.Teleport(destination.position);
+
+		PlayerMovement player = Connection.StateAuthInstance.currenctCharacter.GetComponent<PlayerMovement>();
+		player.RequestTeleport(destination.position);
 	}
 }

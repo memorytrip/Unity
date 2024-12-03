@@ -52,6 +52,9 @@ public class PlayerMovement : NetworkBehaviour
     private bool isRestricted = false;
 
     private CustomFmodPlayerSfxManager _customFmodPlayerSfxManager;
+
+    private bool teleport = false;
+    private Vector3 teleportDestination;
     
     private void Awake()
     {
@@ -115,7 +118,24 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    public override void FixedUpdateNetwork()
+    public void RequestTeleport(Vector3 dest) {
+        teleport = true;
+        teleportDestination = dest;
+    }
+
+	public override void Render() {
+        if (!HasStateAuthority)
+            return;
+        if (isRestricted)
+            return;
+
+        if (teleport) {
+            GetComponent<NetworkTransform>().Teleport(teleportDestination);
+            teleport = false;
+        }
+	}
+
+	public override void FixedUpdateNetwork()
     {
         if (!HasStateAuthority)
             return;
