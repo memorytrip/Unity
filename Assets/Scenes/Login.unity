@@ -8208,6 +8208,7 @@ GameObject:
   - component: {fileID: 989912023}
   - component: {fileID: 989912022}
   - component: {fileID: 989912021}
+  - component: {fileID: 989912024}
   m_Layer: 5
   m_Name: Teleport - myroom
   m_TagString: Untagged
@@ -8316,6 +8317,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 989912019}
   m_CullTransparentMesh: 1
+--- !u!225 &989912024
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989912019}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1012255421
 GameObject:
   m_ObjectHideFlags: 0
@@ -41440,7 +41453,7 @@ MonoBehaviour:
   credit: {fileID: 2033555615}
   creditUI: {fileID: 2033555614}
   storeButton: {fileID: 6831999334299086606}
-  myRoomButton: {fileID: 989912021}
+  myRoomButton: {fileID: 989912024}
 --- !u!33 &5419066075591742996
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -43771,7 +43784,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000005023266, y: -807.03455}
+  m_AnchoredPosition: {x: 0.000005023266, y: -807.03467}
   m_SizeDelta: {x: 0, y: 5000}
   m_Pivot: {x: 0, y: 0}
 --- !u!23 &6285195480415856115
@@ -47999,8 +48012,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 731807325920517678}
   m_HandleRect: {fileID: 6457838681639334125}
   m_Direction: 2
-  m_Value: -0.000000014556561
-  m_Size: 0.16140695
+  m_Value: -0.0000000145565595
+  m_Size: 0.15762435
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
