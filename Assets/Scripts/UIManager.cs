@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CanvasGroup credit;
     [SerializeField] public GUI.CreditUI creditUI;
     [SerializeField] private Button storeButton;
-    [SerializeField] private Button myRoomButton;
+    [SerializeField] private CanvasGroup myRoomButton;
 
     private void Awake()
     {
@@ -74,11 +74,13 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 HideUI(newChat);
                 HideUI(credit);
+				HideUI(myRoomButton);
                 storeButton.interactable = false;
                 break;
             case SceneName.Square:
                 HideUI(newChat);
                 TemporarilyHideUI();
+                screenshotButton.interactable = true;
                 storeButton.interactable = true;
                 myRoomButton.interactable = true;
                 break;
@@ -90,6 +92,7 @@ public class UIManager : MonoBehaviour
                 ShowUI(joystick);
                 HideUI(newChat);
                 HideUI(credit);
+				HideUI(myRoomButton);
                 storeButton.interactable = true;
                 myRoomButton.interactable = false;
                 break;
@@ -99,6 +102,7 @@ public class UIManager : MonoBehaviour
                 ShowUI(chat);
                 ShowUI(joystick);
                 ShowUI(credit);
+				HideUI(myRoomButton);
                 storeButton.interactable = false;
                 myRoomButton.interactable = false;
                 screenshotButton.interactable = false;
@@ -110,6 +114,7 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);   
                 HideUI(newChat);
                 HideUI(credit);
+				HideUI(myRoomButton);
                 break;
             case SceneName.PlayReady:
                 HideUI(mainMenu);
@@ -118,6 +123,7 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 HideUI(newChat);
                 HideUI(credit);
+				HideUI(myRoomButton);
                 storeButton.interactable = false;
                 break;
             case SceneName.SelectPhotoScene:
@@ -127,6 +133,7 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 ShowUI(newChat);
                 HideUI(credit);
+				HideUI(myRoomButton);
                 storeButton.interactable = false;
                 break;  
             case SceneName.VideoLoadTest:
@@ -136,6 +143,7 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 ShowUI(newChat);
                 HideUI(credit);
+				HideUI(myRoomButton);
                 storeButton.interactable = false;
                 break;
             case SceneName.LetterScene:
@@ -145,6 +153,7 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 ShowUI(newChat);
                 HideUI(credit);
+				HideUI(myRoomButton);
                 storeButton.interactable = false;
                 break;
             default:
@@ -184,6 +193,7 @@ public class UIManager : MonoBehaviour
             ShowUI(chat);
             ShowUI(joystick);
             ShowUI(credit);
+			ShowUI(myRoomButton);
         }
     }
 
@@ -194,12 +204,26 @@ public class UIManager : MonoBehaviour
         HideUI(chat);
         HideUI(joystick);
         HideUI(credit);
+        HideUI(myRoomButton);
         yield return _wait;
         ShowUI(mainMenu);
         ShowUI(sideMenu);
         ShowUI(chat);
         ShowUI(joystick);
         ShowUI(credit);
+        ShowUI(myRoomButton);
+        InitMyroomButton();
+    }
+
+    private void InitMyroomButton() {
+        myRoomButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        myRoomButton.GetComponent<Button>().onClick.AddListener(() => {
+            GameObject obj = GameObject.Find("Teleport_Popup");
+            if ( obj != null )
+            {
+                ShowUI(obj.GetComponent<CanvasGroup>());
+            }
+        });
     }
     
     private void OnDestroy()
