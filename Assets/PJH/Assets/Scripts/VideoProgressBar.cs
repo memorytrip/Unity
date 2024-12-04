@@ -9,7 +9,8 @@ public class VideoProgressBar : MonoBehaviour
     [SerializeField] private float maxTime = 60f;
     [SerializeField] private float currentTime = 0f;
     public CanvasGroup doneCanvasGroup;
-    public bool isLoading;
+    public static bool isLoading;
+    public bool watched;
 
     private void Awake()
     {

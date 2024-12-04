@@ -18,13 +18,13 @@ public class VideoLoadStart : NetworkBehaviour
         }
     }
     
-    //[Rpc(RpcSources.All,RpcTargets.All)]
+    [Rpc(RpcSources.StateAuthority,RpcTargets.All)]
     public void RpcVideoLoadButtonClicked()
     {
         Debug.Log("버튼이 눌렸습니다");
         if (videoProgressBar != null)
         {
-            videoProgressBar.isLoading = true;
+            VideoProgressBar.isLoading = true;
         }
         else
         {
