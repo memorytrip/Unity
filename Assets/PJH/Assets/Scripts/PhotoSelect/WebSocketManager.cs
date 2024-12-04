@@ -1,8 +1,11 @@
 using UnityEngine;
 using WebSocketSharp;
 using System;
+using System.Collections;
 using System.IO;
+using System.Threading;
 using Common.Network;
+using Cysharp.Threading.Tasks;
 using UnityEngine.Video;
 
 public class WebSocketManager : MonoBehaviour
@@ -10,9 +13,10 @@ public class WebSocketManager : MonoBehaviour
     public VideoPlayer videoPlayer;
     private static WebSocketManager _instance;
     public static WebSocketManager Instance => _instance;
+    private CancellationTokenSource _cancellationTokenSource;
 
     private WebSocket _webSocket;
-    private string _url = "ws://125.132.216.190:17778/ws?token=";// "ws://memorytrip-env.eba-73mrisxy.ap-northeast-2.elasticbeanstalk.com/ws?token=";// 서버 URL
+    private string _url = "ws://memorytrip-env.eba-73mrisxy.ap-northeast-2.elasticbeanstalk.com/ws?token=";// 서버 URL
     public bool IsConnected => _webSocket != null && _webSocket.ReadyState == WebSocketState.Open;
 
     private void Awake()
@@ -57,13 +61,14 @@ public class WebSocketManager : MonoBehaviour
         _webSocket.OnOpen += (sender, e) =>
         {
             Debug.LogWarning("WebSocket connected.");
+            KeepConnectionAlive().Forget();
         }; 
 
         //서버에서 메시지를 받았을 때 호출
         _webSocket.OnMessage += (sender, e) =>
         {
             Debug.Log("소켓 정보가 넘어옴:" + e.Data);
-            //SaveAndPlayVideo(e.Data);
+            HandleIncomingVideoData(e.Data);
         };
 
         //오류가 발생하면 호출
@@ -75,7 +80,8 @@ public class WebSocketManager : MonoBehaviour
         //서버와 연결이 끊어지면 출력
         _webSocket.OnClose += (sender, e) =>
         {
-            Debug.Log($"WebSocket closed. Code: {e.Code}, Reason: {e.Reason}");
+            Debug.LogWarning($"WebSocket closed. Code: {e.Code}, Reason: {e.Reason}");
+            StartCoroutine(ReconnectWebSocket(url));
         };
 
         _webSocket.ConnectAsync(); //소켓 서버에 비동기 연결 시작
@@ -84,21 +90,82 @@ public class WebSocketManager : MonoBehaviour
     private void OnDestroy()
     {
         _webSocket?.Close();
+        _cancellationTokenSource?.Cancel();
     }
 
-    /*//내가 서버로 메시지를 보냄 이거는 포스트가 아닌가? 뭐지? 
-    public void SendMessage(string message)
+    private async UniTask KeepConnectionAlive()
     {
-        if (IsConnected)
+        _cancellationTokenSource = new CancellationTokenSource();
+        var token = _cancellationTokenSource.Token;
+
+        while (IsConnected)
         {
-            _webSocket.SendAsync(message, null);
+            try
+            {
+                _webSocket.Send("ping");
+                Debug.Log("핑!");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Ping 전송 중 오류 발생: {ex.Message}");
+                break; // 에러 발생 시 반복문 종료
+            }
+
+            // 30초 대기
+            await UniTask.Delay(TimeSpan.FromSeconds(30), cancellationToken: token);
+        }
+
+        Debug.LogWarning("KeepConnectionAlive가 종료되었습니다.");
+    }
+
+    
+    private void HandleIncomingVideoData(string videoUrl)
+    {
+        if (string.IsNullOrEmpty(videoUrl))
+        {
+            Debug.LogWarning("비디오 정보 없음");
+            return;
+        }
+
+        Debug.Log("Url:" + videoUrl);
+
+        videoPlayer.url = videoUrl;
+        videoPlayer.Prepare();
+        videoPlayer.prepareCompleted += OnVideoPrepared;
+    }
+
+    private void OnVideoPrepared(VideoPlayer source)
+    {
+        videoPlayer.Play();
+    }
+    
+    private IEnumerator ReconnectWebSocket(string url)
+    {
+        const int maxRetryAttempts = 5; // 최대 재시도 횟수
+        const float retryInterval = 5.0f; // 재시도 간격 (초)
+        int attempt = 0;
+
+        while (attempt < maxRetryAttempts && (_webSocket == null || _webSocket.ReadyState != WebSocketState.Open))
+        {
+            attempt++;
+            Debug.Log($"WebSocket 재연결 시도 {attempt}/{maxRetryAttempts}...");
+            _webSocket = null;
+            InitializeWebSocket(url);
+
+            // 연결 상태 확인
+            yield return new WaitForSeconds(retryInterval);
+        }
+
+        if (_webSocket != null && _webSocket.ReadyState == WebSocketState.Open)
+        {
+            Debug.Log("WebSocket 재연결 성공.");
         }
         else
         {
-            Debug.LogError("WebSocket is not connected.");
+            Debug.LogError("WebSocket 재연결 실패.");
         }
-    }*/
-    
+    }
+
     private void SaveAndPlayVideo(byte[] videoData)
     {
         // 1. 임시 파일 경로 지정
