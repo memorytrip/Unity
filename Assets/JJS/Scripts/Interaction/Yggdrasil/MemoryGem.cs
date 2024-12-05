@@ -1,4 +1,5 @@
 using System;
+using GUI;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -8,8 +9,7 @@ public class MemoryGem : MonoBehaviour, IClickable3dObject
     private VideoPlayer _videoPlayer;
     [SerializeField] private VideoClip dummyVideo;
 
-    [HideInInspector] public long videoId;
-    [HideInInspector] public string videoUrl;
+    [HideInInspector] public VideoData videoData;
 
     private void Awake()
     {
@@ -27,9 +27,8 @@ public class MemoryGem : MonoBehaviour, IClickable3dObject
             DisplayDummyData();
         }*/
         MemoryGemUI memoryGemUI = MemoryGemUI.Instance;
-        memoryGemUI.videoId = videoId;
-        memoryGemUI.videoUrl = videoUrl;
-        StartCoroutine(memoryGemUI.PlayVideo(videoUrl));
+        memoryGemUI.videoData = videoData;
+        StartCoroutine(memoryGemUI.PlayVideo());
     }
 
     private void DisplayServerData()
