@@ -4,13 +4,16 @@ using UnityEngine.Video;
 
 public class MemoryGem : MonoBehaviour, IClickable3dObject
 {
-    [SerializeField] private CanvasGroup canvasGroup;
+    // [SerializeField] private CanvasGroup canvasGroup;
     private VideoPlayer _videoPlayer;
     [SerializeField] private VideoClip dummyVideo;
 
+    [HideInInspector] public long videoId;
+    [HideInInspector] public string videoUrl;
+
     private void Awake()
     {
-        _videoPlayer = canvasGroup.GetComponent<VideoPlayer>();
+        // _videoPlayer = canvasGroup.GetComponent<VideoPlayer>();
     }
 
     public void OnClick()
@@ -23,10 +26,10 @@ public class MemoryGem : MonoBehaviour, IClickable3dObject
         {
             DisplayDummyData();
         }*/
-
-        //DisplayDummyData();
-        canvasGroup.alpha = 1f;
-        canvasGroup.blocksRaycasts = canvasGroup.interactable = true;
+        MemoryGemUI memoryGemUI = MemoryGemUI.Instance;
+        memoryGemUI.videoId = videoId;
+        memoryGemUI.videoUrl = videoUrl;
+        StartCoroutine(memoryGemUI.PlayVideo(videoUrl));
     }
 
     private void DisplayServerData()
