@@ -9,6 +9,7 @@ namespace GUI
     public class PhotoListVideoItem: PhotoListItem
     {
         [SerializeField] private VideoPlayer videoPlayer;
+        [HideInInspector] public string videoUrl;
 
         protected override void ShowImage()
         {
@@ -21,6 +22,7 @@ namespace GUI
 
         private IEnumerator PlayVideoProcess()
         {
+            videoPlayer.url = videoUrl;
             videoPlayer.Prepare();
             yield return new WaitUntil( () => videoPlayer.isPrepared );
             videoPlayer.Play();
