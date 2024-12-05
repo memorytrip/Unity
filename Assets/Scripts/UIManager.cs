@@ -30,12 +30,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CanvasGroup credit;
     [SerializeField] public GUI.CreditUI creditUI;
     [SerializeField] private Button storeButton;
+    [SerializeField] private Button walletButton;
+    [SerializeField] private Button exitAppButton;
     [SerializeField] private CanvasGroup myRoomButton;
+    
 
     private void Awake()
     {
         DontDestroyOnLoad(Instance);
         SceneManager.sceneLoaded += ToggleUI;
+        exitAppButton.onClick.AddListener(ExitApp);
     }
 
     private void Start()
@@ -76,12 +80,14 @@ public class UIManager : MonoBehaviour
                 HideUI(credit);
 				HideUI(myRoomButton);
                 storeButton.interactable = false;
+                walletButton.interactable = false;
                 break;
             case SceneName.Square:
                 HideUI(newChat);
                 TemporarilyHideUI();
                 screenshotButton.interactable = true;
                 storeButton.interactable = true;
+                walletButton.interactable = true;
                 myRoomButton.interactable = true;
                 break;
             case SceneName.MyRoom:
@@ -224,6 +230,15 @@ public class UIManager : MonoBehaviour
                 ShowUI(obj.GetComponent<CanvasGroup>());
             }
         });
+    }
+
+    private void ExitApp()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit(); // 어플리케이션 종료
+#endif
     }
     
     private void OnDestroy()

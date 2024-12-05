@@ -122,11 +122,5 @@ namespace GUI
             // public bool isFound;
             // public string roomCode;
         }
-
-        class VideoData 
-        {
-            public long videoId;
-            public string videoUrl;
-        }
     }
 }

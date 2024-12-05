@@ -15,8 +15,7 @@ public class MemoryGemUI : MonoBehaviour
     [SerializeField] private Button imageButton;
     [SerializeField] private Button likeButton;
 
-    [HideInInspector] public long videoId;
-    [HideInInspector] public string videoUrl;
+    [HideInInspector] public VideoData videoData;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,11 +25,11 @@ public class MemoryGemUI : MonoBehaviour
         likeButton.onClick.AddListener(OnVideoLike);
     }
 
-    public IEnumerator PlayVideo(string url)
+    public IEnumerator PlayVideo()
     {
         Utility.EnablePanel(canvasGroup);
         videoPlayer.source = VideoSource.Url;
-        videoPlayer.url = url;
+        videoPlayer.url = videoData.videoUrl;
         videoPlayer.Prepare();
         yield return new WaitUntil(() => videoPlayer.isPrepared);
         videoPlayer.Play();
@@ -38,6 +37,6 @@ public class MemoryGemUI : MonoBehaviour
 
     private void OnVideoLike()
     {
-        DataManager.Post($"/api/videos/{videoId}/like").Forget();
+        DataManager.Post($"/api/videos/{videoData.videoId}/like").Forget();
     }
 }
