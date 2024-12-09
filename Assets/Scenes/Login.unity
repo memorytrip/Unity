@@ -20101,6 +20101,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5418990628320410888}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: HideUI
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8525318551964037468}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.CanvasGroup, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &362336495816447800
 Transform:
   m_ObjectHideFlags: 0
@@ -27270,8 +27282,8 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7772036111276815391}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
+  m_Alpha: 0
+  m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &2318681576438407131
@@ -44827,7 +44839,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000005023266, y: -807.03467}
+  m_AnchoredPosition: {x: 0.000005023266, y: -807.03455}
   m_SizeDelta: {x: 0, y: 5000}
   m_Pivot: {x: 0, y: 0}
 --- !u!23 &6285195480415856115
@@ -49043,7 +49055,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 731807325920517678}
   m_HandleRect: {fileID: 6457838681639334125}
   m_Direction: 2
-  m_Value: -0.000000014556561
+  m_Value: -0.000000072782804
   m_Size: 0.16140695
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -51617,10 +51629,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f859c660017fe42afe31d87765f259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 60
-  currentTime: 0
+  canvasGroup: {fileID: 2306312844204193172}
   doneCanvasGroup: {fileID: 8525318551964037468}
-  watched: 0
+  videoPlayer: {fileID: 3477717682221592587}
 --- !u!33 &8271861915644481409
 MeshFilter:
   m_ObjectHideFlags: 0
