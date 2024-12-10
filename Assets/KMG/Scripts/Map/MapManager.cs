@@ -50,7 +50,7 @@ namespace Map
             return mapInfos;
         }
         
-        private async UniTask<List<MapInfo>> LoadDefaultsMapListFromServer()
+        public async UniTask<List<MapInfo>> LoadDefaultsMapListFromServer()
         {
             string rawData = await DataManager.Get("/api/map");
             List<MapInfo> mapInfos = MapConverter.ConvertJsonToMapList(rawData);
