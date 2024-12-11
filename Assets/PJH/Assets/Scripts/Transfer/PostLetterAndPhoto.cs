@@ -75,7 +75,6 @@ public class PostLetterAndPhoto : MonoBehaviour
     public async UniTask PostPhotoProcess(Texture2D texture)
     {
         //Texture2D texture = photo.texture as Texture2D;
-
         byte[] imageBytes = texture.EncodeToPNG();
         
         Debug.Log("이미지 배열:" + imageBytes);

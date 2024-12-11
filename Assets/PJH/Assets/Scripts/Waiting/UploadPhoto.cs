@@ -62,6 +62,7 @@ public class UploadPhoto : MonoBehaviour
         letterImg.texture = tex;
         img.SetNativeSize();
         ImageSizeSetting(img, 432f, 288f);
+        ImageSizeSetting(letterImg, 914f, 604f);
         StretchImageToFit(letterImg);
         StretchImageToFit(img);
 
@@ -77,7 +78,7 @@ public class UploadPhoto : MonoBehaviour
         photoId = PhotoResponse.postResponse.photoId;
     }
 
-    void ImageSizeSetting(RawImage img, float x, float y)
+    public static void ImageSizeSetting(RawImage img, float x, float y)
     {
         var imageX = img.rectTransform.sizeDelta.x;
         var imageY = img.rectTransform.sizeDelta.y;

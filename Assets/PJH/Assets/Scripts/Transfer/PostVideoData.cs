@@ -38,8 +38,10 @@ public class PostVideoData : MonoBehaviour
         {
             for (int i = 0; i < loadLP.selectedPhotoUrl.Count; i++)
             {
-                Debug.Log(loadLP.selectedPhotoUrl[i]);
+                Debug.Log("LoadLp:" + loadLP.selectedPhotoUrl[i]);
             } //여기나오는지 확인해야함
+            Debug.Log("emotionText:" + emotionText);
+            Debug.Log("roomCode:" + RunnerManager.Instance.Runner.SessionInfo.Name);
 
             var data = new VideoInfo
             {
@@ -47,9 +49,13 @@ public class PostVideoData : MonoBehaviour
                 photoUrls = loadLP.selectedPhotoUrl.ToArray(),
                 text = emotionText.text
             };
-            string jsonData = JsonConvert.SerializeObject(data);
 
-            await DataManager.Post(realapi, jsonData);
+            Debug.Log("data:" + data.roomCode +"/" + data.photoUrls + "/" + data.text);
+            string jsonData = JsonConvert.SerializeObject(data);
+            
+            Debug.Log("jsonData:" + jsonData);
+            
+            await DataManager.Post(realapi, jsonData).Timeout(TimeSpan.FromSeconds(300f));
             Debug.Log("비디오 정보 Post 성공");
 
         }
