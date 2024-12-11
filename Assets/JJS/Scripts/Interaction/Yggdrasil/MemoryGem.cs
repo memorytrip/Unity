@@ -1,7 +1,11 @@
 using System;
+using Common;
+using Cysharp.Threading.Tasks;
 using GUI;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Video;
+using Random = UnityEngine.Random;
 
 public class MemoryGem : MonoBehaviour, IClickable3dObject
 {
@@ -26,18 +30,42 @@ public class MemoryGem : MonoBehaviour, IClickable3dObject
         {
             DisplayDummyData();
         }*/
-        MemoryGemUI memoryGemUI = MemoryGemUI.Instance;
-        memoryGemUI.videoData = videoData;
-        StartCoroutine(memoryGemUI.PlayVideo());
+        
+        OnClickProcess().Forget();
     }
 
-    private void DisplayServerData()
+    private async UniTaskVoid OnClickProcess()
     {
-        throw new NotImplementedException();
+        MemoryGemUI memoryGemUI = MemoryGemUI.Instance;
+        videoData = await GetServerData();
+        if (videoData != null)
+        {
+            memoryGemUI.videoData = videoData;
+            StartCoroutine(memoryGemUI.PlayVideo());
+        }
+        else
+        {
+            StartCoroutine(memoryGemUI.PlayDummyVideo());
+        }
+    }
+
+    private async UniTask<VideoData> GetServerData()
+    {
+        string rawVideoData = await DataManager.Get("/api/videos");
+        Debug.Log(rawVideoData);
+        VideoData[] videos = JsonConvert.DeserializeObject<VideoData[]>(rawVideoData);
+        if (videos.Length > 0)
+        {
+            return videos[Random.Range(0, videos.Length)];
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private void DisplayDummyData()
     {
-        _videoPlayer.clip = dummyVideo;
+        // _videoPlayer.clip = dummyVideo;
     }
 }

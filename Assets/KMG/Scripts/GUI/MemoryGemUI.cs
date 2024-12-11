@@ -14,6 +14,7 @@ public class MemoryGemUI : MonoBehaviour
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private Button imageButton;
     [SerializeField] private Button likeButton;
+    [SerializeField] private VideoClip dummyVideo;
 
     [HideInInspector] public VideoData videoData;
     
@@ -30,6 +31,16 @@ public class MemoryGemUI : MonoBehaviour
         Utility.EnablePanel(canvasGroup);
         videoPlayer.source = VideoSource.Url;
         videoPlayer.url = videoData.videoUrl;
+        videoPlayer.Prepare();
+        yield return new WaitUntil(() => videoPlayer.isPrepared);
+        videoPlayer.Play();
+    }
+
+    public IEnumerator PlayDummyVideo()
+    {
+        Utility.EnablePanel(canvasGroup);
+        videoPlayer.source = VideoSource.VideoClip;
+        videoPlayer.clip = dummyVideo;
         videoPlayer.Prepare();
         yield return new WaitUntil(() => videoPlayer.isPrepared);
         videoPlayer.Play();
