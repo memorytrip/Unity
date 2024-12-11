@@ -182,7 +182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1670847923, guid: 85703ee0d52ea0d479ea35a4259a0b41, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e2228694fdad28d47bec1983a11a3839, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -254,6 +254,7 @@ MonoBehaviour:
   imagePanel: {fileID: 0}
   rawImage: {fileID: 0}
   videoPlayer: {fileID: 1510694600901997263}
+  videoUrl: 
 --- !u!82 &4257053351611457883
 AudioSource:
   m_ObjectHideFlags: 0
