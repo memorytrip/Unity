@@ -58,9 +58,10 @@ public class LoadFindPhotoMap : NetworkBehaviour
 
         if (tasks.Count < 4)
         {
+            List<MapInfo> defaultMapInfos = await MapManager.Instance.LoadDefaultsMapListFromServer();
             for (int i = tasks.Count; i < 4; i++)
             {
-                tasks.Add(LoadDefaultMapInfo(mapInfos, i));
+                tasks.Add(LoadDefaultMapInfo(mapInfos, defaultMapInfos[i].id));
                 Debug.Log($"LoadFindPhotoMap: load map {i} (default)");
             }
         }
