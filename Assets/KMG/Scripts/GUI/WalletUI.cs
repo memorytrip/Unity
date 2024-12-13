@@ -36,8 +36,9 @@ public class WalletUI : MonoBehaviour
             Destroy(item.gameObject);
         }
         
-        string storeRawData = await DataManager.Get("api/inventory");
-        WalletItemDTO[] walletData = JsonConvert.DeserializeObject<WalletItemDTO[]>(storeRawData);
+        string walletRawData = await DataManager.Get("api/inventory");
+        Debug.Log(walletRawData);
+        WalletItemDTO[] walletData = JsonConvert.DeserializeObject<WalletItemDTO[]>(walletRawData);
         foreach (var data in walletData)
         {
             WalletListItem item = Instantiate(walletItemPrefab, content).GetComponent<WalletListItem>();

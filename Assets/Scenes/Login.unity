@@ -357,13 +357,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5418990628320410888}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: HideUI
-        m_Mode: 2
+      - m_Target: {fileID: 841127975}
+        m_TargetAssemblyTypeName: WalletUI, Assembly-CSharp
+        m_MethodName: CloseWallet
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 841127974}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.CanvasGroup, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2412,13 +2412,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5418990628320410888}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ShowUI
-        m_Mode: 2
+      - m_Target: {fileID: 841127975}
+        m_TargetAssemblyTypeName: WalletUI, Assembly-CSharp
+        m_MethodName: OpenWallet
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 841127974}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.CanvasGroup, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -42020,7 +42020,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000005023266, y: -807.0348}
+  m_AnchoredPosition: {x: 0.000005023266, y: -807.0347}
   m_SizeDelta: {x: 0, y: 5000}
   m_Pivot: {x: 0, y: 0}
 --- !u!23 &6285195480415856115
@@ -46237,7 +46237,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6457838681639334125}
   m_Direction: 2
   m_Value: -0.000000014556561
-  m_Size: 0.16140695
+  m_Size: 0.16140537
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

@@ -39,7 +39,8 @@ public class StoreUI : MonoBehaviour
         foreach (var data in storeData)
         {
             StoreListItem item = Instantiate(storeItemPrefab, content).GetComponent<StoreListItem>();
-            item.SetName(data.name)
+            item.SetId(data.id)
+                .SetName(data.name)
                 .SetPrice(data.price)
                 .SetImage(data.image);
         }        

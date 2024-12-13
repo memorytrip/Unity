@@ -1,3 +1,4 @@
+using System;
 using Common;
 using Cysharp.Threading.Tasks;
 using TMPro;
@@ -11,9 +12,21 @@ public class StoreListItem : MonoBehaviour
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text priceText;
 
+    private long id;
     private int price;
     private string itemName;
     private string imageUri;
+
+    private void Awake()
+    {
+        button.onClick.AddListener(Purchase);
+    }
+
+    public StoreListItem SetId(long id)
+    {
+        this.id = id;
+        return this;
+    }
 
     public StoreListItem SetPrice(int price)
     {
@@ -41,5 +54,16 @@ public class StoreListItem : MonoBehaviour
         Sprite sprite = await DataManager.GetSprite(imageUri);
         if (sprite != null)
             image.sprite = sprite;
+    }
+
+    private void Purchase()
+    {
+        PurchaseProcess().Forget();
+    }
+
+    private async UniTaskVoid PurchaseProcess()
+    {
+        string resultRawData = await DataManager.Post($"/api/shop/item/purchase/{id}");
+        Debug.Log(resultRawData);
     }
 }
