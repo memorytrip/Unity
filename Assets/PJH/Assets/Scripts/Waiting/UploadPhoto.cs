@@ -62,7 +62,6 @@ public class UploadPhoto : MonoBehaviour
         letterImg.texture = tex;
         img.SetNativeSize();
         ImageSizeSetting(img, 432f, 288f);
-        ImageSizeSetting(letterImg, 914f, 604f);
         StretchImageToFit(letterImg);
         StretchImageToFit(img);
 

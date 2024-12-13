@@ -55,7 +55,7 @@ public class PostVideoData : MonoBehaviour
             
             Debug.Log("jsonData:" + jsonData);
             
-            await DataManager.Post(realapi, jsonData).Timeout(TimeSpan.FromSeconds(300f));
+            await DataManager.Post(realapi, jsonData);
             Debug.Log("비디오 정보 Post 성공");
 
         }

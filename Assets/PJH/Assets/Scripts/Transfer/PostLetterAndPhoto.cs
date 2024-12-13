@@ -74,8 +74,10 @@ public class PostLetterAndPhoto : MonoBehaviour
     //formData로 Post
     public async UniTask PostPhotoProcess(Texture2D texture)
     {
-        //Texture2D texture = photo.texture as Texture2D;
+        Texture2D resizedTexture = ResizeTexture(texture, 720, 480);
         byte[] imageBytes = texture.EncodeToPNG();
+        Debug.Log($"실제 이미지 해상도: {texture.width} x {texture.height}");
+        Debug.Log($"리사이즈 이미지 해상도: {resizedTexture.width} x {resizedTexture.height}");
         
         Debug.Log("이미지 배열:" + imageBytes);
         try
@@ -117,7 +119,7 @@ public class PostLetterAndPhoto : MonoBehaviour
             var jsonData = JsonConvert.SerializeObject(data);
             
             // DataManager를 통해 POST 요청 보내기
-            string jsonResponse = await DataManager.Post(realapi, jsonData);
+            string jsonResponse = await DataManager.Post(realapi, jsonData, 300);
             Debug.Log("편지 Post성공");
 
             var response= JsonConvert.DeserializeObject<LetterResponseData>(jsonResponse);
@@ -155,6 +157,23 @@ public class PostLetterAndPhoto : MonoBehaviour
         {
             Debug.LogError("Error sending letter info: " + e.Message);
         }
+    }
+    
+    public Texture2D ResizeTexture(Texture2D source, int targetWidth, int targetHeight)
+    {
+        RenderTexture rt = RenderTexture.GetTemporary(targetWidth, targetHeight);
+        RenderTexture.active = rt;
+
+        Graphics.Blit(source, rt);
+
+        Texture2D result = new Texture2D(targetWidth, targetHeight);
+        result.ReadPixels(new Rect(0, 0, targetWidth, targetHeight), 0, 0);
+        result.Apply();
+
+        RenderTexture.active = null;
+        RenderTexture.ReleaseTemporary(rt);
+
+        return result;
     }
     
 }
