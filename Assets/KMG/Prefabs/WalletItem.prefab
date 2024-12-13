@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7485160214482123393}
   - component: {fileID: 4983791369305384095}
   - component: {fileID: 4077115023036507362}
+  - component: {fileID: 8064227320432743430}
   m_Layer: 5
   m_Name: WalletItem
   m_TagString: Untagged
@@ -170,6 +171,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &8064227320432743430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685442866585174312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1947655657cb7b543a5ac15f3f5b7df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1874106634954939341
 GameObject:
   m_ObjectHideFlags: 0

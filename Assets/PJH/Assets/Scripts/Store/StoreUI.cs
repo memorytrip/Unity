@@ -29,6 +29,11 @@ public class StoreUI : MonoBehaviour
 
     private async UniTaskVoid InitStoreUI()
     {
+        foreach (Transform item in content)
+        {
+            Destroy(item.gameObject);
+        }
+        
         string storeRawData = await DataManager.Get("/api/shop/items");
         StoreItemDTO[] storeData = JsonConvert.DeserializeObject<StoreItemDTO[]>(storeRawData);
         foreach (var data in storeData)
