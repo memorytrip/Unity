@@ -31,7 +31,8 @@ namespace Common
             }
             else
             {
-                throw new Exception(request.error);
+                // throw new Exception(request.error);
+                throw new UnityWebRequestException(request);
             }
         }
 
@@ -87,7 +88,8 @@ namespace Common
             }
             else
             {
-                throw new Exception(request.error);
+                // throw new Exception(request.error);
+                throw new UnityWebRequestException(request);
             }
         }
         
@@ -108,7 +110,8 @@ namespace Common
             }
             else
             {
-                throw new Exception(request.error);
+                // throw new Exception(request.error);
+                throw new UnityWebRequestException(request);
             }
         }
 
@@ -150,7 +153,8 @@ namespace Common
             }
             else
             {
-                throw new Exception(request.error);
+                // throw new Exception(request.error);
+                throw new UnityWebRequestException(request);
             }
         }
         

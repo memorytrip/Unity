@@ -63,7 +63,15 @@ public class StoreListItem : MonoBehaviour
 
     private async UniTaskVoid PurchaseProcess()
     {
-        string resultRawData = await DataManager.Post($"/api/shop/item/purchase/{id}");
-        Debug.Log(resultRawData);
+        try
+        {
+            string resultRawData = await DataManager.Post($"/api/shop/item/purchase/{id}");
+            Debug.Log(resultRawData);
+        }
+        catch (UnityWebRequestException e)
+        {
+            PopupManager.Instance.ShowMessage(e);
+        }
+        
     }
 }
