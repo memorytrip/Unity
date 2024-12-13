@@ -27,8 +27,15 @@ public class PopupManager : MonoBehaviour
     public void ShowMessage(UnityWebRequestException e)
     {
         UIManager.ShowUI(canvasGroup);
-        ErrorMessage message = JsonConvert.DeserializeObject<ErrorMessage>(e.Text);
-        text.text = message.detailMessage;
+        if (e.ResponseHeaders != null && e.ResponseHeaders["Content-Type"] == "application/json")
+        {
+            ErrorMessage message = JsonConvert.DeserializeObject<ErrorMessage>(e.Text);
+            text.text = message.detailMessage;
+        }
+        else
+        {
+            text.text = e.Error;
+        }
     }
 
     private void HideMessage()
