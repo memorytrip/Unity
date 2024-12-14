@@ -27,6 +27,8 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
     [SerializeField] private Image[] readyIcons;
     [SerializeField] private Sprite[] readyIconSprites;
     [SerializeField] private MapSelectionController mapSelectionController;
+    [SerializeField] private UploadPhoto uploadPhoto1;
+    [SerializeField] private UploadPhoto uploadPhoto2;
     
     private int readyCount = 0;
     private CancellationTokenSource cts;
@@ -55,12 +57,13 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
 
     private async UniTaskVoid RefreshPlayerList(CancellationToken token)
     {
-        while (true) {
-
+        while (true) 
+        {
             await UniTask.WaitUntil(() => Connection.list.Count == Runner.ActivePlayers.Count());
             var i = 0;
             readyCount = 0;
-            foreach (var connection in Connection.list) {
+            foreach (var connection in Connection.list) 
+            {
                 await UniTask.WaitUntil(() => (connection.currenctCharacter != null));
                 //authMarks[i].alpha = connection.hasSceneAuthority ? 1f : 0f;
                 string playerName = connection.playerName;
@@ -73,12 +76,14 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
                 i++;
             }
 
-            for (; i < playerNameTextList.Count; i++) {
+            for (; i < playerNameTextList.Count; i++) 
+            {
                 playerNameTextList[i].text = string.Empty;
                 readyIcons[i].sprite = readyIconSprites[0];
             }
 
-            if (Runner.IsSceneAuthority && readyCount == Connection.list.Count) {
+            if (readyCount >= 2 && Runner.IsSceneAuthority && readyCount == Connection.list.Count) 
+            {
                 ActiveStart();
             }
             else
@@ -86,7 +91,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
                 DeactiveStart();
             }
             
-            await UniTask.Delay(500, cancellationToken: token);
+            await UniTask.Delay(100, cancellationToken: token);
 
             if (token.IsCancellationRequested) break;
         }
@@ -101,12 +106,27 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
         string userId = SessionManager.Instance.currentUser.email;
         MapId mapId = mapSelectionController.GetSelectedMapId();
         RpcSendSelectedMap(userId, mapId.mapType == MapInfo.MapType.Custom, mapId.mapId);
-        DeactiveByReady();
+        
+        if (Connection.StateAuthInstance.currenctCharacter.GetComponent<PlayReadyState>().ready)
+            DeactiveByReady();
+        else 
+            ActiveByUnready();
     }
 
     private void DeactiveByReady()
     {
-        // readyButton.interactable = false;
+        mapSelectionController.leftArrowButton.interactable = false;
+        mapSelectionController.rightArrowButton.interactable = false;
+        uploadPhoto1.selectPhotoButton.interactable = false;
+        uploadPhoto2.selectPhotoButton.interactable = false;
+    }
+
+    private void ActiveByUnready()
+    {
+        mapSelectionController.leftArrowButton.interactable = true;
+        mapSelectionController.rightArrowButton.interactable = true;
+        uploadPhoto1.selectPhotoButton.interactable = true;
+        uploadPhoto2.selectPhotoButton.interactable = true;
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
@@ -120,19 +140,20 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
         Debug.Log($"PlayReadRoom.RpcSendSelectedMap: {name} - {map.mapId} ({map.mapType})");
     }
 
-    private void ActiveStart() {
+    private void ActiveStart()
+    {
         readyButtonText.text = "시작하기";
         // readyButton.onClick.RemoveListener(Ready);
         readyButton.onClick.RemoveAllListeners();
         readyButton.onClick.AddListener(RpcGameStart);
     }
     
-    private void DeactiveStart() {
+    private void DeactiveStart() 
+    {
         readyButtonText.text = "준비하기";
         // readyButton.onClick.RemoveListener(GameStart);
         readyButton.onClick.RemoveAllListeners();
         readyButton.onClick.AddListener(Ready);
-        
     }
     
     private void Exit()

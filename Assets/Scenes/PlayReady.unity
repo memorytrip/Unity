@@ -436,6 +436,7 @@ MonoBehaviour:
   img: {fileID: 1563690089}
   letterImg: {fileID: 1380348654}
   photoId: 0
+  selectPhotoButton: {fileID: 698443701}
 --- !u!4 &53974411
 Transform:
   m_ObjectHideFlags: 0
@@ -1275,6 +1276,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6c6075215e21ab040882a40a9c485778, type: 3}
   - {fileID: 21300000, guid: 9f4112df82caaaa42abc2382b919cb6c, type: 3}
   mapSelectionController: {fileID: 165096943}
+  uploadPhoto1: {fileID: 438615992}
+  uploadPhoto2: {fileID: 53974410}
   playReadyConfirmEvent:
     Guid:
       Data1: 1609368329
@@ -1367,6 +1370,7 @@ MonoBehaviour:
   img: {fileID: 54655599}
   letterImg: {fileID: 1654912120}
   photoId: 0
+  selectPhotoButton: {fileID: 514522366}
 --- !u!4 &438615993
 Transform:
   m_ObjectHideFlags: 0
