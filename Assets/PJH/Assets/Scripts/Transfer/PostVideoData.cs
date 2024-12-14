@@ -20,7 +20,6 @@ public class VideoInfo
 
 public class PostVideoData : MonoBehaviour
 {
-    //public RawImage[] selectedImages;
     public TMP_InputField emotionText;
     public LoadLetterAndPhoto loadLP;
     private string endPoint = "/api/videos/";
@@ -39,7 +38,7 @@ public class PostVideoData : MonoBehaviour
             for (int i = 0; i < loadLP.selectedPhotoUrl.Count; i++)
             {
                 Debug.Log("LoadLp:" + loadLP.selectedPhotoUrl[i]);
-            } //여기나오는지 확인해야함
+            } 
             Debug.Log("emotionText:" + emotionText);
             Debug.Log("roomCode:" + RunnerManager.Instance.Runner.SessionInfo.Name);
 
@@ -55,7 +54,7 @@ public class PostVideoData : MonoBehaviour
             
             Debug.Log("jsonData:" + jsonData);
             
-            await DataManager.Post(realapi, jsonData);
+            await DataManager.Post(realapi, jsonData, 500);
             Debug.Log("비디오 정보 Post 성공");
 
         }
