@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using Common;
+using Common.Network;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Map;
@@ -42,7 +44,21 @@ namespace Myroom
         private async UniTask<MapInfo> LoadFromServer()
         {
             // Debug.Log($"LoadMyroom:  MapType: {mapType}, mapId: {mapId}");
-            MapInfo mapInfo = await MapManager.Instance.LoadMyroomMapInfoFromServer(mapOwnerName);
+            MapInfo mapInfo = null;
+            try
+            {
+                mapInfo = await MapManager.Instance.LoadMyroomMapInfoFromServer(mapOwnerName);
+            }
+            catch (UnityWebRequestException e)
+            {
+                PopupManager.Instance.ShowMessage(e);
+                string playerName = SessionManager.Instance.currentUser.nickName;
+                string roomName = $"player_{playerName}";
+                LoadMyroom.mapOwnerName = playerName;
+                SceneManager.Instance.MoveRoom(roomName).Forget();
+            }
+            return mapInfo;
+            
             // switch (mapType)
             // {
             //     case MapInfo.MapType.Custom:
@@ -55,7 +71,7 @@ namespace Myroom
             //         throw new Exception();
             // }
 
-            return mapInfo;
+            
         }
 
         private async UniTaskVoid LoadMap(MapInfo mapInfo)

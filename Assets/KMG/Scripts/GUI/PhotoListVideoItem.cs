@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.IO;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -41,6 +42,11 @@ namespace GUI
 
         protected override void Download()
         {
+            DownloadProcess().Forget();
+        }
+
+        private async UniTaskVoid DownloadProcess()
+        {
             string path = Application.persistentDataPath + "/media";
             if (!Directory.Exists(path))
             {
@@ -48,12 +54,14 @@ namespace GUI
             }
             string filename = Guid.NewGuid().ToString() + ".mp4";
             
+            Debug.Log($"Download Video: {path}/{filename}");
             
             UnityWebRequest request = UnityWebRequest.Get(videoUrl);
-            request.downloadHandler = new DownloadHandlerFile($"{path}/{filename}");
-            request.SendWebRequest();
+            request.downloadHandler = new DownloadHandlerBuffer();
+            await request.SendWebRequest();
             
-            Debug.Log($"Download Picture: {path}/{filename}");
-        }
+            byte[] fileBytes = request.downloadHandler.data;
+            NativeGallery.SaveVideoToGallery(fileBytes, "memorytrip", filename);
+        } 
     }
 }
