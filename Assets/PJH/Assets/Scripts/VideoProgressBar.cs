@@ -8,8 +8,8 @@ public class VideoProgressBar : MonoBehaviour
     [SerializeField] private CanvasGroup doneCanvasGroup;
     [SerializeField] private VideoPlayer videoPlayer;
     
-    private bool isLoading = false;   
-    private float currentTime = 0f;    
+    [SerializeField] private bool isLoading = false;   
+    [SerializeField] private float currentTime = 0f;    
     private float maxTime = 60f;      
     
     public void StartLoading()

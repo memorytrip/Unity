@@ -32,7 +32,6 @@ public class PostLetterAndPhoto : MonoBehaviour
     private UploadPhoto up;
     private int? letterId;
     
-    
     private void Awake()
     {
         Instance = this;
@@ -75,9 +74,12 @@ public class PostLetterAndPhoto : MonoBehaviour
     public async UniTask PostPhotoProcess(Texture2D texture)
     {
         Texture2D resizedTexture = ResizeTexture(texture, 720, 480);
-        byte[] imageBytes = texture.EncodeToPNG();
+        byte[] imageBytes = resizedTexture.EncodeToPNG();
+        System.IO.File.WriteAllBytes(Application.persistentDataPath + "/resizedImage.png", imageBytes);
+        Debug.Log($"Image saved at: {Application.persistentDataPath}/resizedImage.png");
         Debug.Log($"실제 이미지 해상도: {texture.width} x {texture.height}");
         Debug.Log($"리사이즈 이미지 해상도: {resizedTexture.width} x {resizedTexture.height}");
+        Debug.Log($"이미지 바이트 크기: {imageBytes.Length} bytes");
         
         Debug.Log("이미지 배열:" + imageBytes);
         try
