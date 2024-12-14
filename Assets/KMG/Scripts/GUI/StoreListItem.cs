@@ -1,5 +1,6 @@
 using System;
 using Common;
+using Common.Network;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -71,6 +72,10 @@ public class StoreListItem : MonoBehaviour
         catch (UnityWebRequestException e)
         {
             PopupManager.Instance.ShowMessage(e);
+        }
+        finally
+        {
+            SessionManager.Instance.currentUser.RefreshCredit().Forget();
         }
         
     }
