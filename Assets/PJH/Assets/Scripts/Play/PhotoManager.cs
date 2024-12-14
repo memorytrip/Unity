@@ -125,7 +125,8 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
             photo.RpcDespawn();
             RpcUpdateFindedPhoto();
             Instantiate(creditParticle, hitNetworkObject.transform.position, Quaternion.identity);
-            SessionManager.Instance.currentUser.credit++;
+            // SessionManager.Instance.currentUser.credit++;
+            SessionManager.Instance.currentUser.AddCredit(1).Forget();
             if (findedPhoto >= numberOfPhoto)
             {
                 StartCoroutine(FindLastPhoto());

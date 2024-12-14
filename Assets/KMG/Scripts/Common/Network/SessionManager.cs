@@ -56,7 +56,7 @@ namespace Common.Network
                 currentSession.user = new User();
                 currentSession.user.email = result.email;
                 currentSession.user.nickName = result.nickname;
-                UIManager.Instance.creditUI.SetText(currentSession.user.credit.ToString());
+                currentSession.user.RefreshCredit().Forget();
 
                 WebSocketManager.Instance.StartSocketConnect();
                 Debug.Log($"nickname: {currentUser.nickName}");

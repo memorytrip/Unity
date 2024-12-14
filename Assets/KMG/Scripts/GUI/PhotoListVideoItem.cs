@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -18,6 +20,9 @@ namespace GUI
             rawImage.texture = videoPlayer.targetTexture;
             StartCoroutine(PlayVideoProcess());
             closeButton.onClick.AddListener(CloseImage);
+            
+            photoList.downloadButton.onClick.RemoveAllListeners();
+            photoList.downloadButton.onClick.AddListener(Download);
         }
 
         private IEnumerator PlayVideoProcess()
@@ -32,6 +37,23 @@ namespace GUI
         {
             videoPlayer.Stop();
             closeButton.onClick.RemoveListener(CloseImage);
+        }
+
+        protected override void Download()
+        {
+            string path = Application.persistentDataPath + "/media";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            string filename = Guid.NewGuid().ToString() + ".mp4";
+            
+            
+            UnityWebRequest request = UnityWebRequest.Get(videoUrl);
+            request.downloadHandler = new DownloadHandlerFile($"{path}/{filename}");
+            request.SendWebRequest();
+            
+            Debug.Log($"Download Picture: {path}/{filename}");
         }
     }
 }

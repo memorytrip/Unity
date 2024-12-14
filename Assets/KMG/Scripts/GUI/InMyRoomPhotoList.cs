@@ -18,6 +18,9 @@ namespace GUI
         [SerializeField] private CanvasGroup imagePanel;
         [SerializeField] private RawImage rawImage;
         [SerializeField] private Button closeImagePanel;
+        
+        [SerializeField] public Button downloadButton;
+        [SerializeField] public Button shareButton;
 
         [Header("베타 시연용")]
         [SerializeField] private PhotoListItem videoItem;
@@ -76,6 +79,7 @@ namespace GUI
             Sprite thumbnail = await LoadPhoto(photo.photoUrl);
             obj.imagePanel = imagePanel;
             obj.rawImage = rawImage;
+            obj.photoList = this;
             if (thumbnail == null)
                 thumbnail = emptySprite;
             obj.SetThumbnail(thumbnail);
@@ -102,6 +106,7 @@ namespace GUI
             }
             obj.videoUrl = video.videoUrl;
             obj.imagePanel = imagePanel;
+            obj.photoList = this;
             obj.rawImage = rawImage;
             obj.closeButton = closeImagePanel;
             return obj;

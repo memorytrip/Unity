@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +13,8 @@ namespace GUI
         [HideInInspector] public Button closeButton;
         [HideInInspector] public CanvasGroup imagePanel;
         [HideInInspector] public RawImage rawImage;
+
+        [HideInInspector] public InMyRoomPhotoList photoList;
 
         private void Awake()
         {
@@ -26,6 +30,23 @@ namespace GUI
         {
             Utility.EnablePanel(imagePanel);
             rawImage.texture = image.sprite.texture;
+            
+            photoList.downloadButton.onClick.RemoveAllListeners();
+            photoList.downloadButton.onClick.AddListener(Download);
+        }
+
+        protected virtual void Download()
+        {
+            string path = Application.persistentDataPath + "/media";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            
+            byte[] texturePNGBytes = image.sprite.texture.EncodeToPNG();
+            string filename = Guid.NewGuid().ToString() + ".png";
+            File.WriteAllBytes($"{path}/{filename}", texturePNGBytes);
+            Debug.Log($"Download Picture: {path}/{filename}");
         }
     }
 }

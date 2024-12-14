@@ -1299,7 +1299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &459207909
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1744,6 +1744,8 @@ MonoBehaviour:
   imagePanel: {fileID: 949555458}
   rawImage: {fileID: 763340634}
   closeImagePanel: {fileID: 117760203}
+  downloadButton: {fileID: 610854240}
+  shareButton: {fileID: 173412097}
   videoItem: {fileID: 7296141757120614757, guid: d5541e16fb7d9624389932e17b778ade, type: 3}
 --- !u!1 &610854238
 GameObject:
