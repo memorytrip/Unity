@@ -37,16 +37,20 @@ namespace GUI
 
         protected virtual void Download()
         {
-            string path = Application.persistentDataPath + "/media";
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
+            // string path = Application.persistentDataPath + "/media";
+            // if (!Directory.Exists(path))
+            // {
+            //     Directory.CreateDirectory(path);
+            // }
+            
             
             byte[] texturePNGBytes = image.sprite.texture.EncodeToPNG();
             string filename = Guid.NewGuid().ToString() + ".png";
-            File.WriteAllBytes($"{path}/{filename}", texturePNGBytes);
-            Debug.Log($"Download Picture: {path}/{filename}");
+            
+            Debug.Log($"Download Picture: {filename}");
+            // File.WriteAllBytes($"{path}/{filename}", texturePNGBytes);
+            NativeGallery.SaveImageToGallery(texturePNGBytes, "memorytrip", filename);
+            
         }
     }
 }
