@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Common
@@ -8,19 +10,29 @@ namespace Common
         public string email;
         public string avartarId;
         private int _credit;
-        public int credit
+        
+        public async UniTaskVoid RefreshCredit()
         {
-            get
-            {
-                _credit = PlayerPrefs.GetInt("Credit", 0);
-                return _credit;
-            }
-            set
-            {
-                _credit = value;
-                PlayerPrefs.SetInt("Credit", _credit);
-                UIManager.Instance.creditUI.SetText(_credit.ToString());
-            }
+            string response = await DataManager.Get($"/api/credit/{email}");
+            CreditDTO credit = JsonConvert.DeserializeObject<CreditDTO>(response);
+            _credit = credit.credit;
+            UIManager.Instance.creditUI.SetText(_credit.ToString());
         }
+
+        public async UniTaskVoid AddCredit(int amount)
+        {
+            CreditDTO credit = new CreditDTO();
+            credit.email = email;
+            credit.credit = amount;
+            string request = JsonConvert.SerializeObject(credit);
+            await DataManager.Post($"/api/credit/add", request);
+            RefreshCredit().Forget();
+        }
+    }
+
+    class CreditDTO
+    {
+        public string email;
+        public int credit;
     }
 }
