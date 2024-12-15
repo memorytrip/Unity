@@ -80,11 +80,13 @@ namespace Map
             MapInfoRaw.MapObjectData[] mapObjectData;
             if (mapInfoRaw.mapObjectResDTO != null)
             {
-                mapObjectData = mapInfoRaw.mapObjectResDTO;    
+                mapObjectData = mapInfoRaw.mapObjectResDTO;
+                mapInfo.type = MapInfo.MapType.Default;
             }
             else if (mapInfoRaw.customMapObjects != null)
             {
                 mapObjectData = mapInfoRaw.customMapObjects;
+                mapInfo.type = MapInfo.MapType.Custom;
             }
             else
             {

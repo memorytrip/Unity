@@ -48,6 +48,18 @@ public class MemoryGemUI : MonoBehaviour
 
     private void OnVideoLike()
     {
-        DataManager.Post($"/api/videos/{videoData.videoId}/like").Forget();
+        VideoLikeProcess().Forget();    
+    }
+
+    private async UniTaskVoid VideoLikeProcess()
+    {
+        try
+        {
+            await DataManager.Post($"/api/videos/{videoData.videoId}/like");
+        }
+        catch (UnityWebRequestException e)
+        {
+            PopupManager.Instance.ShowMessage(e);
+        }
     }
 }
