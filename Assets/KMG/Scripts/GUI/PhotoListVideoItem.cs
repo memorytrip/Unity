@@ -62,6 +62,7 @@ namespace GUI
             
             byte[] fileBytes = request.downloadHandler.data;
             NativeGallery.SaveVideoToGallery(fileBytes, "memorytrip", filename);
+            PopupManager.Instance.ShowMessage("저장되었습니다.");
         } 
     }
 }

@@ -6,7 +6,6 @@ using Fusion;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 
 public class UploadPhoto : MonoBehaviour
@@ -14,6 +13,7 @@ public class UploadPhoto : MonoBehaviour
     public RawImage img;
     public RawImage letterImg;
     public int photoId; //임시 : 원래는 response의 photoId
+    public Button selectPhotoButton;
     private float photoCapacity = 5000000000000f;
     //private string File = "Application.temporaryCachePath";
     

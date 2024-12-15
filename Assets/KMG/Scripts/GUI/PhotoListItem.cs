@@ -50,7 +50,7 @@ namespace GUI
             Debug.Log($"Download Picture: {filename}");
             // File.WriteAllBytes($"{path}/{filename}", texturePNGBytes);
             NativeGallery.SaveImageToGallery(texturePNGBytes, "memorytrip", filename);
-            
+            PopupManager.Instance.ShowMessage("저장되었습니다.");
         }
     }
 }

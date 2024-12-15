@@ -130,7 +130,8 @@ namespace Common
             }
             else
             {
-                throw new Exception(request.error);
+                // throw new Exception(request.error);
+                throw new UnityWebRequestException(request);
             }
         }
         public static async UniTask<string> Post(string api, List<IMultipartFormSection> formdata, int timeout = 5)

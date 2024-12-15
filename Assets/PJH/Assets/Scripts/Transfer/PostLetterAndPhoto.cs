@@ -102,7 +102,7 @@ public class PostLetterAndPhoto : MonoBehaviour
 
         }   
         
-        catch (Exception e)
+        catch (UnityWebRequestException e)
         {
             Debug.LogError("Error sending photo info: " + e.Message);
         }
