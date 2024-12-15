@@ -1,6 +1,7 @@
 using Common;
 using Common.Network;
 using Cysharp.Threading.Tasks;
+using Map;
 using Myroom;
 using TMPro;
 using UnityEngine;
@@ -30,11 +31,15 @@ namespace GUI
         [SerializeField] private CanvasGroup albumPanel;
         [SerializeField] private Button openAlbumPanel;
         [SerializeField] private Button closeAlbumPanel;
+        
+        [Header("Buy Map")]
+        [SerializeField] private CanvasGroup buyMapPanel;
+        [SerializeField] private Button buyMapButton;
+        [SerializeField] private Button closeBuyMapPanel;
 
         private void Start()
         {
             returnToSquareButton.onClick.AddListener(ReturnToSquare);
-            enterEditModeButton.onClick.AddListener(EnterSetting);
             closeMapListButton.onClick.AddListener(CloseSetting);
             
             openVisitRoom.onClick.AddListener(OpenVisitRoom);
@@ -46,6 +51,9 @@ namespace GUI
 
             enterEditModeButton.interactable = false;
             ActiveSetting().Forget();
+            
+            buyMapButton.onClick.AddListener(BuyMap);
+            closeBuyMapPanel.onClick.AddListener(CloseBuyMapPanel);
         }
 
         private void ReturnToSquare()
@@ -92,6 +100,41 @@ namespace GUI
             Utility.DisablePanel(albumPanel);
         }
 
+        private void OpenBuyMapPanel()
+        {
+            Utility.EnablePanel(buyMapPanel);
+        }
+
+        private void CloseBuyMapPanel()
+        {
+            Utility.DisablePanel(buyMapPanel);
+        }
+
+        private void BuyMap()
+        {
+            BuyMapProcess().Forget();
+        }
+
+        private async UniTaskVoid BuyMapProcess()
+        {
+            MapInfo mapInfo = await MapManager.Instance.LoadMyroomMapInfoFromServer(LoadMyroom.mapOwnerName);
+            if (mapInfo.type == MapInfo.MapType.Default)
+            {
+                PopupManager.Instance.ShowMessage("이미 보유한 기본 맵입니다.");
+                return;
+            }
+
+            try
+            {
+                await DataManager.Post($"/api/main-map/sell/{mapInfo.id}");
+            }
+            catch (UnityWebRequestException e)
+            {
+                PopupManager.Instance.ShowMessage(e);
+            }
+            
+        }
+
         private async UniTaskVoid ActiveSetting()
         {
             // await UniTask.WaitWhile(() => string.IsNullOrEmpty(SceneManager.Instance.curScene) );
@@ -99,9 +142,16 @@ namespace GUI
             string sessionName = RunnerManager.Instance.Runner?.SessionInfo.Name;
             string myName = SessionManager.Instance.currentUser.nickName;
             Debug.Log($"InMyRoom.ActiveSetting: {RunnerManager.Instance.Runner?.SessionInfo.Name}");
+            enterEditModeButton.onClick.RemoveAllListeners();
             if (sessionName == $"player_{myName}")
             {
                 enterEditModeButton.interactable = true;
+                enterEditModeButton.onClick.AddListener(EnterSetting);
+            }
+            else
+            {
+                enterEditModeButton.interactable = true;
+                enterEditModeButton.onClick.AddListener(OpenBuyMapPanel);
             }
         }
     }
