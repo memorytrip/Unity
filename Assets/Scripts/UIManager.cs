@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
-
 
 public class UIManager : MonoBehaviour
 {
@@ -32,8 +32,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button storeButton;
     [SerializeField] private Button walletButton;
     [SerializeField] private Button exitAppButton;
-    [SerializeField] private CanvasGroup myRoomButton;
-    
+    [FormerlySerializedAs("myRoomButton")] [SerializeField] private Button teleportButton;
+    private bool isPopupLayerZeroOpen;
 
     private void Awake()
     {
@@ -87,7 +87,9 @@ public class UIManager : MonoBehaviour
                 screenshotButton.interactable = true;
                 storeButton.interactable = true;
                 walletButton.interactable = true;
-                myRoomButton.interactable = true;
+                teleportButton.interactable = true;
+                var teleportCancelButton = GameObject.Find("Button_CancelTeleport").GetComponent<Button>();
+                teleportCancelButton.onClick.AddListener(TogglePopupLayerZero);
                 break;
             case SceneName.MyRoom:
                 ShowUI(mainMenu);
@@ -97,9 +99,8 @@ public class UIManager : MonoBehaviour
                 ShowUI(joystick);
                 HideUI(newChat);
                 HideUI(credit);
-				HideUI(myRoomButton);
                 storeButton.interactable = true;
-                myRoomButton.interactable = false;
+                teleportButton.interactable = false;
                 break;
             case SceneName.FindPhoto:
                 ShowUI(mainMenu);
@@ -107,9 +108,8 @@ public class UIManager : MonoBehaviour
                 ShowUI(chat);
                 ShowUI(joystick);
                 ShowUI(credit);
-				HideUI(myRoomButton);
                 storeButton.interactable = false;
-                myRoomButton.interactable = false;
+                teleportButton.interactable = false;
                 screenshotButton.interactable = false;
                 break;
             case SceneName.MapEdit:
@@ -119,7 +119,6 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);   
                 HideUI(newChat);
                 HideUI(credit);
-				HideUI(myRoomButton);
                 break;
             case SceneName.PlayReady:
                 HideUI(mainMenu);
@@ -128,7 +127,6 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 HideUI(newChat);
                 HideUI(credit);
-				HideUI(myRoomButton);
                 storeButton.interactable = false;
                 break;
             case SceneName.SelectPhotoScene:
@@ -138,7 +136,6 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 ShowUI(newChat);
                 HideUI(credit);
-				HideUI(myRoomButton);
                 storeButton.interactable = false;
                 break;  
             case SceneName.VideoLoadTest:
@@ -148,7 +145,6 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 ShowUI(newChat);
                 HideUI(credit);
-				HideUI(myRoomButton);
                 storeButton.interactable = false;
                 break;
             case SceneName.LetterScene:
@@ -158,7 +154,6 @@ public class UIManager : MonoBehaviour
                 HideUI(joystick);
                 ShowUI(newChat);
                 HideUI(credit);
-				HideUI(myRoomButton);
                 storeButton.interactable = false;
                 break;
             default:
@@ -198,7 +193,6 @@ public class UIManager : MonoBehaviour
             ShowUI(chat);
             ShowUI(joystick);
             ShowUI(credit);
-			ShowUI(myRoomButton);
         }
     }
 
@@ -209,26 +203,42 @@ public class UIManager : MonoBehaviour
         HideUI(chat);
         HideUI(joystick);
         HideUI(credit);
-        HideUI(myRoomButton);
         yield return _wait;
         ShowUI(mainMenu);
         ShowUI(sideMenu);
         ShowUI(chat);
         ShowUI(joystick);
         ShowUI(credit);
-        ShowUI(myRoomButton);
         InitMyroomButton();
     }
 
     private void InitMyroomButton() {
-        myRoomButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        myRoomButton.GetComponent<Button>().onClick.AddListener(() => {
+        teleportButton.onClick.RemoveAllListeners();
+        teleportButton.onClick.AddListener(() => {
             GameObject obj = GameObject.Find("Teleport_Popup");
             if ( obj != null )
             {
                 ShowUI(obj.GetComponent<CanvasGroup>());
+                TogglePopupLayerZero();
             }
         });
+    }
+
+    private void TogglePopupLayerZero()
+    {
+        isPopupLayerZeroOpen = !isPopupLayerZeroOpen;
+        if (isPopupLayerZeroOpen)
+        {
+            HideUI(sideMenu);
+            HideUI(joystick);
+            HideUI(chat);
+        }
+        else
+        {
+            ShowUI(sideMenu);
+            ShowUI(joystick);
+            ShowUI(chat);
+        }
     }
 
     private void ExitApp()
