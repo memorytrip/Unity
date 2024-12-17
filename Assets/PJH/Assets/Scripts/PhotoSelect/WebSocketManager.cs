@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading;
 using Common.Network;
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 using UnityEngine.Video;
 
 public class WebSocketManager : MonoBehaviour
@@ -15,7 +16,7 @@ public class WebSocketManager : MonoBehaviour
     public static WebSocketManager Instance => _instance;
     private CancellationTokenSource _cancellationTokenSource;
 
-    private WebSocket _webSocket;
+    public WebSocket _webSocket;
     private string _url = "ws://125.132.216.190:17778/ws?token=";// 서버 URL
     public bool IsConnected => _webSocket != null && _webSocket.ReadyState == WebSocketState.Open;
 
@@ -68,7 +69,25 @@ public class WebSocketManager : MonoBehaviour
         _webSocket.OnMessage += (sender, e) =>
         {
             Debug.Log("소켓 정보가 넘어옴:" + e.Data);
-            HandleIncomingVideoData(e.Data);
+            string fullMessage = e.Data;
+
+            // 바디를 추출하기 위해 헤더가 끝나는 부분을 찾아서 그 이후의 부분을 사용
+            string bodyStartMarker = "\n\n"; // 헤더와 바디 구분
+            int bodyStartIndex = fullMessage.IndexOf(bodyStartMarker);
+
+            if (bodyStartIndex != -1)
+            {
+                // 바디 부분만 추출
+                string body = fullMessage.Substring(bodyStartIndex + bodyStartMarker.Length);
+
+                // 이제 바디 부분을 JSON으로 파싱
+                PlayVideoASDF(body).Forget();
+
+            }
+            else
+            {
+                Debug.LogError("Invalid message format received.");
+            }
         };
 
         //오류가 발생하면 호출
@@ -86,13 +105,30 @@ public class WebSocketManager : MonoBehaviour
 
         _webSocket.ConnectAsync(); //소켓 서버에 비동기 연결 시작
     }
-    
+
+    private async UniTaskVoid PlayVideoASDF(string body)
+    {
+        try
+        {
+            var jsonData = JsonConvert.DeserializeObject<MessageData>(body);
+            Debug.Log($"Received video URL: {jsonData.videoUrl}");
+            await UniTask.SwitchToMainThread();
+            HandleIncomingVideoData(jsonData.videoUrl);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Error parsing JSON: " + ex.Message);
+        }
+    }
     private void OnDestroy()
     {
         _webSocket?.Close();
         _cancellationTokenSource?.Cancel();
     }
 
+    private void SendStompMessage(string message)
+    {
+        var stompMessage = $"SEND\ndestination:/app/hello\n\n{message}\0";
         _webSocket.Send(stompMessage);
         Debug.Log("STOMP 메시지 전송: " + stompMessage);
     }
@@ -197,4 +233,10 @@ public class WebSocketManager : MonoBehaviour
         // 메시지 데이터를 처리하는 로직 추가
         Debug.Log($"Processed message: {data}");
     }
+}
+[System.Serializable]
+public class MessageData
+{
+    public string videoUrl;
+    public string roomCode;
 }
