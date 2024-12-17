@@ -54,8 +54,11 @@ namespace Myroom
                 PopupManager.Instance.ShowMessage(e);
                 string playerName = SessionManager.Instance.currentUser.nickName;
                 string roomName = $"player_{playerName}";
-                LoadMyroom.mapOwnerName = playerName;
-                SceneManager.Instance.MoveRoom(roomName).Forget();
+                if (playerName != mapOwnerName)
+                {
+                    mapOwnerName = playerName;
+                    SceneManager.Instance.MoveRoom(roomName).Forget();   
+                }
             }
             return mapInfo;
             
