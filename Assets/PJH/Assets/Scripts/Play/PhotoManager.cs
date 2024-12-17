@@ -52,6 +52,8 @@ public class PhotoManager : NetworkRunnerCallbacks, IListener
         skipButton.gameObject.SetActive(true);
         skipButton.interactable = true;
         findedPhotoCount.text = PhotoCountText + findedPhoto + " / " + TotalHiddenPhotoCount;
+        
+        Connection.StateAuthInstance.SpawnAvatar();
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
