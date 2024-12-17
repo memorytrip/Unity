@@ -16,7 +16,7 @@ public class WebSocketManager : MonoBehaviour
     private CancellationTokenSource _cancellationTokenSource;
 
     private WebSocket _webSocket;
-    private string _url = "125.132.216.190:17778/ws?token=";// 서버 URL
+    private string _url = "ws://125.132.216.190:17778/ws?token=";// 서버 URL
     public bool IsConnected => _webSocket != null && _webSocket.ReadyState == WebSocketState.Open;
 
     private void Awake()
@@ -93,6 +93,10 @@ public class WebSocketManager : MonoBehaviour
         _cancellationTokenSource?.Cancel();
     }
 
+        _webSocket.Send(stompMessage);
+        Debug.Log("STOMP 메시지 전송: " + stompMessage);
+    }
+    
     private async UniTask KeepConnectionAlive()
     {
         _cancellationTokenSource = new CancellationTokenSource();
@@ -102,7 +106,7 @@ public class WebSocketManager : MonoBehaviour
         {
             try
             {
-                _webSocket.Send("ping");
+                SendStompMessage("진따 왜안됑에에에에에에");
                 Debug.Log("핑!");
             }
             catch (Exception ex)
