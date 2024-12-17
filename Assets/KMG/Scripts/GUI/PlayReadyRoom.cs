@@ -43,6 +43,7 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
         getLP = GetComponent<GetLetterAndPhoto>();
         readyButtonText = readyButton.GetComponentInChildren<TextMeshProUGUI>();
         readyButtonImage = readyButton.GetComponent<Image>();
+        readyButton.interactable = false;
     }
     public override void Spawned()
     {
@@ -80,6 +81,15 @@ public class PlayReadyRoom : NetworkBehaviour, IStateAuthorityChanged
             {
                 playerNameTextList[i].text = string.Empty;
                 readyIcons[i].sprite = readyIconSprites[0];
+            }
+
+            if (uploadPhoto1.photoId != 0 && uploadPhoto2.photoId != 0)
+            {
+                readyButton.interactable = true;
+            }
+            else
+            {
+                readyButton.interactable = false;
             }
 
             if (readyCount >= 2 && Runner.IsSceneAuthority && readyCount == Connection.list.Count) 

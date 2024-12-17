@@ -56,7 +56,7 @@ namespace Common.Network
             hasSceneAuthority = Runner.IsSceneAuthority;
         }
 
-        private void SpawnAvatar() => SpawnAvatarAsync().Forget();
+        public void SpawnAvatar() => SpawnAvatarAsync().Forget();
         
         private async UniTaskVoid SpawnAvatarAsync()
         {
@@ -71,10 +71,10 @@ namespace Common.Network
                     break;
                 case SceneName.PlayReady:
                     currenctCharacter = await SpawnProcess(PrefabName.PlayReadyState);
-                    SceneManager.Instance.OnSceneLoaded += SpawnAvatar;
+                    // SceneManager.Instance.OnSceneLoaded += SpawnAvatar;
                     break;
                 case SceneName.FindPhoto:
-                    SceneManager.Instance.OnSceneLoaded -= SpawnAvatar;
+                    // SceneManager.Instance.OnSceneLoaded -= SpawnAvatar;
                     LoadFindPhotoMap loadmap = FindAnyObjectByType<LoadFindPhotoMap>();
                     await UniTask.WaitWhile(() => loadmap.isLoading);
                     
