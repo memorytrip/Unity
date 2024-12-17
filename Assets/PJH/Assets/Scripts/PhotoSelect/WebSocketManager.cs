@@ -16,7 +16,7 @@ public class WebSocketManager : MonoBehaviour
     private CancellationTokenSource _cancellationTokenSource;
 
     private WebSocket _webSocket;
-    private string _url = "ws://memorytrip-env.eba-73mrisxy.ap-northeast-2.elasticbeanstalk.com/ws?token=";// 서버 URL
+    private string _url = "125.132.216.190:17778/ws?token=";// 서버 URL
     public bool IsConnected => _webSocket != null && _webSocket.ReadyState == WebSocketState.Open;
 
     private void Awake()
