@@ -17,7 +17,8 @@ public class VideoProgressBar : MonoBehaviour
         if (!isLoading) 
         {
             isLoading = true;
-            currentTime = 0f; 
+            currentTime = 0f;
+            WebSocketManager.Instance.videoPlayer.url = null;
             StartCoroutine(StartVideoLoading());
         }
     }
@@ -51,7 +52,8 @@ public class VideoProgressBar : MonoBehaviour
     {
         UIManager.ShowUI(canvasGroup);
 
-        if (currentTime <= maxTime)
+        // if (currentTime <= maxTime)
+        if (string.IsNullOrEmpty(WebSocketManager.Instance.videoPlayer.url))
         {
             currentTime += Time.unscaledDeltaTime;
         }
