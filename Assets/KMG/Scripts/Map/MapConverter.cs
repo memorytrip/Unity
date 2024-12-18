@@ -64,6 +64,14 @@ namespace Map
             
             return ConvertMapInfoRawToMapInfo(mapInfoRaw);
         }
+
+        public static MapInfo ConvertJsonToMyroomMapInfo(string jsondata)
+        {
+            MyroomMapInfoRaw myroomMapInfoRaw = JsonConvert.DeserializeObject<MyroomMapInfoRaw>(jsondata);
+            MapInfo mapinfo = ConvertMapInfoRawToMapInfo(myroomMapInfoRaw.customMapResponseDTO);
+            mapinfo.mainMapId = myroomMapInfoRaw.mainMapId;
+            return mapinfo;
+        }
         
         private static MapInfo ConvertMapInfoRawToMapInfo(MapInfoRaw mapInfoRaw)
         {
@@ -195,5 +203,12 @@ namespace Map
         {
             return objects != null;
         }
+    }
+
+    [Serializable]
+    class MyroomMapInfoRaw
+    {
+        public long mainMapId;
+        public MapInfoRaw customMapResponseDTO;
     }
 }

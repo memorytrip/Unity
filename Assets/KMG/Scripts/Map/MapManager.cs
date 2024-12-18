@@ -137,7 +137,8 @@ namespace Map
         public async UniTask<MapInfo> LoadMyroomMapInfoFromServer(string nickName)
         {
             string rawData = await DataManager.Get($"/api/main-map/{nickName}");
-            MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(rawData);
+            // MapInfo mapInfo = MapConverter.ConvertJsonToMapInfo(rawData);
+            MapInfo mapInfo = MapConverter.ConvertJsonToMyroomMapInfo(rawData);
             return mapInfo;
         }
     #endregion

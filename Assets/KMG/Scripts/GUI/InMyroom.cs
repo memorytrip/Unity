@@ -126,7 +126,8 @@ namespace GUI
 
             try
             {
-                await DataManager.Post($"/api/main-map/sell/{mapInfo.id}");
+                await DataManager.Post($"/api/main-map/sell/{mapInfo.mainMapId}");
+                PopupManager.Instance.ShowMessage("구매되었습니다.");
             }
             catch (UnityWebRequestException e)
             {
