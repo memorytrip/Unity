@@ -21,9 +21,9 @@ namespace Common
             if (Instance == null) Instance = this;
             else Destroy(this);
             DontDestroyOnLoad(gameObject);
-// #if !UNITY_EDITOR
-//             Debug.unityLogger.logEnabled = false;
-// #endif
+#if !UNITY_EDITOR
+            Debug.unityLogger.logEnabled = false;
+#endif
 
             Application.targetFrameRate = 30;
         }
